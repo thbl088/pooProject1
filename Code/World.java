@@ -1,3 +1,5 @@
+//test
+
 public class World {
 
 	private HashMap<String, Map> Maps;
