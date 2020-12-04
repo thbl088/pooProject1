@@ -1,6 +1,6 @@
 package Characters;
 
-public class Enemy {
+public class Enemy extends Character {
 
 	private Item Object;
 
@@ -9,8 +9,11 @@ public class Enemy {
 	 * @param object
 	 * @param type
 	 */
-	public Enemy(Item object, Stats type) {
+	public Enemy(String name, Item object, Stats type) {
 		// TODO - implement Enemy.Enemy
+		this.Object = object;
+		super(name);
+		super(type);
 		throw new UnsupportedOperationException();
 	}
 

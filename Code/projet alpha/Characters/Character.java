@@ -2,45 +2,56 @@ package Characters;
 
 public abstract class Character {
 
-	private string Name;
-	private Statistics Stats;
+	private String Name;
+	private Statistics Stats;        // tableau de int  {MH , H , Att , Def, Crit}
 
 	/**
 	 * 
 	 * @param String
 	 */
-	public Character(int String) {
+	protected Character(String name) {
 		// TODO - implement Character.Character
+		this.Name = name;
 		throw new UnsupportedOperationException();
 	}
 
-	public void getMaxHealth() {
+	public int getMaxHealth() {
 		// TODO - implement Character.getMaxHealth
+
+		return this.Stats.getMaxHealth();
+
 		throw new UnsupportedOperationException();
 	}
 
-	public void getHealth() {
+	public int getHealth() {
 		// TODO - implement Character.getHealth
+
+		return this.Stats.getHealth();
 		throw new UnsupportedOperationException();
 	}
 
-	public void getAttack() {
+	public int getAttack() {
 		// TODO - implement Character.getAttack
+
+		return this.Stats.getAttack();
+
 		throw new UnsupportedOperationException();
 	}
 
-	public void getDefense() {
+	public int getDefense() {
 		// TODO - implement Character.getDefense
+
+		return this.Stats.getDefense();
+
 		throw new UnsupportedOperationException();
 	}
 
-	public void getSpeed() {
-		// TODO - implement Character.getSpeed
-		throw new UnsupportedOperationException();
-	}
 
-	public void getCrit() {
+	public int getCrit() {
 		// TODO - implement Character.getCrit
+
+		return this.Stats.getCrit();
+
 		throw new UnsupportedOperationException();
 	}
 
