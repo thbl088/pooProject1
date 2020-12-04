@@ -1,12 +1,11 @@
 import Characters.*;
 
 public class Fight {
-
-	private Player player;
-	private Enemy enemy;
 	private boolean usedAttackPotion;
 	private boolean usedDefensePotion;
 	private boolean usedCritPotion;
+	private Player player;
+	private Enemy enemy;
 
 	public void attack() {
 		// TODO - implement Fight.attack

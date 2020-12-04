@@ -3,7 +3,7 @@ package Characters;
 import Items.*;
 import Locations.*;
 
-public class Player {
+public class Player extends Character {
 
 	private HashMap<String, Item> inventory;
 	private int healthPotion;
@@ -13,24 +13,6 @@ public class Player {
 	private Map currentLocation;
 	private Item armor;
 	private Item weapon;
-
-	/**
-	 * 
-	 * @param item
-	 */
-	public void addInventory(Item item) {
-		// TODO - implement Player.addInventory
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param item
-	 */
-	public void addEquipment(Item item) {
-		// TODO - implement Player.addEquipment
-		throw new UnsupportedOperationException();
-	}
 
 	public void addHealthPotion() {
 		// TODO - implement Player.addHealthPotion
@@ -57,15 +39,6 @@ public class Player {
 	 */
 	public Item getItem(string item) {
 		// TODO - implement Player.getItem
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param item
-	 */
-	public void removeInventory(Item item) {
-		// TODO - implement Player.removeInventory
 		throw new UnsupportedOperationException();
 	}
 
@@ -96,60 +69,6 @@ public class Player {
 
 	public void removeArmor() {
 		// TODO - implement Player.removeArmor
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param item
-	 */
-	public void addInventory(Item item) {
-		// TODO - implement Player.addInventory
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param item
-	 */
-	public void addEquipment(Item item) {
-		// TODO - implement Player.addEquipment
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param item
-	 */
-	public void removeInventory(Item item) {
-		// TODO - implement Player.removeInventory
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param item
-	 */
-	public void addInventory(Item item) {
-		// TODO - implement Player.addInventory
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param item
-	 */
-	public void addEquipment(Item item) {
-		// TODO - implement Player.addEquipment
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param item
-	 */
-	public void removeInventory(Item item) {
-		// TODO - implement Player.removeInventory
 		throw new UnsupportedOperationException();
 	}
 

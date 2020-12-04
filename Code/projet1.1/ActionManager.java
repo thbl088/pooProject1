@@ -1,9 +1,8 @@
 public class ActionManager {
-
-	private World currentGame;
 	private string scanner;
 	private string command;
 	private boolean isFighting;
+	private World currentGame;
 	private Fight fight;
 
 	/**

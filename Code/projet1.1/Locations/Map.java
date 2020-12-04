@@ -10,8 +10,9 @@ public class Map {
 	private Door west;
 	private Door south;
 	private Attack attack;
-	private Shop shop;
+	private Shop attribute;
 	private string description;
+	private Shop shop;
 
 	public void addEnemy() {
 		// TODO - implement Map.addEnemy

@@ -1,6 +1,6 @@
 package Characters;
 
-public class Enemy {
+public class Enemy extends Character {
 
 	private Item object;
 
