@@ -2,11 +2,16 @@ package Stats;
 
 public abstract class Statistics {
 
+	private int maxhealth;
 	private int health;
 	private int defense;
 	private int attack;
 	private int critical;
 	private int money;
+
+	public int getMaxHealth() {
+		return this.maxhealth;
+	}
 
 	public int getHealth() {
 		return this.health;
@@ -33,7 +38,21 @@ public abstract class Statistics {
 	 * @param hp
 	 */
 	public void addHealth(int hp) {
-		// TODO - implement Statistics.addHealth
+		
+		if( this.health == this.maxhealth)
+		{
+
+		}
+		else
+		{
+			this.health += hp ;
+
+			if (this.health >= this.maxhealth)
+			{
+				this.health = this.maxhealth;
+			}
+		}
+		
 		throw new UnsupportedOperationException();
 	}
 
@@ -42,7 +61,8 @@ public abstract class Statistics {
 	 * @param def
 	 */
 	public void addDefense(int def) {
-		// TODO - implement Statistics.addDefense
+		
+		this.defense += def;
 		throw new UnsupportedOperationException();
 	}
 
@@ -51,7 +71,8 @@ public abstract class Statistics {
 	 * @param atk
 	 */
 	public void addAttack(int atk) {
-		// TODO - implement Statistics.addAttack
+
+		this.attack += atk;
 		throw new UnsupportedOperationException();
 	}
 
@@ -60,7 +81,8 @@ public abstract class Statistics {
 	 * @param crit
 	 */
 	public void addCritical(int crit) {
-		// TODO - implement Statistics.addCritical
+
+		this.critical += crit;
 		throw new UnsupportedOperationException();
 	}
 
@@ -69,7 +91,8 @@ public abstract class Statistics {
 	 * @param coins
 	 */
 	public void addMoney(int coins) {
-		// TODO - implement Statistics.addMoney
+
+		this.money += coins;
 		throw new UnsupportedOperationException();
 	}
 
@@ -87,7 +110,8 @@ public abstract class Statistics {
 	 * @param def
 	 */
 	public void removeDefense(int def) {
-		// TODO - implement Statistics.removeDefense
+
+		this.defense -= def;
 		throw new UnsupportedOperationException();
 	}
 
@@ -96,7 +120,8 @@ public abstract class Statistics {
 	 * @param crit
 	 */
 	public void removeCritical(int crit) {
-		// TODO - implement Statistics.removeCritical
+		
+		this.critical -= crit;
 		throw new UnsupportedOperationException();
 	}
 
@@ -105,7 +130,8 @@ public abstract class Statistics {
 	 * @param att
 	 */
 	public void removeAttack(int att) {
-		// TODO - implement Statistics.removeAttack
+		
+		this.attack -= att;
 		throw new UnsupportedOperationException();
 	}
 
@@ -114,7 +140,8 @@ public abstract class Statistics {
 	 * @param coins
 	 */
 	public void removeMoney(int coins) {
-		// TODO - implement Statistics.removeMoney
+		
+		this.money -= coins;
 		throw new UnsupportedOperationException();
 	}
 

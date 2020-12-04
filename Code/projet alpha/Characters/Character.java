@@ -10,13 +10,12 @@ public abstract class Character {
 	 * @param String
 	 */
 	protected Character(String name) {
-		// TODO - implement Character.Character
+
 		this.Name = name;
 		throw new UnsupportedOperationException();
 	}
 
 	public int getMaxHealth() {
-		// TODO - implement Character.getMaxHealth
 
 		return this.Stats.getMaxHealth();
 
@@ -24,7 +23,6 @@ public abstract class Character {
 	}
 
 	public int getHealth() {
-		// TODO - implement Character.getHealth
 
 		return this.Stats.getHealth();
 		throw new UnsupportedOperationException();

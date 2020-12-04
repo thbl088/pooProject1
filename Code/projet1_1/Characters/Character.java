@@ -1,32 +1,54 @@
 package Characters;
+import Stats.Statistics;
 
 public abstract class Character {
 
-	private string name;
+	private String name;
 	private Statistics stats;
 
-	public void getMaxHealth() {
+
+	/**
+	 * 
+	 * @param String
+	 */
+	protected Character(String name) {
+
+		this.name = name;
+		throw new UnsupportedOperationException();
+	}
+
+	public int getMaxHealth() {
 		// TODO - implement Character.getMaxHealth
+
+		return this.stats.getMaxHealth();
 		throw new UnsupportedOperationException();
 	}
 
-	public void getHealth() {
+	public int getHealth() {
 		// TODO - implement Character.getHealth
+
+		return this.stats.getHealth();
 		throw new UnsupportedOperationException();
 	}
 
-	public void getAttack() {
+	public int getAttack() {
 		// TODO - implement Character.getAttack
+
+		return this.stats.getAttack();
 		throw new UnsupportedOperationException();
 	}
 
-	public void getDefense() {
+	public int getDefense() {
 		// TODO - implement Character.getDefense
+
+		return this.stats.getDefense();
 		throw new UnsupportedOperationException();
 	}
 
-	public void getCrit() {
+	public int getCrit() {
 		// TODO - implement Character.getCrit
+
+		return this.stats.getCrit();
 		throw new UnsupportedOperationException();
 	}
 
