@@ -1,11 +1,10 @@
-package Characters;
-package Items;
-import java.util.HashMap;
-import Items.*;
-import Locations.*;
-import Item.*;
+package projet1_1.Characters;
 
-public class Player extends Characters {
+import java.util.HashMap;
+import projet1_1.Items.*;
+import projet1_1.Locations.*;
+
+public class Player extends Character {
 
 	private HashMap<String, Item> inventory;
 	private int healthPotion = 0;
@@ -23,12 +22,28 @@ public class Player extends Characters {
 	public void addHealthPotion() {
 
 		this.healthPotion ++;
+
 		throw new UnsupportedOperationException();
 	}
 
 	public void addDefensePotion() {
 
 		this.defensePotion ++ ;
+
+		throw new UnsupportedOperationException();
+	}
+
+	public void addAttackPotion() {
+
+		this.attackPotion ++ ;
+
+		throw new UnsupportedOperationException();
+	}
+
+	public void addCritPotion() {
+
+		this.critPotion++ ;
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -37,7 +52,9 @@ public class Player extends Characters {
 	 * @param newLoc
 	 */
 	public void Move(Map newLoc) {
-		// TODO - implement Player.Move
+		
+		this.currentLocation = newLoc;
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -49,7 +66,7 @@ public class Player extends Characters {
 
 		return inventory.get(item);
 
-		throw new UnsupportedOperationException();
+		
 	}
 
 	public int useHealthPotion() {
@@ -60,10 +77,10 @@ public class Player extends Characters {
 		}
 		else
 		{
-			System.out.println("vous ne posséder pas de potion");
+			System.out.println("vous ne posséder pas de potion." + "\n");
 			return 0;
 		}
-		throw new UnsupportedOperationException();
+		
 	}
 
 	public int useDefensePotion() {
@@ -74,11 +91,10 @@ public class Player extends Characters {
 		}
 		else
 		{
-			System.out.println("vous ne posséder pas de potion");
+			System.out.println("vous ne posséder pas de potion." + "\n");
 			return  0;
 		}
 
-		throw new UnsupportedOperationException();
 	}
 
 	public int useCritPotion() {
@@ -90,7 +106,24 @@ public class Player extends Characters {
 		}
 		else
 		{
-			System.out.println("vous ne posséder pas de potion");
+			System.out.println("vous ne posséder pas de potion."+"\n");
+			return  0;
+		}
+
+
+		throw new UnsupportedOperationException();
+	}
+
+	public int useAttackPotion() {
+
+		if (this.attackPotion > 0)
+		{
+			this.attackPotion = -1 ;
+			return  1;
+		}
+		else
+		{
+			System.out.println("vous ne posséder pas de potion."+"\n");
 			return  0;
 		}
 
@@ -99,9 +132,8 @@ public class Player extends Characters {
 	}
 
 	public void printInventory() {
-		// TODO - implement Player.printInventory
 
-		for (String i : Inventory.keySet()) {
+		for (String i : inventory.keySet()) {
 			System.out.println(i);
 		  }
 
@@ -123,9 +155,8 @@ public class Player extends Characters {
 	 * @param item
 	 */
 	public void addInventory(Item item) {
-		// TODO - implement Player.addInventory
 
-		Inventory.put(Item.getName(), item);
+		inventory.put(item.getname(), item);
 
 		throw new UnsupportedOperationException();
 	}
@@ -144,9 +175,8 @@ public class Player extends Characters {
 	 * @param item
 	 */
 	public void removeInventory(Item item) {
-		// TODO - implement Player.removeInventory
 
-		Inventory.remove(Item.getName());
+		inventory.remove(item.getname());
 
 		throw new UnsupportedOperationException();
 	}

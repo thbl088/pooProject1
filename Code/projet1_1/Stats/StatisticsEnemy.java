@@ -1,4 +1,4 @@
-package Stats;
+package projet1_1.Stats;
 
 public class StatisticsEnemy extends Statistics {
 

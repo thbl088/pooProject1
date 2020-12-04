@@ -1,4 +1,4 @@
-//package Items;
+package projet1_1.Items;
 
 public class Item {
 

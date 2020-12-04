@@ -1,5 +1,7 @@
-package Characters;
-import Stats.Statistics;
+package projet1_1.Characters;
+
+import projet1_1.Stats.Statistics;
+
 
 public abstract class Character {
 
@@ -11,45 +13,60 @@ public abstract class Character {
 	 * 
 	 * @param String
 	 */
-	protected Character(String name) {
+	protected Character(String name){
+		this.name = name ;
+	}
+
+	protected Character(String name, Statistics stats) {
 
 		this.name = name;
+		this.stats = stats;
 		throw new UnsupportedOperationException();
+	}
+
+	public String getName(){
+
+		return this.name;
+	}
+
+	public void printName(){
+
+		System.out.println(this.name);
+		
 	}
 
 	public int getMaxHealth() {
-		// TODO - implement Character.getMaxHealth
+		
 
 		return this.stats.getMaxHealth();
-		throw new UnsupportedOperationException();
+	
 	}
 
 	public int getHealth() {
-		// TODO - implement Character.getHealth
+		
 
 		return this.stats.getHealth();
-		throw new UnsupportedOperationException();
+		
 	}
 
 	public int getAttack() {
-		// TODO - implement Character.getAttack
+		
 
 		return this.stats.getAttack();
-		throw new UnsupportedOperationException();
+		
 	}
 
 	public int getDefense() {
-		// TODO - implement Character.getDefense
+		
 
 		return this.stats.getDefense();
-		throw new UnsupportedOperationException();
+		
 	}
 
 	public int getCrit() {
-		// TODO - implement Character.getCrit
 
-		return this.stats.getCrit();
-		throw new UnsupportedOperationException();
+		return this.stats.getCritical();
+		
 	}
 
 }

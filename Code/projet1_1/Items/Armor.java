@@ -1,4 +1,4 @@
-package Items;
+package projet1_1.Items;
 
 public class Armor extends Item {
 
@@ -10,8 +10,14 @@ public class Armor extends Item {
 		this.defenseBonus = defense;
 	}
 
-	public int getdef(){
+	public int getDefenseBonus(){
 
 		return this.defenseBonus;
 	}
+
+	public void printDefenseBonus(){
+
+		System.out.println(this.defenseBonus+"\n");
+	}
+	
 }
