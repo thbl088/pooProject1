@@ -10,14 +10,14 @@ public class Weapon extends Item {
 		this.attackBonus = attack;
 	}
 
-	public int getAttackBonu(){
+	public int getAttackBonus(){
 
 		return this.attackBonus ;
 	}
 
 	public void printAttackBonus(){
 
-		System.out.println(this.attackBonus+"\n");
+		System.out.println(this.attackBonus);
 	}
 	
 }

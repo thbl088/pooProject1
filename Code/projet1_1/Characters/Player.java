@@ -12,8 +12,10 @@ public class Player extends Character {
 	private int defensePotion = 0;
 	private int critPotion = 0;
 	private Map currentLocation ;
-	private Item armor ;
-	private Item weapon;
+	private Armor armor ;
+	private Weapon weapon;
+	private Armor DEFAULT_ARMOR = new Armor("Combinaison spatiale", "Armure du début", 0, 3);
+	private Weapon DEFAULT_WEAPON = new Weapon("Hache", "Hache du début", 0, 3);
 
 	public Player(String name){
 		super(name);
@@ -51,11 +53,17 @@ public class Player extends Character {
 	 * 
 	 * @param newLoc
 	 */
-	public void Move(Map newLoc) {
+	public void move(Map newLoc) {
 		
 		this.currentLocation = newLoc;
 
 		throw new UnsupportedOperationException();
+	}
+
+	public Map getMapHero() {
+
+		return this.currentLocation;
+
 	}
 
 	/**
@@ -72,13 +80,14 @@ public class Player extends Character {
 	public int useHealthPotion() {
 		if (this.healthPotion > 0)
 		{
-			this.healthPotion = -1 ;
+			this.healthPotion -- ;
 			return  1;
 		}
 		else
 		{
-			System.out.println("vous ne posséder pas de potion." + "\n");
+			System.out.println("vous ne posséder pas de potion de soin.");
 			return 0;
+			
 		}
 		
 	}
@@ -86,12 +95,12 @@ public class Player extends Character {
 	public int useDefensePotion() {
 		if (this.defensePotion > 0)
 		{
-			this.defensePotion = -1 ;
+			this.defensePotion -- ;
 			return  1;
 		}
 		else
 		{
-			System.out.println("vous ne posséder pas de potion." + "\n");
+			System.out.println("vous ne posséder pas de potion de défense.");
 			return  0;
 		}
 
@@ -101,17 +110,17 @@ public class Player extends Character {
 
 		if (this.critPotion > 0)
 		{
-			this.critPotion = -1 ;
+			this.critPotion -- ;
 			return  1;
 		}
 		else
 		{
-			System.out.println("vous ne posséder pas de potion."+"\n");
+			System.out.println("vous ne posséder pas de potion de crit.");
 			return  0;
 		}
 
 
-		throw new UnsupportedOperationException();
+		//throw new UnsupportedOperationException();
 	}
 
 	public int useAttackPotion() {
@@ -128,7 +137,7 @@ public class Player extends Character {
 		}
 
 
-		throw new UnsupportedOperationException();
+		//throw new UnsupportedOperationException();
 	}
 
 	public void printInventory() {
@@ -141,12 +150,28 @@ public class Player extends Character {
 	}
 
 	public void removeWeapon() {
-		// TODO - implement Player.removeWeapon
+		
+		if (this.weapon == DEFAULT_WEAPON)
+		{
+			System.out.println("Vous ne pouvez pas enlever d'arme car vous en avez pas.");
+		}
+		else
+		{
+			this.weapon = DEFAULT_WEAPON;
+		}
 		throw new UnsupportedOperationException();
 	}
 
 	public void removeArmor() {
-		// TODO - implement Player.removeArmor
+		
+		if (this.armor == DEFAULT_ARMOR)
+		{
+			System.out.println("Vous ne pouvez pas enlever d'armure car vous en avez pas.");
+		}
+		else
+		{
+			this.armor = DEFAULT_ARMOR;
+		}
 		throw new UnsupportedOperationException();
 	}
 
@@ -164,11 +189,35 @@ public class Player extends Character {
 	/**
 	 * 
 	 * @param item
-	 */
+	 *
+	 * 
+	*/
 	public void addEquipment(Item item) {
-		// TODO - implement Player.addEquipment
+	
+		if ( item instanceof Weapon )
+		{
+
+		equiWeapon(((Weapon)item));
+
+		}
+		else if 
 		throw new UnsupportedOperationException();
 	}
+
+	public void equiWeapon(Weapon item) {
+		
+		this.weapon = item;
+
+		throw new UnsupportedOperationException();
+	}
+
+	public void equiArmor(Armor item) {
+		
+		this.armor = item;
+
+		throw new UnsupportedOperationException();
+	}
+
 
 	/**
 	 * 

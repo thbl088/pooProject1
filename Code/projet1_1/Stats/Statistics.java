@@ -101,7 +101,13 @@ public abstract class Statistics {
 	 * @param hp
 	 */
 	public void removeHealth(int hp) {
-		// TODO - implement Statistics.removeHealth
+		
+		this.health -= hp;
+		if ( this.health <= 0)
+		{ 
+			System.out.println("Vous êtes morts.");
+
+		}
 		throw new UnsupportedOperationException();
 	}
 

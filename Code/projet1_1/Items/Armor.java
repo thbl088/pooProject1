@@ -17,7 +17,7 @@ public class Armor extends Item {
 
 	public void printDefenseBonus(){
 
-		System.out.println(this.defenseBonus+"\n");
+		System.out.println(this.defenseBonus);
 	}
 	
 }
