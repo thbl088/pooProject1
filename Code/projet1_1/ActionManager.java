@@ -1,6 +1,6 @@
 public class ActionManager {
-	private string scanner;
-	private string command;
+	private String scanner;
+	private String command;
 	private boolean isFighting;
 	private World currentGame;
 	private Fight fight;
@@ -9,7 +9,7 @@ public class ActionManager {
 	 * 
 	 * @param CommandLine
 	 */
-	public void getAction(string CommandLine) {
+	public void getAction(String CommandLine) {
 		// TODO - implement ActionManager.getAction
 		throw new UnsupportedOperationException();
 	}
@@ -18,8 +18,9 @@ public class ActionManager {
 	 * 
 	 * @param direction
 	 */
-	public void actionGo(string direction) {
+	public void actionGo(String direction) {
 		// TODO - implement ActionManager.actionGo
+		this.currentGame.player.move(direction);
 		throw new UnsupportedOperationException();
 	}
 
@@ -32,8 +33,8 @@ public class ActionManager {
 	 * 
 	 * @param item
 	 */
-	public void actionLook(string item) {
-		// TODO - implement ActionManager.actionLook
+	public void actionLook(String item) {
+		this.currentGame.player.map.getMapDescription();
 		throw new UnsupportedOperationException();
 	}
 
@@ -41,13 +42,13 @@ public class ActionManager {
 	 * 
 	 * @param item
 	 */
-	public void actionTake(string item) {
+	public void actionTake(String item) {
 		// TODO - implement ActionManager.actionTake
 		throw new UnsupportedOperationException();
 	}
 
 	public void actionQuit() {
-		// TODO - implement ActionManager.actionQuit
+		System.exit(0);
 		throw new UnsupportedOperationException();
 	}
 
@@ -55,23 +56,41 @@ public class ActionManager {
 	 * 
 	 * @param potion
 	 */
-	public void actionUse(string potion) {
+	public void actionUse(String potion) {
 		// TODO - implement ActionManager.actionUse
 		throw new UnsupportedOperationException();
 	}
 
 	public void actionFight() {
-		// TODO - implement ActionManager.actionFight
+		startFight();
 		throw new UnsupportedOperationException();
 	}
 
 	public void startFight() {
-		// TODO - implement ActionManager.startFight
+		this.isFighting = true;
+		int turnCounter = 0;
+		while(this.fight.stillFighting() == 0){
+			System.out.println("Tour " + turnCounter);
+			System.out.println("Entrez votre action");
+			// TODO - implement Enter choice
+			//getAction(scanner);
+			
+			this.fight.enemyAttack();
+			turnCounter++;
+		}
+		if(this.fight.stillFighting() == 1){
+			System.out.println("Vous etes mort");
+			actionQuit();
+		}
+		if(this.fight.stillFighting() == 2){
+			System.out.println("Vous avez vaincu" + this.fight.getEnemyName());
+			endFight();
+		}
 		throw new UnsupportedOperationException();
 	}
 
 	public void endFight() {
-		// TODO - implement ActionManager.endFight
+		this.isFighting = false;
 		throw new UnsupportedOperationException();
 	}
 
