@@ -195,11 +195,6 @@ public class Player extends Character {
 		equiWeapon(((Weapon)item));
 
 		}
-<<<<<<< Updated upstream
-		else if 
-		throw new UnsupportedOperationException();
-	}*/
-=======
 		else if ( item instanceof Armor ){
 
 			equiArmor(((Armor)item));
@@ -208,7 +203,6 @@ public class Player extends Character {
 
 	
 	}
->>>>>>> Stashed changes
 
 	public void equiWeapon(Weapon item) {
 		

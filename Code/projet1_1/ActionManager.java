@@ -1,7 +1,11 @@
 import Doors.LockedDoor;
 
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Scanner;
+
+import Characters.Enemy;
+import Characters.Player;
 
 public class ActionManager {
 	private Scanner scanner;
@@ -10,35 +14,53 @@ public class ActionManager {
 	private World currentGame;
 	private Fight fight;
 
-	/**
-	 * 
-	 * @param CommandLine
-	 */
-	public void getAction(String CommandLine) {
+
+	public void getAction() {
 		String[] parsedCommands = command.split(" ");
 
-		switch (parsedCommands[0].toLowerCase()) {
-			case "go" :
-				actionGo(parsedCommands[1]);
-				break;
-			case "help" :
-				actionHelp();
-				break;
-			case "look" :
-				actionLook(parsedCommands[1]);
-				break;
-			case "take" :
-				actionTake(parsedCommands[1]);
-				break;
-			case "use" :
-				actionUse(parsedCommands[1]);
-				break;
-			case "fight" :
-				actionFight();
-				break;
-			case "quit" :
-				actionQuit();
-				break;
+		if(isFighting){ //actions disponibles pendant un combat
+			switch (parsedCommands[0].toLowerCase()) {
+				case "attack" :
+					fight.playerAttack();
+					break;
+				case "defend" :
+					fight.defend();
+					break;
+				case "help" :
+					actionHelp();
+					break;
+				case "use" :
+					actionUse(parsedCommands[1]);
+					break;
+				case "quit" :
+					actionQuit();
+					break;
+			}
+		}
+		else{ //actions disponibles hors combats
+			switch (parsedCommands[0].toLowerCase()) {
+				case "go" :
+					actionGo(parsedCommands[1]);
+					break;
+				case "help" :
+					actionHelp();
+					break;
+				case "look" :
+					actionLook(parsedCommands[1]);
+					break;
+				case "take" :
+					actionTake(parsedCommands[1]);
+					break;
+				case "use" :
+					actionUse(parsedCommands[1]);
+					break;
+				case "fight" :
+					actionFight();
+					break;
+				case "quit" :
+					actionQuit();
+					break;
+			}
 		}
 	}
 
@@ -47,7 +69,6 @@ public class ActionManager {
 	 * @param direction
 	 */
 	public void actionGo(String direction) {
-		// TODO - implement ActionManager.actionGo
 		if (direction.equalsIgnoreCase("North")){
 			if (this.currentGame.player.getMapHero().isNorth() && !(this.currentGame.player.getMapHero().getNorth() instanceof LockedDoor))
 			{
@@ -99,8 +120,12 @@ public class ActionManager {
 	}
 
 	public void actionHelp() {
-		// TODO - implement ActionManager.actionHelp
-		throw new UnsupportedOperationException();
+		if (isFighting){
+			System.out.println("You can use attack, defend, use an item, quit the game");
+		}
+		else{
+			System.out.println("You can look, go to a direction, take an object, fight, use an item, quit the game");
+		}
 	}
 
 	/**
@@ -129,23 +154,40 @@ public class ActionManager {
 	 * @param potion
 	 */
 	public void actionUse(String potion) {
-		// TODO - implement ActionManager.actionUse
-		throw new UnsupportedOperationException();
+		switch (potion) {
+			case "healthPotion" :
+				currentGame.player.useHealthPotion();
+				break;
+			case "attackPotion" :
+				currentGame.player.useAttackPotion();
+				break;
+			case "defensePotion" :
+				currentGame.player.useDefensePotion();
+				break;
+			case "critPotion" :
+				currentGame.player.useCritPotion();
+				break;
+		}
 	}
 
 	public void actionFight() {
-		startFight();
+		if(currentGame.player.getMapHero().getEnemy().isEmpty()){
+			System.out.println("There is no enemies");
+		}
+		else{
+			startFight(); 
+		}
 	}
 
 	public void startFight() {
-		this.isFighting = true;
+		//currentGame.player.getMapHero().getEnemy().get(currentGame.player.getMapHero().getEnemy().keySet().toArray()[0])
+		isFighting = true;
 		int turnCounter = 0;
 		while(fight.stillFighting() == 0){
 			System.out.println("Turn " + turnCounter);
 			System.out.println("Enter your action : ");
-			// TODO - implement Enter choice
-			//getAction(scanner);
-			
+
+			getAction();			
 			fight.enemyAttack();
 			turnCounter++;
 		}
@@ -160,7 +202,7 @@ public class ActionManager {
 	}
 
 	public void endFight() {
-		this.isFighting = false;
+		isFighting = false;
 	}
 
 }

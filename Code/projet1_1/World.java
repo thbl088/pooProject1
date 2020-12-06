@@ -8,7 +8,6 @@ public class World {
 	public Player player;
 
 	public String getMapDescription(){
-				// TODO - set currentLocation to public and create getDesciption
 		return this.player.getMapHero().getDescription();
 	}
 

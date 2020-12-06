@@ -76,4 +76,5 @@ public class Map {
 				+ "Shop : " + this.isShop();
 	}
 
+	public HashMap getEnemy(){return enemies;} //warning mais on se fiche de l'ordre des ennemies
 }
