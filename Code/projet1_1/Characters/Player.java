@@ -25,28 +25,27 @@ public class Player extends Character {
 
 		this.healthPotion ++;
 
-		throw new UnsupportedOperationException();
 	}
 
 	public void addDefensePotion() {
 
 		this.defensePotion ++ ;
 
-		throw new UnsupportedOperationException();
+
 	}
 
 	public void addAttackPotion() {
 
 		this.attackPotion ++ ;
 
-		throw new UnsupportedOperationException();
+	
 	}
 
 	public void addCritPotion() {
 
 		this.critPotion++ ;
 
-		throw new UnsupportedOperationException();
+
 	}
 
 	/**
@@ -57,7 +56,6 @@ public class Player extends Character {
 		
 		this.currentLocation = newLoc;
 
-		throw new UnsupportedOperationException();
 	}
 
 	public Map getMapHero() {
@@ -120,7 +118,7 @@ public class Player extends Character {
 		}
 
 
-		//throw new UnsupportedOperationException();
+
 	}
 
 	public int useAttackPotion() {
@@ -137,7 +135,6 @@ public class Player extends Character {
 		}
 
 
-		//throw new UnsupportedOperationException();
 	}
 
 	public void printInventory() {
@@ -146,7 +143,6 @@ public class Player extends Character {
 			System.out.println(i);
 		  }
 
-		throw new UnsupportedOperationException();
 	}
 
 	public void removeWeapon() {
@@ -159,7 +155,7 @@ public class Player extends Character {
 		{
 			this.weapon = DEFAULT_WEAPON;
 		}
-		throw new UnsupportedOperationException();
+
 	}
 
 	public void removeArmor() {
@@ -172,7 +168,7 @@ public class Player extends Character {
 		{
 			this.armor = DEFAULT_ARMOR;
 		}
-		throw new UnsupportedOperationException();
+
 	}
 
 	/**
@@ -183,7 +179,6 @@ public class Player extends Character {
 
 		inventory.put(item.getName(), item);
 
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -200,24 +195,38 @@ public class Player extends Character {
 		equiWeapon(((Weapon)item));
 
 		}
+<<<<<<< Updated upstream
 		else if 
 		throw new UnsupportedOperationException();
 	}*/
+=======
+		else if ( item instanceof Armor ){
+
+			equiArmor(((Armor)item));
+
+		}
+
+	
+	}
+>>>>>>> Stashed changes
 
 	public void equiWeapon(Weapon item) {
 		
 		this.weapon = item;
 
-		throw new UnsupportedOperationException();
+
 	}
 
 	public void equiArmor(Armor item) {
 		
 		this.armor = item;
 
-		throw new UnsupportedOperationException();
 	}
 
+	public void showEquipement(){
+
+		System.out.println("Vous êtes équipé de l'arme suivante :" + this.weapon + "de l'amurmue suivante :" + this.armor );
+	}
 
 	/**
 	 * 
@@ -227,7 +236,6 @@ public class Player extends Character {
 
 		inventory.remove(item.getName());
 
-		throw new UnsupportedOperationException();
 	}
 
 }

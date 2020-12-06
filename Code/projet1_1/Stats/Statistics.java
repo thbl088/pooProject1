@@ -53,7 +53,6 @@ public abstract class Statistics {
 			}
 		}
 		
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -63,7 +62,6 @@ public abstract class Statistics {
 	public void addDefense(int def) {
 		
 		this.defense += def;
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -73,7 +71,6 @@ public abstract class Statistics {
 	public void addAttack(int atk) {
 
 		this.attack += atk;
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -83,7 +80,6 @@ public abstract class Statistics {
 	public void addCritical(int crit) {
 
 		this.critical += crit;
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -93,7 +89,6 @@ public abstract class Statistics {
 	public void addMoney(int coins) {
 
 		this.money += coins;
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -108,7 +103,6 @@ public abstract class Statistics {
 			System.out.println("Vous êtes morts.");
 
 		}
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -118,7 +112,6 @@ public abstract class Statistics {
 	public void removeDefense(int def) {
 
 		this.defense -= def;
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -128,7 +121,6 @@ public abstract class Statistics {
 	public void removeCritical(int crit) {
 		
 		this.critical -= crit;
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -138,7 +130,6 @@ public abstract class Statistics {
 	public void removeAttack(int att) {
 		
 		this.attack -= att;
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -148,7 +139,6 @@ public abstract class Statistics {
 	public void removeMoney(int coins) {
 		
 		this.money -= coins;
-		throw new UnsupportedOperationException();
 	}
 
 }

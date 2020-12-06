@@ -1,6 +1,7 @@
 package Characters;
 
-import Stats.Statistics;
+import Stats.*;
+
 
 
 public abstract class Character {
@@ -21,7 +22,7 @@ public abstract class Character {
 
 		this.name = name;
 		this.stats = stats;
-		throw new UnsupportedOperationException();
+		
 	}
 
 	public String getName(){
