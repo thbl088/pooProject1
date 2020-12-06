@@ -1,4 +1,4 @@
-package projet1_1.Items;
+package Items;
 
 public class Item {
 
@@ -13,17 +13,17 @@ public class Item {
 		this.price = price;
 	}
 
-	public String getname(){
+	public String getName(){
 
 		return this.name ;
 	}
 
-	public String getdescription(){
+	public String getDescription(){
 
 		return this.description ;
 	}
 
-	public int getprice(){
+	public int getPrice(){
 
 		return this.price ;
 	}

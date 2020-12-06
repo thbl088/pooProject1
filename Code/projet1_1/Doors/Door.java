@@ -2,13 +2,15 @@ package Doors;
 
 import Locations.*;
 
-public class Door extends LockedDoor {
-	protected Map origin;
+public class Door
+{
 	protected Map destination;
 
+	public Door(Map dest) { this.destination = dest; }
+	public Door(){ this.destination = null; }
+
 	public Map getDestination() {
-		// TODO - implement Door.getDestination
-		throw new UnsupportedOperationException();
+		return this.destination;
 	}
 
 }

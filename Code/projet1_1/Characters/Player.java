@@ -1,8 +1,8 @@
-package projet1_1.Characters;
+package Characters;
 
 import java.util.HashMap;
-import projet1_1.Items.*;
-import projet1_1.Locations.*;
+import Items.*;
+import Locations.*;
 
 public class Player extends Character {
 
@@ -181,7 +181,7 @@ public class Player extends Character {
 	 */
 	public void addInventory(Item item) {
 
-		inventory.put(item.getname(), item);
+		inventory.put(item.getName(), item);
 
 		throw new UnsupportedOperationException();
 	}
@@ -192,7 +192,7 @@ public class Player extends Character {
 	 *
 	 * 
 	*/
-	public void addEquipment(Item item) {
+	/*public void addEquipment(Item item) {
 	
 		if ( item instanceof Weapon )
 		{
@@ -202,7 +202,7 @@ public class Player extends Character {
 		}
 		else if 
 		throw new UnsupportedOperationException();
-	}
+	}*/
 
 	public void equiWeapon(Weapon item) {
 		
@@ -225,7 +225,7 @@ public class Player extends Character {
 	 */
 	public void removeInventory(Item item) {
 
-		inventory.remove(item.getname());
+		inventory.remove(item.getName());
 
 		throw new UnsupportedOperationException();
 	}

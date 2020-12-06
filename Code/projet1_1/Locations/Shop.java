@@ -1,24 +1,38 @@
 package Locations;
 
 import Items.*;
+import java.util.HashMap;
 
 public class Shop extends Map {
 
 	private HashMap<String, Item> items;
+	private Map exitShop;
 
-	public void addItem() {
-		// TODO - implement Shop.addItem
-		throw new UnsupportedOperationException();
+	public Shop(){
+		this.items = new HashMap<>();
+		this.exitShop = null;
 	}
 
-	public void removeItem() {
-		// TODO - implement Shop.removeItem
-		throw new UnsupportedOperationException();
+	public void setReturn(Map back){
+		this.exitShop = back;
+	}
+
+	public void addItem(Item newItem) {
+		items.put(newItem.getName(), newItem);
+	}
+
+	public void getItem(String item){
+		items.get(item);
+		this.removeItem(item);
+	}
+
+	public void removeItem(String item) {
+		items.remove(item);
 	}
 
 	public void printItems() {
-		// TODO - implement Shop.printItems
-		throw new UnsupportedOperationException();
+		for (String i : items.keySet()) {
+			System.out.println(i + " : " + items.get(i).getDescription() + "\n");
+		}
 	}
-
 }

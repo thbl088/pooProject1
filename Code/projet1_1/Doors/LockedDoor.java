@@ -1,12 +1,20 @@
 package Doors;
+import Locations.*;
 
-public class LockedDoor {
+public class LockedDoor extends Door {
 
 	private boolean isLocked;
 
+	public LockedDoor(Map dest){
+		this.destination = dest;
+		this.isLocked = true;
+	}
+
+	public boolean isLocked(){
+		return this.isLocked;
+	}
 	public void unlock() {
-		// TODO - implement LockedDoor.unlock
-		throw new UnsupportedOperationException();
+		this.isLocked = false;
 	}
 
 }

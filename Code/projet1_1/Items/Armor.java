@@ -1,4 +1,4 @@
-package projet1_1.Items;
+package Items;
 
 public class Armor extends Item {
 

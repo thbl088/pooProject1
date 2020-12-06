@@ -1,7 +1,7 @@
-package projet1_1.Characters;
+package Characters;
 
-import projet1_1.Items.*;
-import projet1_1.Stats.*;
+import Items.*;
+import Stats.*;
 
 public class Enemy extends Character{
 

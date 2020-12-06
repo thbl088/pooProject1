@@ -1,6 +1,6 @@
-package projet1_1.Characters;
+package Characters;
 
-import projet1_1.Stats.Statistics;
+import Stats.Statistics;
 
 
 public abstract class Character {
@@ -11,7 +11,7 @@ public abstract class Character {
 
 	/**
 	 * 
-	 * @param String
+	 * @param name
 	 */
 	protected Character(String name){
 		this.name = name ;

@@ -1,4 +1,6 @@
 import Locations.*;
+import Characters.*;
+import java.util.HashMap;
 
 public class World {
 
@@ -7,7 +9,7 @@ public class World {
 
 	public String getMapDescription(){
 				// TODO - set currentLocation to public and create getDesciption
-		this.player.currentLocation.getDescription();
+		return this.player.getMapHero().getDescription();
 	}
 
 	public World() {

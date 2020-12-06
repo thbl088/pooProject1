@@ -1,52 +1,79 @@
 package Locations;
 
 import Characters.*;
+import java.util.HashMap;
+import Doors.*;
 
 public class Map {
 
+	private String name;
 	private HashMap<String, Enemy> enemies;
 	private Door north;
 	private Door east;
 	private Door west;
 	private Door south;
-	private Attack attack;
 	private Shop shop;
-	private string description;
+	private String description;
 	
-
-	public void addEnemy() {
-		// TODO - implement Map.addEnemy
-		throw new UnsupportedOperationException();
+	public Map(String newName){
+		this.name = newName;
+		this.enemies = new HashMap<>();
 	}
 
-	public void addChoice() {
-		// TODO - implement Map.addChoice
-		throw new UnsupportedOperationException();
+	public Map(){
+		this.enemies = new HashMap();
 	}
 
-	public void setNorth() {
-		// TODO - implement Map.setNorth
-		throw new UnsupportedOperationException();
+	public void addEnemy(Enemy newEnemy) {
+		enemies.put(newEnemy.getName(), newEnemy);
 	}
 
-	public void setSouth() {
-		// TODO - implement Map.setSouth
-		throw new UnsupportedOperationException();
+	public void setNorth(Door newNorth) {
+		north = newNorth;
 	}
 
-	public void setEast() {
-		// TODO - implement Map.setEast
-		throw new UnsupportedOperationException();
+	public void setSouth(Door newSouth) {
+		south = newSouth;
 	}
 
-	public void setWest() {
-		// TODO - implement Map.setWest
-		throw new UnsupportedOperationException();
+	public void setEast(Door newEast) {
+		east = newEast;
 	}
 
-	public void toString() {
-		// TODO - implement Map.toString
-		throw new UnsupportedOperationException();
+	public void setWest(Door newWest) {
+		west = newWest;
+	}
+
+	public void setShop() { this.shop = new Shop(); }
+
+	public void setDescription(String desc) { this.description = desc; }
+
+	public boolean isNorth() { return north != null; }
+
+	public boolean isSouth() { return south != null; }
+
+	public boolean isEast() { return east != null; }
+
+	public boolean isWest() { return west != null; }
+
+	public boolean isShop() { return this.shop != null; }
+
+	public Door getNorth() { return north; }
+
+	public Door getSouth() { return south; }
+
+	public Door getEast() { return east; }
+
+	public Door getWest() { return west; }
+
+	public String getName() { return this.name; }
+
+	public String getDescription() { return this.description; }
+
+	public String toString() {
+		return this.getName() + " : " + this.getDescription()
+				+ "\n"
+				+ "Shop : " + this.isShop();
 	}
 
 }
