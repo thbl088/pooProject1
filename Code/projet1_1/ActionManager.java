@@ -111,7 +111,7 @@ public class ActionManager {
 	 */
 	public void actionLook(String item) {
 		switch (item.toLowerCase()) {
-			case "here", "around" -> System.out.println(this.currentGame.player.getMapHero().getDescription());
+			case "here", "around" -> System.out.println(this.currentGame.getMapDescription());
 			case "inventory" -> this.currentGame.player.printInventory();
 			case "enemy", "enemies" -> this.currentGame.player.getMapHero().getEnemiesList();
 		}

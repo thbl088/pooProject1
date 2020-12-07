@@ -68,7 +68,7 @@ public class Map {
 
 	public String getName() { return this.name; }
 
-	public String getDescription() { return this.description; }
+	public String getDescription() { return this.getName() + " : \n" + this.description; }
 
 	public String toString() {
 		return this.getName() + " : " + this.getDescription()
@@ -78,5 +78,14 @@ public class Map {
 
 	public HashMap<String, Enemy> getEnemy(){return enemies;} //warning mais on se fiche de l'ordre des ennemies
 
-	public String getEnemiesList(){ return "The enemies on this map are : " + enemies.keySet(); }
+	public String getEnemiesList() {
+		if (enemies.isEmpty()) {
+			return "there are no enemies here";
+		} else if (enemies.size() == 1){
+			return "There is " + enemies.size() + " enemy on this map : " + enemies.keySet();
+		}
+		else {
+			return "There are " + enemies.size() + " enemies on this map : " + enemies.keySet();
+		}
+	}
 }

@@ -5,8 +5,8 @@ import Stats.*;
 
 
 public abstract class Character {
-	private String name;
-	private Statistics stats;
+	protected String name;
+	protected Statistics stats;
 
 	/**
 	 * 

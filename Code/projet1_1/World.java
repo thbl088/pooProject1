@@ -1,5 +1,10 @@
+import Items.Weapon;
 import Locations.*;
 import Characters.*;
+import Doors.*;
+import Stats.StatisticsEnemy;
+import Stats.StatisticsPlayer;
+
 import java.util.HashMap;
 
 public class World {
@@ -11,9 +16,16 @@ public class World {
 		return this.player.getMapHero().getDescription();
 	}
 
-	public World() {
-		// TODO - implement World.World
-		throw new UnsupportedOperationException();
+	public void addMap(Map newMap){
+		maps.put(newMap.getName(), newMap);
 	}
 
+	public World() {
+		player = new Player("José");
+		this.maps = new HashMap<>();
+	}
+
+	public static void main(String[] args){
+
+	}
 }

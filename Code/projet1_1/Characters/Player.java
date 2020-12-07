@@ -3,6 +3,7 @@ package Characters;
 import java.util.HashMap;
 import Items.*;
 import Locations.*;
+import Stats.StatisticsPlayer;
 
 public class Player extends Character {
 
@@ -20,7 +21,9 @@ public class Player extends Character {
 	private static final int EXIT_FAILURE = -1;
 
 	public Player(String name){
-		super(name);
+		super(name, new StatisticsPlayer());
+		this.armor = DEFAULT_ARMOR;
+		this.weapon = DEFAULT_WEAPON;
 	}
 
 	public void addHealthPotion() { this.healthPotion ++; }
@@ -45,10 +48,17 @@ public class Player extends Character {
 	 */
 	public Item getItem(String item) { return inventory.get(item); }
 
+	public String getNbPotion(){
+		return "health potion : " + this.healthPotion
+						+ "\ndefense potion : " + this.defensePotion
+						+ "\nattack potion : " + this.attackPotion
+						+ "\ncrit potion : " + this.critPotion;
+	}
+
 	public int useHealthPotion() {
 		if (this.healthPotion > 0)
 		{
-			this.healthPotion -- ;
+			this.healthPotion-- ;
 			return EXIT_SUCCESS;
 		}
 		else
@@ -62,7 +72,7 @@ public class Player extends Character {
 	public int useDefensePotion() {
 		if (this.defensePotion > 0)
 		{
-			this.defensePotion -- ;
+			this.defensePotion-- ;
 			return EXIT_SUCCESS;
 		}
 		else
@@ -88,7 +98,7 @@ public class Player extends Character {
 	public int useAttackPotion() {
 		if (this.attackPotion > 0)
 		{
-			this.attackPotion = -1 ;
+			this.attackPotion-- ;
 			return  EXIT_SUCCESS;
 		}
 		else
@@ -99,9 +109,12 @@ public class Player extends Character {
 	}
 
 	public void printInventory() {
-		for (String i : inventory.keySet()) {
-			System.out.println(i);
-		  }
+		if (!(this.inventory == null)){
+			for (String i : inventory.keySet()) {
+				System.out.println(i);
+			}
+		}
+		else { System.out.println("Inventory is empty."); }
 	}
 
 	public void removeWeapon() {
@@ -165,4 +178,8 @@ public class Player extends Character {
 	 */
 	public void removeInventory(Item item) { this.inventory.remove(item.getName()); }
 
+	@Override
+	public String toString() {
+		return "player name : " + this.getName() + "\nhealth : " + this.getHealth() + "\nattack : " + this.getAttack() + "\ndefense : " + this.getDefense() + "\ncritical : " + this.getCrit() + "\n";
+	}
 }
