@@ -3,7 +3,6 @@ package Characters;
 import java.util.HashMap;
 import Items.*;
 import Locations.*;
-import Stats.StatisticsPlayer;
 
 public class Player extends Character {
 
@@ -58,7 +57,8 @@ public class Player extends Character {
 	public int useHealthPotion() {
 		if (this.healthPotion > 0)
 		{
-			this.healthPotion-- ;
+			this.healthPotion -- ;
+			this.getStatistics().addHealth(25);
 			return EXIT_SUCCESS;
 		}
 		else
