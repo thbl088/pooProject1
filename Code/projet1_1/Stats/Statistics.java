@@ -98,11 +98,7 @@ public abstract class Statistics {
 	public void removeHealth(int hp) {
 		
 		this.health -= hp;
-		if ( this.health <= 0)
-		{ 
-			System.out.println("Vous êtes morts.");
 
-		}
 	}
 
 	/**
