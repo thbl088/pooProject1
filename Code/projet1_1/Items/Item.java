@@ -7,24 +7,14 @@ public class Item {
 	private int price;
 
 	public Item(String name, String description , int price){
-		
 		this.name = name;
 		this.description = description;
 		this.price = price;
 	}
 
-	public String getName(){
+	public String getName() { return this.name ; }
 
-		return this.name ;
-	}
+	public String getDescription() { return this.description ; }
 
-	public String getDescription(){
-
-		return this.description ;
-	}
-
-	public int getPrice(){
-
-		return this.price ;
-	}
+	public int getPrice() { return this.price ; }
 }

@@ -68,28 +68,28 @@ public class ActionManager {
 				if (currentLoc.isSouth() && (!(currentLoc.getSouth() instanceof LockedDoor) || !((LockedDoor) currentLoc.getSouth()).isLocked())) {
 					currentPlayer.move(southDir);
 				}
-				else if (!currentLoc.isSouth()) { System.out.println("Impossible to go north"); }
-				else if (((LockedDoor) currentLoc.getSouth()).isLocked()) { System.out.println("North door is locked"); }
+				else if (!currentLoc.isSouth()) { System.out.println("Impossible to go south"); }
+				else if (((LockedDoor) currentLoc.getSouth()).isLocked()) { System.out.println("South door is locked"); }
 				break;
 			case "east" :
 				if (currentLoc.isEast() && (!(currentLoc.getEast() instanceof LockedDoor) || !((LockedDoor) currentLoc.getEast()).isLocked())) {
 					currentPlayer.move(eastDir);
 				}
-				else if (!currentLoc.isEast()) { System.out.println("Impossible to go north"); }
-				else if (((LockedDoor) currentLoc.getEast()).isLocked()) { System.out.println("North door is locked"); }
+				else if (!currentLoc.isEast()) { System.out.println("Impossible to go east"); }
+				else if (((LockedDoor) currentLoc.getEast()).isLocked()) { System.out.println("East door is locked"); }
 				break;
 			case "west" :
 				if (currentLoc.isWest() && (!(currentLoc.getWest() instanceof LockedDoor) || !((LockedDoor) currentLoc.getWest()).isLocked())) {
 					currentPlayer.move(westDir);
 				}
-				else if (!currentLoc.isWest()) { System.out.println("Impossible to go north"); }
-				else if (((LockedDoor) currentLoc.getWest()).isLocked()) { System.out.println("North door is locked"); }
+				else if (!currentLoc.isWest()) { System.out.println("Impossible to go west"); }
+				else if (((LockedDoor) currentLoc.getWest()).isLocked()) { System.out.println("West door is locked"); }
 				break;
 			case "shop" :
 				if (currentLoc.isShop()) { currentPlayer.move(shop); }
 				else { System.out.println("There is no shop"); }
 				break;
-			case "back" :
+			case "back", "out" :
 				if (currentLoc instanceof Shop) { currentPlayer.move(((Shop) currentLoc).getExitShop()); }
 				else { System.out.println("You cannot exit current location"); }
 				break;
@@ -110,7 +110,11 @@ public class ActionManager {
 	 * @param item
 	 */
 	public void actionLook(String item) {
-		this.currentGame.player.getMapHero().getDescription();
+		switch (item.toLowerCase()) {
+			case "here", "around" -> System.out.println(this.currentGame.player.getMapHero().getDescription());
+			case "inventory" -> this.currentGame.player.printInventory();
+			case "enemy", "enemies" -> this.currentGame.player.getMapHero().getEnemiesList();
+		}
 	}
 
 	/**
@@ -122,9 +126,7 @@ public class ActionManager {
 		throw new UnsupportedOperationException();
 	}
 
-	public void actionQuit() {
-		System.exit(0);
-	}
+	public void actionQuit() { System.exit(0); }
 
 	/**
 	 * 
@@ -141,7 +143,7 @@ public class ActionManager {
 
 	public void actionFight() {
 		if(currentGame.player.getMapHero().getEnemy().isEmpty()){
-			System.out.println("There is no enemies");
+			System.out.println("There are no enemies here");
 		}
 		else{
 			startFight(); 

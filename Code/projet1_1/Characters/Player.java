@@ -16,159 +16,114 @@ public class Player extends Character {
 	private Weapon weapon;
 	private Armor DEFAULT_ARMOR = new Armor("Combinaison spatiale", "Armure du début", 0, 3);
 	private Weapon DEFAULT_WEAPON = new Weapon("Hache", "Hache du début", 0, 3);
+	private static final int EXIT_SUCCESS = 0;
+	private static final int EXIT_FAILURE = -1;
 
 	public Player(String name){
 		super(name);
 	}
 
-	public void addHealthPotion() {
+	public void addHealthPotion() { this.healthPotion ++; }
 
-		this.healthPotion ++;
+	public void addDefensePotion() { this.defensePotion ++; }
 
-	}
+	public void addAttackPotion() { this.attackPotion ++; }
 
-	public void addDefensePotion() {
-
-		this.defensePotion ++ ;
-
-
-	}
-
-	public void addAttackPotion() {
-
-		this.attackPotion ++ ;
-
-	
-	}
-
-	public void addCritPotion() {
-
-		this.critPotion++ ;
-
-
-	}
+	public void addCritPotion() { this.critPotion++; }
 
 	/**
 	 * 
 	 * @param newLoc
 	 */
-	public void move(Map newLoc) {
-		
-		this.currentLocation = newLoc;
+	public void move(Map newLoc) { this.currentLocation = newLoc; }
 
-	}
-
-	public Map getMapHero() {
-
-		return this.currentLocation;
-
-	}
+	public Map getMapHero() { return this.currentLocation; }
 
 	/**
 	 * 
 	 * @param item
 	 */
-	public Item getItem(String item) {
-
-		return inventory.get(item);
-
-		
-	}
+	public Item getItem(String item) { return inventory.get(item); }
 
 	public int useHealthPotion() {
 		if (this.healthPotion > 0)
 		{
 			this.healthPotion -- ;
-			return  1;
+			return EXIT_SUCCESS;
 		}
 		else
 		{
-			System.out.println("vous ne posséder pas de potion de soin.");
-			return 0;
+			System.out.println("You don't have any health potion.");
+			return EXIT_FAILURE;
 			
 		}
-		
 	}
 
 	public int useDefensePotion() {
 		if (this.defensePotion > 0)
 		{
 			this.defensePotion -- ;
-			return  1;
+			return EXIT_SUCCESS;
 		}
 		else
 		{
-			System.out.println("vous ne posséder pas de potion de défense.");
-			return  0;
+			System.out.println("You don't have any defense potion.");
+			return  EXIT_FAILURE;
 		}
-
 	}
 
 	public int useCritPotion() {
-
 		if (this.critPotion > 0)
 		{
-			this.critPotion -- ;
-			return  1;
+			this.critPotion-- ;
+			return EXIT_SUCCESS;
 		}
 		else
 		{
-			System.out.println("vous ne posséder pas de potion de crit.");
-			return  0;
+			System.out.println("You don't have any crit potion.");
+			return  EXIT_FAILURE;
 		}
-
-
-
 	}
 
 	public int useAttackPotion() {
-
 		if (this.attackPotion > 0)
 		{
 			this.attackPotion = -1 ;
-			return  1;
+			return  EXIT_SUCCESS;
 		}
 		else
 		{
-			System.out.println("vous ne posséder pas de potion."+"\n");
-			return  0;
+			System.out.println("You don't have any attack potion.");
+			return  EXIT_FAILURE;
 		}
-
-
 	}
 
 	public void printInventory() {
-
 		for (String i : inventory.keySet()) {
 			System.out.println(i);
 		  }
-
 	}
 
 	public void removeWeapon() {
-		
 		if (this.weapon == DEFAULT_WEAPON)
 		{
-			System.out.println("Vous ne pouvez pas enlever d'arme car vous en avez pas.");
+			System.out.println("You can't remove your default weapon.");
 		}
 		else
 		{
 			this.weapon = DEFAULT_WEAPON;
 		}
-
 	}
 
 	public void removeArmor() {
-		
 		if (this.armor == DEFAULT_ARMOR)
 		{
-			System.out.println("Vous ne pouvez pas enlever d'armure car vous en avez pas.");
+			System.out.println("You can't remove your default armor.");
 		}
 		else
 		{
 			this.armor = DEFAULT_ARMOR;
 		}
-
 	}
 
 	/**
@@ -187,49 +142,27 @@ public class Player extends Character {
 	 *
 	 * 
 	*/
-	/*public void addEquipment(Item item) {
-	
+	public void addEquipment(Item item) {
 		if ( item instanceof Weapon )
 		{
-
 		equiWeapon(((Weapon)item));
-
 		}
 		else if ( item instanceof Armor ){
 
 			equiArmor(((Armor)item));
-
 		}
-
-	
 	}
 
-	public void equiWeapon(Weapon item) {
-		
-		this.weapon = item;
+	public void equiWeapon(Weapon item) { this.weapon = item; }
 
+	public void equiArmor(Armor item) { this.armor = item; }
 
-	}
-
-	public void equiArmor(Armor item) {
-		
-		this.armor = item;
-
-	}
-
-	public void showEquipement(){
-
-		System.out.println("Vous êtes équipé de l'arme suivante :" + this.weapon + "de l'amurmue suivante :" + this.armor );
-	}
+	public void showEquipement() { System.out.println("You are equipped with the current weapon : " + this.weapon.getName() + " and the current armor : " + this.armor.getName()); }
 
 	/**
 	 * 
 	 * @param item
 	 */
-	public void removeInventory(Item item) {
-
-		inventory.remove(item.getName());
-
-	}
+	public void removeInventory(Item item) { this.inventory.remove(item.getName()); }
 
 }

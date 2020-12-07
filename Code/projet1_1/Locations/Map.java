@@ -20,10 +20,6 @@ public class Map {
 		this.enemies = new HashMap<>();
 	}
 
-	public Map(){
-		this.enemies = new HashMap<>();
-	}
-
 	public void addEnemy(Enemy newEnemy) {
 		enemies.put(newEnemy.getName(), newEnemy);
 	}
@@ -79,4 +75,6 @@ public class Map {
 	}
 
 	public HashMap<String, Enemy> getEnemy(){return enemies;} //warning mais on se fiche de l'ordre des ennemies
+
+	public String getEnemiesList(){ return "The enemies on this map are : " + enemies.keySet(); }
 }

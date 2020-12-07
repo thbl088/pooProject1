@@ -5,10 +5,8 @@ import Stats.*;
 
 
 public abstract class Character {
-
 	private String name;
 	private Statistics stats;
-
 
 	/**
 	 * 
@@ -19,55 +17,21 @@ public abstract class Character {
 	}
 
 	protected Character(String name, Statistics stats) {
-
 		this.name = name;
 		this.stats = stats;
-		
 	}
 
-	public String getName(){
+	public String getName(){ return this.name; }
 
-		return this.name;
-	}
+	public void printName(){ System.out.println(this.name); }
 
-	public void printName(){
+	public int getMaxHealth() { return this.stats.getMaxHealth(); }
 
-		System.out.println(this.name);
-		
-	}
+	public int getHealth() { return this.stats.getHealth(); }
 
-	public int getMaxHealth() {
-		
+	public int getAttack() { return this.stats.getAttack(); }
 
-		return this.stats.getMaxHealth();
-	
-	}
+	public int getDefense() { return this.stats.getDefense(); }
 
-	public int getHealth() {
-		
-
-		return this.stats.getHealth();
-		
-	}
-
-	public int getAttack() {
-		
-
-		return this.stats.getAttack();
-		
-	}
-
-	public int getDefense() {
-		
-
-		return this.stats.getDefense();
-		
-	}
-
-	public int getCrit() {
-
-		return this.stats.getCritical();
-		
-	}
-
+	public int getCrit() { return this.stats.getCritical(); }
 }

@@ -4,7 +4,6 @@ import Items.*;
 import Stats.*;
 
 public class Enemy extends Character{
-
 	private Item object;
 
 	public Enemy(String name, Item item, Statistics stats){
@@ -12,10 +11,5 @@ public class Enemy extends Character{
 		this.object = item;
 	}
 
-	public Item getobject(){
-
-		return this.object;
-
-	}
-	
+	public Item getobject(){ return this.object; }
 }

@@ -33,31 +33,31 @@ public class Fight {
 		damage = player.getAttack()-enemy.getDefense();
 		if (damage>0){
 			enemyHP -= damage;
-			System.out.println("You inflicted " + damage +" dmg. "+ enemy.getName() +" has " + enemyHP + " HP left");
+			System.out.println("You inflicted " + damage +" dmg. "+ enemy.getName() +" has " + enemyHP + " HP left.");
 		}
 		else{
 			playerHP -= damage;
-			System.out.println("Vous vous faites" + damage +"degats il vous reste" + playerHP + "points de vie");
+			System.out.println("You inflict yourself" + damage +"dmg. You have " + playerHP + "HP left.");
 		}
 	}
 
 	public void enemyAttack() {
-		System.out.println(enemy.getName() + " is attacking");
+		System.out.println(enemy.getName() + " is attacking.");
 		damage = enemy.getAttack()-player.getDefense();
 		if (damage>0){
 			playerHP -= damage;
-			System.out.println("The enemy has inflicted " + damage +" dmg, you have " + playerHP + " HP remaining");
+			System.out.println("The enemy has inflicted " + damage +" dmg, you have " + playerHP + " HP remaining.");
 		}
 		else{
 			enemyHP -= damage;
-			System.out.println("You have inflicted " + damage +" dmg. "+ enemy.getName() +" has " + enemyHP + " HP");
+			System.out.println("You have inflicted " + damage +" dmg. "+ enemy.getName() +" has " + enemyHP + " HP.");
 		}
 		hasDefend = false;
 	}
 
 	public void defend() {
 		playerDef *= 2;
-		System.out.println("You get ready for the next attack");
+		System.out.println("You get ready for the next attack.");
 		hasDefend = true;
 	}
 
