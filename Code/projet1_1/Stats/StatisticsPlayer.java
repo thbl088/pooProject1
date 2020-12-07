@@ -25,7 +25,4 @@ public class StatisticsPlayer extends Statistics {
 		this.critical = crit;
 		this.money = money;
 	}
-	public int getMaxHealth() {
-		return this.MAX_HEALTH;
-	}
 }
