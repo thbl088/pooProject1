@@ -26,6 +26,10 @@ public class Shop extends Map {
 		this.removeItem(item);
 	}
 
+	public Map getExitShop() {
+		return this.exitShop;
+	}
+
 	public void removeItem(String item) {
 		items.remove(item);
 	}

@@ -21,7 +21,7 @@ public class Map {
 	}
 
 	public Map(){
-		this.enemies = new HashMap();
+		this.enemies = new HashMap<>();
 	}
 
 	public void addEnemy(Enemy newEnemy) {
@@ -66,6 +66,8 @@ public class Map {
 
 	public Door getWest() { return west; }
 
+	public Shop getShop() { return this.shop; }
+
 	public String getName() { return this.name; }
 
 	public String getDescription() { return this.description; }
@@ -76,5 +78,5 @@ public class Map {
 				+ "Shop : " + this.isShop();
 	}
 
-	public HashMap getEnemy(){return enemies;} //warning mais on se fiche de l'ordre des ennemies
+	public HashMap<String, Enemy> getEnemy(){return enemies;} //warning mais on se fiche de l'ordre des ennemies
 }

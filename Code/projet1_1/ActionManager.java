@@ -1,8 +1,10 @@
 import Doors.LockedDoor;
 
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Scanner;
+import Locations.*;
 
 import Characters.Enemy;
 import Characters.Player;
@@ -20,46 +22,22 @@ public class ActionManager {
 
 		if(isFighting){ //actions disponibles pendant un combat
 			switch (parsedCommands[0].toLowerCase()) {
-				case "attack" :
-					fight.playerAttack();
-					break;
-				case "defend" :
-					fight.defend();
-					break;
-				case "help" :
-					actionHelp();
-					break;
-				case "use" :
-					actionUse(parsedCommands[1]);
-					break;
-				case "quit" :
-					actionQuit();
-					break;
+				case "attack" -> fight.playerAttack();
+				case "defend" -> fight.defend();
+				case "help" -> actionHelp();
+				case "use" -> actionUse(parsedCommands[1]);
+				case "quit" -> actionQuit();
 			}
 		}
 		else{ //actions disponibles hors combats
 			switch (parsedCommands[0].toLowerCase()) {
-				case "go" :
-					actionGo(parsedCommands[1]);
-					break;
-				case "help" :
-					actionHelp();
-					break;
-				case "look" :
-					actionLook(parsedCommands[1]);
-					break;
-				case "take" :
-					actionTake(parsedCommands[1]);
-					break;
-				case "use" :
-					actionUse(parsedCommands[1]);
-					break;
-				case "fight" :
-					actionFight();
-					break;
-				case "quit" :
-					actionQuit();
-					break;
+				case "go" -> actionGo(parsedCommands[1]);
+				case "help" -> actionHelp();
+				case "look" -> actionLook(parsedCommands[1]);
+				case "take" -> actionTake(parsedCommands[1]);
+				case "use" -> actionUse(parsedCommands[1]);
+				case "fight" -> actionFight();
+				case "quit" -> actionQuit();
 			}
 		}
 	}
@@ -69,53 +47,52 @@ public class ActionManager {
 	 * @param direction
 	 */
 	public void actionGo(String direction) {
-		if (direction.equalsIgnoreCase("North")){
-			if (this.currentGame.player.getMapHero().isNorth() && !(this.currentGame.player.getMapHero().getNorth() instanceof LockedDoor))
-			{
-				this.currentGame.player.move(this.currentGame.player.getMapHero().getNorth().getDestination());
-			}
-			else if (!this.currentGame.player.getMapHero().isNorth()){
-				System.out.println("Impossible to go north");
-			}
-			else if (this.currentGame.player.getMapHero().getNorth() instanceof LockedDoor){
-				System.out.println("North door is locked");
-			}
-		}
-		else if (direction.equalsIgnoreCase("South")){
-			if (this.currentGame.player.getMapHero().isSouth() && !(this.currentGame.player.getMapHero().getSouth() instanceof LockedDoor))
-			{
-				this.currentGame.player.move(this.currentGame.player.getMapHero().getSouth().getDestination());
-			}
-			else if (!this.currentGame.player.getMapHero().isSouth()){
-				System.out.println("Impossible to go south");
-			}
-			else if (this.currentGame.player.getMapHero().getSouth() instanceof LockedDoor){
-				System.out.println("South door is locked");
-			}
-		}
-		else if (direction.equalsIgnoreCase("East")){
-			if (this.currentGame.player.getMapHero().isEast() && !(this.currentGame.player.getMapHero().getEast() instanceof LockedDoor))
-			{
-				this.currentGame.player.move(this.currentGame.player.getMapHero().getEast().getDestination());
-			}
-			else if (!this.currentGame.player.getMapHero().isEast()){
-				System.out.println("Impossible to go east");
-			}
-			else if (this.currentGame.player.getMapHero().getEast() instanceof LockedDoor){
-				System.out.println("East door is locked");
-			}
-		}
-		else if (direction.equalsIgnoreCase("West")){
-			if (this.currentGame.player.getMapHero().isWest() && !(this.currentGame.player.getMapHero().getWest() instanceof LockedDoor))
-			{
-				this.currentGame.player.move(this.currentGame.player.getMapHero().getWest().getDestination());
-			}
-			else if (!this.currentGame.player.getMapHero().isWest()){
-				System.out.println("Impossible to go west");
-			}
-			else if (this.currentGame.player.getMapHero().getWest() instanceof LockedDoor){
-				System.out.println("West door is locked");
-			}
+		Map northDir = this.currentGame.player.getMapHero().getNorth().getDestination();
+		Map southDir = this.currentGame.player.getMapHero().getSouth().getDestination();
+		Map eastDir = this.currentGame.player.getMapHero().getEast().getDestination();
+		Map westDir = this.currentGame.player.getMapHero().getWest().getDestination();
+		Map shop = this.currentGame.player.getMapHero().getShop();
+		Map currentLoc = this.currentGame.player.getMapHero();
+		Player currentPlayer = this.currentGame.player;
+
+
+		switch (direction.toLowerCase()) {
+			case "north" :
+				if (currentLoc.isNorth() && (!(currentLoc.getNorth() instanceof LockedDoor) || !((LockedDoor) currentLoc.getNorth()).isLocked())) {
+					currentPlayer.move(northDir);
+				}
+				else if (!currentLoc.isNorth()) { System.out.println("Impossible to go north"); }
+				else if (((LockedDoor) currentLoc.getNorth()).isLocked()) { System.out.println("North door is locked"); }
+				break;
+			case "south" :
+				if (currentLoc.isSouth() && (!(currentLoc.getSouth() instanceof LockedDoor) || !((LockedDoor) currentLoc.getSouth()).isLocked())) {
+					currentPlayer.move(southDir);
+				}
+				else if (!currentLoc.isSouth()) { System.out.println("Impossible to go north"); }
+				else if (((LockedDoor) currentLoc.getSouth()).isLocked()) { System.out.println("North door is locked"); }
+				break;
+			case "east" :
+				if (currentLoc.isEast() && (!(currentLoc.getEast() instanceof LockedDoor) || !((LockedDoor) currentLoc.getEast()).isLocked())) {
+					currentPlayer.move(eastDir);
+				}
+				else if (!currentLoc.isEast()) { System.out.println("Impossible to go north"); }
+				else if (((LockedDoor) currentLoc.getEast()).isLocked()) { System.out.println("North door is locked"); }
+				break;
+			case "west" :
+				if (currentLoc.isWest() && (!(currentLoc.getWest() instanceof LockedDoor) || !((LockedDoor) currentLoc.getWest()).isLocked())) {
+					currentPlayer.move(westDir);
+				}
+				else if (!currentLoc.isWest()) { System.out.println("Impossible to go north"); }
+				else if (((LockedDoor) currentLoc.getWest()).isLocked()) { System.out.println("North door is locked"); }
+				break;
+			case "shop" :
+				if (currentLoc.isShop()) { currentPlayer.move(shop); }
+				else { System.out.println("There is no shop"); }
+				break;
+			case "back" :
+				if (currentLoc instanceof Shop) { currentPlayer.move(((Shop) currentLoc).getExitShop()); }
+				else { System.out.println("You cannot exit current location"); }
+				break;
 		}
 	}
 
@@ -155,18 +132,10 @@ public class ActionManager {
 	 */
 	public void actionUse(String potion) {
 		switch (potion) {
-			case "healthPotion" :
-				currentGame.player.useHealthPotion();
-				break;
-			case "attackPotion" :
-				currentGame.player.useAttackPotion();
-				break;
-			case "defensePotion" :
-				currentGame.player.useDefensePotion();
-				break;
-			case "critPotion" :
-				currentGame.player.useCritPotion();
-				break;
+			case "healthPotion" -> currentGame.player.useHealthPotion();
+			case "attackPotion" -> currentGame.player.useAttackPotion();
+			case "defensePotion" -> currentGame.player.useDefensePotion();
+			case "critPotion" -> currentGame.player.useCritPotion();
 		}
 	}
 
