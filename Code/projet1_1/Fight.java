@@ -1,4 +1,6 @@
 import Characters.*;
+import Items.Weapon;
+import Stats.StatisticsEnemy;
 
 public class Fight {
 	private boolean usedAttackPotion;

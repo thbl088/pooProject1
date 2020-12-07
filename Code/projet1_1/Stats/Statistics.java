@@ -2,16 +2,14 @@ package Stats;
 
 public abstract class Statistics {
 
-	private int maxhealth;
-	private int health;
-	private int defense;
-	private int attack;
-	private int critical;
-	private int money;
+	protected int maxhealth;
+	protected int health;
+	protected int defense;
+	protected int attack;
+	protected int critical;
+	protected int money;
 
-	public int getMaxHealth() {
-		return this.maxhealth;
-	}
+	public int getMaxHealth() { return this.maxhealth; }
 
 	public int getHealth() {
 		return this.health;

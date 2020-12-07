@@ -11,5 +11,5 @@ public class Enemy extends Character{
 		this.object = item;
 	}
 
-	public Item getobject(){ return this.object; }
+	public Item getObject(){ return this.object; }
 }

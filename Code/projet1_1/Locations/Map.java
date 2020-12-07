@@ -14,7 +14,9 @@ public class Map {
 	private Door south;
 	private Shop shop;
 	private String description;
-	
+
+	public Map(){}
+
 	public Map(String newName){
 		this.name = newName;
 		this.enemies = new HashMap<>();
