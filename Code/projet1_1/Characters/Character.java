@@ -34,4 +34,6 @@ public abstract class Character {
 	public int getDefense() { return this.stats.getDefense(); }
 
 	public int getCrit() { return this.stats.getCritical(); }
+
+	public Statistics getStatistics(){return this.stats;}
 }

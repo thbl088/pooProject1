@@ -49,6 +49,7 @@ public class Player extends Character {
 		if (this.healthPotion > 0)
 		{
 			this.healthPotion -- ;
+			this.getStatistics().addHealth(25);
 			return EXIT_SUCCESS;
 		}
 		else

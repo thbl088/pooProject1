@@ -151,11 +151,10 @@ public class ActionManager {
 	}
 
 	public void startFight() {
-		//currentGame.player.getMapHero().getEnemy().get(currentGame.player.getMapHero().getEnemy().keySet().toArray()[0])
 		isFighting = true;
 		int turnCounter = 0;
 		while(fight.stillFighting() == 0){
-			System.out.println("Turn " + turnCounter);
+			System.out.println("Turn " + turnCounter + "\n");
 			System.out.println("Enter your action : ");
 
 			getAction();			
@@ -163,11 +162,11 @@ public class ActionManager {
 			turnCounter++;
 		}
 		if(fight.stillFighting() == 1){
-			System.out.println("You are dead");
+			System.out.println("You are dead\n");
 			actionQuit();
 		}
 		if(fight.stillFighting() == 2){
-			System.out.println("You have defeated " + fight.getEnemyName());
+			System.out.println("You have win this fight\n");
 			endFight();
 		}
 	}
