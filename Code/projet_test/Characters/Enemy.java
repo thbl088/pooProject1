@@ -11,10 +11,5 @@ public class Enemy extends Character{
 		this.object = item;
 	}
 
-	public Enemy(String name, Statistics stats){
-		super(name, stats);
-		this.object = null;
-	}
-
 	public Item getObject(){ return this.object; }
 }

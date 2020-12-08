@@ -18,15 +18,9 @@ public class Player extends Character {
 	private Weapon DEFAULT_WEAPON = new Weapon("Ax", "It is used to break the windshield", 0, 3);
 	private static final int EXIT_SUCCESS = 0;
 	private static final int EXIT_FAILURE = -1;
-	private int coefHPPotion = 25;
-	private int coefAttPotion = 2;
-	private int coefDefPotion = 2;
-	private int coefCritPotion = 2;
 
 	public Player(String name){
-		super(name, new StatisticsPlayer());
-		this.armor = DEFAULT_ARMOR;
-		this.weapon = DEFAULT_WEAPON;
+		super(name);
 	}
 
 	public void addHealthPotion() { this.healthPotion ++; }
@@ -51,18 +45,10 @@ public class Player extends Character {
 	 */
 	public Item getItem(String item) { return inventory.get(item); }
 
-	public String getNbPotion(){
-		return "health potion : " + this.healthPotion
-						+ "\ndefense potion : " + this.defensePotion
-						+ "\nattack potion : " + this.attackPotion
-						+ "\ncrit potion : " + this.critPotion;
-	}
-
 	public int useHealthPotion() {
 		if (this.healthPotion > 0)
 		{
 			this.healthPotion -- ;
-			this.getStatistics().addHealth(coefHPPotion);
 			return EXIT_SUCCESS;
 		}
 		else
@@ -72,26 +58,11 @@ public class Player extends Character {
 			
 		}
 	}
-	
-		public int useAttackPotion() {
-			if (this.attackPotion > 0)
-			{
-				this.attackPotion-- ;
-				this.getStatistics().changeAttack(this.getAttack() * coefAttPotion);
-				return  EXIT_SUCCESS;
-			}
-			else
-			{
-				System.out.println("You don't have any attack potion.");
-				return  EXIT_FAILURE;
-			}
-		}
 
 	public int useDefensePotion() {
 		if (this.defensePotion > 0)
 		{
-			this.defensePotion-- ;
-			this.getStatistics().changeDefense(this.getDefense() * coefDefPotion);
+			this.defensePotion -- ;
 			return EXIT_SUCCESS;
 		}
 		else
@@ -104,9 +75,7 @@ public class Player extends Character {
 	public int useCritPotion() {
 		if (this.critPotion > 0)
 		{
-			
 			this.critPotion-- ;
-			this.getStatistics().changeCritical(this.getCrit() * coefCritPotion);
 			return EXIT_SUCCESS;
 		}
 		else
@@ -116,13 +85,23 @@ public class Player extends Character {
 		}
 	}
 
-	public void printInventory() {
-		if (!(this.inventory == null)){
-			for (String i : inventory.keySet()) {
-				System.out.println(i);
-			}
+	public int useAttackPotion() {
+		if (this.attackPotion > 0)
+		{
+			this.attackPotion = -1 ;
+			return  EXIT_SUCCESS;
 		}
-		else { System.out.println("Inventory is empty."); }
+		else
+		{
+			System.out.println("You don't have any attack potion.");
+			return  EXIT_FAILURE;
+		}
+	}
+
+	public void printInventory() {
+		for (String i : inventory.keySet()) {
+			System.out.println(i);
+		  }
 	}
 
 	public void removeWeapon() {
@@ -186,8 +165,4 @@ public class Player extends Character {
 	 */
 	public void removeInventory(Item item) { this.inventory.remove(item.getName()); }
 
-	@Override
-	public String toString() {
-		return "player name : " + this.getName() + "\nhealth : " + this.getHealth() + "\nattack : " + this.getAttack() + "\ndefense : " + this.getDefense() + "\ncritical : " + this.getCrit() + "\n";
-	}
 }
