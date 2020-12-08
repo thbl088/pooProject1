@@ -99,6 +99,10 @@ public abstract class Statistics {
 
 	}
 
+	public void changeHealth(int hp){
+		this.health = hp;
+	}
+
 	/**
 	 * 
 	 * @param def
@@ -106,6 +110,9 @@ public abstract class Statistics {
 	public void removeDefense(int def) {
 
 		this.defense -= def;
+	}
+	public void changeDefense(int def){
+		this.defense = def;
 	}
 
 	/**
@@ -116,6 +123,9 @@ public abstract class Statistics {
 		
 		this.critical -= crit;
 	}
+	public void changeCritical(int crit){
+		this.critical = crit;
+	}
 
 	/**
 	 * 
@@ -124,6 +134,9 @@ public abstract class Statistics {
 	public void removeAttack(int att) {
 		
 		this.attack -= att;
+	}
+	public void changeAttack(int att){
+		this.attack = att;
 	}
 
 	/**
