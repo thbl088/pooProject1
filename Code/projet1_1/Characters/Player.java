@@ -3,6 +3,7 @@ package Characters;
 import java.util.HashMap;
 import Items.*;
 import Locations.*;
+import Stats.*;
 
 public class Player extends Character {
 

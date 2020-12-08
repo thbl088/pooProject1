@@ -21,18 +21,18 @@ public class Shop extends Map {
 		items.put(newItem.getName(), newItem);
 	}
 
-	public void getItem(String item){
-		items.get(item);
-		this.removeItem(item);
+
+	public Item getItem(String item){
+		Item itemReturn = this.items.get(item);
+		this.items.remove(item);
+		return itemReturn;
 	}
 
 	public Map getExitShop() {
 		return this.exitShop;
 	}
 
-	public void removeItem(String item) {
-		items.remove(item);
-	}
+
 
 	public void printItems() {
 		for (String i : items.keySet()) {

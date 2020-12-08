@@ -12,14 +12,16 @@ public abstract class Character {
 	 * 
 	 * @param name
 	 */
-	protected Character(String name){
+	public Character(String name){
 		this.name = name ;
 	}
 
-	protected Character(String name, Statistics stats) {
+	public Character(String name, Statistics stats) {
 		this.name = name;
 		this.stats = stats;
 	}
+
+	public Character(){}
 
 	public String getName(){ return this.name; }
 

@@ -164,7 +164,7 @@ public class ActionManager {
 	}
 
 	public void actionFight() {
-		if(currentGame.player.getMapHero().getEnemy().isEmpty()){
+		if(currentGame.player.getMapHero().getEnemies().isEmpty()){
 			System.out.println("There are no enemies here");
 		}
 		else{

@@ -14,7 +14,7 @@ public class Fight {
 	
 	public void instantiateFight(Player player){
 		player = this.player;
-		enemies = this.player.getMapHero().getEnemy() ;
+		enemies = this.player.getMapHero().getEnemies() ;
 	}
 
 
@@ -27,7 +27,7 @@ public class Fight {
 		int random100 = (int)(Math.random() * randomMax);
 
 		if(attacker.getCrit()<random100){
-			System.out.println("CRITIC !!!!!!!!!!\n")
+			System.out.println("CRITIC !!!!!!!!!!\n");
 			return attacker.getAttack()*coeffCrit;
 		}
 		else{
