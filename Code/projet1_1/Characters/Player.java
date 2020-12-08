@@ -18,6 +18,10 @@ public class Player extends Character {
 	private Weapon DEFAULT_WEAPON = new Weapon("Hache", "Hache du début", 0, 3);
 	private static final int EXIT_SUCCESS = 0;
 	private static final int EXIT_FAILURE = -1;
+	private int coefHPPotion = 25;
+	private int coefAttPotion = 2;
+	private int coefDefPotion = 2;
+	private int coefCritPotion = 2;
 
 	public Player(String name){
 		super(name, new StatisticsPlayer());
@@ -58,7 +62,7 @@ public class Player extends Character {
 		if (this.healthPotion > 0)
 		{
 			this.healthPotion -- ;
-			this.getStatistics().addHealth(25);
+			this.getStatistics().addHealth(coefHPPotion);
 			return EXIT_SUCCESS;
 		}
 		else
@@ -68,11 +72,26 @@ public class Player extends Character {
 			
 		}
 	}
+	
+		public int useAttackPotion() {
+			if (this.attackPotion > 0)
+			{
+				this.attackPotion-- ;
+				this.getStatistics().changeAttack(this.getAttack() * coefAttPotion);
+				return  EXIT_SUCCESS;
+			}
+			else
+			{
+				System.out.println("You don't have any attack potion.");
+				return  EXIT_FAILURE;
+			}
+		}
 
 	public int useDefensePotion() {
 		if (this.defensePotion > 0)
 		{
 			this.defensePotion-- ;
+			this.getStatistics().changeDefense(this.getDefense() * coefDefPotion);
 			return EXIT_SUCCESS;
 		}
 		else
@@ -85,25 +104,14 @@ public class Player extends Character {
 	public int useCritPotion() {
 		if (this.critPotion > 0)
 		{
+			
 			this.critPotion-- ;
+			this.getStatistics().changeCritical(this.getCrit() * coefCritPotion);
 			return EXIT_SUCCESS;
 		}
 		else
 		{
 			System.out.println("You don't have any crit potion.");
-			return  EXIT_FAILURE;
-		}
-	}
-
-	public int useAttackPotion() {
-		if (this.attackPotion > 0)
-		{
-			this.attackPotion-- ;
-			return  EXIT_SUCCESS;
-		}
-		else
-		{
-			System.out.println("You don't have any attack potion.");
 			return  EXIT_FAILURE;
 		}
 	}

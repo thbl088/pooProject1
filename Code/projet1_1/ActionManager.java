@@ -135,9 +135,31 @@ public class ActionManager {
 	public void actionUse(String potion) {
 		switch (potion) {
 			case "healthPotion" -> currentGame.player.useHealthPotion();
-			case "attackPotion" -> currentGame.player.useAttackPotion();
-			case "defensePotion" -> currentGame.player.useDefensePotion();
-			case "critPotion" -> currentGame.player.useCritPotion();
+			case "attackPotion" -> {
+									if(isFighting) {
+										currentGame.player.useAttackPotion();
+									}
+									else{
+										System.out.println("You can't use that right now");
+									}
+								}
+				
+			case "defensePotion" -> {
+									if(isFighting) {
+										currentGame.player.useDefensePotion();
+										}
+										else{
+											System.out.println("You can't use that right now");
+										}
+									}
+			case "critPotion" -> {
+								if(isFighting){
+									currentGame.player.useCritPotion();
+								}
+								else{
+										System.out.println("You can't use that right now");
+								}
+							}
 		}
 	}
 
