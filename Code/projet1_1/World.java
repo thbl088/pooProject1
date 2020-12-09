@@ -5,8 +5,6 @@ import Locations.*;
 import Characters.*;
 import Doors.*;
 import Stats.StatisticsEnemy;
-import Stats.StatisticsPlayer;
-import sun.security.util.Length;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -32,7 +30,7 @@ public class World {
 
 	public String[] nameMap(){
 
-		String[] dataName;
+		String[] dataName = new String[23];
 		
 		dataName[0] = "Ship";
 		dataName[1] = "Crash Site";
@@ -63,7 +61,7 @@ public class World {
 
 	public String[] descriptionMap(){
 
-		String[] dataDescription;
+		String[] dataDescription =  new String[23];
 		
 		dataDescription[0] = "Ship";
 		dataDescription[1] = "";
@@ -93,7 +91,7 @@ public class World {
 	}
 
 	public Map[] createTiles(){
-		Map[] tiles;
+		Map[] tiles = new Map[24];
 
 		for(int i = 0 ; i < numberMap ; i++){
 
@@ -119,7 +117,7 @@ public class World {
 	}
 
 	public Enemy[] createAllEnemies(){
-		Enemy[] enemies;
+		Enemy[] enemies = new Enemy[16];
 
 		// Map 4 Dernier Boss
 		StatisticsEnemy statsLeclerc = new 	StatisticsEnemy( 100 , 50 , 60 , 15, 80);
@@ -224,7 +222,7 @@ public class World {
 	}
 
 	public Item[] initItemInGround(){
-		Item[] ground;
+		Item[] ground = new Item[10];
 
 		ground[0] = new Weapon("Pickaxe", "A pickaxe hard enough to mine netherite.", 12, 5);
 		ground[1] = new Weapon("Rock", "It's rock like Malphite.", 2 , 2 );
@@ -392,8 +390,8 @@ public class World {
 	}
 	
 	public Npc[] initNpc(){
-		//TODO faire la fonction création de pnj
-		Npc[] village;
+
+		Npc[] village = new Npc[11];
 
 		village[0] = new Npc("Henry", null,"Henry [Village chief] : “Welcome "+ this.player.getName() + " as I can see on your suit, I have seen you falling from the sky. I’m sure you’re the man of the prophecy. I’m sure you will find what you need behind the door behind me. But before that you’ll need to find the 2 objects needed to open the door. If you need help you can ask our merchant, he should have some object useful for you.”" );
 		village[1] = new Npc("Josette", null, "Josette [Villager] : “Hello there. The weather is nice, isn’t it?”");
@@ -429,7 +427,7 @@ public class World {
 
 	public Item[] initShopItem(){
 
-		Item[] shop;
+		Item[] shop = new Armor[6];
 		shop[0] = new Armor("Leather Tunic","Tunic made of leather." , 12, 5);
 		shop[1] = new Armor("Titanium Armour","Made with remnants of pencil robots." , 25, 20);
 		shop[2] = new Armor("Nethererite Armour","Made with a coming ore Ravenholm." , 25, 20);
@@ -474,7 +472,7 @@ public class World {
 		Scanner keyboard = new Scanner(System.in);
 		System.out.println("Welcome Enter ur name:");
 		String name = keyboard.nextLine();
-
+		keyboard.close();
 		Player hero = new Player(name);
 		hero. move(maps.get(namemap[0]));
 

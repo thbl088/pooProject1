@@ -1,7 +1,7 @@
 package Stats;
 
 public class StatisticsEnemy extends Statistics {
-	private final int MAX_HEALTH;
+	
 	private final int DEFAULT_HEALTH = 100;
 	private final int DEFAULT_DEFENSE = 50;
 	private final int DEFAULT_ATTACK = 10;
@@ -9,7 +9,7 @@ public class StatisticsEnemy extends Statistics {
 	private final int DEFAULT_MONEY = 5;
 
 	public StatisticsEnemy() {
-		this.MAX_HEALTH = DEFAULT_HEALTH;
+		this.maxhealth = DEFAULT_HEALTH;
 		this.health = DEFAULT_HEALTH;
 		this.defense = DEFAULT_DEFENSE;
 		this.attack = DEFAULT_ATTACK;
@@ -18,7 +18,7 @@ public class StatisticsEnemy extends Statistics {
 	}
 
 	public StatisticsEnemy(int hp, int att, int def,int money) {
-		this.MAX_HEALTH = hp;
+		this.maxhealth = hp;
 		this.health = hp;
 		this.defense = def;
 		this.attack = att;
@@ -27,7 +27,7 @@ public class StatisticsEnemy extends Statistics {
 	}
 
 	public StatisticsEnemy(int hp, int att, int def, int crit, int money) {
-		this.MAX_HEALTH = hp;
+		this.maxhealth = hp;
 		this.health = hp;
 		this.defense = def;
 		this.attack = att;
