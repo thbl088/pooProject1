@@ -2,11 +2,11 @@ package Stats;
 
 public class StatisticsPlayer extends Statistics {
 	private final int MAX_HEALTH;
-	private final int DEFAULT_HEALTH = 100;
-	private final int DEFAULT_DEFENSE = 100;
-	private final int DEFAULT_ATTACK = 100;
-	private final int DEFAULT_CRITICAL = 100;
-	private final int DEFAULT_MONEY = 100;
+	private final int DEFAULT_HEALTH = 5;
+	private final int DEFAULT_DEFENSE = 5;
+	private final int DEFAULT_ATTACK = 5;
+	private final int DEFAULT_CRITICAL = 5;
+	private final int DEFAULT_MONEY = 0;
 
 	public StatisticsPlayer(){
 		this.MAX_HEALTH = DEFAULT_HEALTH;

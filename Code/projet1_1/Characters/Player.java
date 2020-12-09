@@ -191,4 +191,15 @@ public class Player extends Character {
 	public String toString() {
 		return "player name : " + this.getName() + "\nhealth : " + this.getHealth() + "\nattack : " + this.getAttack() + "\ndefense : " + this.getDefense() + "\ncritical : " + this.getCrit() + "\n";
 	}
+
+	public int finish(){
+
+		if( this.getMapHero().getName().equals("Ship") && this.weapon.getName().equals("Reactor"))
+		{
+			return 1;
+		}
+
+		return 0;
+
+	}
 }
