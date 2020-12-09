@@ -1,3 +1,4 @@
+import Items.Armor;
 import Items.Item;
 import Items.Weapon;
 import Locations.*;
@@ -13,6 +14,7 @@ public class World {
 
 	private HashMap<String, Map> maps;
 	public Player player;
+	private int numberMap = 22;
 
 	public String getMapDescription(){
 		return this.player.getMapHero().getDescription();
@@ -61,7 +63,7 @@ public class World {
 	public Map[] createTiles(){
 		Map[] tiles;
 
-		for(int i = 0 ; i < 22 ; i++){
+		for(int i = 0 ; i < numberMap ; i++){
 
 			Map map = new Map();
 			tiles[i] = map ;
@@ -79,6 +81,8 @@ public class World {
 			maps.put(name[i], map[i]);
 		}
 		
+		Shop shop = new Shop();
+		maps.put("Shop", shop);
 	}
 
 	public Enemy[] createAllEnemies(){
@@ -198,7 +202,6 @@ public class World {
 		ground[6] = new Item("Companion Cube", "A cube with pink heart on the side.", 60);
 		ground[7] = new Item("Package", "A package which contains a nvidia geforce 3080." , 20);
 		ground[8] = new Item("Package", "A package which contains a nvidia geforce 3080." , 20);
-		ground[9] = new Weapon("Garbage Collector", "A pickaxe hard enough to mine netherite.", -1, 99999999);
 		
 		return ground;
 	}
@@ -215,7 +218,6 @@ public class World {
 		maps.get(namemap[15]).addItem(ground[0]);
 		maps.get(namemap[19]).addItem(ground[2]);
 		maps.get(namemap[19]).addItem(ground[3]);
-		maps.get(namemap[22]).addItem(ground[9]);
 
 
 	}
@@ -357,15 +359,58 @@ public class World {
 		//TODO faire la fonction création de pnj
 		Npc[] village;
 
+		village[0] = new Npc("Henry", null,"" );
+		village[1] = new Npc("Josette", null, "");
+		village[2] = new Npc("Loïc Choulet", null,"" );
+		Item tankTrack = new Item("Tank Track", "This chariot caterpillar is shining.", -1);
+		village[3] = new Npc("Mark",tankTrack, "");
+		village[4] = new Npc("Sebastien", null,"" );
+		village[5] = new Npc("Anne", null,"" );
+		village[6] = new Npc("Robert", null,"" );
+		village[7] = new Npc("José", null,"" );
+		village[8] = new Npc("Franck", null,"" );
+		village[9] = new Npc("Hena", null,"" );
+		Weapon grabage = new Weapon("Garbage Collector", "This weapon allows to put any entity to state null.", -1, 99999999);
+		village[10] = new Npc("Samuel", grabage,"" );
+
 		return village;
 	}
 
-	public void implentNpc(String[]name , Npc[] pnj){
-		//TODO ajouter les pnj dans le monde
+	public void implentNpc(String[]namemap , Npc[] pnj){
+
+		maps.get(namemap[2]).addNpc(pnj[0]);
+		maps.get(namemap[2]).addNpc(pnj[1]);
+		maps.get(namemap[2]).addNpc(pnj[2]);
+		maps.get(namemap[3]).addNpc(pnj[3]);
+		maps.get(namemap[18]).addNpc(pnj[4]);
+		maps.get(namemap[11]).addNpc(pnj[5]);
+		maps.get(namemap[14]).addNpc(pnj[6]);
+		maps.get(namemap[16]).addNpc(pnj[7]);
+		maps.get(namemap[18]).addNpc(pnj[8]);
+		maps.get(namemap[19]).addNpc(pnj[9]);
+		maps.get(namemap[22]).addNpc(pnj[10]);
 	}
 
 	public Item[] initShopItem(){
-		//TODO faire la banque de donnée du shop
+
+		Item[] shop;
+		shop[0] = new Armor("Leather Tunic","Tunic made of leather." , 12, 5);
+		shop[1] = new Armor("Titanium Armour","Made with remnants of pencil robots." , 25, 20);
+		shop[2] = new Armor("Nethererite Armour","Made with a coming ore Ravenholm." , 25, 20);
+		shop[3] = new Weapon("Stone Sword","A sword stronger than wood.", 12, 15);
+		shop[4] = new Weapon("Japanese Sword","Take the soul of your enemies.", 12, 15);
+		shop[5] = new Weapon("Energie Sword","Sword recover from an old ship that once crashed here.", 70, 50);
+		return shop;
+	}
+
+	public void addItemInShop(Item[]items){
+
+		for(int i=0 ; i < items.length ; i++){
+
+			maps.get("Shop").addItem(items[i]);
+
+		}
+
 	}
 
 	public void initWorld(){
@@ -374,18 +419,22 @@ public class World {
 			Map[] tabMap = createTiles();
 			Enemy[] tabEnemies = createAllEnemies();
 			Item[]  tabItemGround = initItemInGround();
-
+			Item[]	shopInit = initShopItem();
+			Npc[]	tabNpc = initNpc();
 
 			addnameMap(tabName, tabMap);  // ajout des nom au map 
 			addEnnmiesMap(tabEnemies, tabName); // ajout des ennemis 
 			addItemMap(tabItemGround, tabName);	// ajout des items
-
+			addItemInShop(shopInit);       // ajout de la banque d 'item dans le shop
+			implentNpc(tabName, tabNpc);   // ajout des pnj
+ 
 			initDoorMap(tabName);						// Chaque map coté ses porte 
 
 	}
 
 
 	public static void main(String[] args){
-
+		World monde = new World();
+		monde.initWorld();
 	}
 }
