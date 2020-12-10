@@ -81,7 +81,7 @@ public class Map {
 
 	public String getName() { return this.name; }
 
-	public String getDescription() { return this.getName() + " : \n" + this.description; }
+	public String getDescription() { return this.getName() + " : " + this.description; }
 
 	public HashMap<String, Enemy> getEnemies(){return enemies;} //warning mais on se fiche de l'ordre des ennemies
 
