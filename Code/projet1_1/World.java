@@ -472,12 +472,15 @@ public class World {
 	public void initPlayer(String[] namemap){
 		
 		Scanner keyboard = new Scanner(System.in);
-		System.out.println("Welcome \nEnter your name:");
+		System.out.print("Enter your name : ");
 		String name = keyboard.nextLine();
 		Player hero = new Player(name);
 		this.player = hero;
-		System.out.println("Your Welcome "+ hero.getName() +".");
+		System.out.println("Welcome "+ hero.getName() +".");
+		System.out.println("Your ship has crashed and you need a jack and a new motor to leave this planet.");
 		hero. move(maps.get(namemap[0]));
+		System.out.println("You Enter : "+this.player.getMapHero().getName() + ".");
+		System.out.println(this.player.getMapHero().getDescription());
 
 		
 	}
@@ -486,8 +489,6 @@ public class World {
 
 		Map maphero = this.player.getMapHero() ;
 
-		System.out.println("You Enter in "+maphero.getName() + ".");
-		System.out.println(maphero.getDescription());
 		
 		action.getAction();
 		
@@ -515,9 +516,6 @@ public class World {
 
 		// ------------------------ INTRODUCTION -----------------------------------
 
-		System.out.println("Your ship has crashed and you need a jack and a new motor to leave this planet.");
-		System.out.println("You Enter "+monde.player.getMapHero().getName());
-		System.out.println(monde.player.getMapHero().getDescription());
 
 		while ( finish == 0){
 
