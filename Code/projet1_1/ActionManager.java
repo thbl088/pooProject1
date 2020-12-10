@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Scanner;
 
+import javax.swing.Action;
+
+
 
 import Locations.*;
 
@@ -15,17 +18,16 @@ import Characters.Player;
 import Characters.Npc;
 
 public class ActionManager {
-	private Scanner scanner;
+	public Scanner scanner;
 	private String command;
 	private boolean isFighting;
 	private World currentGame;
 	private Fight fight;
 	private String[] parsedCommands;
 
-
-	public ActionManager(World monde) {
+	public ActionManager()
+	{
 		this.scanner = new Scanner(System.in);
-		this.currentGame = monde;
 	}
 
 

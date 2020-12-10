@@ -2,7 +2,6 @@ package Locations;
 
 import Characters.*;
 
-import java.lang.Character;
 import java.util.HashMap;
 import Doors.*;
 import Items.*;

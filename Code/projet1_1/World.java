@@ -91,7 +91,7 @@ public class World {
 	}
 
 	public Map[] createTiles(){
-		Map[] tiles = new Map[24];
+		Map[] tiles = new Map[23];
 
 		for(int i = 0 ; i < numberMap ; i++){
 
@@ -293,6 +293,7 @@ public class World {
 		maps.get(namemap[2]).setEast(new Door(maps.get(namemap[14])));
 		maps.get(namemap[2]).setSouth(new Door(maps.get(namemap[1])));
 		maps.get(namemap[2]).setWest(new Door(maps.get(namemap[8])));
+		maps.get(namemap[2]).setShop();
 
 		//map 3
 		LockedDoor finalBossDoor = new LockedDoor(maps.get(namemap[4]));
@@ -393,17 +394,17 @@ public class World {
 
 		Npc[] village = new Npc[11];
 
-		village[0] = new Npc("Henry", null,"Henry [Village chief] : “Welcome "+ this.player.getName() + " as I can see on your suit, I have seen you falling from the sky. I’m sure you’re the man of the prophecy. I’m sure you will find what you need behind the door behind me. But before that you’ll need to find the 2 objects needed to open the door. If you need help you can ask our merchant, he should have some object useful for you.”" );
-		village[1] = new Npc("Josette", null, "Josette [Villager] : “Hello there. The weather is nice, isn’t it?”");
-		village[2] = new Npc("Loïc Choulet", null,"Loïc Choulet [Villager] : “Do you have a SolidWorks license?”" );
+		village[0] = new Npc("Mayor", null,"Henry [Mayor] : “Welcome "+ this.player.getName() + " as I can see on your suit, I have seen you falling from the sky. I’m sure you’re the man of the prophecy. I’m sure you will find what you need behind the door behind me. But before that you’ll need to find the 2 objects needed to open the door. If you need help you can ask our merchant, he should have some object useful for you.”" );
+		village[1] = new Npc("Villager", null, "Josette [Villager] : “Hello there. The weather is nice, isn’t it?”");
+		village[2] = new Npc("Children", null,"Loïc Choulet [Children] : “Do you have a SolidWorks license?”" );
 		Item tankTrack = new Item("Tank Track", "This chariot caterpillar is shining.", -1);
-		village[3] = new Npc("Mark",tankTrack, "Mark [Crazy man] : “HEY YOU! I have found this big thing around, I was trying to sleep on it but it’s too hard so take it!”");
-		village[4] = new Npc("Sebastien", null,"Sebastien [Factor] : “I need to deliver those important packages but those monsters block the road.”" );
-		village[5] = new Npc("Anne", null,"Anne [Shepherdess] : “Sometimes I found weird trace on the earth around my herd and a big ball appear.”" );
-		village[6] = new Npc("Robert", null,"Robert : “BEURGHHHH.”" );
-		village[7] = new Npc("José", null,"José [Miner] : “I hope I’ll found diamond this time but there is too much lava down there.”" );
-		village[8] = new Npc("Franck", null,"Franck [Villager] :“Thank you a lot now I can go back see my wife Josette.”" );
-		village[9] = new Npc("Hena", null,"Hena [Fisher] : “I hope I’ll catch this big fish this time.”" );
+		village[3] = new Npc("Crazy man",tankTrack, "Mark [Crazy man] : “HEY YOU! I have found this big thing around, I was trying to sleep on it but it’s too hard so take it!”");
+		village[4] = new Npc("Factor", null,"Sebastien [Factor] : “I need to deliver those important packages but those monsters block the road.”" );
+		village[5] = new Npc("Shepherdess", null,"Anne [Shepherdess] : “Sometimes I found weird trace on the earth around my herd and a big ball appear.”" );
+		village[6] = new Npc("Alcoholic", null,"Robert [alcoholic]: “BEURGHHHH.”" );
+		village[7] = new Npc("Miner", null,"José [Miner] : “I hope I’ll found diamond this time but there is too much lava down there.”" );
+		village[8] = new Npc("Lumberjack", null,"Franck [Lumberjack] :“Thank you a lot now I can go back see my wife Josette.”" );
+		village[9] = new Npc("Fisher", null,"Hena [Fisher] : “I hope I’ll catch this big fish this time.”" );
 		Weapon grabage = new Weapon("Garbage Collector", "This weapon allows to put any entity to state null.", -1, 99999999);
 		village[10] = new Npc("Samuel", grabage,"Samuel : “Congratulation for looking at the game file for founding this area. Take this The Garbage Collector.”" );
 
@@ -469,17 +470,25 @@ public class World {
 	}
 
 	public void initPlayer(String[] namemap){
+		
 		Scanner keyboard = new Scanner(System.in);
-		System.out.print("Welcome, enter your name : ");
+		System.out.println("Welcome \nEnter your name:");
 		String name = keyboard.nextLine();
 		Player hero = new Player(name);
+		this.player = hero;
+		System.out.println("Your Welcome "+ hero.getName() +".");
 		hero. move(maps.get(namemap[0]));
 
-		this.player = hero;
+		
 	}
 
 	public int play(ActionManager action){
 
+		Map maphero = this.player.getMapHero() ;
+
+		System.out.println("You Enter in "+maphero.getName() + ".");
+		System.out.println(maphero.getDescription());
+		
 		action.getAction();
 		
 
@@ -515,6 +524,8 @@ public class World {
 			finish = monde.play(action);
 
 		}
+
+		action.scanner.close();
 
 		// ------------------------ Fin du jeu -----------------------------------
 

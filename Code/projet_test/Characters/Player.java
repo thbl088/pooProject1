@@ -35,7 +35,16 @@ public class Player extends Character {
 	 * 
 	 * @param newLoc
 	 */
-	public void move(Map newLoc) { this.currentLocation = newLoc; }
+	public void move(Map newLoc) { 
+		this.currentLocation = newLoc;
+		if( (newLoc.getName().equals("Barracks")  && getItem("CarWheel").getName().equals("CarWheel") && getItem("Little Wheel").getName().equals("Little Wheel") && getItem("Tank Track").getName().equals("Tank Track"))||(
+			this.destination.getName().equals("Ship") && getItem("Jack").getName().equals("Jack"))
+		){
+			
+			newLoc.unlock();
+		}
+		
+	 }
 
 	public Map getMapHero() { return this.currentLocation; }
 
