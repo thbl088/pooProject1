@@ -22,7 +22,7 @@ public class ActionManager {
 
 		if(isFighting){ //actions disponibles pendant un combat
 			switch (parsedCommands[0].toLowerCase()) {
-				case "attack" -> fight.playerAttack();
+				case "attack" -> fight.playerAttack(parsedCommands[1].toLowerCase());
 				case "defend" -> fight.defend();
 				case "help" -> actionHelp();
 				case "use" -> actionUse(parsedCommands[1]);

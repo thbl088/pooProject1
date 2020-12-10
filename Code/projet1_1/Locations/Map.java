@@ -10,9 +10,9 @@ import Items.*;
 public class Map {
 
 	private String name;
-	private HashMap<String, Enemy> enemies;
-	private HashMap<String, Item> groundItems;
-	private HashMap<String, Npc> npcs;
+	private HashMap<String, Enemy> enemies = new HashMap<>();
+	private HashMap<String, Item> groundItems= new HashMap<>();
+	private HashMap<String, Npc> npcs= new HashMap<>();
 	private Door north;
 	private Door east;
 	private Door west;

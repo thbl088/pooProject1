@@ -106,7 +106,7 @@ public class World {
 	public  void addnameMap(String[] name, Map[] map ,String[] description){
 
 		for(int  i = 0 ; i < name.length ; i++ ){
-			
+			map[i] = new Map();
 			map[i].changeName(name[i]);
 			map[i].setDescription(description[i]);
 			maps.put(name[i], map[i]);
@@ -427,7 +427,7 @@ public class World {
 
 	public Item[] initShopItem(){
 
-		Item[] shop = new Armor[6];
+		Item[] shop = new Item[6];
 		shop[0] = new Armor("Leather Tunic","Tunic made of leather." , 12, 5);
 		shop[1] = new Armor("Titanium Armour","Made with remnants of pencil robots." , 25, 20);
 		shop[2] = new Armor("Nethererite Armour","Made with a coming ore Ravenholm." , 25, 20);

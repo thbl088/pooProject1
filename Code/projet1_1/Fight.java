@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 public class Fight {
 	private Player player;
-	private Enemy enemy;
 	private HashMap<String, Enemy> enemies = new HashMap<String, Enemy>();
 	private int damage;
 	private boolean hasDefend = false;
