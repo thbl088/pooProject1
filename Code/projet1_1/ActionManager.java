@@ -27,6 +27,7 @@ public class ActionManager {
 				case "help" -> actionHelp();
 				case "use" -> actionUse(parsedCommands[1]);
 				case "quit" -> actionQuit();
+				default -> System.out.println("You can't do this");
 			}
 		}
 		else{ //actions disponibles hors combats
@@ -38,6 +39,9 @@ public class ActionManager {
 				case "use" -> actionUse(parsedCommands[1]);
 				case "fight" -> actionFight();
 				case "quit" -> actionQuit();
+				case "buy" -> actionBuy(parsedCommands[1]);
+				case "sell" -> actionSell(parsedCommands[1]);
+				default -> System.out.println("You can't do this");
 			}
 		}
 	}
@@ -93,6 +97,9 @@ public class ActionManager {
 				if (currentLoc instanceof Shop) { currentPlayer.move(((Shop) currentLoc).getExitShop()); }
 				else { System.out.println("You cannot exit current location"); }
 				break;
+			default :
+				System.out.println("You can't go there");
+				break;
 		}
 	}
 
@@ -114,6 +121,7 @@ public class ActionManager {
 			case "here", "around" -> System.out.println(this.currentGame.getMapDescription());
 			case "inventory" -> this.currentGame.player.printInventory();
 			case "enemy", "enemies" -> this.currentGame.player.getMapHero().getEnemiesList();
+			default -> System.out.println("You can't look at this");
 		}
 	}
 
@@ -133,6 +141,7 @@ public class ActionManager {
 	 * @param potion
 	 */
 	public void actionUse(String potion) {
+		final String UNUSABLE = "You can't use that right now";
 		switch (potion) {
 			case "healthPotion" -> currentGame.player.useHealthPotion();
 			case "attackPotion" -> {
@@ -140,7 +149,7 @@ public class ActionManager {
 										currentGame.player.useAttackPotion();
 									}
 									else{
-										System.out.println("You can't use that right now");
+										System.out.println(UNUSABLE);
 									}
 								}
 				
@@ -149,7 +158,7 @@ public class ActionManager {
 										currentGame.player.useDefensePotion();
 										}
 										else{
-											System.out.println("You can't use that right now");
+											System.out.println(UNUSABLE);
 										}
 									}
 			case "critPotion" -> {
@@ -157,7 +166,7 @@ public class ActionManager {
 									currentGame.player.useCritPotion();
 								}
 								else{
-										System.out.println("You can't use that right now");
+										System.out.println(UNUSABLE);
 								}
 							}
 		}
@@ -171,6 +180,16 @@ public class ActionManager {
 			startFight(); 
 		}
 	}
+
+
+	public void actionBuy(String item) {
+		this.currentGame.player.buyItem(item.toLowerCase());
+	}
+
+	public void actionSell(String item) {
+		this.currentGame.player.sellItem(item.toLowerCase());
+	}
+
 
 	public void startFight() {
 		isFighting = true;

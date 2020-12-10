@@ -481,7 +481,7 @@ public class World {
 
 	public int play(ActionManager action){
 
-		System.out.println("You Enter in "+this.player.getMapHero().getName());
+		System.out.println("You Enter "+this.player.getMapHero().getName());
 		System.out.println(this.player.getMapHero().getDescription());
 		action.getAction();
 		

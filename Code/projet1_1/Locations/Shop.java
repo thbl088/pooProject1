@@ -21,6 +21,13 @@ public class Shop extends Map {
 		items.put(newItem.getName(), newItem);
 	}
 
+	public boolean hasItem(String item) {
+		return this.items.containsKey(item);
+	}
+
+	public void removeItem(String item) {
+		this.items.remove(item);
+	}
 
 	public Item getItem(String item){
 		Item itemReturn = this.items.get(item);
