@@ -16,6 +16,7 @@ import Locations.*;
 import Characters.Enemy;
 import Characters.Player;
 import Characters.Npc;
+import Items.Item;
 
 public class ActionManager {
 	private Scanner scanner;
@@ -252,12 +253,25 @@ public class ActionManager {
 	}
 
 	public void actionTalk(String name){
-		System.out.println(name);
-		System.out.println(currentGame.player.getMapHero().getNpc(name));
-		if( currentGame.player.getMapHero().getNpc(name) != null ){
-			System.out.println( currentGame.player.getMapHero().getNpc(name).getDialog());
+
+		Player p = this.currentGame.player;
+
+	if ( p.getMapHero().getNpc(name) != null ){      // vérifie si l'entité est bien un pnj
+		System.out.println( p.getMapHero().getNpc(name).getDialog()); // récupére et affiche son dialogue
+
+														
+		if ( (name.equals("crazy_man") && (p.getItem("tank_track") == null) )    //vérifie le pnj si c'est  le crazy_man ou samuel deux pnj qui donne des items et on vérifie si ils ont déjà pas donnée les items
+		|| name.equals("samuel") && (p.getItem("garbage_collector") == null)) {  
+			
+			Item objet_pnj = p.getMapHero().getNpc(name).getItem();
+			System.out.println("You obtain " + objet_pnj.getName() + ".");
+
+			p.addInventory(objet_pnj);
 		}
-		else {System.out.println("Wrong name");}
+		}
+		else {
+			System.out.println("Wrong name");
+		}
 	}
 
 	public void actionQuit() { System.exit(0); }

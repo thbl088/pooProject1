@@ -25,9 +25,13 @@ public class Player extends Character {
 	private final int COEF_CRIT_POTION = 2;
 
 	public Player(String name){
+		
 		super(name, new StatisticsPlayer());
+		HashMap<String, Item> inv = new HashMap<>();
 		this.armor = DEFAULT_ARMOR;
 		this.weapon = DEFAULT_WEAPON;
+		this.inventory = inv;
+		
 	}
 
 	public void addHealthPotion() { this.healthPotion ++; }
@@ -128,7 +132,8 @@ public class Player extends Character {
 	}
 
 	public void printInventory() {
-		if (!(this.inventory == null)){
+		if (!this.inventory.isEmpty()){
+			
 			for (String i : inventory.keySet()) {
 				System.out.println(i);
 			}

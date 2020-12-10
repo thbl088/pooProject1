@@ -25,11 +25,11 @@ public class Npc extends Enemy {
     public Item getItem() {
         Item returnItem = this.object;
         object = null;
-        if ( this.name.equals("Mark")){
-            this.dialog = "Mark [Crazy man] : “I was trying to sleep on it but it’s too hard.”";
+        if ( this.name.equals("crazy_man")){
+            this.dialog = "Mark [Crazy man] : \"I was trying to sleep on it but it’s too hard.\"";
         }
-        else if( this.name.equals("Samuel")){
-            this.dialog = "Samuel : “ Now you can save the world.”";
+        else if( this.name.equals("samuel")){
+            this.dialog = "Samuel : \" Now you can save the world.\"";
         }
         return returnItem;
     }
