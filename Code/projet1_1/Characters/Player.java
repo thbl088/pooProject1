@@ -8,10 +8,10 @@ import Stats.*;
 public class Player extends Character {
 
 	private HashMap<String, Item> inventory;
-	private int healthPotion = 0;
-	private int attackPotion = 0;
-	private int defensePotion = 0;
-	private int critPotion = 0;
+	private int healthPotion = 1;
+	private int attackPotion = 1;
+	private int defensePotion = 1;
+	private int critPotion = 1;
 	private Map currentLocation ;
 	private Armor armor ;
 	private Weapon weapon;
@@ -93,6 +93,7 @@ public class Player extends Character {
 			{
 				this.attackPotion-- ;
 				this.getStatistics().changeAttack(this.getAttack() * COEF_ATT_POTION);
+				System.out.println("new attack = " + this.getAttack());
 				return  EXIT_SUCCESS;
 			}
 			else
@@ -107,6 +108,8 @@ public class Player extends Character {
 		{
 			this.defensePotion-- ;
 			this.getStatistics().changeDefense(this.getDefense() * COEF_DEF_POTION);
+			System.out.println("new Defense = " + this.getDefense());
+
 			return EXIT_SUCCESS;
 		}
 		else
@@ -122,6 +125,8 @@ public class Player extends Character {
 			
 			this.critPotion-- ;
 			this.getStatistics().changeCritical(this.getCrit() * COEF_CRIT_POTION);
+			System.out.println("new Critic = " + this.getCrit());
+
 			return EXIT_SUCCESS;
 		}
 		else

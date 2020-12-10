@@ -8,7 +8,7 @@ public class StatisticsPlayer extends Statistics {
 	private final int DEFAULT_MONEY = 0;
 
 	public StatisticsPlayer(){
-		this.maxhealth = DEFAULT_HEALTH;
+		this.maxhealth = DEFAULT_HEALTH *2 ;
 		this.health = DEFAULT_HEALTH;
 		this.defense = DEFAULT_DEFENSE;
 		this.attack = DEFAULT_ATTACK;
