@@ -10,14 +10,17 @@ public class Fight {
 	private boolean hasDefend = false;
 	private int randomMax = 100;
 	private int coeffCrit = 2;
-	private int playerDef;
-	private Player savePlayerBaseStat;
+	private int formerAtt;
+	private int formerDef;
+	private int formerCrit;
+
 	
 	public Fight(Player playerEnter){
 		this.player = playerEnter;
 		this.enemies = playerEnter.getMapHero().getEnemies();
-		this.playerDef = playerEnter.getDefense();
-		this.savePlayerBaseStat = playerEnter;
+		this.formerAtt = playerEnter.getAttack();
+		this.formerDef = playerEnter.getDefense();
+		this.formerCrit = playerEnter.getCrit();
 	}
 	
 	
@@ -37,6 +40,9 @@ public class Fight {
 		if(enemies.get(targetName).getHealth()<1){
 			System.out.println("You killed " + enemies.get(targetName).getName()+ " and got " + enemies.get(targetName).getStatistics().getMoney() + " money.");
 			player.getStatistics().addMoney(enemies.get(targetName).getStatistics().getMoney());
+			if(enemies.get(targetName).getObject() != null){
+				player.addInventory(enemies.get(targetName).getObject());
+			}
 			enemies.remove(targetName);
 		}
 	}
@@ -46,16 +52,14 @@ public class Fight {
 			return 1;
 		}
 		if(enemies.size()==0){		
-			player.getStatistics().changeAttack(savePlayerBaseStat.getAttack());
-			player.getStatistics().changeDefense(savePlayerBaseStat.getDefense());
-			player.getStatistics().changeCritical(savePlayerBaseStat.getCrit());
+			System.out.println(player.getAttack() +"att" + player.getDefense()+"def"  + player.getCrit()+"crit" );
 			return 2;
 		}
 		return 0;
 	}
 
 	public void playerAttack(String targetName) {
-		
+		if(hasDefend){this.player.getStatistics().changeDefense(this.player.getDefense()/2);}
 		hasDefend = false;
 		System.out.println("You are attacking " + enemies.get(targetName).getName());
 		damage = attackCrit(player)-enemies.get(targetName).getDefense();
@@ -73,7 +77,7 @@ public class Fight {
 	public void enemyAttack() {
 		for (String i : enemies.keySet()) {
 			System.out.println(enemies.get(i).getName() + " is attacking.\n");
-			damage = attackCrit(enemies.get(i))-playerDef;
+			damage = attackCrit(enemies.get(i))-player.getDefense();
 			if (damage>0){
 				player.getStatistics().removeHealth(damage);
 				System.out.println(enemies.get(i).getName() + " has inflicted " + damage +" dmg, you have " + player.getHealth() + " HP remaining.\n");
@@ -91,7 +95,7 @@ public class Fight {
 		System.out.println("You keep your defend. \n");
 	}
 	else{
-		this.playerDef *= 2;
+		player.getStatistics().addDefense(this.player.getDefense());
 		System.out.println("You get ready for the next attack.");
 		hasDefend = true;
 		}
@@ -107,8 +111,16 @@ public class Fight {
 	}
 
 	public void printPlayerStats(){
-		System.out.println("Player : " + player.getName() + " : " + player.getHealth() + " HP, " + player.getAttack() + " att, "+ playerDef + " def." );
+		System.out.println("Player : " + player.getName() + " : " + player.getHealth() + " HP, " + player.getAttack() + " att, "+ player.getDefense() + " def." );
 		System.out.println("_____________________");
+	}
+
+	public Player getPlayerPostFight(){
+		player.getStatistics().changeAttack(formerAtt);
+		player.getStatistics().changeDefense(formerDef);
+		player.getStatistics().changeCritical(formerCrit);
+		System.out.println("Player : " + player.getName() + " : " + player.getHealth() + " HP, " + player.getAttack() + " att, "+ player.getDefense() + " def." );
+		return player;
 	}
 
 }

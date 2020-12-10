@@ -366,6 +366,7 @@ public class ActionManager {
 		if(fight.stillFighting() == 2){
 			System.out.println("You have win this fight\n");
 			endFight();
+			currentGame.player = fight.getPlayerPostFight();
 		}
 	}
 
