@@ -42,7 +42,17 @@ public class Player extends Character {
 	 * 
 	 * @param newLoc
 	 */
-	public void move(Map newLoc) { this.currentLocation = newLoc; }
+	public void move(Map newLoc) { 
+		/*
+		if( (newLoc.getName().equals("Barracks")  && getItem("car_wheel").getName().equals("car_wheel") && getItem("little_wheel").getName().equals("little_wheel") && getItem("tank_track").getName().equals("tank_track"))||(
+			newLoc.getName().equals("Ship") && getItem("jack").getName().equals("jack"))
+		){
+			
+			newLoc.getNorth().unlock();
+		}
+		*/
+		this.currentLocation = newLoc;
+	 }
 
 	public Map getMapHero() { return this.currentLocation; }
 

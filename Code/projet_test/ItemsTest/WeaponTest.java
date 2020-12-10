@@ -1,14 +1,23 @@
-package Items;
+package ItemsTest;
 
-public class Weapon extends Item {
+//import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import Items.Item;
+//import jdk.jfr.Timestamp;
+import junit.framework.*;
+
+public class WeaponTest extends ItemTest {
 	private int attackBonus;
 
-	public Weapon(String name, String description , int price , int attack) {
+	@beforeALL
+	public WeaponTest(String name, String description , int price , int attack) {
 		super(name, description , price);
 		this.attackBonus = attack;
 	}
 
-	public int getAttackBonus() { return this.attackBonus; }
+	@Test
+	public int testgetAttackBonus() throws Exception { assertEquals(this.attackBonus, item.getAttackBonus()); }
 
-	public void printAttackBonus() { System.out.println(this.attackBonus); }
+
 }

@@ -1,18 +1,28 @@
-package Items;
+package ItemsTest;
 
-import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import Items.Item;
-import jdk.jfr.Timestamp;
 import junit.framework.*;
 
 public class ItemTest{
 
+	private Item item;
+
+	@beforAll
+	void ItemTest()
+	{
+	  this.item = new Item("Wheel", "It's a wheel", 15); 
+	}
+
 	@Test
-	public void testgetName() throws Exception { assertEquals(this.name,Item.getname()); }
+	public void testgetName() throws Exception { assertEquals("Wheel", item.getName()); }
 
-	public String getDescription() { return this.description ; }
+	@Test
+	public String testgetDescription() throws Exception { assertEquals("It's a wheel" , item.getDescription()); }
 
-	public int getPrice() { return this.price ; }
+	@Test
+	public int testgetPrice() throws Execption { assertEquals(15 , item.getPrice()); }
+
 }

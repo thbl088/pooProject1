@@ -251,8 +251,10 @@ public class ActionManager {
 	}
 
 	public void actionTalk(String name){
-		if(currentGame.player.getMapHero().getNpc(name) instanceof Npc){
-			currentGame.player.getMapHero().getNpc(name).getDialog();
+		System.out.println(name);
+		System.out.println(currentGame.player.getMapHero().getNpc(name));
+		if( currentGame.player.getMapHero().getNpc(name) != null ){
+			System.out.println( currentGame.player.getMapHero().getNpc(name).getDialog());
 		}
 		else {System.out.println("Wrong name");}
 	}
