@@ -196,6 +196,7 @@ public class Player extends Character {
 			this.getMapHero().addItem(this.inventory.get(item));
 			this.stats.addMoney(this.inventory.get(item).getPrice() / 2);
 			this.inventory.remove(item);
+			System.out.println("Thanks for your patronage.");
 		}
 		else { System.out.println("You don't have this item"); }
 	}
