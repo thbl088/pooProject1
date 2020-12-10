@@ -18,7 +18,7 @@ import Characters.Player;
 import Characters.Npc;
 
 public class ActionManager {
-	public Scanner scanner;
+	private Scanner scanner;
 	private String command;
 	private boolean isFighting;
 	private World currentGame;
@@ -41,14 +41,14 @@ public class ActionManager {
 			switch (parsedCommands[0].toLowerCase()) {
 				case "attack" :
 					if (parsedCommands.length > 1) {
-						fight.playerAttack(parsedCommands[1].toLowerCase());
+						this.fight.playerAttack(parsedCommands[1].toLowerCase());
 					}
 					else {
 						System.out.println("Who do you want to attack ?");
 					}
 					break;
 				case "defend" :
-					fight.defend();
+					this.fight.defend();
 					break;
 				case "help" :
 					actionHelp();
@@ -325,30 +325,20 @@ public class ActionManager {
 		}
 	}
 
-
-	public void actionBuy(String item) {
-		this.currentGame.player.buyItem(item.toLowerCase());
-	}
-
-	public void actionSell(String item) {
-		this.currentGame.player.sellItem(item.toLowerCase());
-	}
-
-
 	public void startFight() {
 		isFighting = true;
+		this.fight = new Fight(currentGame.player);
 		int turnCounter = 0;
 		while(fight.stillFighting() == 0){
 			System.out.println("Turn " + turnCounter + "\n");
-			System.out.println("Enter your action : ");
 
 			getAction();			
 			fight.enemyAttack();
 			turnCounter++;
 		}
 		if(fight.stillFighting() == 1){
-			System.out.println("You are dead\n");
-			actionQuit();
+			//System.out.println("You are dead\n");
+			//actionQuit();
 		}
 		if(fight.stillFighting() == 2){
 			System.out.println("You have win this fight\n");
@@ -359,5 +349,14 @@ public class ActionManager {
 	public void endFight() {
 		isFighting = false;
 	}
+	
+	public void actionBuy(String item) {
+		this.currentGame.player.buyItem(item.toLowerCase());
+	}
 
+	public void actionSell(String item) {
+		this.currentGame.player.sellItem(item.toLowerCase());
+	}
+	
+	
 }

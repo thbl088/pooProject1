@@ -74,7 +74,7 @@ public class Player extends Character {
 		}
 	}
 	
-		public int useAttackPotion() {
+	public int useAttackPotion() {
 			if (this.attackPotion > 0)
 			{
 				this.attackPotion-- ;

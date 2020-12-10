@@ -10,22 +10,21 @@ public class Fight {
 	private boolean hasDefend = false;
 	private int randomMax = 100;
 	private int coeffCrit = 2;
+	private int playerDef;
+	private Player savePlayerBaseStat;
 	
-	public void instantiateFight(Player player){
-		player = this.player;
-		enemies = this.player.getMapHero().getEnemies() ;
+	public Fight(Player playerEnter){
+		this.player = playerEnter;
+		this.enemies = playerEnter.getMapHero().getEnemies();
+		this.playerDef = playerEnter.getDefense();
+		this.savePlayerBaseStat = playerEnter;
 	}
-
-
-	private Player savePlayerBaseStat = player;
-	private int playerDef = player.getDefense();
 	
-
-
+	
 	public int attackCrit(Character attacker){
 		int random100 = (int)(Math.random() * randomMax);
 
-		if(attacker.getCrit()<random100){
+		if(attacker.getCrit()>random100){
 			System.out.println("CRITIC !!!!!!!!!!\n");
 			return attacker.getAttack()*coeffCrit;
 		}
@@ -34,6 +33,13 @@ public class Fight {
 		}
 	}
 
+	public void checkEnemyDeath(String targetName){
+		if(enemies.get(targetName).getHealth()<1){
+			System.out.println("You killed " + enemies.get(targetName).getName()+ "and got" + enemies.get(targetName).getStatistics().getMoney() + "money.");
+			player.getStatistics().addMoney(enemies.get(targetName).getStatistics().getMoney());
+			enemies.remove(targetName);
+		}
+	}
 
 	public int stillFighting(){
 		if (player.getHealth()<1){
@@ -55,16 +61,12 @@ public class Fight {
 		damage = attackCrit(player)-enemies.get(targetName).getDefense();
 		if (damage>0){
 			enemies.get(targetName).getStatistics().removeHealth(damage);
-			System.out.println("You inflicted " + damage +" dmg. " + enemies.get(targetName).getName() +" has " + enemies.get(targetName).getHealth() + " HP left.\n");
-			if(enemies.get(targetName).getHealth()<1){
-				player.getStatistics().addMoney(enemies.get(targetName).getStatistics().getMoney());
-				System.out.println("You killed " + enemies.get(targetName).getName());
-				enemies.remove(targetName);
-			}
+			System.out.println("You inflicted " + -damage +" dmg. " + enemies.get(targetName).getName() +" has " + enemies.get(targetName).getHealth() + " HP left.\n");
+			checkEnemyDeath(enemies.get(targetName).getName());
 		}
 		else{
-			player.getStatistics().removeHealth(damage);
-			System.out.println("You inflict yourself" + damage +"dmg. You have " + player.getHealth() + "HP left.\n");
+			player.getStatistics().removeHealth(-damage);
+			System.out.println("You inflict yourself" + -damage +"dmg. You have " + player.getHealth() + "HP left.\n");
 		}
 	}
 
@@ -74,11 +76,12 @@ public class Fight {
 			damage = attackCrit(enemies.get(i))-playerDef;
 			if (damage>0){
 				player.getStatistics().removeHealth(damage);
-				System.out.println(enemies.get(i).getName() + " has inflicted " + damage +" dmg, you have " + player.getHealth() + " HP remaining.\n");
+				System.out.println(enemies.get(i).getName() + " has inflicted " + -damage +" dmg, you have " + player.getHealth() + " HP remaining.\n");
 			}
 			else{
-				enemies.get(i).getStatistics().removeHealth(damage);
-				System.out.println("You have inflicted " + damage +" dmg. "+ enemies.get(i).getName() +" has " + enemies.get(i).getHealth() + " HP.\n");
+				enemies.get(i).getStatistics().removeHealth(-damage);
+				System.out.println("You have inflicted " + -damage +" dmg. "+ enemies.get(i).getName() +" has " + enemies.get(i).getHealth() + " HP.\n");
+				checkEnemyDeath(enemies.get(i).getName());
 			}
 		}
 	}
@@ -88,7 +91,7 @@ public class Fight {
 		System.out.println("You keep your defend. \n");
 	}
 	else{
-		playerDef *= 2;
+		this.playerDef *= 2;
 		System.out.println("You get ready for the next attack.");
 		hasDefend = true;
 		}
@@ -101,4 +104,5 @@ public class Fight {
 			System.out.println(enemies.get(i).getName() + " : " + enemies.get(i).getHealth() + " HP. \n" );
 		}
 	}
+
 }

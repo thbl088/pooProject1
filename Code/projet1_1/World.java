@@ -523,7 +523,6 @@ public class World {
 
 		}
 
-		action.scanner.close();
 
 		// ------------------------ Fin du jeu -----------------------------------
 
