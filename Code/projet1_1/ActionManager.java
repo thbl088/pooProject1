@@ -1,13 +1,19 @@
 import Doors.LockedDoor;
+import Items.Armor;
+import Items.Weapon;
 
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Scanner;
+
+import org.graalvm.compiler.lir.StandardOp.NullCheck;
+
 import Locations.*;
 
 import Characters.Enemy;
 import Characters.Player;
+import Characters.Npc;
 
 public class ActionManager {
 	private Scanner scanner;
@@ -131,12 +137,12 @@ public class ActionManager {
 	 * @param item
 	 */
 	public void actionTake(String item) {
-		currentGame.player.addInventory(currentGame.player.getMapHero().getItem(item))
+		currentGame.player.addInventory(currentGame.player.getMapHero().getItem(item));
 	}
 
 	public void actionTalk(String name){
-		if(currentGame.player.getMapHero().getNpc(name) != Null){
-		currentGame.player.getMapHero().getNpc(name).getDialog();
+		if(currentGame.player.getMapHero().getNpc(name) instanceof Npc){
+			currentGame.player.getMapHero().getNpc(name).getDialog();
 		}
 		else {System.out.println("Wrong name");}
 	}
@@ -147,35 +153,56 @@ public class ActionManager {
 	 * 
 	 * @param potion
 	 */
-	public void actionUse(String potion) {
+	public void actionUse(String item) {
 		final String UNUSABLE = "You can't use that right now";
-		switch (potion) {
-			case "healthPotion" -> currentGame.player.useHealthPotion();
-			case "attackPotion" -> {
-									if(isFighting) {
-										currentGame.player.useAttackPotion();
-									}
-									else{
-										System.out.println(UNUSABLE);
-									}
-								}
+		switch (item) {
+			case "healthPotion" : 
+				currentGame.player.useHealthPotion(); 
+				break;
+			case "attackPotion" : 
+				if(isFighting) {
+					currentGame.player.useAttackPotion();
+					}
+				else{
+					System.out.println(UNUSABLE);
+				}
+				break;
 				
-			case "defensePotion" -> {
-									if(isFighting) {
-										currentGame.player.useDefensePotion();
-										}
-										else{
-											System.out.println(UNUSABLE);
-										}
-									}
-			case "critPotion" -> {
-								if(isFighting){
-									currentGame.player.useCritPotion();
-								}
-								else{
-										System.out.println(UNUSABLE);
-								}
-							}
+			case "defensePotion" :
+				if(isFighting) {
+					currentGame.player.useDefensePotion();
+				}
+				else{
+					System.out.println(UNUSABLE);
+					}
+				break;
+			case "critPotion" : 
+				if(isFighting){
+					currentGame.player.useCritPotion();
+				}
+				else{
+						System.out.println(UNUSABLE);
+				}
+				break;		
+			default :
+				actionEquip(item);		
+				break;		
+		}
+
+	}
+
+	public void actionEquip(String item){
+		boolean isArmor = currentGame.player.getItem(item) instanceof Armor;
+		boolean isWeapon = currentGame.player.getItem(item) instanceof Weapon;
+
+		if(isArmor){
+				currentGame.player.equiArmor((Armor)currentGame.player.getItem(item));
+		}
+		if(isWeapon){
+			currentGame.player.equiWeapon((Weapon)currentGame.player.getItem(item));
+		}
+		else{
+			System.out.println(item + "isn't equipable.");
 		}
 	}
 
