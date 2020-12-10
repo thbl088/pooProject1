@@ -35,7 +35,7 @@ public class Fight {
 
 	public void checkEnemyDeath(String targetName){
 		if(enemies.get(targetName).getHealth()<1){
-			System.out.println("You killed " + enemies.get(targetName).getName()+ "and got" + enemies.get(targetName).getStatistics().getMoney() + "money.");
+			System.out.println("You killed " + enemies.get(targetName).getName()+ " and got " + enemies.get(targetName).getStatistics().getMoney() + " money.");
 			player.getStatistics().addMoney(enemies.get(targetName).getStatistics().getMoney());
 			enemies.remove(targetName);
 		}
@@ -61,12 +61,12 @@ public class Fight {
 		damage = attackCrit(player)-enemies.get(targetName).getDefense();
 		if (damage>0){
 			enemies.get(targetName).getStatistics().removeHealth(damage);
-			System.out.println("You inflicted " + -damage +" dmg. " + enemies.get(targetName).getName() +" has " + enemies.get(targetName).getHealth() + " HP left.\n");
+			System.out.println("You inflicted " + damage +" dmg. " + enemies.get(targetName).getName() +" has " + enemies.get(targetName).getHealth() + " HP left.\n");
 			checkEnemyDeath(enemies.get(targetName).getName());
 		}
 		else{
 			player.getStatistics().removeHealth(-damage);
-			System.out.println("You inflict yourself" + -damage +"dmg. You have " + player.getHealth() + "HP left.\n");
+			System.out.println("You inflict yourself " + -damage +" dmg. You have " + player.getHealth() + " HP left.\n");
 		}
 	}
 
@@ -76,7 +76,7 @@ public class Fight {
 			damage = attackCrit(enemies.get(i))-playerDef;
 			if (damage>0){
 				player.getStatistics().removeHealth(damage);
-				System.out.println(enemies.get(i).getName() + " has inflicted " + -damage +" dmg, you have " + player.getHealth() + " HP remaining.\n");
+				System.out.println(enemies.get(i).getName() + " has inflicted " + damage +" dmg, you have " + player.getHealth() + " HP remaining.\n");
 			}
 			else{
 				enemies.get(i).getStatistics().removeHealth(-damage);
@@ -101,8 +101,14 @@ public class Fight {
 
 	public void printEnemiesStats(){
 		for (String i : enemies.keySet()) {
-			System.out.println(enemies.get(i).getName() + " : " + enemies.get(i).getHealth() + " HP. \n" );
+			System.out.println(enemies.get(i).getName() + " : " + enemies.get(i).getHealth() + " HP." );
 		}
+		System.out.println("_____________________");
+	}
+
+	public void printPlayerStats(){
+		System.out.println("Player : " + player.getName() + " : " + player.getHealth() + " HP, " + player.getAttack() + " att, "+ playerDef + " def." );
+		System.out.println("_____________________");
 	}
 
 }

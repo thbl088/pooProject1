@@ -237,7 +237,8 @@ public class ActionManager {
 		switch (item.toLowerCase()) {
 			case "here", "around" -> System.out.println(this.currentGame.getMapDescription());
 			case "inventory" -> this.currentGame.player.printInventory();
-			case "enemy", "enemies" -> this.currentGame.player.getMapHero().getEnemiesList();
+			case "enemy", "enemies" -> System.out.println(this.currentGame.player.getMapHero().getEnemiesList());
+			case "npc" ->  System.out.println(this.currentGame.player.getMapHero().getNpcsList());
 			default -> System.out.println("You can't look at this");
 		}
 	}
@@ -333,6 +334,8 @@ public class ActionManager {
 		int turnCounter = 0;
 		while(fight.stillFighting() == 0){
 			System.out.println("Turn " + turnCounter + "\n");
+			fight.printPlayerStats();
+			fight.printEnemiesStats();
 
 			getAction();			
 			fight.enemyAttack();
