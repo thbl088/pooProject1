@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Scanner;
 
-import org.graalvm.compiler.lir.StandardOp.NullCheck;
 
 import Locations.*;
 
@@ -21,10 +20,19 @@ public class ActionManager {
 	private boolean isFighting;
 	private World currentGame;
 	private Fight fight;
+	private String[] parsedCommands;
+
+
+	public ActionManager(World monde) {
+		this.scanner = new Scanner(System.in);
+		this.currentGame = monde;
+	}
 
 
 	public void getAction() {
-		String[] parsedCommands = command.split(" ");
+		System.out.print("Enter your action : ");
+		command = scanner.nextLine();
+		parsedCommands = command.split(" ");
 
 		if(isFighting){ //actions disponibles pendant un combat
 			switch (parsedCommands[0].toLowerCase()) {
@@ -151,7 +159,7 @@ public class ActionManager {
 
 	/**
 	 * 
-	 * @param potion
+	 * @param item
 	 */
 	public void actionUse(String item) {
 		final String UNUSABLE = "You can't use that right now";
