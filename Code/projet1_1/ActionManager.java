@@ -33,6 +33,7 @@ public class ActionManager {
 		else{ //actions disponibles hors combats
 			switch (parsedCommands[0].toLowerCase()) {
 				case "go" -> actionGo(parsedCommands[1]);
+				case "talk" -> actionTalk(parsedCommands[1]);
 				case "help" -> actionHelp();
 				case "look" -> actionLook(parsedCommands[1]);
 				case "take" -> actionTake(parsedCommands[1]);
@@ -130,8 +131,14 @@ public class ActionManager {
 	 * @param item
 	 */
 	public void actionTake(String item) {
-		// TODO - implement ActionManager.actionTake
-		throw new UnsupportedOperationException();
+		currentGame.player.addInventory(currentGame.player.getMapHero().getItem(item))
+	}
+
+	public void actionTalk(String name){
+		if(currentGame.player.getMapHero().getNpc(name) != Null){
+		currentGame.player.getMapHero().getNpc(name).getDialog();
+		}
+		else {System.out.println("Wrong name");}
 	}
 
 	public void actionQuit() { System.exit(0); }
