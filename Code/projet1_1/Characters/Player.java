@@ -146,24 +146,48 @@ public class Player extends Character {
 		else { System.out.println("Inventory is empty."); }
 	}
 
-	public void removeWeapon() {
-		if (this.weapon == DEFAULT_WEAPON)
+	public void removeEquipment(Item item){
+
+		if( item != DEFAULT_WEAPON ){
+			 
+			removeWeapon(item);
+		}
+		if ( item != DEFAULT_ARMOR ){
+			
+			removeArmor(item);
+		}
+		else{
+
+			System.out.println("You can't remove it.");
+		}
+
+		
+	}
+
+	public void removeWeapon(Item item) {  
+		int statWeapon = 0;                      					// Permet d'enlever son arme on vérifie bien qui n'enlève pas celle de base     
+		if (item == DEFAULT_WEAPON)
 		{
 			System.out.println("You can't remove your default weapon.");
 		}
 		else
 		{
+			this.stats.removeAttack(this.weapon.getAttackBonus());
 			this.weapon = DEFAULT_WEAPON;
 		}
+
+		
+		
 	}
 
-	public void removeArmor() {
-		if (this.armor == DEFAULT_ARMOR)
+	public void removeArmor(Item item) {              
+		if (item == DEFAULT_ARMOR)
 		{
 			System.out.println("You can't remove your default armor.");
 		}
 		else
 		{
+			this.stats.removeDefense(this.armor.getDefenseBonus());
 			this.armor = DEFAULT_ARMOR;
 		}
 	}
@@ -193,11 +217,39 @@ public class Player extends Character {
 
 			equiArmor(((Armor)item));
 		}
+		else{
+			System.out.println(item.getName() + "isn't equipable.");
+		}
 	}
 
-	public void equiWeapon(Weapon item) { this.weapon = item; }
+	public void equiWeapon(Weapon item) {                 // On équipe la nouvelle arme
 
-	public void equiArmor(Armor item) { this.armor = item; }
+		if ( item != this.weapon){
+
+			this.stats.removeAttack(this.weapon.getAttackBonus());  // On retire les dégat de l'ancienne arme 
+			this.stats.addAttack(item.getAttackBonus());
+			this.weapon = item;
+
+		}
+
+		this.weapon = item;
+		this.stats.addAttack(item.getAttackBonus());
+	}
+
+	public void equiArmor(Armor item) {                 // On équipe la nouvelle défense
+
+		if ( item != this.armor){
+
+			this.stats.removeDefense(this.armor.getDefenseBonus());  // On retire les bonus de def  de l'ancienne arme 
+			this.stats.addDefense(item.getDefenseBonus());
+			this.armor = item;
+
+		}
+
+		this.armor = item;
+		this.stats.addDefense(item.getDefenseBonus());
+	}
+
 
 	public void showEquipement() { System.out.println("You are equipped with the current weapon : " + this.weapon.getName() + " and the current armor : " + this.armor.getName()); }
 

@@ -115,6 +115,14 @@ public class ActionManager {
 						System.out.println("What do you want to use ?");
 					}
 					break;
+				case "remove" :
+					if (parsedCommands.length > 1) {
+						actionRemove(parsedCommands[1].toLowerCase());
+					}
+					else {
+						System.out.println("What do you want to remove ?");
+					}
+					break;
 				case "fight" :
 					actionFight();
 					break;
@@ -240,6 +248,7 @@ public class ActionManager {
 			case "inventory" -> this.currentGame.player.printInventory();
 			case "enemy", "enemies" -> System.out.println(this.currentGame.player.getMapHero().getEnemiesList());
 			case "npc" ->  System.out.println(this.currentGame.player.getMapHero().getNpcsList());
+			case "equipment" -> this.currentGame.player.showEquipement();
 			default -> System.out.println("You can't look at this");
 		}
 	}
@@ -260,8 +269,8 @@ public class ActionManager {
 		System.out.println( p.getMapHero().getNpc(name).getDialog()); // récupére et affiche son dialogue
 
 														
-		if ( (name.equals("crazy_man") && (p.getItem("tank_track") == null) )    //vérifie le pnj si c'est  le crazy_man ou samuel deux pnj qui donne des items et on vérifie si ils ont déjà pas donnée les items
-		|| name.equals("samuel") && (p.getItem("garbage_collector") == null)) {  
+		if ( (name.equals("crazy_man") && !(p.hasItem("tank_track")) )    //vérifie le pnj si c'est  le crazy_man ou samuel deux pnj qui donne des items et on vérifie si ils ont déjà pas donnée les items
+		|| name.equals("samuel") && !(p.hasItem("garbage_collector"))) {  
 			
 			Item objet_pnj = p.getMapHero().getNpc(name).getItem();
 			System.out.println("You obtain " + objet_pnj.getName() + ".");
@@ -322,19 +331,32 @@ public class ActionManager {
 
 	}
 
-	public void actionEquip(String item){
-		boolean isArmor = currentGame.player.getItem(item) instanceof Armor;
-		boolean isWeapon = currentGame.player.getItem(item) instanceof Weapon;
+	public void actionRemove(String item) {
 
-		if(isArmor){
-				currentGame.player.equiArmor((Armor)currentGame.player.getItem(item));
-		}
-		if(isWeapon){
-			currentGame.player.equiWeapon((Weapon)currentGame.player.getItem(item));
+		if (this.currentGame.player.hasItem(item) ) {
+			
+			this.currentGame.player.removeEquipment(this.currentGame.player.getItem(item));
+
 		}
 		else{
-			System.out.println(item + "isn't equipable.");
+
+			System.out.println("You can't remove this.");
 		}
+
+	}
+
+
+	public void actionEquip(String name_item){
+		
+		Item item = this.currentGame.player.getItem(name_item);
+
+		if( item == null ){
+
+			System.out.println("It's not a item.");
+		}
+
+		this.currentGame.player.addEquipment(item);
+
 	}
 
 	public void actionFight() {
