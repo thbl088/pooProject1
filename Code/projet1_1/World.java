@@ -63,29 +63,29 @@ public class World {
 
 		String[] dataDescription =  new String[23];
 		
-		dataDescription[0] = "Ship";
-		dataDescription[1] = "";
-		dataDescription[2] = "You are in a big village. You can see the mayor and a shop. At the north there is a big door, at the south the crash site, at the west a forest and at the est a meadow.";
-		dataDescription[3] = "You are in front of a huge door made in steel, you can see 2 round holes in it, one of 5 centimeters and one of 20 centimeters. There is also a crazy man who is shouting at you. At the north there is the closed huge door, at the south the village, at the west the forest, at the est a stone quarry.";
-		dataDescription[4] = "You are in front of a huge tank at the south there is the big door.";
-		dataDescription[5] = "You are at the north of the forest. You can see a hard pen hiding behind a tree. At the west is the deep wood, at the south the edge of the forest and at the est the huge door.";
-		dataDescription[6] = "You are in the deeper part of the forest. you can see in a skylight a cube with hearth on the side. At the south is the west of the forest, at the est the north of the forest.";
-		dataDescription[7] = "You are at the west of the forest. You can see a feather pencil. At the north is the deep wood, at the south a skatepark and at the est the edge of the forest";
-		dataDescription[8] = "Forest";
-		dataDescription[9] = "Skatepark";
-		dataDescription[10] = "Forest South";
-		dataDescription[11] = "Beehdow";
-		dataDescription[12] =	"Daltons Rooms";
-		dataDescription[13] =	"Four Seasons Meadow";
-		dataDescription[14] =	"Meadow";
-		dataDescription[15] =	"Ravenholm";
-		dataDescription[16] =	"Enter Stone Quarry";
-		dataDescription[17] = "Garage";
-		dataDescription[18] =	"Enter Lac Colère";
-		dataDescription[19] =	"Lac Colère";
-		dataDescription[20] =	"The Big Red Fish";
-		dataDescription[21] =  "Fighting Gold";
-		dataDescription[22] =  "NetBeans";
+		dataDescription[0] = "You are in your ship, you can see at the north your crash site.";
+		dataDescription[1] = "The ground is red, the Sky is blue, your ship is blocked by a huge rock in the south and you see a village in the north.";
+		dataDescription[2] = "You are in a big village. You can see the mayor and a shop. At the north, there is a big door, at the south the crash site, at the west a forest and at the east a meadow.";
+		dataDescription[3] = "You are in front of a huge door made of steel, you can see 2 round holes in it, one of 5 centimeters and one of 20 centimeters. There is also a crazy man who is shouting at you. At the north, there is the closed huge door, at the south the village, at the east a stone quarry.";
+		dataDescription[4] = "You are in front of a huge tank in the south there is the big door.";
+		dataDescription[5] = "You are in the north forest. You can see a hard pen hiding behind a tree. At the west is the deep wood, at the south the edge forest.";
+		dataDescription[6] = "You are in the deeper part of the forest. you can see in a skylight a cube with hearths on the side. At the south is the west forest, at the east the north forest.";
+		dataDescription[7] = "You are in the west forest. You can see a feather pencil. At the north is the deep wood, at the south a skatepark.";
+		dataDescription[8] = "You are at the edge of the forest. You can see a tender pen monster in a bush. At the north there is the north forest, at the south the south forest, and at the east the village.";
+		dataDescription[9] = "You are in a skatepark. You can see a giant skateboard in front of you. In the north there is the west forest, at the east the south forest.";
+		dataDescription[10] = "You are in the south forest. In the north, there is the west forest, at the west the skatepark.";
+		dataDescription[11] = "You are in a sheepfold, you see a shepherdess and a sheep’s herd. At the north, there is the meadow, at the east the plain.";
+		dataDescription[12] = "You are in a plain and you are seeing 4 pens of different heights align from the tallest to the taller. At the north there is the 4 colors meadow, at the west is the sheepfold, at the east the lakeside.";
+		dataDescription[13] = "You are in a 4 colors meadow. A 4 colored pen is at the center of it. At the north there is the mining town, at the south the plain, at the west  the meadow and at the east the entrance from the lake.";
+		dataDescription[14] = "You are in a meadow. You are seeing an alcoholic man staggering with a bottle in his hand yelling for no reason. At the north, there is a stone quarry, at the south a sheepfold, at the west the city and at the east the 4 colors meadow.";
+		dataDescription[15] = "You are in a mining town. You can see a man near the entrance to the mine and a pickaxe next to him. At the south the 4 colors meadow, at the west a stone quarry, and the east a garage.";
+		dataDescription[16] = "You are near the entrance to the stone quarry. At the south the meadow, at the west the huge door and, east the mining town.";
+		dataDescription[17] = "You are in a garage, facing a car. At the west the mining town and the south the enter from the lake";
+		dataDescription[18] = "You are at the enter from the lake. At the north there is the garage, at the south the lake, at the west the 4 colors meadow.";
+		dataDescription[19] = "You are at the lakeside. You are seeing a fisher trying to catch something. At the west the plain and you think you can jump into the lake.";
+		dataDescription[20] = "You are in the lake. In front of you a red Leviathan ready to eat you. You can leave the lake in the north.";
+		dataDescription[21] = "You have walked through the continuum of space-time and found a golden pen guarding a cave at the east.";
+		dataDescription[22] = "Inside the cave you are seeing a young man who seems to possess all the knowledge of this world. With an object in front of him. You can leave this place in the west.";
 
 		return dataDescription;
 	}
