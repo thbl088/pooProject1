@@ -80,7 +80,7 @@ public class ActionManager {
 						System.out.println("Where do you want to go ?");
 					}
 					break;
-				case "talk" :
+				case "talk", "speak" :
 					if (parsedCommands.length > 1) {
 						actionTalk(parsedCommands[1].toLowerCase());
 					}
@@ -92,8 +92,14 @@ public class ActionManager {
 					actionHelp();
 					break;
 				case "look" :
-					if (parsedCommands.length > 1) {
+					if (parsedCommands.length == 2) {
 						actionLook(parsedCommands[1].toLowerCase());
+					}
+					else if(parsedCommands.length == 3){
+						switch (parsedCommands[1].toLowerCase()){
+							case "item" -> actionLookItem(parsedCommands[2].toLowerCase());
+							default -> System.out.println("Do you want to look at an item?");
+						}
 					}
 					else {
 						System.out.println("What do you want to look at ?");
@@ -107,7 +113,7 @@ public class ActionManager {
 						System.out.println("What do you want to take ?");
 					}
 					break;
-				case "use" :
+				case "use", "drink", "equip" :
 					if (parsedCommands.length > 1) {
 						actionUse(parsedCommands[1].toLowerCase());
 					}
@@ -232,11 +238,14 @@ public class ActionManager {
 			System.out.println("""
 					-----------------------------------------
 					Available actions : 
-					LOOK + object or location
-					GO + direction
+					LOOK + location(here), inventory, stat, potion, enemy, npc, equipment, money or shop(if in a shop)
+					LOOK ITEM + item
+					TALK + name
+					GO + direction(cardinal points, shop if available and back to leave the shop)
 					TAKE + item
-					FIGHT
 					USE + item
+					REMOVE + item
+					FIGHT
 					QUIT
 					-----------------------------------------""");
 		}
@@ -251,6 +260,8 @@ public class ActionManager {
 			case "here", "around" : System.out.println(this.currentGame.getMapDescription());
 				break;
 			case "inventory" : this.currentGame.player.printInventory();
+				break;
+			case "stat" : System.out.println("Player : " + this.currentGame.player.getName() + " : " + this.currentGame.player.getHealth() + " HP, " + this.currentGame.player.getAttack() + " att, "+ this.currentGame.player.getDefense() + " def." );
 				break;
 			case "potion" : System.out.println(this.currentGame.player.getNbPotion());
 				break;
@@ -289,6 +300,11 @@ public class ActionManager {
 		}
 	}
 
+	public void actionLookItem(String lookedAt){
+		Item item = this.currentGame.player.getItem(lookedAt);
+		if(item != null)
+			System.out.println(item.getDescription());
+	}
 	/**
 	 * 
 	 * @param item
@@ -307,18 +323,18 @@ public class ActionManager {
 
 		Player p = this.currentGame.player;
 
-	if ( p.getMapHero().getNpc(name) != null ){      // vérifie si l'entité est bien un pnj
-		System.out.println( p.getMapHero().getNpc(name).getDialog()); // récupére et affiche son dialogue
+		if ( p.getMapHero().getNpc(name) != null ){      // vérifie si l'entité est bien un pnj
+			System.out.println( p.getMapHero().getNpc(name).getDialog()); // récupére et affiche son dialogue
 
 														
-		if ( (name.equals("crazy_man") && !(p.hasItem("tank_track")) )    //vérifie le pnj si c'est  le crazy_man ou samuel deux pnj qui donne des items et on vérifie si ils ont déjà pas donnée les items
-		|| name.equals("samuel") && !(p.hasItem("garbage_collector"))) {  
-			
-			Item objet_pnj = p.getMapHero().getNpc(name).getItem();
-			System.out.println("You obtain " + objet_pnj.getName() + ".");
+			if ( (name.equals("crazy_man") && !(p.hasItem("tank_track")) )    //vérifie le pnj si c'est  le crazy_man ou samuel deux pnj qui donne des items et on vérifie si ils ont déjà pas donnée les items
+			|| name.equals("samuel") && !(p.hasItem("garbage_collector"))) {  
+				
+				Item objet_pnj = p.getMapHero().getNpc(name).getItem();
+				System.out.println("You obtain " + objet_pnj.getName() + ".");
 
-			p.addInventory(objet_pnj);
-		}
+				p.addInventory(objet_pnj);
+			}
 		}
 		else {
 			System.out.println("Wrong name");
@@ -392,13 +408,12 @@ public class ActionManager {
 		
 		Item item = this.currentGame.player.getItem(name_item);
 
-		if( item == null ){
-
+		if( item != null ){
+			this.currentGame.player.addEquipment(item);
+		}
+		else{
 			System.out.println("It's not a item.");
 		}
-
-		this.currentGame.player.addEquipment(item);
-
 	}
 
 	public void actionFight() {
