@@ -5,21 +5,23 @@ import Stats.*;
 
 
 public abstract class Character {
-	private String name;
-	private Statistics stats;
+	protected String name;
+	protected Statistics stats;
 
 	/**
 	 * 
 	 * @param name
 	 */
-	protected Character(String name){
+	public Character(String name){
 		this.name = name ;
 	}
 
-	protected Character(String name, Statistics stats) {
+	public Character(String name, Statistics stats) {
 		this.name = name;
 		this.stats = stats;
 	}
+
+	public Character(){}
 
 	public String getName(){ return this.name; }
 
@@ -34,4 +36,6 @@ public abstract class Character {
 	public int getDefense() { return this.stats.getDefense(); }
 
 	public int getCrit() { return this.stats.getCritical(); }
+
+	public Statistics getStatistics(){return this.stats;}
 }

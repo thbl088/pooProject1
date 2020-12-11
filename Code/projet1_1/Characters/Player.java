@@ -14,8 +14,8 @@ public class Player extends Character {
 	private Map currentLocation ;
 	private Armor armor ;
 	private Weapon weapon;
-	private final Armor DEFAULT_ARMOR = new Armor("Space suit", "This uniform represents our nation", 0, 3);
-	private final Weapon DEFAULT_WEAPON = new Weapon("Ax", "It is used to break the windshield", 0, 3);
+	private final Armor DEFAULT_ARMOR = new Armor("Space suit", "This uniform represents our nation", -1, 0);
+	private final Weapon DEFAULT_WEAPON = new Weapon("Ax", "It is used to break the windshield", -1, 0);
 	private final int COEF_HP_POTION;
 	private final int COEF_ATT_POTION;
 	private final int COEF_DEF_POTION;
@@ -217,16 +217,6 @@ public class Player extends Character {
 	public boolean hasItem(String item) {
 		return this.INVENTORY.containsKey(item);
 	}
-	/*
-		public void buyItem(String item) {
-			if (((Shop) this.getMapHero()).hasItem(item)  && (this.stats.getMoney() >= ((Shop) this.getMapHero()).getItem(item).getPrice())) {
-				this.addInventory(((Shop) this.getMapHero()).getItem(item));
-				this.stats.removeMoney(((Shop) this.getMapHero()).getItem(item).getPrice());
-				((Shop) this.getMapHero()).removeItem(item);
-			}
-			else { System.out.println("The shop doesn't sell this item"); }
-		}
-*/
 
 
 	public void buyItem(String nameItem) {
