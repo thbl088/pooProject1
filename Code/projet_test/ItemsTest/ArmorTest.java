@@ -1,14 +1,21 @@
-package Items;
+package ItemsTest;
 
-public class Armor extends Item {
-	private int defenseBonus;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import Items.Armor;
+import junit.framework.*;
 
-	public Armor(String name, String description , int price , int defense){
-		super(name, description , price);
-		this.defenseBonus = defense;
+public class ArmorTest extends ItemTest {
+	
+	private Armor item;
+
+	@beforAll
+	public testinitArmor(){
+		
+		this.item = new Armor("test", "test", 12 ,13);
 	}
 
-	public int getDefenseBonus() { return this.defenseBonus; }
+	@Test
+	public void testgetDefenseBonus() { assertEquals(13, item.getDefenseBonus()); }
 
-	public void printDefenseBonus() { System.out.println(this.defenseBonus); }
 }

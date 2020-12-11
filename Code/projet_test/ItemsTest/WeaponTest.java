@@ -1,23 +1,22 @@
 package ItemsTest;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import Items.Item;
-import jdk.jfr.Timestamp;
+import Items.Weapon;
 import junit.framework.*;
 
 public class WeaponTest extends ItemTest {
-	private int attackBonus;
+
+	private Weapon item;
 
 	@beforeALL
-	public WeaponTest(String name, String description , int price , int attack) {
-		super(name, description , price);
-		this.attackBonus = attack;
+	public testinitWeapon() {
+		
+		this.item = new Weapon("test", "test", 12, 13);
 	}
 
 	@Test
-	public int testgetAttackBonus() throws Exception { assertEquals(this.attackBonus, item.getAttackBonus()); }
+	public int testgetAttackBonus()  { assertEquals(13, item.getAttackBonus()); }
 
 
 }

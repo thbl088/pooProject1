@@ -17,7 +17,7 @@ public class World {
 		return this.player.getMapHero().getDescription();
 	}
 
-	// public void addMap(Map newMap){ this.MAPS.put(newMap.getName(), newMap); }
+	
 
 	public World() {
 		this.MAPS = new HashMap<>();
@@ -433,7 +433,7 @@ public class World {
 		addItemInShop(items, shop);
 	}
 
-	public void initWorld(){
+	public void initWorld(Scanner keyboard){
 			String[] tabName = nameMap();
 			String[] tabDescription = descriptionMap();
 			Map[] tabMap = createTiles();
@@ -445,15 +445,14 @@ public class World {
 			addEnnmiesMap(tabEnemies, tabName); // ajout des ennemis 
 			addItemMap(tabItemGround, tabName);	// ajout des items
 			initShop(tabName, tabItemShop);    // ajout de la banque d 'item dans le shop
-			initPlayer(tabName);  // Joueur crée
+			initPlayer(tabName, keyboard); // Joueur crée
 			Npc[]	tabNpc = initNpc();
 
 			implentNpc(tabName, tabNpc);   // ajout des pnj
 			initDoorMap(tabName);		// Chaque map coté ses porte
 	}
 
-	public void initPlayer(String[] namemap){
-		Scanner keyboard = new Scanner(System.in);
+	public void initPlayer(String[] namemap , Scanner keyboard){
 		System.out.print("Enter your name : ");
 		String name = keyboard.nextLine();
 		Player hero = new Player(name);
@@ -485,9 +484,10 @@ public class World {
 	public static void main(String[] args){
 		int finish = 0 ;
 		World monde = new World();
-		monde.initWorld();
-
 		ActionManager action  = new ActionManager(monde);
+		monde.initWorld(action.SCANNER);
+
+		
 
 		// ------------------------ INTRODUCTION -----------------------------------
 		while ( finish == 0){
@@ -495,6 +495,7 @@ public class World {
 		}
 		// ------------------------ Fin du jeu -----------------------------------
 
+			action.SCANNER.close();
 		if(finish == 1 ){
 			System.out.println("\nCongratulations, you have escaped the planet and saved everyone on it.");
 			System.out.println("Thanks for playing our video game !!!");
@@ -502,6 +503,7 @@ public class World {
 		}
 		else{
 			System.out.println("\"☠ You died. ☠ \"");
+			
 		}
 	}
 }
