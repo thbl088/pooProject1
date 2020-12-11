@@ -238,7 +238,7 @@ public class ActionManager {
 			System.out.println("""
 					-----------------------------------------
 					Available actions : 
-					LOOK + location(here), inventory, stat, potion, enemy, npc, equipment, money or shop(if in a shop)
+					LOOK + location(here), inventory, stat, potion, enemy, npc, equipment, ground, money or shop(if in a shop)
 					LOOK ITEM + item
 					TALK + name
 					GO + direction(cardinal points, shop if available and back to leave the shop)
@@ -294,6 +294,8 @@ public class ActionManager {
 				else{System.out.println("You're not in a shop");}
 				break;
 			case "money" : System.out.println(this.currentGame.player.getStatistics().getMoney());
+				break;
+			case "ground" : System.out.println(this.currentGame.player.getMapHero().getGroundItemsList());
 				break;
 			default : System.out.println("You can't look at this");
 				break;
