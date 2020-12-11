@@ -112,8 +112,7 @@ public class World {
 			maps.put(name[i], map[i]);
 		}
 		
-		Shop shop = new Shop();
-		maps.put("Shop", shop);
+
 	}
 
 	public Enemy[] createAllEnemies(){
@@ -293,7 +292,8 @@ public class World {
 		maps.get(namemap[2]).setEast(new Door(maps.get(namemap[14])));
 		maps.get(namemap[2]).setSouth(new Door(maps.get(namemap[1])));
 		maps.get(namemap[2]).setWest(new Door(maps.get(namemap[8])));
-		maps.get(namemap[2]).setShop();
+
+
 
 		//map 3
 		LockedDoor finalBossDoor = new LockedDoor(maps.get(namemap[4]));
@@ -438,13 +438,29 @@ public class World {
 		return shop;
 	}
 
-	public void addItemInShop(Item[]items){
+	public void addItemInShop(Item[]items , Shop shop){
+
 
 		for(int i=0 ; i < items.length ; i++){
 
-			maps.get("Shop").addItem(items[i]);
+			shop.addItem(items[i]);
+
 
 		}
+
+	}
+
+	public void initShop(String[]namemap, Item[] items){
+
+		Map village = maps.get(namemap[2]);
+		Shop shop = new Shop("Shop Bonville");
+
+		shop.setDescription("sqdsdsfds");
+		shop.setReturn(village);
+		village.setShop(new Door(shop));
+
+		addItemInShop(items, shop);
+
 
 	}
 
@@ -455,13 +471,13 @@ public class World {
 			Map[] tabMap = createTiles();
 			Enemy[] tabEnemies = createAllEnemies();
 			Item[]  tabItemGround = initItemInGround();
-			Item[]	shopInit = initShopItem();
+			Item[]	tabItemShop =  initShopItem();
 			
 
 			addnameMap(tabName, tabMap, tabDescription);  // ajout des nom au map et leurs description
 			addEnnmiesMap(tabEnemies, tabName); // ajout des ennemis 
 			addItemMap(tabItemGround, tabName);	// ajout des items
-			addItemInShop(shopInit);       // ajout de la banque d 'item dans le shop
+			initShop(tabName, tabItemShop);    // ajout de la banque d 'item dans le shop
 			initPlayer(tabName);  // Joueur crée
 			Npc[]	tabNpc = initNpc();
 
@@ -490,7 +506,6 @@ public class World {
 
 	public int play(ActionManager action){
 
-		Map maphero = this.player.getMapHero() ;
 
 		
 		action.getAction();

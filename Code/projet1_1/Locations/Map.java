@@ -16,7 +16,7 @@ public class Map {
 	private Door east;
 	private Door west;
 	private Door south;
-	private Shop shop;
+	private Door shop;
 	private String description;
 
 	public Map(){}
@@ -54,7 +54,9 @@ public class Map {
 		west = newWest;
 	}
 
-	public void setShop() { this.shop = new Shop(); }
+	public void setShop(Door newshop) { 
+		shop = newshop; 
+	}
 
 	public void setDescription(String desc) { this.description = desc; }
 
@@ -76,7 +78,7 @@ public class Map {
 
 	public Door getWest() { return west; }
 
-	public Shop getShop() { return this.shop; }
+	public Door getShop() { return shop; }
 
 	public String getName() { return this.name; }
 

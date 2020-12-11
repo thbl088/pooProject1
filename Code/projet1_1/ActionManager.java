@@ -196,7 +196,7 @@ public class ActionManager {
 				break;
 			case "shop" :
 				if (currentLoc.isShop()) {
-					currentPlayer.move(currentLoc.getShop());
+					currentPlayer.move(currentLoc.getShop().getDestination());
 					System.out.println("You Enter : " + currentPlayer.getMapHero().getName() + "\n" + currentPlayer.getMapHero().getDescription());}
 				else { System.out.println("There is no shop"); }
 				break;
@@ -244,12 +244,16 @@ public class ActionManager {
 	 */
 	public void actionLook(String item) {
 		switch (item.toLowerCase()) {
-			case "here", "around" -> System.out.println(this.currentGame.getMapDescription());
-			case "inventory" -> this.currentGame.player.printInventory();
-			case "enemy", "enemies" -> System.out.println(this.currentGame.player.getMapHero().getEnemiesList());
-			case "npc" ->  System.out.println(this.currentGame.player.getMapHero().getNpcsList());
-			case "equipment" -> this.currentGame.player.showEquipement();
-			default -> System.out.println("You can't look at this");
+			case "here", "around" : System.out.println(this.currentGame.getMapDescription());
+			case "inventory" : this.currentGame.player.printInventory();
+			case "enemy", "enemies" : System.out.println(this.currentGame.player.getMapHero().getEnemiesList());
+			case "npc" :  System.out.println(this.currentGame.player.getMapHero().getNpcsList());
+			case "equipment" : this.currentGame.player.showEquipement();
+			case "shop" : if( this.currentGame.player.getMapHero().getName().isShop() ){
+
+				this.currentGame.player.getMapHero().printItems();
+			} ;
+			default : System.out.println("You can't look at this");
 		}
 	}
 
@@ -397,7 +401,9 @@ public class ActionManager {
 	}
 	
 	public void actionBuy(String item) {
+
 		this.currentGame.player.buyItem(item.toLowerCase());
+
 	}
 
 	public void actionSell(String item) {

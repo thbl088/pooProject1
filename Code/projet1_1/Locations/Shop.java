@@ -8,8 +8,10 @@ public class Shop extends Map {
 	private HashMap<String, Item> items;
 	private Map exitShop;
 
-	public Shop(){
-		this.items = new HashMap<>();
+	public Shop(String name){
+		super(name);
+		HashMap<String, Item> shop = new HashMap<>();
+		this.items = shop;  //new HashMap<>();
 		this.exitShop = null;
 	}
 
@@ -17,6 +19,7 @@ public class Shop extends Map {
 		this.exitShop = back;
 	}
 
+	@Override
 	public void addItem(Item newItem) {
 		items.put(newItem.getName(), newItem);
 	}
@@ -29,6 +32,7 @@ public class Shop extends Map {
 		this.items.remove(item);
 	}
 
+	@Override
 	public Item getItem(String item){
 		Item itemReturn = this.items.get(item);
 		this.items.remove(item);
@@ -38,7 +42,6 @@ public class Shop extends Map {
 	public Map getExitShop() {
 		return this.exitShop;
 	}
-
 
 
 	public void printItems() {
