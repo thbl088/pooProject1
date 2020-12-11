@@ -6,7 +6,7 @@ import Characters.Player;
 import Items.Item;
 
 public class ActionManager {
-	private final Scanner SCANNER;
+	public final Scanner SCANNER;
 	private boolean isFighting;
 	private final World CURRENT_GAME;
 	private Fight fight;
