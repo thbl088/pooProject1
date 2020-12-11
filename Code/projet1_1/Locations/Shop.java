@@ -34,8 +34,7 @@ public class Shop extends Map {
 
 	@Override
 	public Item getItem(String item){
-		Item itemReturn = this.items.get(item);
-		this.items.remove(item);
+		Item itemReturn = items.get(item);
 		return itemReturn;
 	}
 

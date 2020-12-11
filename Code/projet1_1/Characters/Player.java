@@ -8,10 +8,10 @@ import Stats.*;
 public class Player extends Character {
 
 	private HashMap<String, Item> inventory;
-	private int healthPotion = 1;
-	private int attackPotion = 1;
-	private int defensePotion = 1;
-	private int critPotion = 1;
+	private int healthPotion = 0;
+	private int attackPotion = 0;
+	private int defensePotion = 0;
+	private int critPotion = 0;
 	private Map currentLocation ;
 	private Armor armor ;
 	private Weapon weapon;
@@ -186,7 +186,7 @@ public class Player extends Character {
 		}
 		else
 		{
-			this.stats.removeDefense(this.DEFAULT_ATTACK + DEFAULT_WEAPON.getAttackBonus());
+			this.stats.removeDefense(this.DEFAULT_DEFENSE + DEFAULT_ARMOR.getDefenseBonus());
 			this.armor = DEFAULT_ARMOR;
 		}
 	}
@@ -197,7 +197,7 @@ public class Player extends Character {
 	 */
 	public void addInventory(Item item) {
 
-		inventory.put(item.getName(), item);
+		this.inventory.put(item.getName(), item);
 
 	}
 
@@ -262,6 +262,33 @@ public class Player extends Character {
 	public boolean hasItem(String item) {
 		return this.inventory.containsKey(item);
 	}
+	/*
+		public void buyItem(String item) {
+			if (((Shop) this.getMapHero()).hasItem(item)  && (this.stats.getMoney() >= ((Shop) this.getMapHero()).getItem(item).getPrice())) {
+				this.addInventory(((Shop) this.getMapHero()).getItem(item));
+				this.stats.removeMoney(((Shop) this.getMapHero()).getItem(item).getPrice());
+				((Shop) this.getMapHero()).removeItem(item);
+			}
+			else { System.out.println("The shop doesn't sell this item"); }
+		}
+*/
+	public void buyItem(String nameItem) {
+		Shop shop = (Shop) this.currentLocation ;
+		if (shop.getItem(nameItem)!= null ){
+			Item item = shop.getItem(nameItem);
+			System.out.println(item);
+			if ( item.getPrice() < this.stats.getMoney() ){
+
+					addInventory(item);
+					this.stats.removeMoney(item.getPrice());
+					shop.removeItem(nameItem);
+			}
+			else{
+				System.out.println("Need more money rogue!");
+			}
+		}
+		else { System.out.println("The shop doesn't sell this item."); }
+	}
 
 	public void sellItem(String item) {
 		if (this.hasItem(item)) {
@@ -271,15 +298,6 @@ public class Player extends Character {
 			System.out.println("Thanks for your patronage.");
 		}
 		else { System.out.println("You don't have this item"); }
-	}
-
-	public void buyItem(String item) {
-		if (((Shop) this.getMapHero()).hasItem(item)  && (this.stats.getMoney() >= ((Shop) this.getMapHero()).getItem(item).getPrice())) {
-			this.addInventory(((Shop) this.getMapHero()).getItem(item));
-			this.stats.removeMoney(((Shop) this.getMapHero()).getItem(item).getPrice());
-			((Shop) this.getMapHero()).removeItem(item);
-		}
-		else { System.out.println("The shop doesn't sell this item"); }
 	}
 
 

@@ -52,7 +52,6 @@ public class Fight {
 			return 1;
 		}
 		if(enemies.size()==0){		
-			System.out.println(player.getAttack() +"att" + player.getDefense()+"def"  + player.getCrit()+"crit" );
 			return 2;
 		}
 		return 0;
