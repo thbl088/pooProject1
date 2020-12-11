@@ -50,10 +50,7 @@ public class Player extends Character {
 	 * 
 	 * @param newLoc
 	 */
-	public void move(Map newLoc) { 
-	
-		this.currentLocation = newLoc;
-	 }
+	public void move(Map newLoc) { this.currentLocation = newLoc; }
 
 	public Map getMapHero() { return this.currentLocation; }
 

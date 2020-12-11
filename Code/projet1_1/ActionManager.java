@@ -173,7 +173,10 @@ public class ActionManager {
 
 		switch (direction.toLowerCase()) {
 			case "north", "n" :
-				if (currentLoc.isNorth() && (!(currentLoc.getNorth() instanceof LockedDoor) || !((LockedDoor) currentLoc.getNorth()).isLocked())) {
+				if (currentLoc.isNorth() && (!(currentLoc.getNorth() instanceof LockedDoor) ||
+				 !((LockedDoor) currentLoc.getNorth()).isLocked()) ||
+				 (((LockedDoor) currentLoc.getNorth()).isLocked() && currentLoc.getName().equals("End Portal") &&  currentPlayer.hasItem("car_wheel") && currentPlayer.hasItem("little_wheel") && currentPlayer.hasItem("tank_track")))
+				 {
 					currentPlayer.move(currentLoc.getNorth().getDestination());
 					System.out.println("You Enter : " + currentPlayer.getMapHero().getName() + "\n" + currentPlayer.getMapHero().getDescription());
 				}
@@ -181,7 +184,9 @@ public class ActionManager {
 				else if (((LockedDoor) currentLoc.getNorth()).isLocked()) { System.out.println("North door is locked"); }
 				break;
 			case "south", "s" :
-				if (currentLoc.isSouth() && (!(currentLoc.getSouth() instanceof LockedDoor) || !((LockedDoor) currentLoc.getSouth()).isLocked())) {
+				if (currentLoc.isSouth() && (!(currentLoc.getSouth() instanceof LockedDoor) ||
+				 !((LockedDoor) currentLoc.getSouth()).isLocked()) ||
+				 (((LockedDoor) currentLoc.getSouth()).isLocked() && currentLoc.getName().equals("Crash Site") &&  currentPlayer.hasItem("jack") )) {
 					currentPlayer.move(currentLoc.getSouth().getDestination());
 					System.out.println("You Enter : " + currentPlayer.getMapHero().getName() + "\n" + currentPlayer.getMapHero().getDescription());
 				}
@@ -213,12 +218,13 @@ public class ActionManager {
 			case "back", "out" :
 				if (currentLoc instanceof Shop) {
 					currentPlayer.move(((Shop) currentLoc).getExitShop());
+					System.out.println("Xavier [Marchand] :\"Good Bye Hero.\"");
 					System.out.println("You Enter : " + currentPlayer.getMapHero().getName() + "\n" + currentPlayer.getMapHero().getDescription());
 				}
 				else { System.out.println("You cannot exit current location"); }
 				break;
 			default :
-				System.out.println("You can't go there");
+				System.out.println("You can't go there.");
 				break;
 		}
 	}
@@ -291,7 +297,7 @@ public class ActionManager {
 					shop.printPotions();
 					System.out.println("________________________________________________");
 				} 
-				else{System.out.println("You're not in a shop");}
+				else{System.out.println("You're not in a shop.");}
 				break;
 			case "money" : System.out.println(this.currentGame.player.getStatistics().getMoney());
 				break;

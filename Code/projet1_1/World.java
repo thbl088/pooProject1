@@ -500,7 +500,6 @@ public class World {
 		System.out.println("You Enter : "+this.player.getMapHero().getName() + ".");
 		System.out.println(this.player.getMapHero().getDescription());
 
-
 		
 	}
 
@@ -515,7 +514,7 @@ public class World {
 
 			return -1;
 		}
-		else if( this.player.finish() == 1 ) {
+		else if( this.player.getMapHero().getName().equals("Ship") && this.player.hasItem("reactor")) {
 
 			return 1;
 		}
@@ -546,8 +545,9 @@ public class World {
 
 		if(finish == 1 ){
 
-			System.out.println("Congratulations you have escaped the planet and saved everyone on it.\n ✶ ✶ ✶ ✶ ✶ ✶ ✶ ✶ ✶\n Thanks playing my video games.");
-			System.out.println("        Credit      \nBoue Alexis\nLuneteau Thomas\nVialle Charlie");
+			System.out.println("\nCongratulations you have escaped the planet and saved everyone on it.");
+			System.out.println("Thanks playing my video games.");
+			System.out.println("Credit:\nBoue Alexis\nLuneteau Thomas\nVialle Charlie");
 		}
 		else{
 
