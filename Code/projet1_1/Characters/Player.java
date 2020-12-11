@@ -265,13 +265,6 @@ public class Player extends Character {
 			else { System.out.println("The shop doesn't sell this item"); }
 		}
 */
-	public void buyItem(String nameItem) {
-		Shop shop = (Shop) this.currentLocation ;
-		if (shop.getItem(nameItem)!= null ){
-			Item item = shop.getItem(nameItem);
-			System.out.println(item);
-			if ( item.getPrice() < this.stats.getMoney() ){
-
 
 
 	public void buyItem(String nameItem) {
