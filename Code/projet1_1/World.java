@@ -487,9 +487,7 @@ public class World {
 
 	public int play(ActionManager action){
 
-		Map maphero = this.player.getMapHero() ;
 
-		
 		action.getAction();
 		
 
@@ -512,7 +510,7 @@ public class World {
 		World monde = new World();
 		monde.initWorld();
 
-		ActionManager action  = new ActionManager(monde);
+		ActionManager action  = new ActionManager();
 
 		// ------------------------ INTRODUCTION -----------------------------------
 
