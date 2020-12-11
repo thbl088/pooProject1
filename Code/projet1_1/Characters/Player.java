@@ -166,7 +166,7 @@ public class Player extends Character {
 	public void addInventory(Item item) { this.INVENTORY.put(item.getName(), item); }
 
 
-	public void addEquipment(Item item) {
+	public void addEquipment(Item item) {          // Permet d'équiper un objet retour avec un print si on peut pas
 		if ( item instanceof Weapon )
 		{
 			equiWeapon(((Weapon)item));
@@ -216,11 +216,11 @@ public class Player extends Character {
 
 	public boolean hasItem(String item) {return this.INVENTORY.containsKey(item);}
 
-	public void buyItem(String nameItem) {
+	public void buyItem(String nameItem) {                                   //Permet d'acheter un item
 		Shop shop = (Shop) this.currentLocation ;
 		if (shop.getItem(nameItem)!= null ){
 			Item item = shop.getItem(nameItem);
-			if ( item.getPrice() < this.stats.getMoney() ){
+			if ( item.getPrice() < this.stats.getMoney() ){          // Vérifie si le joueur possède accés d'argent  puis on l'ajoute à dans l'inventaire et l iteme n'ai plus dans le shop
 
 					addInventory(item);
 					this.stats.removeMoney(item.getPrice());
@@ -237,7 +237,7 @@ public class Player extends Character {
 	public void sellItem(String nameItem) {
 		if (this.hasItem(nameItem)) {
 			Item item = getItem(nameItem);
-			if ( item.getPrice() <  0) {
+			if ( item.getPrice() <  0) {                                        // Vérifie si le prix de litem est supérieur à 0 car les items pour avancer dans l'histoire on un prix négatif
 				System.out.println("Xavier [Marchand] :\"This item is so important.\"");
 			}
 			else{
@@ -281,14 +281,5 @@ public class Player extends Character {
 	public String toString() {
 		return "player name : " + this.getName() + "\nhealth : " + this.getHealth() + "\nattack : " + this.getAttack() + "\ndefense : " + this.getDefense() + "\ncritical : " + this.getCrit() + "\n";
 	}
-	/*
-	public int finish(){
-		if( this.getMapHero().getName().equals("Ship") && this.weapon.getName().equals("Reactor"))
-		{
-			return 1;
-		}
 
-		return 0;
-	}
-	*/
 }
