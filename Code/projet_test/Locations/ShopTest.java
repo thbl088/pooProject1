@@ -3,13 +3,11 @@ package Locations;
 import Items.*;
 import java.util.HashMap;
 
-public class Shop extends Map {
+public class ShopTest extends MapTest {
 
-	private HashMap<String, Item> items;
-	private Map exitShop;
-	private int potionCost = 5;
+	private Shop shopTest;
 
-	public Shop(String name){
+	public ShopTest(){
 		super(name);
 		HashMap<String, Item> shop = new HashMap<>();
 		this.items = shop;  //new HashMap<>();
