@@ -23,6 +23,9 @@ public class Player extends Character {
 	private final int COEF_ATT_POTION = 2;
 	private final int COEF_DEF_POTION = 2;
 	private final int COEF_CRIT_POTION = 2;
+	private final int DEFAULT_ATTACK;
+	private final int DEFAULT_DEFENSE;
+
 
 	public Player(String name){
 		
@@ -31,7 +34,8 @@ public class Player extends Character {
 		this.armor = DEFAULT_ARMOR;
 		this.weapon = DEFAULT_WEAPON;
 		this.inventory = inv;
-		
+		this.DEFAULT_ATTACK = this.stats.getAttack();
+		this.DEFAULT_DEFENSE = this.stats.getDefense();
 	}
 
 	public void addHealthPotion() { this.healthPotion ++; }
@@ -147,47 +151,41 @@ public class Player extends Character {
 	}
 
 	public void removeEquipment(Item item){
-
-		if( item != DEFAULT_WEAPON ){
-			 
-			removeWeapon(item);
-		}
-		if ( item != DEFAULT_ARMOR ){
+		if ( item instanceof Weapon && item != DEFAULT_WEAPON)
+		{
+			removeWeapon(((Weapon)item));
 			
-			removeArmor(item);
+		}
+		else if ( item instanceof Armor && item != DEFAULT_ARMOR){
+
+			removeArmor(((Armor)item));
 		}
 		else{
-
-			System.out.println("You can't remove it.");
-		}
-
-		
+			System.out.println(item.getName() + " isn't removable.");
+		}		
+		showEquipement();
 	}
 
-	public void removeWeapon(Item item) {  
-		int statWeapon = 0;                      					// Permet d'enlever son arme on vérifie bien qui n'enlève pas celle de base     
+	public void removeWeapon(Weapon item) {  	// Permet d'enlever son arme on vérifie bien qui n'enlève pas celle de base     
 		if (item == DEFAULT_WEAPON)
 		{
 			System.out.println("You can't remove your default weapon.");
 		}
 		else
 		{
-			this.stats.removeAttack(this.weapon.getAttackBonus());
+			this.stats.changeAttack(this.DEFAULT_ATTACK + DEFAULT_WEAPON.getAttackBonus());
 			this.weapon = DEFAULT_WEAPON;
 		}
-
-		
-		
 	}
 
-	public void removeArmor(Item item) {              
+	public void removeArmor(Armor item) {              
 		if (item == DEFAULT_ARMOR)
 		{
 			System.out.println("You can't remove your default armor.");
 		}
 		else
 		{
-			this.stats.removeDefense(this.armor.getDefenseBonus());
+			this.stats.removeDefense(this.DEFAULT_ATTACK + DEFAULT_WEAPON.getAttackBonus());
 			this.armor = DEFAULT_ARMOR;
 		}
 	}
@@ -211,7 +209,7 @@ public class Player extends Character {
 	public void addEquipment(Item item) {
 		if ( item instanceof Weapon )
 		{
-		equiWeapon(((Weapon)item));
+			equiWeapon(((Weapon)item));
 		}
 		else if ( item instanceof Armor ){
 
@@ -226,14 +224,15 @@ public class Player extends Character {
 
 		if ( item != this.weapon){
 
-			this.stats.removeAttack(this.weapon.getAttackBonus());  // On retire les dégat de l'ancienne arme 
+			this.stats.removeAttack(this.weapon.getAttackBonus());  // On retire l'ancienne arme 
 			this.stats.addAttack(item.getAttackBonus());
 			this.weapon = item;
+			showEquipement();
 
 		}
-
-		this.weapon = item;
-		this.stats.addAttack(item.getAttackBonus());
+		else{
+			System.out.println("You have already this weapon equiped.");
+		}
 	}
 
 	public void equiArmor(Armor item) {                 // On équipe la nouvelle défense
@@ -245,9 +244,9 @@ public class Player extends Character {
 			this.armor = item;
 
 		}
-
-		this.armor = item;
-		this.stats.addDefense(item.getDefenseBonus());
+		else{
+			System.out.println("You have already this armor equiped.");
+		}	
 	}
 
 
