@@ -2,6 +2,7 @@ package Items;
 
 public class Item {
 
+
 	private final String NAME;
 	private final String DESCRIPTION;
 	private final int PRICE;
@@ -11,6 +12,7 @@ public class Item {
 		this.DESCRIPTION = description;
 		this.PRICE = price;
 	}
+
 
 	public String getName() { return this.NAME ; }
 
