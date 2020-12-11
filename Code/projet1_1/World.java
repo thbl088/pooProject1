@@ -116,7 +116,7 @@ public class World {
 	}
 
 	public Enemy[] createAllEnemies(){
-		Enemy[] enemies = new Enemy[16];
+		Enemy[] enemies = new Enemy[17];
 
 		// Map 4 Dernier Boss
 		StatisticsEnemy statsLeclerc = new 	StatisticsEnemy( 100 , 50 , 60 , 15, 80);

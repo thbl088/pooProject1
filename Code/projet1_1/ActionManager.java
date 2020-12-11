@@ -1,21 +1,17 @@
 import Doors.LockedDoor;
-import Items.Armor;
-import Items.Weapon;
+//import Items.Armor;
+//import Items.Weapon;
 
-import java.nio.file.Files;
-import java.util.HashMap;
-import java.util.Locale;
+//import java.nio.file.Files;
+//import java.util.HashMap;
+//import java.util.Locale;
 import java.util.Scanner;
-
-import javax.swing.Action;
-
-
 
 import Locations.*;
 import Locations.Shop;
-import Characters.Enemy;
+//import Characters.Enemy;
 import Characters.Player;
-import Characters.Npc;
+//import Characters.Npc;
 import Items.Item;
 
 public class ActionManager {
@@ -188,7 +184,7 @@ public class ActionManager {
 	 * 
 	 * @param direction
 	 */
-	public void actionGo(String direction) {
+	public void actionGo(String direction) { //déplace le joueur sur le monde
 		Map currentLoc = this.currentGame.player.getMapHero();
 		Player currentPlayer = this.currentGame.player;
 
@@ -229,13 +225,13 @@ public class ActionManager {
 				else if (!currentLoc.isWest()) { System.out.println("Impossible to go west"); }
 				else if (((LockedDoor) currentLoc.getWest()).isLocked()) { System.out.println("West door is locked"); }
 				break;
-			case "shop" :
+			case "shop" : //entre magasin
 				if (currentLoc.isShop()) {
 					currentPlayer.move(currentLoc.getShop().getDestination());
 					System.out.println("You Enter : " + currentPlayer.getMapHero().getName() + "\n" + currentPlayer.getMapHero().getDescription());}
 				else { System.out.println("There is no shop"); }
 				break;
-			case "back", "out" :
+			case "back", "out" : //sort du magasin
 				if (currentLoc instanceof Shop) {
 					currentPlayer.move(((Shop) currentLoc).getExitShop());
 					System.out.println("Xavier [Marchand] :\"Good Bye Hero.\"");
@@ -249,7 +245,7 @@ public class ActionManager {
 		}
 	}
 
-	public void actionHelp() {
+	public void actionHelp() { //affiche les commandes dispo
 		if (isFighting){
 			System.out.println("""
 					-----------------------------------------
@@ -281,23 +277,23 @@ public class ActionManager {
 	 * 
 	 * @param item
 	 */
-	public void actionLook(String item) {
+	public void actionLook(String item) { //permet de partager l'intel du personnage avec le joueur
 		switch (item.toLowerCase()) {
-			case "here", "around" : System.out.println(this.currentGame.getMapDescription());
+			case "here", "around" : System.out.println(this.currentGame.getMapDescription()); //affiche description de la map sur laquelle le joueur est présent
 				break;
-			case "inventory" : this.currentGame.player.printInventory();
+			case "inventory" : this.currentGame.player.printInventory(); //affiche inventaire du joueur
 				break;
-			case "stat" : System.out.println("Player : " + this.currentGame.player.getName() + " : " + this.currentGame.player.getHealth() + " HP, " + this.currentGame.player.getAttack() + " att, "+ this.currentGame.player.getDefense() + " def." );
+			case "stat" : System.out.println("Player : " + this.currentGame.player.getName() + " : " + this.currentGame.player.getHealth() + " HP, " + this.currentGame.player.getAttack() + " att, "+ this.currentGame.player.getDefense() + " def." ); //affiche les stats du joueur
 				break;
-			case "potion" : System.out.println(this.currentGame.player.getNbPotion());
+			case "potion" : System.out.println(this.currentGame.player.getNbPotion()); //nombre de potion détennues
 				break;
-			case "enemy", "enemies" : System.out.println(this.currentGame.player.getMapHero().getEnemiesList());
+			case "enemy", "enemies" : System.out.println(this.currentGame.player.getMapHero().getEnemiesList()); //liste des ennemies
 			break;
-			case "npc" :  System.out.println(this.currentGame.player.getMapHero().getNpcsList());
+			case "npc" :  System.out.println(this.currentGame.player.getMapHero().getNpcsList()); // liste des pnj
 				break;
-			case "equipment" : this.currentGame.player.showEquipement();
+			case "equipment" : this.currentGame.player.showEquipement(); //équipement du joueur
 				break;
-			case "shop" : if( this.currentGame.player.getMapHero() instanceof Shop){
+			case "shop" : if( this.currentGame.player.getMapHero() instanceof Shop){ //inventaire du shop
 					Shop shop = (Shop) this.currentGame.player.getMapHero();
 					System.out.println("This is what we have :");
 
@@ -319,16 +315,16 @@ public class ActionManager {
 				} 
 				else{System.out.println("You're not in a shop.");}
 				break;
-			case "money" : System.out.println(this.currentGame.player.getStatistics().getMoney());
+			case "money" : System.out.println(this.currentGame.player.getStatistics().getMoney()); //argent
 				break;
-			case "ground" : System.out.println(this.currentGame.player.getMapHero().getGroundItemsList());
+			case "ground" : System.out.println(this.currentGame.player.getMapHero().getGroundItemsList()); //objet sur le sol
 				break;
 			default : System.out.println("You can't look at this");
 				break;
 		}
 	}
 
-	public void actionLookItem(String lookedAt){
+	public void actionLookItem(String lookedAt){ //affiche la description d'un item
 		Item item = this.currentGame.player.getItem(lookedAt);
 		if(item != null)
 			System.out.println(item.getDescription());
@@ -337,7 +333,7 @@ public class ActionManager {
 	 * 
 	 * @param item
 	 */
-	public void actionTake(String item) {
+	public void actionTake(String item) { //récupere un objet sur le sol
 		Item takeItem = currentGame.player.getMapHero().getItem(item);
 		if(takeItem != null){
 			currentGame.player.addInventory(takeItem);
@@ -347,7 +343,7 @@ public class ActionManager {
 		}
 	}
 
-	public void actionTalk(String name){
+	public void actionTalk(String name){ //lance le dialogue d'un pnj
 
 		Player p = this.currentGame.player;
 
@@ -369,13 +365,13 @@ public class ActionManager {
 		}
 	}
 
-	public void actionQuit() { System.exit(0); }
+	public void actionQuit() { System.exit(0); } //ferme le jeu
 
 	/**
 	 * 
 	 * @param item
 	 */
-	public void actionUse(String item) {
+	public void actionUse(String item) { //utilise une potion ou équipe un item
 		final String UNUSABLE = "You can't use that right now";
 		switch (item) {
 			case "health_potion", "hp" : 
@@ -417,7 +413,7 @@ public class ActionManager {
 
 	}
 
-	public void actionRemove(String item) {
+	public void actionRemove(String item) { //déséquipe un item
 
 		if (this.currentGame.player.hasItem(item) ) {
 			
@@ -432,7 +428,7 @@ public class ActionManager {
 	}
 
 
-	public void actionEquip(String name_item){
+	public void actionEquip(String name_item){ //équipe un item et déséquipe le précédant et vérifie si c'est un item
 		
 		Item item = this.currentGame.player.getItem(name_item);
 
@@ -444,7 +440,7 @@ public class ActionManager {
 		}
 	}
 
-	public void actionFight() {
+	public void actionFight() { //vérifie si il y a des enemies et lance le combat si oui
 		if(currentGame.player.getMapHero().getEnemies().isEmpty()){
 			System.out.println("There are no enemies here");
 		}
@@ -453,11 +449,11 @@ public class ActionManager {
 		}
 	}
 
-	public void startFight() {
+	public void startFight() { // lance et gère le dérouler du combat
 		isFighting = true;
 		this.fight = new Fight(currentGame.player);
 		int turnCounter = 0;
-		while(fight.stillFighting() == 0){
+		while(fight.stillFighting() == 0){ //pendant le combat
 			System.out.println("Turn " + turnCounter + "\n");
 			fight.printPlayerStats();
 			fight.printEnemiesStats();
@@ -467,33 +463,33 @@ public class ActionManager {
 			fight.remEnemyDeath();
 			turnCounter++;
 		}
-		if(fight.stillFighting() == 1){
+		if(fight.stillFighting() == 1){ //si le joueur est mort
 			//System.out.println("You are dead\n");
 			//actionQuit();
 		}
-		if(fight.stillFighting() == 2){
+		if(fight.stillFighting() == 2){ //si il n'y a plus d'enemi en face
 			System.out.println("You have win this fight\n");
 			endFight();
 			currentGame.player = fight.getPlayerPostFight();
 		}
 	}
 
-	public void endFight() {
+	public void endFight() { //met isFighting a false
 		isFighting = false;
 	}
 	
-	public void actionBuyItem(String item) {
+	public void actionBuyItem(String item) { //achete un item
 
 		this.currentGame.player.buyItem(item.toLowerCase());
 	}
 
-	public void actionBuyPotion(String potion) {
+	public void actionBuyPotion(String potion) { //achete une potion
 
 		this.currentGame.player.buyPotion(potion.toLowerCase());
 
 	}
 
-	public void actionSell(String item) {
+	public void actionSell(String item) { //vend un object
 		this.currentGame.player.sellItem(item.toLowerCase());
 	}
 }
