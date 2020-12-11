@@ -214,10 +214,7 @@ public class Player extends Character {
 
 	public void removeInventory(Item item) { this.INVENTORY.remove(item.getName()); }
 
-	public boolean hasItem(String item) {
-		return this.INVENTORY.containsKey(item);
-	}
-
+	public boolean hasItem(String item) {return this.INVENTORY.containsKey(item);}
 
 	public void buyItem(String nameItem) {
 		Shop shop = (Shop) this.currentLocation ;
@@ -264,7 +261,7 @@ public class Player extends Character {
 				this.stats.removeMoney(shop.getPotionCost());
 				addHealthPotion();
 			}
-			case "attack__potion" -> {
+			case "attack_potion" -> {
 				this.stats.removeMoney(shop.getPotionCost());
 				addAttackPotion();
 			}
@@ -284,7 +281,6 @@ public class Player extends Character {
 	public String toString() {
 		return "player name : " + this.getName() + "\nhealth : " + this.getHealth() + "\nattack : " + this.getAttack() + "\ndefense : " + this.getDefense() + "\ncritical : " + this.getCrit() + "\n";
 	}
-
 	/*
 	public int finish(){
 		if( this.getMapHero().getName().equals("Ship") && this.weapon.getName().equals("Reactor"))
