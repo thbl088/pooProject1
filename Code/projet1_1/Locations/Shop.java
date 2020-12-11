@@ -7,6 +7,7 @@ public class Shop extends Map {
 
 	private HashMap<String, Item> items;
 	private Map exitShop;
+	private int potionCost = 5;
 
 	public Shop(String name){
 		super(name);
@@ -48,4 +49,8 @@ public class Shop extends Map {
 			System.out.println(i + " : " + items.get(i).getDescription() + " Price : " + items.get(i).getPrice() + " gold.");
 		}
 	}
+
+	public void printPotions(){System.out.println("We have health_potion, attack_potion, defense_potion, crit_potion. Price : " + this.potionCost + " gold.");}
+
+	public int getPotionCost(){return this.potionCost;}
 }

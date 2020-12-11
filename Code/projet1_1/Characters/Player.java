@@ -312,6 +312,29 @@ public class Player extends Character {
 		else { System.out.println("Xavier [Marchand] :\"You don't have this item.\"" ); }
 	}
 
+	public void buyPotion(String potionType){
+		Shop shop = (Shop) this.currentLocation ;
+		switch (potionType){
+			case "health_potion" : 
+				this.stats.removeMoney(shop.getPotionCost());
+				addHealthPotion();
+				break;
+			case "attack__potion" : 
+				this.stats.removeMoney(shop.getPotionCost());
+				addAttackPotion();
+				break;
+			case "defense_potion" : 
+				this.stats.removeMoney(shop.getPotionCost());
+				addDefensePotion();
+				break;
+			case "crit_potion" : 
+				this.stats.removeMoney(shop.getPotionCost());
+				addCritPotion();
+				break;
+			default : System.out.println("We don't have that kind of potion here.");
+				break;
+		}
+	}
 
 	@Override
 	public String toString() {

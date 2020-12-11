@@ -130,8 +130,12 @@ public class ActionManager {
 					actionQuit();
 					break;
 				case "buy" :
-					if (parsedCommands.length > 1) {
-						actionBuy(parsedCommands[1].toLowerCase());
+					if (parsedCommands.length > 2) {
+						switch (parsedCommands[1].toLowerCase()){
+							case "item" -> actionBuyItem(parsedCommands[2].toLowerCase());
+							case "potion" -> actionBuyPotion(parsedCommands[2].toLowerCase());
+							default -> System.out.println("Do you want to buy potion or item?");
+						}
 					}
 					else {
 						System.out.println("What do you want to buy ?");
@@ -248,6 +252,8 @@ public class ActionManager {
 				break;
 			case "inventory" : this.currentGame.player.printInventory();
 				break;
+			case "potion" : System.out.println(this.currentGame.player.getNbPotion());
+				break;
 			case "enemy", "enemies" : System.out.println(this.currentGame.player.getMapHero().getEnemiesList());
 			break;
 			case "npc" :  System.out.println(this.currentGame.player.getMapHero().getNpcsList());
@@ -255,11 +261,26 @@ public class ActionManager {
 			case "equipment" : this.currentGame.player.showEquipement();
 				break;
 			case "shop" : if( this.currentGame.player.getMapHero() instanceof Shop){
-				System.out.println("It is what I have.");
-				Shop shop = (Shop) this.currentGame.player.getMapHero();
-				shop.printItems();
-			} 
-			else{System.out.println("You're not in a shop");}
+					Shop shop = (Shop) this.currentGame.player.getMapHero();
+					System.out.println("This is what we have :");
+
+					System.out.println("""
+					-----------
+					|  item   |
+					-----------
+					________________________________________________
+					""");
+					shop.printItems();
+					System.out.println("""
+					-------------
+					|  potion   |
+					-------------
+					________________________________________________
+					""");
+					shop.printPotions();
+					System.out.println("________________________________________________");
+				} 
+				else{System.out.println("You're not in a shop");}
 				break;
 			case "money" : System.out.println(this.currentGame.player.getStatistics().getMoney());
 				break;
@@ -273,7 +294,13 @@ public class ActionManager {
 	 * @param item
 	 */
 	public void actionTake(String item) {
-		currentGame.player.addInventory(currentGame.player.getMapHero().getItem(item));
+		Item takeItem = currentGame.player.getMapHero().getItem(item);
+		if(takeItem != null){
+			currentGame.player.addInventory(takeItem);
+		}
+		else{
+			System.out.println("Nothing to take.");
+		}
 	}
 
 	public void actionTalk(String name){
@@ -411,8 +438,15 @@ public class ActionManager {
 		isFighting = false;
 	}
 	
-	public void actionBuy(String item) {
+	public void actionBuyItem(String item) {
+
 		this.currentGame.player.buyItem(item.toLowerCase());
+	}
+
+	public void actionBuyPotion(String potion) {
+
+		this.currentGame.player.buyPotion(potion.toLowerCase());
+
 	}
 
 	public void actionSell(String item) {

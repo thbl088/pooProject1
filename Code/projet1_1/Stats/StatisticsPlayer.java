@@ -5,7 +5,7 @@ public class StatisticsPlayer extends Statistics {
 	private final int DEFAULT_DEFENSE = 5;
 	private final int DEFAULT_ATTACK = 5;
 	private final int DEFAULT_CRITICAL = 5;
-	private final int DEFAULT_MONEY = 0;
+	private final int DEFAULT_MONEY = 200;
 
 	public StatisticsPlayer(){
 		this.maxhealth = DEFAULT_HEALTH *2 ;
