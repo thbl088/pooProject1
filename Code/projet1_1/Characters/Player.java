@@ -6,8 +6,7 @@ import Locations.*;
 import Stats.*;
 
 public class Player extends Character {
-
-	private HashMap<String, Item> inventory;
+	private final HashMap<String, Item> INVENTORY;
 	private int healthPotion = 0;
 	private int attackPotion = 0;
 	private int defensePotion = 0;
@@ -15,25 +14,26 @@ public class Player extends Character {
 	private Map currentLocation ;
 	private Armor armor ;
 	private Weapon weapon;
-	private final Armor DEFAULT_ARMOR = new Armor("Space suit", "This uniform represents our nation", -1, 0);
-	private final Weapon DEFAULT_WEAPON = new Weapon("Ax", "It is used to break the windshield", -1, 0);
-	private static final int EXIT_SUCCESS = 0;
-	private static final int EXIT_FAILURE = -1;
-	private final int COEF_HP_POTION = 25;
-	private final int COEF_ATT_POTION = 2;
-	private final int COEF_DEF_POTION = 2;
-	private final int COEF_CRIT_POTION = 2;
+	private final Armor DEFAULT_ARMOR = new Armor("Space suit", "This uniform represents our nation", 0, 3);
+	private final Weapon DEFAULT_WEAPON = new Weapon("Ax", "It is used to break the windshield", 0, 3);
+	private final int COEF_HP_POTION;
+	private final int COEF_ATT_POTION;
+	private final int COEF_DEF_POTION;
+	private final int COEF_CRIT_POTION;
 	private final int DEFAULT_ATTACK;
 	private final int DEFAULT_DEFENSE;
 
 
 	public Player(String name){
-		
 		super(name, new StatisticsPlayer());
 		HashMap<String, Item> inv = new HashMap<>();
 		this.armor = DEFAULT_ARMOR;
 		this.weapon = DEFAULT_WEAPON;
-		this.inventory = inv;
+		this.INVENTORY = inv;
+		this.COEF_HP_POTION = 25;
+		this.COEF_ATT_POTION = 2;
+		this.COEF_DEF_POTION = 2;
+		this.COEF_CRIT_POTION = 2;
 		this.DEFAULT_ATTACK = this.stats.getAttack();
 		this.DEFAULT_DEFENSE = this.stats.getDefense();
 	}
@@ -46,19 +46,11 @@ public class Player extends Character {
 
 	public void addCritPotion() { this.critPotion++; }
 
-	/**
-	 * 
-	 * @param newLoc
-	 */
 	public void move(Map newLoc) { this.currentLocation = newLoc; }
 
 	public Map getMapHero() { return this.currentLocation; }
 
-	/**
-	 * 
-	 * @param item
-	 */
-	public Item getItem(String item) { return inventory.get(item); }
+	public Item getItem(String item) { return this.INVENTORY.get(item); }
 
 	public String getNbPotion(){
 		return "health potion : " + this.healthPotion
@@ -67,73 +59,63 @@ public class Player extends Character {
 						+ "\ncrit potion : " + this.critPotion;
 	}
 
-	public int useHealthPotion() {
+	public void useHealthPotion() {
 		if (this.healthPotion > 0)
 		{
 			this.healthPotion -- ;
 			this.getStatistics().addHealth(COEF_HP_POTION);
-			return EXIT_SUCCESS;
 		}
 		else
 		{
 			System.out.println("You don't have any health potion.");
-			return EXIT_FAILURE;
 			
 		}
 	}
 	
-	public int useAttackPotion() {
+	public void useAttackPotion() {
 			if (this.attackPotion > 0)
 			{
 				this.attackPotion-- ;
 				this.getStatistics().changeAttack(this.getAttack() * COEF_ATT_POTION);
 				System.out.println("new attack = " + this.getAttack());
-				return  EXIT_SUCCESS;
 			}
 			else
 			{
 				System.out.println("You don't have any attack potion.");
-				return  EXIT_FAILURE;
 			}
 		}
 
-	public int useDefensePotion() {
+	public void useDefensePotion() {
 		if (this.defensePotion > 0)
 		{
 			this.defensePotion-- ;
 			this.getStatistics().changeDefense(this.getDefense() * COEF_DEF_POTION);
 			System.out.println("new Defense = " + this.getDefense());
-
-			return EXIT_SUCCESS;
 		}
 		else
 		{
 			System.out.println("You don't have any defense potion.");
-			return  EXIT_FAILURE;
 		}
 	}
 
-	public int useCritPotion() {
+	public void useCritPotion() {
 		if (this.critPotion > 0)
 		{
 			
 			this.critPotion-- ;
 			this.getStatistics().changeCritical(this.getCrit() * COEF_CRIT_POTION);
 			System.out.println("new Critic = " + this.getCrit());
-
-			return EXIT_SUCCESS;
 		}
 		else
 		{
 			System.out.println("You don't have any crit potion.");
-			return  EXIT_FAILURE;
 		}
 	}
 
 	public void printInventory() {
-		if (!this.inventory.isEmpty()){
+		if (!this.INVENTORY.isEmpty()){
 			
-			for (String i : inventory.keySet()) {
+			for (String i : this.INVENTORY.keySet()) {
 				System.out.println(i);
 			}
 		}
@@ -180,22 +162,10 @@ public class Player extends Character {
 		}
 	}
 
-	/**
-	 * 
-	 * @param item
-	 */
-	public void addInventory(Item item) {
 
-		this.inventory.put(item.getName(), item);
+	public void addInventory(Item item) { this.INVENTORY.put(item.getName(), item); }
 
-	}
 
-	/**
-	 * 
-	 * @param item
-	 *
-	 * 
-	*/
 	public void addEquipment(Item item) {
 		if ( item instanceof Weapon )
 		{
@@ -211,7 +181,6 @@ public class Player extends Character {
 	}
 
 	public void equiWeapon(Weapon item) {                 // On équipe la nouvelle arme
-
 		if ( item != this.weapon){
 
 			this.stats.removeAttack(this.weapon.getAttackBonus());  // On retire l'ancienne arme 
@@ -226,7 +195,6 @@ public class Player extends Character {
 	}
 
 	public void equiArmor(Armor item) {                 // On équipe la nouvelle défense
-
 		if ( item != this.armor){
 
 			this.stats.removeDefense(this.armor.getDefenseBonus());  // On retire les bonus de def  de l'ancienne arme 
@@ -243,14 +211,11 @@ public class Player extends Character {
 
 	public void showEquipement() { System.out.println("You are equipped with the current weapon : " + this.weapon.getName() + " and the current armor : " + this.armor.getName()); }
 
-	/**
-	 * 
-	 * @param item
-	 */
-	public void removeInventory(Item item) { this.inventory.remove(item.getName()); }
+
+	public void removeInventory(Item item) { this.INVENTORY.remove(item.getName()); }
 
 	public boolean hasItem(String item) {
-		return this.inventory.containsKey(item);
+		return this.INVENTORY.containsKey(item);
 	}
 	/*
 		public void buyItem(String item) {
@@ -304,25 +269,24 @@ public class Player extends Character {
 
 	public void buyPotion(String potionType){
 		Shop shop = (Shop) this.currentLocation ;
-		switch (potionType){
-			case "health_potion" : 
+		switch (potionType) {
+			case "health_potion" -> {
 				this.stats.removeMoney(shop.getPotionCost());
 				addHealthPotion();
-				break;
-			case "attack__potion" : 
+			}
+			case "attack__potion" -> {
 				this.stats.removeMoney(shop.getPotionCost());
 				addAttackPotion();
-				break;
-			case "defense_potion" : 
+			}
+			case "defense_potion" -> {
 				this.stats.removeMoney(shop.getPotionCost());
 				addDefensePotion();
-				break;
-			case "crit_potion" : 
+			}
+			case "crit_potion" -> {
 				this.stats.removeMoney(shop.getPotionCost());
 				addCritPotion();
-				break;
-			default : System.out.println("We don't have that kind of potion here.");
-				break;
+			}
+			default -> System.out.println("We don't have that kind of potion here.");
 		}
 	}
 
@@ -331,14 +295,14 @@ public class Player extends Character {
 		return "player name : " + this.getName() + "\nhealth : " + this.getHealth() + "\nattack : " + this.getAttack() + "\ndefense : " + this.getDefense() + "\ncritical : " + this.getCrit() + "\n";
 	}
 
+	/*
 	public int finish(){
-
 		if( this.getMapHero().getName().equals("Ship") && this.weapon.getName().equals("Reactor"))
 		{
 			return 1;
 		}
 
 		return 0;
-
 	}
+	*/
 }

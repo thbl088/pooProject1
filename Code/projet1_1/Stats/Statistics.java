@@ -147,7 +147,4 @@ public abstract class Statistics {
 		
 		this.money -= coins;
 	}
-
-
-
 }

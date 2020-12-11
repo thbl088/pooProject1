@@ -8,14 +8,6 @@ public abstract class Character {
 	protected String name;
 	protected Statistics stats;
 
-	/**
-	 * 
-	 * @param name
-	 */
-	public Character(String name){
-		this.name = name ;
-	}
-
 	public Character(String name, Statistics stats) {
 		this.name = name;
 		this.stats = stats;
@@ -25,9 +17,9 @@ public abstract class Character {
 
 	public String getName(){ return this.name; }
 
-	public void printName(){ System.out.println(this.name); }
+	// public void printName(){ System.out.println(this.name); }
 
-	public int getMaxHealth() { return this.stats.getMaxHealth(); }
+	// public int getMaxHealth() { return this.stats.getMaxHealth(); }
 
 	public int getHealth() { return this.stats.getHealth(); }
 
