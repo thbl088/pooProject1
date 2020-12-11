@@ -89,6 +89,10 @@ public class Fight {
 			this.PLAYER.getStatistics().removeHealth(-damage);
 			System.out.println("You inflict yourself " + -damage +" dmg. You have " + this.PLAYER.getHealth() + " HP left.\n");
 		}
+		for (String i : this.ENEMIES.keySet()) {
+			checkEnemyDeath(i);
+		}
+		remEnemyDeath();
 	}
 
 	public void enemyAttack() { //calcule les dégats que l'enemi inflige au joueur
