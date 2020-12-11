@@ -43,8 +43,22 @@ public class Fight {
 			if(enemies.get(targetName).getObject() != null){
 				player.addInventory(enemies.get(targetName).getObject());
 			}
-			enemies.remove(targetName);
 		}
+	}
+
+	public void remEnemyDeath(){
+		int size = this.player.getMapHero().getEnemies().size();
+		String[] deathNote = new String[size];
+		int i =0;
+		for (String j : enemies.keySet()) {
+			if(enemies.get(j).getHealth()<1){
+				deathNote[i] = j;
+				i++;
+			}
+		}
+		for (int k = 0; k < size; k++) {
+			enemies.remove(deathNote[k]);
+		  }
 	}
 
 	public int stillFighting(){
@@ -75,17 +89,19 @@ public class Fight {
 
 	public void enemyAttack() {
 		for (String i : enemies.keySet()) {
-			System.out.println(enemies.get(i).getName() + " is attacking.\n");
+			System.out.println(i + " is attacking.\n");
 			damage = attackCrit(enemies.get(i))-player.getDefense();
 			if (damage>0){
 				player.getStatistics().removeHealth(damage);
-				System.out.println(enemies.get(i).getName() + " has inflicted " + damage +" dmg, you have " + player.getHealth() + " HP remaining.\n");
+				System.out.println(i + " has inflicted " + damage +" dmg, you have " + player.getHealth() + " HP remaining.\n");
 			}
 			else{
 				enemies.get(i).getStatistics().removeHealth(-damage);
-				System.out.println("You have inflicted " + -damage +" dmg. "+ enemies.get(i).getName() +" has " + enemies.get(i).getHealth() + " HP.\n");
-				checkEnemyDeath(enemies.get(i).getName());
+				System.out.println("You have inflicted " + -damage +" dmg. "+ i +" has " + enemies.get(i).getHealth() + " HP.\n");
 			}
+		}
+		for (String i : enemies.keySet()) {
+			checkEnemyDeath(i);
 		}
 	}
 

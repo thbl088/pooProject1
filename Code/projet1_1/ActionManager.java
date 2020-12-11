@@ -51,15 +51,37 @@ public class ActionManager {
 				case "defend" :
 					this.fight.defend();
 					break;
-				case "help" :
+					case "help" :
 					actionHelp();
 					break;
-				case "use" :
+				case "look" :
+					if (parsedCommands.length == 2) {
+						actionLook(parsedCommands[1].toLowerCase());
+					}
+					else if(parsedCommands.length == 3){
+						switch (parsedCommands[1].toLowerCase()){
+							case "item" -> actionLookItem(parsedCommands[2].toLowerCase());
+							default -> System.out.println("Do you want to look at an item?");
+						}
+					}
+					else {
+						System.out.println("What do you want to look at ?");
+					}
+					break;
+				case "use", "drink", "equip" :
 					if (parsedCommands.length > 1) {
 						actionUse(parsedCommands[1].toLowerCase());
 					}
 					else {
 						System.out.println("What do you want to use ?");
+					}
+					break;
+				case "remove" :
+					if (parsedCommands.length > 1) {
+						actionRemove(parsedCommands[1].toLowerCase());
+					}
+					else {
+						System.out.println("What do you want to remove ?");
 					}
 					break;
 				case "quit" :
@@ -442,6 +464,7 @@ public class ActionManager {
 
 			getAction();			
 			fight.enemyAttack();
+			fight.remEnemyDeath();
 			turnCounter++;
 		}
 		if(fight.stillFighting() == 1){
@@ -473,6 +496,4 @@ public class ActionManager {
 	public void actionSell(String item) {
 		this.currentGame.player.sellItem(item.toLowerCase());
 	}
-	
-	
 }
