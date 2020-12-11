@@ -265,6 +265,9 @@ public class ActionManager {
 					USE + item
 					REMOVE + item
 					FIGHT
+					BUY ITEM + name of the item you want to buy
+					BUY POTION + name of the potion you want to buy
+					SELL + name of the item you want to sell
 					QUIT
 					-----------------------------------------""");
 		}
