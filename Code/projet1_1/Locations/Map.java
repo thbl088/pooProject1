@@ -91,6 +91,7 @@ public class Map {
 		groundItems.remove(item);
 		return itemReturn;
 	}
+	public boolean isNpc(String Npc) { return npcs.containsKey(Npc); }
 
 	public Npc getNpc(String Npc) {
 		return npcs.get(Npc);

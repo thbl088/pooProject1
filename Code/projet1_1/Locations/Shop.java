@@ -5,14 +5,14 @@ import java.util.HashMap;
 
 public class Shop extends Map {
 
-	private HashMap<String, Item> items;
+	private final HashMap<String, Item> ITEMS;
 	private Map exitShop;
-	private int potionCost = 5;
+	private final int POTION_COST;
 
 	public Shop(String name){
 		super(name);
-		HashMap<String, Item> shop = new HashMap<>();
-		this.items = shop;  //new HashMap<>();
+		this.ITEMS = new HashMap<>();  //new HashMap<>();
+		this.POTION_COST = 5;
 		this.exitShop = null;
 	}
 
@@ -22,21 +22,23 @@ public class Shop extends Map {
 
 	@Override
 	public void addItem(Item newItem) {
-		items.put(newItem.getName(), newItem);
+		this.ITEMS.put(newItem.getName(), newItem);
 	}
+
 
 	public boolean hasItem(String item) {
-		return this.items.containsKey(item);
+		return this.ITEMS.containsKey(item);
 	}
 
+
+
 	public void removeItem(String item) {
-		this.items.remove(item);
+		this.ITEMS.remove(item);
 	}
 
 	@Override
 	public Item getItem(String item){
-		Item itemReturn = this.items.get(item);
-		return itemReturn;
+		return this.ITEMS.get(item);
 	}
 
 	public Map getExitShop() {
@@ -45,12 +47,12 @@ public class Shop extends Map {
 
 
 	public void printItems() {
-		for (String i : items.keySet()) {
-			System.out.println(i + " : " + items.get(i).getDescription() + " Price : " + items.get(i).getPrice() + " gold.");
+		for (String i : this.ITEMS.keySet()) {
+			System.out.println(i + " : " + this.ITEMS.get(i).getDescription() + " Price : " + this.ITEMS.get(i).getPrice() + " gold.");
 		}
 	}
 
-	public void printPotions(){System.out.println("We have health_potion, attack_potion, defense_potion, crit_potion. Price : " + this.potionCost + " gold.");}
+	public void printPotions(){System.out.println("We have health_potion, attack_potion, defense_potion, crit_potion. Price : " + this.POTION_COST + " gold.");}
 
-	public int getPotionCost(){return this.potionCost;}
+	public int getPotionCost(){return this.POTION_COST;}
 }

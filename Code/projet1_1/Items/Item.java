@@ -2,19 +2,19 @@ package Items;
 
 public class Item {
 
-	private String name;
-	private String description;
-	private int price;
+	private final String NAME;
+	private final String DESCRIPTION;
+	private final int PRICE;
 
 	public Item(String name, String description , int price){
-		this.name = name;
-		this.description = description;
-		this.price = price;
+		this.NAME = name;
+		this.DESCRIPTION = description;
+		this.PRICE = price;
 	}
 
-	public String getName() { return this.name ; }
+	public String getName() { return this.NAME ; }
 
-	public String getDescription() { return this.description ; }
+	public String getDescription() { return this.DESCRIPTION ; }
 
-	public int getPrice() { return this.price ; }
+	public int getPrice() { return this.PRICE ; }
 }

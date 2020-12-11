@@ -11,21 +11,22 @@ import java.util.Scanner;
 
 public class World {
 
-	private HashMap<String, Map> maps;
+	private final HashMap<String, Map> MAPS;
 	public Player player;
-	private int numberMap = 22;
 
 	public String getMapDescription(){
 		return this.player.getMapHero().getDescription();
 	}
 
+
 	public void addMap(Map newMap){
-		maps.put(newMap.getName(), newMap);
+		this.MAPS.put(newMap.getName(), newMap);
 	}
+
 
 	public World() {
 		player = new Player("José");
-		this.maps = new HashMap<>();
+		this.MAPS = new HashMap<>();
 	}
 
 	public String[] nameMap(){
@@ -93,7 +94,7 @@ public class World {
 	public Map[] createTiles(){
 		Map[] tiles = new Map[23];
 
-		for(int i = 0 ; i < numberMap ; i++){
+		for(int i = 0 ; i < tiles.length ; i++){
 
 			Map map = new Map();
 			tiles[i] = map ;
@@ -109,7 +110,7 @@ public class World {
 			map[i] = new Map();
 			map[i].changeName(name[i]);
 			map[i].setDescription(description[i]);
-			maps.put(name[i], map[i]);
+			this.MAPS.put(name[i], map[i]);
 		}
 		
 
@@ -242,16 +243,16 @@ public class World {
 	public void addItemMap(Item[]ground,String[] namemap){
 
 		// Ajout des Ennemis dans les Hashmap de leur map
-		maps.get(namemap[4]).addItem(ground[9]);
-		maps.get(namemap[6]).addItem(ground[6]);
-		maps.get(namemap[10]).addItem(ground[7]);
-		maps.get(namemap[10]).addItem(ground[8]);
-		maps.get(namemap[11]).addItem(ground[4]);
-		maps.get(namemap[11]).addItem(ground[5]);
-		maps.get(namemap[15]).addItem(ground[1]);
-		maps.get(namemap[15]).addItem(ground[0]);
-		maps.get(namemap[19]).addItem(ground[2]);
-		maps.get(namemap[19]).addItem(ground[3]);
+		this.MAPS.get(namemap[4]).addItem(ground[9]);
+		this.MAPS.get(namemap[6]).addItem(ground[6]);
+		this.MAPS.get(namemap[10]).addItem(ground[7]);
+		this.MAPS.get(namemap[10]).addItem(ground[8]);
+		this.MAPS.get(namemap[11]).addItem(ground[4]);
+		this.MAPS.get(namemap[11]).addItem(ground[5]);
+		this.MAPS.get(namemap[15]).addItem(ground[1]);
+		this.MAPS.get(namemap[15]).addItem(ground[0]);
+		this.MAPS.get(namemap[19]).addItem(ground[2]);
+		this.MAPS.get(namemap[19]).addItem(ground[3]);
 		
 
 
@@ -260,137 +261,137 @@ public class World {
 	public  void addEnnmiesMap(Enemy[] tabEnemies,String[] namemap){
 
 		// Ajout des Ennemis dans les Hashmap de leur map
-		maps.get(namemap[4]).addEnemy(tabEnemies[0]);
-		maps.get(namemap[5]).addEnemy(tabEnemies[1]);
-		maps.get(namemap[8]).addEnemy(tabEnemies[2]);
-		maps.get(namemap[8]).addEnemy(tabEnemies[3]);
-		maps.get(namemap[9]).addEnemy(tabEnemies[4]);
-		maps.get(namemap[12]).addEnemy(tabEnemies[5]);
-		maps.get(namemap[12]).addEnemy(tabEnemies[6]);
-		maps.get(namemap[12]).addEnemy(tabEnemies[7]);
-		maps.get(namemap[12]).addEnemy(tabEnemies[8]);
-		maps.get(namemap[13]).addEnemy(tabEnemies[9]);
-		maps.get(namemap[14]).addEnemy(tabEnemies[10]);
-		maps.get(namemap[16]).addEnemy(tabEnemies[11]);
-		maps.get(namemap[17]).addEnemy(tabEnemies[12]);
-		maps.get(namemap[18]).addEnemy(tabEnemies[13]);
-		maps.get(namemap[18]).addEnemy(tabEnemies[14]);
-		maps.get(namemap[20]).addEnemy(tabEnemies[15]);
-		maps.get(namemap[21]).addEnemy(tabEnemies[16]);
+		this.MAPS.get(namemap[4]).addEnemy(tabEnemies[0]);
+		this.MAPS.get(namemap[5]).addEnemy(tabEnemies[1]);
+		this.MAPS.get(namemap[8]).addEnemy(tabEnemies[2]);
+		this.MAPS.get(namemap[8]).addEnemy(tabEnemies[3]);
+		this.MAPS.get(namemap[9]).addEnemy(tabEnemies[4]);
+		this.MAPS.get(namemap[12]).addEnemy(tabEnemies[5]);
+		this.MAPS.get(namemap[12]).addEnemy(tabEnemies[6]);
+		this.MAPS.get(namemap[12]).addEnemy(tabEnemies[7]);
+		this.MAPS.get(namemap[12]).addEnemy(tabEnemies[8]);
+		this.MAPS.get(namemap[13]).addEnemy(tabEnemies[9]);
+		this.MAPS.get(namemap[14]).addEnemy(tabEnemies[10]);
+		this.MAPS.get(namemap[16]).addEnemy(tabEnemies[11]);
+		this.MAPS.get(namemap[17]).addEnemy(tabEnemies[12]);
+		this.MAPS.get(namemap[18]).addEnemy(tabEnemies[13]);
+		this.MAPS.get(namemap[18]).addEnemy(tabEnemies[14]);
+		this.MAPS.get(namemap[20]).addEnemy(tabEnemies[15]);
+		this.MAPS.get(namemap[21]).addEnemy(tabEnemies[16]);
 
 	}
 
 	public void initDoorMap(String[] namemap){
 		// map 0
-		maps.get(namemap[0]).setNorth(new Door(maps.get(namemap[1])));
+		this.MAPS.get(namemap[0]).setNorth(new Door(this.MAPS.get(namemap[1])));
 
 		// map 1
-		LockedDoor finDoor = new LockedDoor(maps.get(namemap[0]));
-		maps.get(namemap[1]).setNorth(new Door(maps.get(namemap[2])));
-		maps.get(namemap[1]).setSouth(finDoor);
-		
+		LockedDoor finDoor = new LockedDoor(this.MAPS.get(namemap[0]));
+		this.MAPS.get(namemap[1]).setNorth(new Door(this.MAPS.get(namemap[2])));
+		this.MAPS.get(namemap[1]).setSouth(finDoor);
 
-		//map 2 
-		maps.get(namemap[2]).setNorth(new Door(maps.get(namemap[3])));
-		maps.get(namemap[2]).setEast(new Door(maps.get(namemap[14])));
-		maps.get(namemap[2]).setSouth(new Door(maps.get(namemap[1])));
-		maps.get(namemap[2]).setWest(new Door(maps.get(namemap[8])));
+
+		//map 2
+		this.MAPS.get(namemap[2]).setNorth(new Door(this.MAPS.get(namemap[3])));
+		this.MAPS.get(namemap[2]).setEast(new Door(this.MAPS.get(namemap[14])));
+		this.MAPS.get(namemap[2]).setSouth(new Door(this.MAPS.get(namemap[1])));
+		this.MAPS.get(namemap[2]).setWest(new Door(this.MAPS.get(namemap[8])));
 
 
 
 		//map 3
-		LockedDoor finalBossDoor = new LockedDoor(maps.get(namemap[4]));
-		maps.get(namemap[3]).setNorth(finalBossDoor);
-		maps.get(namemap[3]).setEast(new Door(maps.get(namemap[16])));
-		maps.get(namemap[3]).setSouth(new Door(maps.get(namemap[2])));
-		maps.get(namemap[3]).setWest(new Door(maps.get(namemap[5])));
+		LockedDoor finalBossDoor = new LockedDoor(this.MAPS.get(namemap[4]));
+		this.MAPS.get(namemap[3]).setNorth(finalBossDoor);
+		this.MAPS.get(namemap[3]).setEast(new Door(this.MAPS.get(namemap[16])));
+		this.MAPS.get(namemap[3]).setSouth(new Door(this.MAPS.get(namemap[2])));
+		this.MAPS.get(namemap[3]).setWest(new Door(this.MAPS.get(namemap[5])));
 
 		//map 4
-		maps.get(namemap[4]).setSouth(new Door(maps.get(namemap[3])));
+		this.MAPS.get(namemap[4]).setSouth(new Door(this.MAPS.get(namemap[3])));
 
 		//map 5
-		maps.get(namemap[5]).setEast(new Door(maps.get(namemap[3])));
-		maps.get(namemap[5]).setSouth(new Door(maps.get(namemap[8])));
-		maps.get(namemap[5]).setWest(new Door(maps.get(namemap[6])));
+		this.MAPS.get(namemap[5]).setEast(new Door(this.MAPS.get(namemap[3])));
+		this.MAPS.get(namemap[5]).setSouth(new Door(this.MAPS.get(namemap[8])));
+		this.MAPS.get(namemap[5]).setWest(new Door(this.MAPS.get(namemap[6])));
 
 		//map 6
-		maps.get(namemap[6]).setEast(new Door(maps.get(namemap[5])));
-		maps.get(namemap[6]).setSouth(new Door(maps.get(namemap[7])));
+		this.MAPS.get(namemap[6]).setEast(new Door(this.MAPS.get(namemap[5])));
+		this.MAPS.get(namemap[6]).setSouth(new Door(this.MAPS.get(namemap[7])));
 
 		//map 7
-		maps.get(namemap[7]).setNorth(new Door(maps.get(namemap[6])));
-		maps.get(namemap[7]).setEast(new Door(maps.get(namemap[8])));
-		maps.get(namemap[7]).setSouth(new Door(maps.get(namemap[9])));
+		this.MAPS.get(namemap[7]).setNorth(new Door(this.MAPS.get(namemap[6])));
+		this.MAPS.get(namemap[7]).setEast(new Door(this.MAPS.get(namemap[8])));
+		this.MAPS.get(namemap[7]).setSouth(new Door(this.MAPS.get(namemap[9])));
 
 		//map 8
-		maps.get(namemap[8]).setNorth(new Door(maps.get(namemap[5])));
-		maps.get(namemap[8]).setEast(new Door(maps.get(namemap[2])));
-		maps.get(namemap[8]).setSouth(new Door(maps.get(namemap[10])));
-		maps.get(namemap[8]).setWest(new Door(maps.get(namemap[7])));
+		this.MAPS.get(namemap[8]).setNorth(new Door(this.MAPS.get(namemap[5])));
+		this.MAPS.get(namemap[8]).setEast(new Door(this.MAPS.get(namemap[2])));
+		this.MAPS.get(namemap[8]).setSouth(new Door(this.MAPS.get(namemap[10])));
+		this.MAPS.get(namemap[8]).setWest(new Door(this.MAPS.get(namemap[7])));
 
 		//map 9
-		maps.get(namemap[9]).setNorth(new Door(maps.get(namemap[7])));
-		maps.get(namemap[9]).setEast(new Door(maps.get(namemap[10])));
+		this.MAPS.get(namemap[9]).setNorth(new Door(this.MAPS.get(namemap[7])));
+		this.MAPS.get(namemap[9]).setEast(new Door(this.MAPS.get(namemap[10])));
 
-		//map 10 
-		maps.get(namemap[10]).setNorth(new Door(maps.get(namemap[8])));
-		maps.get(namemap[10]).setWest(new Door(maps.get(namemap[9])));
+		//map 10
+		this.MAPS.get(namemap[10]).setNorth(new Door(this.MAPS.get(namemap[8])));
+		this.MAPS.get(namemap[10]).setWest(new Door(this.MAPS.get(namemap[9])));
 
 		//map 11
-		maps.get(namemap[11]).setNorth(new Door(maps.get(namemap[14])));
-		maps.get(namemap[11]).setEast(new Door(maps.get(namemap[12])));
-		
+		this.MAPS.get(namemap[11]).setNorth(new Door(this.MAPS.get(namemap[14])));
+		this.MAPS.get(namemap[11]).setEast(new Door(this.MAPS.get(namemap[12])));
+
 		//map 12
-		maps.get(namemap[12]).setNorth(new Door(maps.get(namemap[13])));
-		maps.get(namemap[12]).setEast(new Door(maps.get(namemap[19])));
-		maps.get(namemap[12]).setWest(new Door(maps.get(namemap[11])));
+		this.MAPS.get(namemap[12]).setNorth(new Door(this.MAPS.get(namemap[13])));
+		this.MAPS.get(namemap[12]).setEast(new Door(this.MAPS.get(namemap[19])));
+		this.MAPS.get(namemap[12]).setWest(new Door(this.MAPS.get(namemap[11])));
 
 		//map 13
-		maps.get(namemap[13]).setNorth(new Door(maps.get(namemap[15])));
-		maps.get(namemap[13]).setEast(new Door(maps.get(namemap[18])));
-		maps.get(namemap[13]).setSouth(new Door(maps.get(namemap[12])));
-		maps.get(namemap[13]).setWest(new Door(maps.get(namemap[14])));
+		this.MAPS.get(namemap[13]).setNorth(new Door(this.MAPS.get(namemap[15])));
+		this.MAPS.get(namemap[13]).setEast(new Door(this.MAPS.get(namemap[18])));
+		this.MAPS.get(namemap[13]).setSouth(new Door(this.MAPS.get(namemap[12])));
+		this.MAPS.get(namemap[13]).setWest(new Door(this.MAPS.get(namemap[14])));
 
 		//map 14
-		maps.get(namemap[14]).setNorth(new Door(maps.get(namemap[16])));
-		maps.get(namemap[14]).setEast(new Door(maps.get(namemap[13])));
-		maps.get(namemap[14]).setSouth(new Door(maps.get(namemap[11])));
-		maps.get(namemap[14]).setWest(new Door(maps.get(namemap[2])));
+		this.MAPS.get(namemap[14]).setNorth(new Door(this.MAPS.get(namemap[16])));
+		this.MAPS.get(namemap[14]).setEast(new Door(this.MAPS.get(namemap[13])));
+		this.MAPS.get(namemap[14]).setSouth(new Door(this.MAPS.get(namemap[11])));
+		this.MAPS.get(namemap[14]).setWest(new Door(this.MAPS.get(namemap[2])));
 
 		//map 15
-		maps.get(namemap[15]).setEast(new Door(maps.get(namemap[17])));
-		maps.get(namemap[15]).setSouth(new Door(maps.get(namemap[13])));
-		maps.get(namemap[15]).setWest(new Door(maps.get(namemap[16])));
+		this.MAPS.get(namemap[15]).setEast(new Door(this.MAPS.get(namemap[17])));
+		this.MAPS.get(namemap[15]).setSouth(new Door(this.MAPS.get(namemap[13])));
+		this.MAPS.get(namemap[15]).setWest(new Door(this.MAPS.get(namemap[16])));
 
 		//map 16
-		maps.get(namemap[16]).setEast(new Door(maps.get(namemap[15])));
-		maps.get(namemap[16]).setSouth(new Door(maps.get(namemap[14])));
-		maps.get(namemap[16]).setWest(new Door(maps.get(namemap[3])));
+		this.MAPS.get(namemap[16]).setEast(new Door(this.MAPS.get(namemap[15])));
+		this.MAPS.get(namemap[16]).setSouth(new Door(this.MAPS.get(namemap[14])));
+		this.MAPS.get(namemap[16]).setWest(new Door(this.MAPS.get(namemap[3])));
 
 		//map 17
-		maps.get(namemap[17]).setSouth(new Door(maps.get(namemap[18])));
-		maps.get(namemap[17]).setWest(new Door(maps.get(namemap[15])));
+		this.MAPS.get(namemap[17]).setSouth(new Door(this.MAPS.get(namemap[18])));
+		this.MAPS.get(namemap[17]).setWest(new Door(this.MAPS.get(namemap[15])));
 
 		//map 18
-		maps.get(namemap[18]).setNorth(new Door(maps.get(namemap[17])));
-		maps.get(namemap[18]).setEast(new Door(maps.get(namemap[21])));
-		maps.get(namemap[18]).setSouth(new Door(maps.get(namemap[19])));
-		maps.get(namemap[18]).setWest(new Door(maps.get(namemap[13])));
+		this.MAPS.get(namemap[18]).setNorth(new Door(this.MAPS.get(namemap[17])));
+		this.MAPS.get(namemap[18]).setEast(new Door(this.MAPS.get(namemap[21])));
+		this.MAPS.get(namemap[18]).setSouth(new Door(this.MAPS.get(namemap[19])));
+		this.MAPS.get(namemap[18]).setWest(new Door(this.MAPS.get(namemap[13])));
 
 		//map 19
-		maps.get(namemap[19]).setNorth(new Door(maps.get(namemap[18])));
-		maps.get(namemap[19]).setSouth(new Door(maps.get(namemap[20])));
-		maps.get(namemap[19]).setWest(new Door(maps.get(namemap[12])));
+		this.MAPS.get(namemap[19]).setNorth(new Door(this.MAPS.get(namemap[18])));
+		this.MAPS.get(namemap[19]).setSouth(new Door(this.MAPS.get(namemap[20])));
+		this.MAPS.get(namemap[19]).setWest(new Door(this.MAPS.get(namemap[12])));
 
 		//map20
-		maps.get(namemap[20]).setNorth(new Door(maps.get(namemap[19])));
+		this.MAPS.get(namemap[20]).setNorth(new Door(this.MAPS.get(namemap[19])));
 
 		//map 21
-		maps.get(namemap[21]).setEast(new Door(maps.get(namemap[22])));
-		maps.get(namemap[21]).setWest(new Door(maps.get(namemap[18])));
+		this.MAPS.get(namemap[21]).setEast(new Door(this.MAPS.get(namemap[22])));
+		this.MAPS.get(namemap[21]).setWest(new Door(this.MAPS.get(namemap[18])));
 
 		//map 22
-		maps.get(namemap[22]).setWest(new Door(maps.get(namemap[21])));
+		this.MAPS.get(namemap[22]).setWest(new Door(this.MAPS.get(namemap[21])));
 	}
 	
 	public Npc[] initNpc(){
@@ -416,17 +417,17 @@ public class World {
 
 	public void implentNpc(String[]namemap , Npc[] pnj){
 
-		maps.get(namemap[2]).addNpc(pnj[0]);
-		maps.get(namemap[2]).addNpc(pnj[1]);
-		maps.get(namemap[2]).addNpc(pnj[2]);
-		maps.get(namemap[3]).addNpc(pnj[3]);
-		maps.get(namemap[9]).addNpc(pnj[4]);
-		maps.get(namemap[11]).addNpc(pnj[5]);
-		maps.get(namemap[14]).addNpc(pnj[6]);
-		maps.get(namemap[15]).addNpc(pnj[7]);
-		maps.get(namemap[18]).addNpc(pnj[8]);
-		maps.get(namemap[19]).addNpc(pnj[9]);
-		maps.get(namemap[22]).addNpc(pnj[10]);
+		this.MAPS.get(namemap[2]).addNpc(pnj[0]);
+		this.MAPS.get(namemap[2]).addNpc(pnj[1]);
+		this.MAPS.get(namemap[2]).addNpc(pnj[2]);
+		this.MAPS.get(namemap[3]).addNpc(pnj[3]);
+		this.MAPS.get(namemap[9]).addNpc(pnj[4]);
+		this.MAPS.get(namemap[11]).addNpc(pnj[5]);
+		this.MAPS.get(namemap[14]).addNpc(pnj[6]);
+		this.MAPS.get(namemap[15]).addNpc(pnj[7]);
+		this.MAPS.get(namemap[18]).addNpc(pnj[8]);
+		this.MAPS.get(namemap[19]).addNpc(pnj[9]);
+		this.MAPS.get(namemap[22]).addNpc(pnj[10]);
 	}
 
 	public Item[] initShopItem(){
@@ -442,20 +443,13 @@ public class World {
 	}
 
 	public void addItemInShop(Item[]items , Shop shop){
-
-
-		for(int i=0 ; i < items.length ; i++){
-
-			shop.addItem(items[i]);
-
-
+		for (Item item : items) {
+			shop.addItem(item);
 		}
-
 	}
 
 	public void initShop(String[]namemap, Item[] items){
-
-		Map village = maps.get(namemap[2]);
+		Map village = this.MAPS.get(namemap[2]);
 		Shop shop = new Shop("Shop Bonville");
 
 		shop.setDescription("Xavier [Marchand] :\"Welcome to my modest shop hero.\"");
@@ -463,19 +457,16 @@ public class World {
 		village.setShop(new Door(shop));
 
 		addItemInShop(items, shop);
-
-
 	}
 
 	public void initWorld(){
-
 			String[] tabName = nameMap();
 			String[] tabDescription = descriptionMap();
 			Map[] tabMap = createTiles();
 			Enemy[] tabEnemies = createAllEnemies();
 			Item[]  tabItemGround = initItemInGround();
 			Item[]	tabItemShop =  initShopItem();
-			
+
 
 			addnameMap(tabName, tabMap, tabDescription);  // ajout des nom au map et leurs description
 			addEnnmiesMap(tabEnemies, tabName); // ajout des ennemis 
@@ -485,13 +476,10 @@ public class World {
 			Npc[]	tabNpc = initNpc();
 
 			implentNpc(tabName, tabNpc);   // ajout des pnj
-			initDoorMap(tabName);		// Chaque map coté ses porte 
-
-
+			initDoorMap(tabName);		// Chaque map coté ses porte
 	}
 
 	public void initPlayer(String[] namemap){
-		
 		Scanner keyboard = new Scanner(System.in);
 		System.out.print("Enter your name : ");
 		String name = keyboard.nextLine();
@@ -499,19 +487,13 @@ public class World {
 		this.player = hero;
 		System.out.println("Welcome "+ hero.getName() +".");
 		System.out.println("Your ship has crashed and you need a jack and a new motor to leave this planet.");
-		hero. move(maps.get(namemap[0]));
+		hero. move(this.MAPS.get(namemap[0]));
 		System.out.println("You Enter : "+this.player.getMapHero().getName() + ".");
 		System.out.println(this.player.getMapHero().getDescription());
-
-		
 	}
 
 	public int play(ActionManager action){
-
-
-		
 		action.getAction();
-		
 
 		if( this.player.getHealth() <= 0 ){
 
@@ -536,26 +518,19 @@ public class World {
 
 		// ------------------------ INTRODUCTION -----------------------------------
 
-
 		while ( finish == 0){
-
 			finish = monde.play(action);
-
 		}
-
 
 		// ------------------------ Fin du jeu -----------------------------------
 
 		if(finish == 1 ){
-
 			System.out.println("\nCongratulations you have escaped the planet and saved everyone on it.");
 			System.out.println("Thanks playing my video games.");
 			System.out.println("Credit:\nBoue Alexis\nLuneteau Thomas\nVialle Charlie");
 		}
 		else{
-
 			System.out.println("\"☠ You Die. ☠ \"");
-
 		}
 	}
 }

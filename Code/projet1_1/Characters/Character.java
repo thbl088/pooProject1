@@ -8,14 +8,6 @@ public abstract class Character {
 	protected String name;
 	protected Statistics stats;
 
-	/**
-	 * 
-	 * @param name
-	 */
-	public Character(String name){
-		this.name = name ;
-	}
-
 	public Character(String name, Statistics stats) {
 		this.name = name;
 		this.stats = stats;
