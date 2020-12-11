@@ -153,23 +153,25 @@ public class World {
 				
 		enemies[4] = tony;
 
-		// Map 12  [3 Criterium]
+		// Map 12  [4 Criterium]
 
 		StatisticsEnemy statsCriterium = new StatisticsEnemy( 1 , 8 , 2 , 100 , 5);
 		Enemy criterium2mm = new Enemy("2mm" ,statsCriterium);
 		Enemy criterium5mm = new Enemy("5mm" ,statsCriterium);
 		Enemy criterium7mm = new Enemy("7mm" ,statsCriterium);
+		Enemy criterium9mm = new Enemy("9mm" ,statsCriterium);
 
 		enemies[5] = criterium2mm;
 		enemies[6] = criterium5mm;
 		enemies[7] = criterium7mm;
+		enemies[8] = criterium9mm;
 
 		// Map  13 Bicolor
 
 		StatisticsEnemy statsBic = new 	StatisticsEnemy( 20 , 16 , 12 , 20);
 		Enemy bicolor = new Enemy("bicolor",statsBic);
 				
-		enemies[8] = bicolor;
+		enemies[9] = bicolor;
 
 		// Map  14 Robert l'alcoolo 
 
@@ -177,14 +179,14 @@ public class World {
 		Weapon bottle = new Weapon("bottle", "It's a bottle.", 2, 1);
 		Enemy robert = new Enemy("robert",bottle ,statsRobert);
 						
-		enemies[9] = robert;
+		enemies[10] = robert;
 
 		// Map  16 robot crayon HB
 
 		StatisticsEnemy statsHB = new StatisticsEnemy( 10 , 10 , 10 , 10);
 		Enemy hB = new Enemy("hb",statsHB);
 				
-		enemies[10] = hB;
+		enemies[11] = hB;
 
 		// Map  17 Boss Twingy
 
@@ -192,15 +194,15 @@ public class World {
 		Item carwheel = new Item("car_wheel","It's a glowing car wheel.", -1);
 		Enemy twingy = new Enemy("twingy",carwheel ,statsTwingy);
 				
-		enemies[11] = twingy;
+		enemies[12] = twingy;
 
 		// Map  18 Les frères crayons 2B crayon tendre et 2H crayon dur
 
 		Enemy crayon2B = new Enemy("2b",statsRobcrayontendre);
 		Enemy crayon2H = new Enemy("2h",stats9H);
 				
-		enemies[12] = crayon2B;
-		enemies[13] = crayon2H;
+		enemies[13] = crayon2B;
+		enemies[14] = crayon2H;
 
 		// Map  20 Le Léviathan
 
@@ -208,14 +210,14 @@ public class World {
 		Weapon redfish = new Weapon("leviathan", "The big red fish.", 50, 15);
 		Enemy leviathan = new Enemy("leviathan",redfish ,statsLeviathan);
 						
-		enemies[14] = leviathan;
+		enemies[15] = leviathan;
 
 		// Map  21 Le crayon d'oré
 
 		StatisticsEnemy statsCrayondore = new StatisticsEnemy( 1 , 1 , 9999999 , 100 , 200);
 		Enemy crayonDore = new Enemy("golden_pen", statsCrayondore);
 								
-		enemies[15] = crayonDore;
+		enemies[16] = crayonDore;
 
 		return enemies;
 	}
@@ -260,20 +262,21 @@ public class World {
 		// Ajout des Ennemis dans les Hashmap de leur map
 		maps.get(namemap[4]).addEnemy(tabEnemies[0]);
 		maps.get(namemap[5]).addEnemy(tabEnemies[1]);
-		maps.get(namemap[7]).addEnemy(tabEnemies[2]);
+		maps.get(namemap[8]).addEnemy(tabEnemies[2]);
 		maps.get(namemap[8]).addEnemy(tabEnemies[3]);
 		maps.get(namemap[9]).addEnemy(tabEnemies[4]);
 		maps.get(namemap[12]).addEnemy(tabEnemies[5]);
 		maps.get(namemap[12]).addEnemy(tabEnemies[6]);
 		maps.get(namemap[12]).addEnemy(tabEnemies[7]);
-		maps.get(namemap[13]).addEnemy(tabEnemies[8]);
-		maps.get(namemap[14]).addEnemy(tabEnemies[9]);
-		maps.get(namemap[16]).addEnemy(tabEnemies[10]);
-		maps.get(namemap[17]).addEnemy(tabEnemies[11]);
-		maps.get(namemap[18]).addEnemy(tabEnemies[12]);
+		maps.get(namemap[12]).addEnemy(tabEnemies[8]);
+		maps.get(namemap[13]).addEnemy(tabEnemies[9]);
+		maps.get(namemap[14]).addEnemy(tabEnemies[10]);
+		maps.get(namemap[16]).addEnemy(tabEnemies[11]);
+		maps.get(namemap[17]).addEnemy(tabEnemies[12]);
 		maps.get(namemap[18]).addEnemy(tabEnemies[13]);
-		maps.get(namemap[20]).addEnemy(tabEnemies[14]);
-		maps.get(namemap[21]).addEnemy(tabEnemies[15]);
+		maps.get(namemap[18]).addEnemy(tabEnemies[14]);
+		maps.get(namemap[20]).addEnemy(tabEnemies[15]);
+		maps.get(namemap[21]).addEnemy(tabEnemies[16]);
 
 	}
 

@@ -173,9 +173,8 @@ public class ActionManager {
 
 		switch (direction.toLowerCase()) {
 			case "north", "n" :
-				if (currentLoc.isNorth() && (!(currentLoc.getNorth() instanceof LockedDoor) ||
-				 !((LockedDoor) currentLoc.getNorth()).isLocked()) ||
-				 (((LockedDoor) currentLoc.getNorth()).isLocked() && currentLoc.getName().equals("End Portal") &&  currentPlayer.hasItem("car_wheel") && currentPlayer.hasItem("little_wheel") && currentPlayer.hasItem("tank_track")))
+				if (currentLoc.isNorth() && (!(currentLoc.getNorth() instanceof LockedDoor) || !((LockedDoor) currentLoc.getNorth()).isLocked()) ||
+				 (currentLoc.getName().equals("End Portal") &&  currentPlayer.hasItem("car_wheel") && currentPlayer.hasItem("little_wheel") && currentPlayer.hasItem("tank_track")))
 				 {
 					currentPlayer.move(currentLoc.getNorth().getDestination());
 					System.out.println("You Enter : " + currentPlayer.getMapHero().getName() + "\n" + currentPlayer.getMapHero().getDescription());
@@ -184,9 +183,8 @@ public class ActionManager {
 				else if (((LockedDoor) currentLoc.getNorth()).isLocked()) { System.out.println("North door is locked"); }
 				break;
 			case "south", "s" :
-				if (currentLoc.isSouth() && (!(currentLoc.getSouth() instanceof LockedDoor) ||
-				 !((LockedDoor) currentLoc.getSouth()).isLocked()) ||
-				 (((LockedDoor) currentLoc.getSouth()).isLocked() && currentLoc.getName().equals("Crash Site") &&  currentPlayer.hasItem("jack") )) {
+				if (currentLoc.isSouth() && (!(currentLoc.getSouth() instanceof LockedDoor) || !((LockedDoor) currentLoc.getSouth()).isLocked()) ||
+				 ( currentLoc.getName().equals("Crash Site") &&  currentPlayer.hasItem("jack") )) {
 					currentPlayer.move(currentLoc.getSouth().getDestination());
 					System.out.println("You Enter : " + currentPlayer.getMapHero().getName() + "\n" + currentPlayer.getMapHero().getDescription());
 				}
