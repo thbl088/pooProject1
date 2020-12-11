@@ -12,7 +12,7 @@ import javax.swing.Action;
 
 
 import Locations.*;
-
+import Locations.Shop;
 import Characters.Enemy;
 import Characters.Player;
 import Characters.Npc;
@@ -412,9 +412,7 @@ public class ActionManager {
 	}
 	
 	public void actionBuy(String item) {
-
 		this.currentGame.player.buyItem(item.toLowerCase());
-
 	}
 
 	public void actionSell(String item) {

@@ -51,14 +51,7 @@ public class Player extends Character {
 	 * @param newLoc
 	 */
 	public void move(Map newLoc) { 
-		/*
-		if( (newLoc.getName().equals("Barracks")  && getItem("car_wheel").getName().equals("car_wheel") && getItem("little_wheel").getName().equals("little_wheel") && getItem("tank_track").getName().equals("tank_track"))||(
-			newLoc.getName().equals("Ship") && getItem("jack").getName().equals("jack"))
-		){
-			
-			newLoc.getNorth().unlock();
-		}
-		*/
+	
 		this.currentLocation = newLoc;
 	 }
 
@@ -175,7 +168,6 @@ public class Player extends Character {
 		{
 			this.stats.changeAttack(this.DEFAULT_ATTACK + DEFAULT_WEAPON.getAttackBonus());
 			this.weapon = DEFAULT_WEAPON;
-
 		}
 	}
 
@@ -243,6 +235,7 @@ public class Player extends Character {
 			this.stats.removeDefense(this.armor.getDefenseBonus());  // On retire les bonus de def  de l'ancienne arme 
 			this.stats.addDefense(item.getDefenseBonus());
 			this.armor = item;
+			showEquipement();
 
 		}
 		else{
@@ -279,27 +272,45 @@ public class Player extends Character {
 			System.out.println(item);
 			if ( item.getPrice() < this.stats.getMoney() ){
 
+
+
+	public void buyItem(String nameItem) {
+		Shop shop = (Shop) this.currentLocation ;
+		if (shop.getItem(nameItem)!= null ){
+			Item item = shop.getItem(nameItem);
+			if ( item.getPrice() < this.stats.getMoney() ){
+
 					addInventory(item);
 					this.stats.removeMoney(item.getPrice());
 					shop.removeItem(nameItem);
 			}
 			else{
-				System.out.println("Need more money rogue!");
+				System.out.println("Xavier [Marchand] :\"Need more money rogue!\" ");
 			}
 		}
-		else { System.out.println("The shop doesn't sell this item."); }
+		else { System.out.println("Xavier [Marchand] :\"The shop doesn't sell this item.\""); }
 	}
 
-	public void sellItem(String item) {
-		if (this.hasItem(item)) {
-			this.getMapHero().addItem(this.inventory.get(item));
-			this.stats.addMoney(this.inventory.get(item).getPrice() / 2);
-			this.inventory.remove(item);
-			System.out.println("Thanks for your patronage.");
+
+	public void sellItem(String nameItem) {
+		if (this.hasItem(nameItem)) {
+			Item item = getItem(nameItem);
+			if ( item.getPrice() <  0) {
+				System.out.println("Xavier [Marchand] :\"This item is so important.\"");
+			}
+			else{
+				if( item == this.weapon || item == this.armor ){
+
+					removeEquipment(item);
+				}
+				this.stats.addMoney(item.getPrice() / 2);
+				removeInventory(item);
+				System.out.println("Xavier [Marchand] :\"Thanks for your patronage.\"" );
+
+			}
 		}
-		else { System.out.println("You don't have this item"); }
+		else { System.out.println("Xavier [Marchand] :\"You don't have this item.\"" ); }
 	}
-
 
 
 	@Override

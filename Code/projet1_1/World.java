@@ -455,7 +455,7 @@ public class World {
 		Map village = maps.get(namemap[2]);
 		Shop shop = new Shop("Shop Bonville");
 
-		shop.setDescription("sqdsdsfds");
+		shop.setDescription("Xavier [Marchand] :\"Welcome to my modest shop hero.\"");
 		shop.setReturn(village);
 		village.setShop(new Door(shop));
 
@@ -551,7 +551,7 @@ public class World {
 		}
 		else{
 
-			System.out.println("☠ You Die. ☠");
+			System.out.println("\"☠ You Die. ☠ \"");
 
 		}
 	}
