@@ -46,7 +46,7 @@ public class Shop extends Map {
 
 	public void printItems() {
 		for (String i : items.keySet()) {
-			System.out.println(i + " : " + items.get(i).getDescription());
+			System.out.println(i + " : " + items.get(i).getDescription() + " Price : " + items.get(i).getPrice() + " gold.");
 		}
 	}
 }

@@ -175,6 +175,7 @@ public class Player extends Character {
 		{
 			this.stats.changeAttack(this.DEFAULT_ATTACK + DEFAULT_WEAPON.getAttackBonus());
 			this.weapon = DEFAULT_WEAPON;
+
 		}
 	}
 

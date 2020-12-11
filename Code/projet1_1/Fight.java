@@ -116,11 +116,7 @@ public class Fight {
 	}
 
 	public Player getPlayerPostFight(){
-		player.getStatistics().changeAttack(formerAtt);
-		player.getStatistics().changeDefense(formerDef);
-		player.getStatistics().changeCritical(formerCrit);
-		System.out.println("Player : " + player.getName() + " : " + player.getHealth() + " HP, " + player.getAttack() + " att, "+ player.getDefense() + " def." );
+		System.out.println("Player : " + player.getName() + " : " + player.getHealth() + " HP, " + player.getAttack() + " att, "+ player.getDefense() + " def, " + player.getStatistics().getMoney() + " golds.");
 		return player;
 	}
-
 }

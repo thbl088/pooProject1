@@ -245,15 +245,26 @@ public class ActionManager {
 	public void actionLook(String item) {
 		switch (item.toLowerCase()) {
 			case "here", "around" : System.out.println(this.currentGame.getMapDescription());
+				break;
 			case "inventory" : this.currentGame.player.printInventory();
+				break;
 			case "enemy", "enemies" : System.out.println(this.currentGame.player.getMapHero().getEnemiesList());
+			break;
 			case "npc" :  System.out.println(this.currentGame.player.getMapHero().getNpcsList());
+				break;
 			case "equipment" : this.currentGame.player.showEquipement();
-			case "shop" : if( this.currentGame.player.getMapHero().getName().isShop() ){
-
-				this.currentGame.player.getMapHero().printItems();
-			} ;
+				break;
+			case "shop" : if( this.currentGame.player.getMapHero() instanceof Shop){
+				System.out.println("It is what I have.");
+				Shop shop = (Shop) this.currentGame.player.getMapHero();
+				shop.printItems();
+			} 
+			else{System.out.println("You're not in a shop");}
+				break;
+			case "money" : System.out.println(this.currentGame.player.getStatistics().getMoney());
+				break;
 			default : System.out.println("You can't look at this");
+				break;
 		}
 	}
 
