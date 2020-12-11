@@ -1,4 +1,5 @@
 package Doors;
+
 import Locations.*;
 
 public class LockedDoor extends Door {
@@ -13,8 +14,7 @@ public class LockedDoor extends Door {
 	public boolean isLocked(){
 		return this.isLocked;
 	}
-	public void unlock() {
-		this.isLocked = false;
-	}
+
+	//public void unlock() { this.isLocked = false; }
 
 }

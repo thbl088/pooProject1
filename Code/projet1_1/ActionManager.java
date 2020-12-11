@@ -1,17 +1,8 @@
 import Doors.LockedDoor;
-//import Items.Armor;
-//import Items.Weapon;
-
-//import java.nio.file.Files;
-//import java.util.HashMap;
-//import java.util.Locale;
 import java.util.Scanner;
-
 import Locations.*;
 import Locations.Shop;
-//import Characters.Enemy;
 import Characters.Player;
-//import Characters.Npc;
 import Items.Item;
 
 public class ActionManager {
@@ -158,7 +149,7 @@ public class ActionManager {
 						switch (parsedCommands[1].toLowerCase()){
 							case "item" -> actionBuyItem(parsedCommands[2].toLowerCase());
 							case "potion" -> actionBuyPotion(parsedCommands[2].toLowerCase());
-							default -> System.out.println("Do you want to buy potion or item?");
+							default -> System.out.println("Do you want to buy a potion or an item?");
 						}
 					}
 					else {
@@ -231,7 +222,7 @@ public class ActionManager {
 			case "back", "out" : //sort du magasin
 				if (currentLoc instanceof Shop) {
 					currentPlayer.move(((Shop) currentLoc).getExitShop());
-					System.out.println("Xavier [Marchand] :\"Good Bye Hero.\"");
+					System.out.println("Xavier [Marchand] :\"Goodbye Hero.\"");
 					System.out.println("You Enter : " + currentPlayer.getMapHero().getName() + "\n" + currentPlayer.getMapHero().getDescription());
 				}
 				else { System.out.println("You cannot exit current location"); }
@@ -282,7 +273,7 @@ public class ActionManager {
 				break;
 			case "inventory" : currentGame.player.printInventory(); //affiche inventaire du joueur
 				break;
-			case "stat" : System.out.println("Player : " + currentGame.player.getName() + " : " + currentGame.player.getHealth() + " HP, " + currentGame.player.getAttack() + " att, "+ currentGame.player.getDefense() + " def." ); //affiche les stats du joueur
+			case "stat", "stats", "statistics" : System.out.println("Player : " + currentGame.player.getName() + " : " + currentGame.player.getHealth() + " HP, " + currentGame.player.getAttack() + " att, "+ currentGame.player.getDefense() + " def." ); //affiche les stats du joueur
 				break;
 			case "potion" : System.out.println(currentGame.player.getNbPotion()); //nombre de potion détennues
 				break;
@@ -432,7 +423,7 @@ public class ActionManager {
 			currentGame.player.addEquipment(item);
 		}
 		else{
-			System.out.println("It's not a item.");
+			System.out.println("It's not an item.");
 		}
 	}
 
@@ -466,7 +457,7 @@ public class ActionManager {
 			//actionQuit();
 		}
 		if(fight.stillFighting() == 2){ //si il n'y a plus d'enemi en face
-			System.out.println("You have win this fight\n");
+			System.out.println("You have won this fight\n");
 			endFight();
 			currentGame.player = fight.getPlayerPostFight();
 		}

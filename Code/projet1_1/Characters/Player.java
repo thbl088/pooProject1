@@ -6,7 +6,6 @@ import Locations.*;
 import Stats.*;
 
 public class Player extends Character {
-
 	private final HashMap<String, Item> INVENTORY;
 	private int healthPotion = 0;
 	private int attackPotion = 0;
@@ -17,8 +16,6 @@ public class Player extends Character {
 	private Weapon weapon;
 	private final Armor DEFAULT_ARMOR = new Armor("Space suit", "This uniform represents our nation", 0, 3);
 	private final Weapon DEFAULT_WEAPON = new Weapon("Ax", "It is used to break the windshield", 0, 3);
-	private static final int EXIT_SUCCESS = 0;
-	private static final int EXIT_FAILURE = -1;
 	private final int COEF_HP_POTION;
 	private final int COEF_ATT_POTION;
 	private final int COEF_DEF_POTION;
@@ -28,7 +25,6 @@ public class Player extends Character {
 
 
 	public Player(String name){
-		
 		super(name, new StatisticsPlayer());
 		HashMap<String, Item> inv = new HashMap<>();
 		this.armor = DEFAULT_ARMOR;
@@ -50,11 +46,9 @@ public class Player extends Character {
 
 	public void addCritPotion() { this.critPotion++; }
 
-
 	public void move(Map newLoc) { this.currentLocation = newLoc; }
 
 	public Map getMapHero() { return this.currentLocation; }
-
 
 	public Item getItem(String item) { return this.INVENTORY.get(item); }
 
@@ -65,66 +59,56 @@ public class Player extends Character {
 						+ "\ncrit potion : " + this.critPotion;
 	}
 
-	public int useHealthPotion() {
+	public void useHealthPotion() {
 		if (this.healthPotion > 0)
 		{
 			this.healthPotion -- ;
 			this.getStatistics().addHealth(COEF_HP_POTION);
-			return EXIT_SUCCESS;
 		}
 		else
 		{
 			System.out.println("You don't have any health potion.");
-			return EXIT_FAILURE;
 			
 		}
 	}
 	
-	public int useAttackPotion() {
+	public void useAttackPotion() {
 			if (this.attackPotion > 0)
 			{
 				this.attackPotion-- ;
 				this.getStatistics().changeAttack(this.getAttack() * COEF_ATT_POTION);
 				System.out.println("new attack = " + this.getAttack());
-				return  EXIT_SUCCESS;
 			}
 			else
 			{
 				System.out.println("You don't have any attack potion.");
-				return  EXIT_FAILURE;
 			}
 		}
 
-	public int useDefensePotion() {
+	public void useDefensePotion() {
 		if (this.defensePotion > 0)
 		{
 			this.defensePotion-- ;
 			this.getStatistics().changeDefense(this.getDefense() * COEF_DEF_POTION);
 			System.out.println("new Defense = " + this.getDefense());
-
-			return EXIT_SUCCESS;
 		}
 		else
 		{
 			System.out.println("You don't have any defense potion.");
-			return  EXIT_FAILURE;
 		}
 	}
 
-	public int useCritPotion() {
+	public void useCritPotion() {
 		if (this.critPotion > 0)
 		{
 			
 			this.critPotion-- ;
 			this.getStatistics().changeCritical(this.getCrit() * COEF_CRIT_POTION);
 			System.out.println("new Critic = " + this.getCrit());
-
-			return EXIT_SUCCESS;
 		}
 		else
 		{
 			System.out.println("You don't have any crit potion.");
-			return  EXIT_FAILURE;
 		}
 	}
 
@@ -179,11 +163,7 @@ public class Player extends Character {
 	}
 
 
-	public void addInventory(Item item) {
-
-		this.INVENTORY.put(item.getName(), item);
-
-	}
+	public void addInventory(Item item) { this.INVENTORY.put(item.getName(), item); }
 
 
 	public void addEquipment(Item item) {
@@ -201,7 +181,6 @@ public class Player extends Character {
 	}
 
 	public void equiWeapon(Weapon item) {                 // On équipe la nouvelle arme
-
 		if ( item != this.weapon){
 
 			this.stats.removeAttack(this.weapon.getAttackBonus());  // On retire l'ancienne arme 
@@ -216,7 +195,6 @@ public class Player extends Character {
 	}
 
 	public void equiArmor(Armor item) {                 // On équipe la nouvelle défense
-
 		if ( item != this.armor){
 
 			this.stats.removeDefense(this.armor.getDefenseBonus());  // On retire les bonus de def  de l'ancienne arme 
@@ -317,14 +295,14 @@ public class Player extends Character {
 		return "player name : " + this.getName() + "\nhealth : " + this.getHealth() + "\nattack : " + this.getAttack() + "\ndefense : " + this.getDefense() + "\ncritical : " + this.getCrit() + "\n";
 	}
 
+	/*
 	public int finish(){
-
 		if( this.getMapHero().getName().equals("Ship") && this.weapon.getName().equals("Reactor"))
 		{
 			return 1;
 		}
 
 		return 0;
-
 	}
+	*/
 }

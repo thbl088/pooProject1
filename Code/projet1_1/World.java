@@ -5,7 +5,6 @@ import Locations.*;
 import Characters.*;
 import Doors.*;
 import Stats.StatisticsEnemy;
-
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -18,19 +17,13 @@ public class World {
 		return this.player.getMapHero().getDescription();
 	}
 
-
-	public void addMap(Map newMap){
-		this.MAPS.put(newMap.getName(), newMap);
-	}
-
+	// public void addMap(Map newMap){ this.MAPS.put(newMap.getName(), newMap); }
 
 	public World() {
-		player = new Player("José");
 		this.MAPS = new HashMap<>();
 	}
 
 	public String[] nameMap(){
-
 		String[] dataName = new String[23];
 		
 		dataName[0] = "Ship";
@@ -45,14 +38,14 @@ public class World {
 		dataName[9] = "Skatepark";
 		dataName[10] = "Forest South";
 		dataName[11] = "Beehdow";
-		dataName[12] =	"Daltons Rooms";
+		dataName[12] =	"Dalton's Rooms";
 		dataName[13] =	"Four Seasons Meadow";
 		dataName[14] =	"Meadow";
 		dataName[15] =	"Ravenholm";
 		dataName[16] =	"Enter Stone Quarry";
 		dataName[17] = "Garage";
-		dataName[18] =	"Enter Lac Colère";
-		dataName[19] =	"Lac Colère";
+		dataName[18] =	"Enter Lake Colère";
+		dataName[19] =	"Lake Colère";
 		dataName[20] =	"The Big Red Fish";
 		dataName[21] =  "Fighting Gold";
 		dataName[22] =  "NetBeans";
@@ -61,15 +54,14 @@ public class World {
 	}
 
 	public String[] descriptionMap(){
-
 		String[] dataDescription =  new String[23];
 		
-		dataDescription[0] = "You are in your ship, you can see at the north your crash site.";
+		dataDescription[0] = "You are in your ship, you can see in the north your crash site.";
 		dataDescription[1] = "The ground is red, the Sky is blue, your ship is blocked by a huge rock in the south and you see a village in the north.";
-		dataDescription[2] = "You are in a big village. You can see the mayor and a shop. At the north, there is a big door, at the south the crash site, at the west a forest and at the east a meadow.";
-		dataDescription[3] = "You are in front of a huge door made of steel, you can see 2 round holes in it, one of 5 centimeters and one of 20 centimeters. There is also a crazy man who is shouting at you. At the north, there is the closed huge door, at the south the village, at the east a stone quarry.";
-		dataDescription[4] = "You are in front of a huge tank in the south there is the big door.";
-		dataDescription[5] = "You are in the north forest. You can see a hard pen hiding behind a tree. At the west is the deep wood, at the south the edge forest.";
+		dataDescription[2] = "You are in a big village. You can see the mayor and a shop. In the north, there is a big door, in the south the crash site, in the west a forest and in the east a meadow.";
+		dataDescription[3] = "You are in front of a huge door made of steel, you can see 2 round holes in it, one 5 centimeters and one of 20 centimeters. There is also a crazy man shouting at you. In the north, there is the huge closed door, in the south the village, in the east a stone quarry.";
+		dataDescription[4] = "You are in front of a huge tank, in the south there is the big door.";
+		dataDescription[5] = "You are in the north forest. You can see a hard pen hiding behind a tree. In the west is the deep wood, in the south the edge of the forest.";
 		dataDescription[6] = "You are in the deeper part of the forest. you can see in a skylight a cube with hearths on the side. At the south is the west forest, at the east the north forest.";
 		dataDescription[7] = "You are in the west forest. You can see a feather pencil. At the north is the deep wood, at the south a skatepark and at the east the forest.";
 		dataDescription[8] = "You are at the edge of the forest. You can see a tender pen monster in a bush. At the north there is the north forest, at the south the south forest, at the west the west forest and at the east the village.";
@@ -95,25 +87,19 @@ public class World {
 		Map[] tiles = new Map[23];
 
 		for(int i = 0 ; i < tiles.length ; i++){
-
 			Map map = new Map();
 			tiles[i] = map ;
-
 		}
-
 		return tiles;
 	}
 
 	public  void addnameMap(String[] name, Map[] map ,String[] description){
-
 		for(int  i = 0 ; i < name.length ; i++ ){
 			map[i] = new Map();
 			map[i].changeName(name[i]);
 			map[i].setDescription(description[i]);
 			this.MAPS.put(name[i], map[i]);
 		}
-		
-
 	}
 
 	public Enemy[] createAllEnemies(){
@@ -219,7 +205,6 @@ public class World {
 		Enemy crayonDore = new Enemy("golden_pen", statsCrayondore);
 								
 		enemies[16] = crayonDore;
-
 		return enemies;
 	}
 
@@ -227,21 +212,19 @@ public class World {
 		Item[] ground = new Item[10];
 
 		ground[0] = new Weapon("pickaxe", "A pickaxe hard enough to mine netherite.", 12, 5);
-		ground[1] = new Weapon("rock", "It's rock like Malphite.", 2 , 2 );
+		ground[1] = new Weapon("rock", "It's a rock like Malphite.", 2 , 2 );
 		ground[2] = new Weapon( "fish", "A smelly fish.", 6 , 4);
 		ground[3] = new Weapon( "fish", "A smelly fish.", 6 , 4);
 		ground[4] = new Item("sheep wool", "This wool is so soft.", 10);
 		ground[5] = new Item("sheep wool", "This wool is so soft.", 10);
-		ground[6] = new Item("companion Cube", "A cube with pink heart on the side.", 60);
-		ground[7] = new Item("package", "A package which contains a nvidia geforce 3080." , 20);
-		ground[8] = new Item("package", "A package which contains a nvidia geforce 3080." , 20);
+		ground[6] = new Item("companion Cube", "A cube with a pink heart on the side.", 60);
+		ground[7] = new Item("package", "A package which contains an Nvidia GeForce RTX™ 3080." , 20);
+		ground[8] = new Item("package", "A package which contains an Nvidia GeForce RTX™ 3080." , 20);
 		ground[9] = new Weapon( "reactor", "This is the key to get out of here.", -1 , 5);
-		
 		return ground;
 	}
 
 	public void addItemMap(Item[]ground,String[] namemap){
-
 		// Ajout des Ennemis dans les Hashmap de leur map
 		this.MAPS.get(namemap[4]).addItem(ground[9]);
 		this.MAPS.get(namemap[6]).addItem(ground[6]);
@@ -253,13 +236,9 @@ public class World {
 		this.MAPS.get(namemap[15]).addItem(ground[0]);
 		this.MAPS.get(namemap[19]).addItem(ground[2]);
 		this.MAPS.get(namemap[19]).addItem(ground[3]);
-		
-
-
 	}
 
 	public  void addEnnmiesMap(Enemy[] tabEnemies,String[] namemap){
-
 		// Ajout des Ennemis dans les Hashmap de leur map
 		this.MAPS.get(namemap[4]).addEnemy(tabEnemies[0]);
 		this.MAPS.get(namemap[5]).addEnemy(tabEnemies[1]);
@@ -278,7 +257,6 @@ public class World {
 		this.MAPS.get(namemap[18]).addEnemy(tabEnemies[14]);
 		this.MAPS.get(namemap[20]).addEnemy(tabEnemies[15]);
 		this.MAPS.get(namemap[21]).addEnemy(tabEnemies[16]);
-
 	}
 
 	public void initDoorMap(String[] namemap){
@@ -395,28 +373,25 @@ public class World {
 	}
 	
 	public Npc[] initNpc(){
-
 		Npc[] village = new Npc[11];
 
-		village[0] = new Npc("mayor", null,"Henry [Mayor] : \"Welcome "+ this.player.getName() + " as I can see on your suit, I have seen you falling from the sky. I’m sure you’re the man of the prophecy. I’m sure you will find what you need behind the door behind me. But before that you’ll need to find the 2 objects needed to open the door. If you need help you can ask our merchant, he should have some object useful for you.\" ");
+		village[0] = new Npc("mayor", null,"Henry [Mayor] : \"Welcome "+ this.player.getName() + ", as I can see on your suit, I have seen you falling from the sky. I’m sure you’re the man from the prophecy. I’m certain you will find what you need beyond the door behind me. But before that you’ll need to find the 2 objects needed to open the door. If you need help you can ask our merchant, he should have some useful object for you.\" ");
 		village[1] = new Npc("villager", null, "Josette [Villager] : \"Hello there. The weather is nice, isn’t it?\"");
 		village[2] = new Npc("children", null,"Loïc Choulet [Children] : \"Do you have a SolidWorks license?\"");
 		Item tankTrack = new Item("tank_track", "This chariot caterpillar is shining.", -1);
 		village[3] = new Npc("crazy_man",tankTrack, "Mark [Crazy man] : \"HEY YOU! I have found this big thing around, I was trying to sleep on it but it’s too hard so take it!\"");
-		village[4] = new Npc("factor", null,"Sebastien [Factor] : \"I need to deliver those important packages but those monsters block the road.\"" );
+		village[4] = new Npc("factor", null,"Sebastien [Factor] : \"I need to deliver these important packages but these monsters block the road.\"" );
 		village[5] = new Npc("shepherdess", null,"Anne [Shepherdess] : \"Sometimes I found weird trace on the earth around my herd and a big ball appear.\"" );
 		village[6] = new Npc("alcoholic", null,"Robert [alcoholic]: \"BEURGHHHH.\"");
-		village[7] = new Npc("miner", null,"José [Miner] : \"I hope I’ll found diamond this time but there is too much lava down there.\" " );
-		village[8] = new Npc("lumberjack", null,"Franck [Lumberjack] :\"Thank you a lot now I can go back see my wife Josette.\"" );
+		village[7] = new Npc("miner", null,"José [Miner] : \"I hope I’ll find a diamond this time but there is too much lava down there.\" " );
+		village[8] = new Npc("lumberjack", null,"Franck [Lumberjack] :\"Thank you a lot, now I can go back and see my wife Josette.\"" );
 		village[9] = new Npc("fisher", null,"Hena [Fisher] : \"I hope I’ll catch this big fish this time.\"" );
-		Weapon grabage = new Weapon("garbage_collector", "This weapon allows to put any entity to state null.", -1, 99999999);
-		village[10] = new Npc("samuel", grabage,"Samuel : \"Congratulation for looking at the game file for founding this area. Take this The Garbage Collector.\"" );
-
+		Weapon grabage = new Weapon("garbage_collector", "This weapon puts any entity reference to null, allowing for the garbage collector to get rid of it.", -1, 99999999);
+		village[10] = new Npc("samuel", grabage,"Samuel : \"Congratulations for looking at the game file and finding this area. Take this The Garbage Collector.\"" );
 		return village;
 	}
 
 	public void implentNpc(String[]namemap , Npc[] pnj){
-
 		this.MAPS.get(namemap[2]).addNpc(pnj[0]);
 		this.MAPS.get(namemap[2]).addNpc(pnj[1]);
 		this.MAPS.get(namemap[2]).addNpc(pnj[2]);
@@ -431,14 +406,14 @@ public class World {
 	}
 
 	public Item[] initShopItem(){
-
 		Item[] shop = new Item[6];
+
 		shop[0] = new Armor("leather_tunic","Tunic made of leather." , 12, 5);
 		shop[1] = new Armor("titanium_armour","Made with remnants of pencil robots." , 25, 20);
-		shop[2] = new Armor("nethererite_armour","Made with a coming ore Ravenholm." , 25, 20);
+		shop[2] = new Armor("nethererite_armour","Made with ore from Ravenholm." , 25, 20);
 		shop[3] = new Weapon("stone_sword","A sword stronger than wood.", 12, 15);
 		shop[4] = new Weapon("japanese_sword","Take the soul of your enemies.", 12, 15);
-		shop[5] = new Weapon("energie_sword","Sword recover from an old ship that once crashed here.", 70, 50);
+		shop[5] = new Weapon("energie_sword","A sword recovered from an old ship that once crashed here.", 70, 50);
 		return shop;
 	}
 
@@ -452,10 +427,9 @@ public class World {
 		Map village = this.MAPS.get(namemap[2]);
 		Shop shop = new Shop("Shop Bonville");
 
-		shop.setDescription("Xavier [Marchand] :\"Welcome to my modest shop hero.\"");
+		shop.setDescription("Xavier [Marchand] :\"Welcome to my modest shop, hero.\"");
 		shop.setReturn(village);
 		village.setShop(new Door(shop));
-
 		addItemInShop(items, shop);
 	}
 
@@ -466,7 +440,6 @@ public class World {
 			Enemy[] tabEnemies = createAllEnemies();
 			Item[]  tabItemGround = initItemInGround();
 			Item[]	tabItemShop =  initShopItem();
-
 
 			addnameMap(tabName, tabMap, tabDescription);  // ajout des nom au map et leurs description
 			addEnnmiesMap(tabEnemies, tabName); // ajout des ennemis 
@@ -486,7 +459,7 @@ public class World {
 		Player hero = new Player(name);
 		this.player = hero;
 		System.out.println("Welcome "+ hero.getName() +".");
-		System.out.println("Your ship has crashed and you need a jack and a new motor to leave this planet.");
+		System.out.println("Your ship has crashed, you need a jack and a new motor to leave this planet.");
 		hero. move(this.MAPS.get(namemap[0]));
 		System.out.println("You Enter : "+this.player.getMapHero().getName() + ".");
 		System.out.println(this.player.getMapHero().getDescription());
@@ -517,20 +490,18 @@ public class World {
 		ActionManager action  = new ActionManager(monde);
 
 		// ------------------------ INTRODUCTION -----------------------------------
-
 		while ( finish == 0){
 			finish = monde.play(action);
 		}
-
 		// ------------------------ Fin du jeu -----------------------------------
 
 		if(finish == 1 ){
-			System.out.println("\nCongratulations you have escaped the planet and saved everyone on it.");
-			System.out.println("Thanks playing my video games.");
-			System.out.println("Credit:\nBoue Alexis\nLuneteau Thomas\nVialle Charlie");
+			System.out.println("\nCongratulations, you have escaped the planet and saved everyone on it.");
+			System.out.println("Thanks for playing our video game !!!");
+			System.out.println("Credit:\n-Boue Alexis\n-Luneteau Thomas\n-Vialle Charlie");
 		}
 		else{
-			System.out.println("\"☠ You Die. ☠ \"");
+			System.out.println("\"☠ You died. ☠ \"");
 		}
 	}
 }

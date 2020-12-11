@@ -25,12 +25,7 @@ public class Shop extends Map {
 		this.ITEMS.put(newItem.getName(), newItem);
 	}
 
-
-	public boolean hasItem(String item) {
-		return this.ITEMS.containsKey(item);
-	}
-
-
+	// public boolean hasItem(String item) { return this.ITEMS.containsKey(item); }
 
 	public void removeItem(String item) {
 		this.ITEMS.remove(item);
@@ -44,7 +39,6 @@ public class Shop extends Map {
 	public Map getExitShop() {
 		return this.exitShop;
 	}
-
 
 	public void printItems() {
 		for (String i : this.ITEMS.keySet()) {

@@ -1,6 +1,5 @@
 import Characters.*;
 import Characters.Character;
-
 import java.util.HashMap;
 
 public class Fight {
@@ -41,7 +40,7 @@ public class Fight {
 
 	public void checkEnemyDeath(String targetName){ //vérifie si un enemi est mort et ajoute son argent et objet tenu
 		if(this.ENEMIES.get(targetName).getHealth()<1){
-			System.out.println("You killed " + this.ENEMIES.get(targetName).getName()+ " and got " + this.ENEMIES.get(targetName).getStatistics().getMoney() + " money.");
+			System.out.println("You killed " + this.ENEMIES.get(targetName).getName()+ " and got " + this.ENEMIES.get(targetName).getStatistics().getMoney() + " coins.");
 			this.PLAYER.getStatistics().addMoney(this.ENEMIES.get(targetName).getStatistics().getMoney());
 			if(this.ENEMIES.get(targetName).getObject() != null){
 				this.PLAYER.addInventory(this.ENEMIES.get(targetName).getObject());
@@ -112,7 +111,7 @@ public class Fight {
 
 	public void defend() { //multiplie la def du joueur par 2 jusqu'a son prochain tour
 	if(hasDefend){
-		System.out.println("You keep your defend. \n");
+		System.out.println("You keep your defense. \n");
 	}
 	else{
 		this.PLAYER.getStatistics().addDefense(this.PLAYER.getDefense());

@@ -17,9 +17,9 @@ public abstract class Character {
 
 	public String getName(){ return this.name; }
 
-	public void printName(){ System.out.println(this.name); }
+	// public void printName(){ System.out.println(this.name); }
 
-	public int getMaxHealth() { return this.stats.getMaxHealth(); }
+	// public int getMaxHealth() { return this.stats.getMaxHealth(); }
 
 	public int getHealth() { return this.stats.getHealth(); }
 
