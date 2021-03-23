@@ -215,9 +215,9 @@ public class World {
 		ground[1] = new Weapon("rock", "It's a rock like Malphite.", 2 , 2 );
 		ground[2] = new Weapon( "fish", "A smelly fish.", 6 , 4);
 		ground[3] = new Weapon( "fish", "A smelly fish.", 6 , 4);
-		ground[4] = new Item("sheep wool", "This wool is so soft.", 10);
-		ground[5] = new Item("sheep wool", "This wool is so soft.", 10);
-		ground[6] = new Item("companion Cube", "A cube with a pink heart on the side.", 60);
+		ground[4] = new Item("sheep_wool", "This wool is so soft.", 10);
+		ground[5] = new Item("sheep_wool", "This wool is so soft.", 10);
+		ground[6] = new Item("companion_Cube", "A cube with a pink heart on the side.", 60);
 		ground[7] = new Item("package", "A package which contains an Nvidia GeForce RTX™ 3080." , 20);
 		ground[8] = new Item("package", "A package which contains an Nvidia GeForce RTX™ 3080." , 20);
 		ground[9] = new Weapon( "reactor", "This is the key to get out of here.", -1 , 5);
@@ -242,7 +242,7 @@ public class World {
 		// Ajout des Ennemis dans les Hashmap de leur map
 		this.MAPS.get(namemap[4]).addEnemy(tabEnemies[0]);
 		this.MAPS.get(namemap[5]).addEnemy(tabEnemies[1]);
-		this.MAPS.get(namemap[8]).addEnemy(tabEnemies[2]);
+		this.MAPS.get(namemap[7]).addEnemy(tabEnemies[2]);
 		this.MAPS.get(namemap[8]).addEnemy(tabEnemies[3]);
 		this.MAPS.get(namemap[9]).addEnemy(tabEnemies[4]);
 		this.MAPS.get(namemap[12]).addEnemy(tabEnemies[5]);
@@ -410,9 +410,9 @@ public class World {
 
 		shop[0] = new Armor("leather_tunic","Tunic made of leather." , 12, 5);
 		shop[1] = new Armor("titanium_armour","Made with remnants of pencil robots." , 25, 20);
-		shop[2] = new Armor("nethererite_armour","Made with ore from Ravenholm." , 25, 20);
+		shop[2] = new Armor("nethererite_armour","Made with ore from Ravenholm." , 50, 40);
 		shop[3] = new Weapon("stone_sword","A sword stronger than wood.", 12, 15);
-		shop[4] = new Weapon("japanese_sword","Take the soul of your enemies.", 12, 15);
+		shop[4] = new Weapon("japanese_sword","Take the soul of your enemies.", 25, 35);
 		shop[5] = new Weapon("energie_sword","A sword recovered from an old ship that once crashed here.", 70, 50);
 		return shop;
 	}
