@@ -133,7 +133,7 @@ public abstract class Statistics {
 	 */
 	public void removeAttack(int att) {
 		
-		this.attack -= att;
+		this.attack -= att ;
 	}
 	public void changeAttack(int att){
 		this.attack = att;
@@ -147,5 +147,4 @@ public abstract class Statistics {
 		
 		this.money -= coins;
 	}
-
 }

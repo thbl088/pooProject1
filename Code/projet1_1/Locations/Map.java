@@ -1,7 +1,6 @@
 package Locations;
 
 import Characters.*;
-
 import java.util.HashMap;
 import Doors.*;
 import Items.*;
@@ -9,34 +8,38 @@ import Items.*;
 public class Map {
 
 	private String name;
-	private HashMap<String, Enemy> enemies = new HashMap<>();
-	private HashMap<String, Item> groundItems= new HashMap<>();
-	private HashMap<String, Npc> npcs= new HashMap<>();
+	private final HashMap<String, Enemy> ENEMIES;
+	private final HashMap<String, Item> GROUND_ITEMS;
+	private final HashMap<String, Npc> NPCS;
 	private Door north;
 	private Door east;
 	private Door west;
 	private Door south;
-	private Shop shop;
+	private Door shop;
 	private String description;
 
-	public Map(){}
+	public Map(){
+		this.ENEMIES = new HashMap<>();
+		this.GROUND_ITEMS = new HashMap<>();
+		this.NPCS = new HashMap<>();
+	}
 
 	public Map(String newName){
 		this.name = newName;
-		this.enemies = new HashMap<>();
-		this.groundItems = new HashMap<>();
-		this.npcs = new HashMap<>();
+		this.ENEMIES = new HashMap<>();
+		this.GROUND_ITEMS = new HashMap<>();
+		this.NPCS = new HashMap<>();
 	}
 
 	public void changeName(String name){ this.name = name; }
 
 	public void addEnemy(Enemy newEnemy) {
-		enemies.put(newEnemy.getName(), newEnemy);
+		this.ENEMIES.put(newEnemy.getName(), newEnemy);
 	}
 
-	public void addItem(Item newItem) { groundItems.put(newItem.getName(), newItem); }
+	public void addItem(Item newItem) { this.GROUND_ITEMS.put(newItem.getName(), newItem); }
 
-	public void addNpc(Npc newNPC) { npcs.put(newNPC.getName(), newNPC); }
+	public void addNpc(Npc newNPC) { this.NPCS.put(newNPC.getName(), newNPC); }
 
 	public void setNorth(Door newNorth) {
 		north = newNorth;
@@ -54,7 +57,9 @@ public class Map {
 		west = newWest;
 	}
 
-	public void setShop() { this.shop = new Shop(); }
+	public void setShop(Door newshop) { 
+		shop = newshop; 
+	}
 
 	public void setDescription(String desc) { this.description = desc; }
 
@@ -76,54 +81,58 @@ public class Map {
 
 	public Door getWest() { return west; }
 
-	public Shop getShop() { return this.shop; }
+	public Door getShop() { return shop; }
 
 	public String getName() { return this.name; }
 
 	public String getDescription() { return this.getName() + " : " + this.description; }
 
-	public HashMap<String, Enemy> getEnemies(){return enemies;} //warning mais on se fiche de l'ordre des ennemies
+	public HashMap<String, Enemy> getEnemies(){return this.ENEMIES;} //warning mais on se fiche de l'ordre des ennemies
 
 	public Item getItem(String item) {
-		Item itemReturn = groundItems.get(item);
-		groundItems.remove(item);
+		Item itemReturn = this.GROUND_ITEMS.get(item);
+		this.GROUND_ITEMS.remove(item);
 		return itemReturn;
 	}
+	// public boolean isNpc(String Npc) { return this.NPCS.containsKey(Npc); }
 
 	public Npc getNpc(String Npc) {
-		return npcs.get(Npc);
+		return this.NPCS.get(Npc);
 	}
 
 	public String getEnemiesList() {
-		if (enemies.isEmpty()) {
+		if (this.ENEMIES.isEmpty()) {
 			return "there are no enemies here";
-		} else if (enemies.size() == 1){
-			return "There is " + enemies.size() + " enemy on this map : " + enemies.keySet();
+		}
+		else if (this.ENEMIES.size() == 1){
+			return "There is " + this.ENEMIES.size() + " enemy on this map : " + this.ENEMIES.keySet();
 		}
 		else {
-			return "There are " + enemies.size() + " enemies on this map : " + enemies.keySet();
+			return "There are " + this.ENEMIES.size() + " enemies on this map : " + this.ENEMIES.keySet();
 		}
 	}
 
 	public String getGroundItemsList() {
-		if (groundItems.isEmpty()) {
+		if (this.GROUND_ITEMS.isEmpty()) {
 			return "there are no items here";
-		} else if (groundItems.size() == 1){
-			return "There is " + groundItems.size() + " item on this map : " + groundItems.keySet();
+		}
+		else if (this.GROUND_ITEMS.size() == 1){
+			return "There is " + this.GROUND_ITEMS.size() + " item on this map : " + this.GROUND_ITEMS.keySet();
 		}
 		else {
-			return "There are " + groundItems.size() + " items on this map : " + groundItems.keySet();
+			return "There are " + this.GROUND_ITEMS.size() + " items on this map : " + this.GROUND_ITEMS.keySet();
 		}
 	}
 
 	public String getNpcsList() {
-		if (npcs.isEmpty()) {
+		if (this.NPCS.isEmpty()) {
 			return "there are no NPCs here";
-		} else if (npcs.size() == 1){
-			return "There is " + npcs.size() + " NPC on this map : " + npcs.keySet();
+		}
+		else if (this.NPCS.size() == 1){
+			return "There is " + this.NPCS.size() + " NPC on this map : " + this.NPCS.keySet();
 		}
 		else {
-			return "There are " + npcs.size() + " NPCs on this map : " + npcs.keySet();
+			return "There are " + this.NPCS.size() + " NPCs on this map : " + this.NPCS.keySet();
 		}
 	}
 
