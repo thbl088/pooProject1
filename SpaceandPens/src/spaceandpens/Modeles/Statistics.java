@@ -1,4 +1,4 @@
-package Stats;
+package spaceandpens.Modeles;
 
 public abstract class Statistics {
 

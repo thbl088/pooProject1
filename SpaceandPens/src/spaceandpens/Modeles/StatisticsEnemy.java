@@ -1,4 +1,4 @@
-package Stats;
+package spaceandpens.Modeles;
 
 public class StatisticsEnemy extends Statistics {
 	

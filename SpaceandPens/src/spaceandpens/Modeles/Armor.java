@@ -1,4 +1,4 @@
-package Items;
+package spaceandpens.Modeles;
 
 public class Armor extends Item {
 	private final int DEFENSE_BONUS;

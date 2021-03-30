@@ -1,5 +1,4 @@
-import Characters.*;
-import Characters.Character;
+package spaceandpens.Modeles;
 import java.util.HashMap;
 
 public class Fight {

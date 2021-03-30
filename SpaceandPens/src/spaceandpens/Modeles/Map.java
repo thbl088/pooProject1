@@ -1,9 +1,6 @@
-package Locations;
-
-import Characters.*;
+package spaceandpens.Modeles;
 import java.util.HashMap;
-import Doors.*;
-import Items.*;
+
 
 public class Map {
 

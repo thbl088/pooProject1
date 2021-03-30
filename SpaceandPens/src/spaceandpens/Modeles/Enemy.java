@@ -1,7 +1,6 @@
-package Characters;
+package spaceandpens.Modeles;
 
-import Items.*;
-import Stats.*;
+
 
 public class Enemy extends Character{
 	protected Item object;

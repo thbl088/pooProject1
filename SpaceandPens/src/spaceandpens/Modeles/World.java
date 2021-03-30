@@ -1,10 +1,4 @@
-import Items.Armor;
-import Items.Item;
-import Items.Weapon;
-import Locations.*;
-import Characters.*;
-import Doors.*;
-import Stats.StatisticsEnemy;
+package spaceandpens.Modeles;
 import java.util.HashMap;
 import java.util.Scanner;
 

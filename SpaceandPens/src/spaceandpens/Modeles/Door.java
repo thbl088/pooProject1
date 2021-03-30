@@ -1,6 +1,6 @@
-package Doors;
+package spaceandpens.Modeles;
 
-import Locations.*;
+
 
 public class Door
 {

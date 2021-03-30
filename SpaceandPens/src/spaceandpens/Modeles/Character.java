@@ -1,6 +1,6 @@
-package Characters;
+package spaceandpens.Modeles;
 
-import Stats.*;
+
 
 
 

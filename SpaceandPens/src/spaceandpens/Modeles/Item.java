@@ -1,4 +1,4 @@
-package Items;
+package spaceandpens.Modeles;
 
 public class Item {
 

@@ -1,6 +1,4 @@
-package Locations;
-
-import Items.*;
+package spaceandpens.Modeles;
 import java.util.HashMap;
 
 public class Shop extends Map {

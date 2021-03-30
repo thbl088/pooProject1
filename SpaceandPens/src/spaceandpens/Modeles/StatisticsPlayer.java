@@ -1,4 +1,4 @@
-package Stats;
+package spaceandpens.Modeles;
 
 public class StatisticsPlayer extends Statistics {
 	private final int DEFAULT_HEALTH = 20;

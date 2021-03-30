@@ -1,4 +1,4 @@
-package Items;
+package spaceandpens.Modeles;
 
 public class Weapon extends Item {
 	private final int ATTACK_BONUS;
