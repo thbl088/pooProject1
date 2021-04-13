@@ -3,33 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package spaceandpens;
+package Controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 /**
- * FXML Controller class
  *
- * @author site7
+ * @author charlie
  */
 public class FXMLDocumentController implements Initializable {
-
+    
     @FXML
-    private Button Jeu;
+    private Label label;
+    
     @FXML
-    private Button Commandes;
-    @FXML
-    private Button Crédit;
-    @FXML
-    private Button Quitter;
-
-    /**
-     * Initializes the controller class.
-     */
+    private void handleButtonAction(ActionEvent event) {
+        System.out.println("You clicked me!");
+        label.setText("Hello World!");
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package spaceandpens;
+package Controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -16,7 +17,7 @@ import javafx.scene.control.Button;
  *
  * @author site7
  */
-public class FXMLDocumentController implements Initializable {
+public class MenuPrincipal implements Initializable {
 
     @FXML
     private Button Jeu;
@@ -34,5 +35,21 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void start(ActionEvent event) {
+    }
+
+    @FXML
+    private void commandes(ActionEvent event) {
+    }
+
+    @FXML
+    private void credit(ActionEvent event) {
+    }
+
+    @FXML
+    private void quitter(ActionEvent event) {
+    }
     
 }
