@@ -16,37 +16,36 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FightController">
+<VBox fx:id="World" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FightController">
   <children>
-    <MenuBar VBox.vgrow="NEVER">
+    <MenuBar fx:id="menubar" VBox.vgrow="NEVER">
       <menus>
-        <Menu mnemonicParsing="false" text="Option">
+        <Menu fx:id="option" mnemonicParsing="false" text="Option">
           <items>
-            <MenuItem mnemonicParsing="false" text="Help" />
+            <MenuItem fx:id="help" mnemonicParsing="false" text="Help" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
+            <MenuItem fx:id="quit" mnemonicParsing="false" text="Quit" />
           </items>
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane fx:id="fightPanel" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <VBox layoutX="14.0" layoutY="19.0" prefHeight="200.0" prefWidth="100.0">
+            <VBox fx:id="playerDisplay" layoutX="14.0" layoutY="19.0" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="playerPicture" fitHeight="150.0" fitWidth="200.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../spaceandpens/images/POGCat.jpg" />
                      </image>
                   </ImageView>
-                  <VBox fx:id="vbox_hp_player" prefHeight="105.0" prefWidth="193.0" style="-fx-border-color: green;">
+                  <VBox fx:id="vboxPlayer" prefHeight="105.0" prefWidth="193.0" style="-fx-border-color: green;">
                      <children>
-                        <Label text="Player" />
-                        <Label text="100">
+                        <Label fx:id="labelNamePlayer" text="Player" />
+                        <Label fx:id="maxHPPLAYER" text="100">
                            <graphic>
                               <Label text="/">
                                  <graphic>
-                                    <Label text="50">
+                                    <Label fx:id="playerHP" text="50">
                                        <graphic>
                                           <Label text="HP :" />
                                        </graphic>
@@ -55,14 +54,14 @@
                               </Label>
                            </graphic>
                         </Label>
-                        <ProgressBar prefHeight="18.0" prefWidth="209.0" progress="1.0" style="-fx-skin: red;" />
+                        <ProgressBar fx:id="HPBarPlayer" prefHeight="18.0" prefWidth="209.0" progress="1.0" style="-fx-skin: red;" />
                         <Label />
-                        <Label text="10">
+                        <Label fx:id="attackPlayer" text="10">
                            <graphic>
                               <Label text="Attack : " />
                            </graphic>
                         </Label>
-                        <Label text="10">
+                        <Label fx:id="PlayerDefense" text="10">
                            <graphic>
                               <Label text="Defense : " />
                            </graphic>
@@ -71,26 +70,26 @@
                   </VBox>
                </children>
             </VBox>
-            <VBox layoutX="476.0" layoutY="19.0" prefHeight="255.0" prefWidth="150.0">
+            <VBox fx:id="enemuDisplay" layoutX="476.0" layoutY="19.0" prefHeight="255.0" prefWidth="150.0">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="enemyPicture" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../spaceandpens/images/POGCat.jpg" />
                      </image>
                   </ImageView>
-                  <VBox prefHeight="180.0" prefWidth="193.0" style="-fx-border-color: red;">
+                  <VBox fx:id="vboxEnemy" prefHeight="180.0" prefWidth="193.0" style="-fx-border-color: red;">
                      <children>
-                        <Label text="Enemy" />
-                        <ProgressBar prefHeight="18.0" prefWidth="209.0" progress="1.0" style="-fx-skin: red;" />
+                        <Label fx:id="labelNameEnemy" text="Enemy" />
+                        <ProgressBar fx:id="HPBarEnemy" prefHeight="18.0" prefWidth="209.0" progress="1.0" style="-fx-skin: red;" />
                      </children>
                   </VBox>
                </children>
             </VBox>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="242.0" layoutY="118.0" prefHeight="99.0" prefWidth="158.0" text="Versus" />
-            <Label alignment="TOP_LEFT" layoutX="177.0" layoutY="19.0" prefHeight="99.0" prefWidth="287.0" text="Description" />
+            <Label fx:id="labelAction" alignment="CENTER" contentDisplay="CENTER" layoutX="242.0" layoutY="118.0" prefHeight="99.0" prefWidth="158.0" text="Versus" />
+            <Label fx:id="description" alignment="TOP_LEFT" layoutX="177.0" layoutY="19.0" prefHeight="99.0" prefWidth="287.0" text="Description" />
          </children>
     </AnchorPane>
-      <GridPane alignment="CENTER" prefHeight="62.0" prefWidth="498.0">
+      <GridPane fx:id="choices" alignment="CENTER" prefHeight="62.0" prefWidth="498.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -100,17 +99,17 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" prefWidth="60.0" text="Attack" GridPane.halignment="CENTER">
+            <Button fx:id="attackButton" mnemonicParsing="false" prefWidth="60.0" text="Attack" GridPane.halignment="CENTER">
                <cursor>
                   <Cursor fx:constant="CROSSHAIR" />
                </cursor>
             </Button>
-            <Button mnemonicParsing="false" text="Defend" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+            <Button fx:id="defendButton" mnemonicParsing="false" text="Defend" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                <cursor>
                   <Cursor fx:constant="WAIT" />
                </cursor>
             </Button>
-            <Button mnemonicParsing="false" text="Inventory" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+            <Button fx:id="InventoryButton" mnemonicParsing="false" text="Inventory" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                <cursor>
                   <Cursor fx:constant="OPEN_HAND" />
                </cursor>
