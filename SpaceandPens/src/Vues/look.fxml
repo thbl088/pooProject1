@@ -17,12 +17,12 @@
             <Image url="@../spaceandpens/images/fleches/Gengadoof.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="connard" fitHeight="150.0" fitWidth="200.0" layoutX="422.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="lamastico" fitHeight="150.0" fitWidth="200.0" layoutX="422.0" layoutY="54.0" onDragDetected="#handleDragDetected" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../spaceandpens/images/fleches/Lamastico.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="773.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="zed" fitHeight="150.0" fitWidth="200.0" layoutX="773.0" layoutY="54.0" onDragDetected="#handleDragDetected" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../spaceandpens/images/fleches/zed%20avatar.gif" />
          </image>

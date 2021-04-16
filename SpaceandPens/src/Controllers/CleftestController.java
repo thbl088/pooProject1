@@ -5,31 +5,37 @@
  */
 package Controllers;
 
-import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
 
 /**
  * FXML Controller class
  *
  * @author charlie
  */
-public class LookController implements Initializable {
+public class CleftestController implements Initializable {
 
     @FXML
-    private Pane world;
- 
-    
+    private ImageView ombre;
+    @FXML
+    private ImageView magicarp;
+    @FXML
+    private ImageView cupcake;
+    @FXML
+    private Circle four;
+    @FXML
+    private Circle clan;
+    @FXML
+    private Circle pokemon;
 
     /**
      * Initializes the controller class.
@@ -40,23 +46,8 @@ public class LookController implements Initializable {
     }    
 
     @FXML
-    private void handleDragOver(DragEvent event) { 
-        if(event.getDragboard().hasImage()){   // autorise le déplacement d'une image
-        event.acceptTransferModes(TransferMode.ANY);
-    }
-    }
-
-    @FXML
-    private void handleDrop(DragEvent event) throws FileNotFoundException {
-       Node node = (Node) event.getGestureSource();                           // on récupére la source 
-                
-        world.getChildren().remove(node);                                    //on la supprime 
-        
-    }
-
-    @FXML
-    private void handleDragDetected(MouseEvent event) {          //Prendre l'image
-        ImageView img  = (ImageView) event.getSource();
+    private void glisse(MouseEvent event) {
+       ImageView img  = (ImageView) event.getSource();
        
         Dragboard db = img.startDragAndDrop(TransferMode.ANY);
         
@@ -66,8 +57,25 @@ public class LookController implements Initializable {
         db.setContent(cb);
         
         event.consume();
-        
-        
-        
     }
+
+    @FXML
+    private void depose(DragEvent event) {
+   
+
+          
+    }
+    
+        
+    
+
+    @FXML
+    private void detecte(DragEvent event) {
+       
+       //String lieu = event.get
+        if(event.getDragboard().hasImage() && event.getGestureSource().equals(magicarp)){// && lieu == "magicarp" ){   // autorise le déplacement d'une image
+        event.acceptTransferModes(TransferMode.ANY);
+        }
+        
+}
 }

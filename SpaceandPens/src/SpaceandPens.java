@@ -19,7 +19,7 @@ public class SpaceandPens extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/Vues/jeu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Vues/cleftest.fxml"));
         
         Scene scene = new Scene(root);
         
