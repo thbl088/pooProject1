@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -22,7 +23,7 @@ public class SpaceandPens extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/Vues/menu.fxml"));
         
         Scene scene = new Scene(root);
-        
+        stage.getIcons().add(new Image("spaceandpens/images/spaceandpens.png"));
         stage.setScene(scene);
         stage.show();
     }
