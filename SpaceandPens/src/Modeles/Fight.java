@@ -1,4 +1,5 @@
 package Modeles;
+
 import java.util.HashMap;
 
 public class Fight {

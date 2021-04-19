@@ -1,4 +1,6 @@
 package Modeles;
+
+import Modeles.*;
 import java.util.HashMap;
 
 public class Shop extends Map {

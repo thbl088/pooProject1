@@ -1,7 +1,6 @@
 package Modeles;
 
 
-
 public class Npc extends Enemy {
     String dialog;
 

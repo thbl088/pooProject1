@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import Modeles.World;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,6 +43,23 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        World jeu = new World();
+    }
+
+    @FXML
+    public void launchGame(ActionEvent event) throws IOException {
+        Stage stage = (Stage) this.Jeu.getScene().getWindow();
+        stage.close();
+
+        Parent root = FXMLLoader.load(getClass().getResource("/Vues/jeu.fxml"));
+
+        Scene scene = new Scene(root);
+        Stage newStage = new Stage();
+        newStage.sizeToScene();
+        newStage.setMinHeight(635);
+        newStage.setMinWidth(1035);
+        newStage.setScene(scene);
+        newStage.show();
     }
 
     @FXML

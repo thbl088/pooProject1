@@ -1,4 +1,5 @@
 package Modeles;
+
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -11,7 +12,6 @@ public class World {
 		return this.player.getMapHero().getDescription();
 	}
 
-	
 
 	public World() {
 		this.MAPS = new HashMap<>();
@@ -446,10 +446,11 @@ public class World {
 			initDoorMap(tabName);		// Chaque map coté ses porte
 	}
 
+
 	public void initPlayer(String[] namemap , Scanner keyboard){
-		System.out.print("Enter your name : ");
-		String name = keyboard.nextLine();
-		Player hero = new Player(name);
+		// System.out.print("Enter your name : ");
+		// String name = keyboard.nextLine();
+		Player hero = new Player("Player");
 		this.player = hero;
 		System.out.println("Welcome "+ hero.getName() +".");
 		System.out.println("Your ship has crashed, you need a jack and a new motor to leave this planet.");
@@ -474,6 +475,7 @@ public class World {
 			return 0;
 		}
 	}
+
 
 	public static void main(String[] args){
 		int finish = 0 ;
@@ -500,4 +502,6 @@ public class World {
 			
 		}
 	}
+
+
 }

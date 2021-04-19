@@ -1,6 +1,7 @@
 package Modeles;
 
 
+
 public class LockedDoor extends Door {
 
 	private boolean isLocked;

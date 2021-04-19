@@ -7,7 +7,13 @@ package Controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -16,12 +22,18 @@ import javafx.fxml.Initializable;
  */
 public class JeuController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+
+    @FXML
+    private TextArea MapDescription;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+
+    }
+
+    @FXML
+    public void actionQuit(ActionEvent event) {
+        System.exit(0);
+    }
     
 }

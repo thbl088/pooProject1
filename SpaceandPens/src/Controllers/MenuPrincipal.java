@@ -5,12 +5,17 @@
  */
 package Controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -18,6 +23,7 @@ import javafx.scene.control.Button;
  * @author site7
  */
 public class MenuPrincipal implements Initializable {
+
 
     @FXML
     private Button Jeu;
@@ -27,6 +33,8 @@ public class MenuPrincipal implements Initializable {
     private Button Crédit;
     @FXML
     private Button Quitter;
+    @FXML
+    private Button Shop;
 
     /**
      * Initializes the controller class.
@@ -34,22 +42,35 @@ public class MenuPrincipal implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-
-    @FXML
-    private void start(ActionEvent event) {
     }
 
     @FXML
-    private void commandes(ActionEvent event) {
+    public void launchGame(ActionEvent event) throws IOException {
+        Stage stage = (Stage) this.Jeu.getScene().getWindow();
+        stage.close();
+
+        Parent root = FXMLLoader.load(getClass().getResource("/Vues/jeu.fxml"));
+
+        Scene scene = new Scene(root);
+        Stage newStage = new Stage();
+        newStage.sizeToScene();
+        newStage.setMinHeight(635);
+        newStage.setMinWidth(1035);
+        newStage.setScene(scene);
+        newStage.show();
     }
 
     @FXML
-    private void credit(ActionEvent event) {
+    public void openShop(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/Vues/Shop.fxml"));
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setMinHeight(545);
+        stage.setMinWidth(900);
+        stage.setScene(scene);
+        stage.show();
     }
 
-    @FXML
-    private void quitter(ActionEvent event) {
-    }
-    
+
 }
