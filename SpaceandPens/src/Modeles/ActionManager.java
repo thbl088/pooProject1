@@ -1,16 +1,17 @@
 package Modeles;
 
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class ActionManager {
 	public final Scanner SCANNER;
 	private boolean isFighting;
-	private final World CURRENT_GAME;
+	private final WorldIHM CURRENT_GAME;
 	private Fight fight;
 
-	public ActionManager(World monde)
+	public ActionManager(WorldIHM monde)
 	{
 		this.SCANNER = new Scanner(System.in);
 		this.CURRENT_GAME = monde;
@@ -171,7 +172,7 @@ public class ActionManager {
 	}
 
 
-	public void actionGo(String direction) { //déplace le joueur sur le monde
+	public Object[] actionGo(String direction) { //déplace le joueur sur le monde
 		Map currentLoc = this.CURRENT_GAME.player.getMapHero();
 		Player currentPlayer = this.CURRENT_GAME.player;
 
@@ -182,36 +183,65 @@ public class ActionManager {
 				 (currentLoc.getName().equals("End Portal") &&  currentPlayer.hasItem("car_wheel") && currentPlayer.hasItem("little_wheel") && currentPlayer.hasItem("tank_track")))
 				 {
 					currentPlayer.move(currentLoc.getNorth().getDestination());
-					System.out.println("You Enter : " + currentPlayer.getMapHero().getName() + "\n" + currentPlayer.getMapHero().getDescription());
+					return new Object[]{true, "You Enter : " + currentPlayer.getMapHero().getName()};
+				 }
+				else if (!currentLoc.isNorth())
+				{
+					return new Object[]{false, "Impossible to go north"};
 				}
-				else if (!currentLoc.isNorth()) { System.out.println("Impossible to go north"); }
-				else if (((LockedDoor) currentLoc.getNorth()).isLocked()) { System.out.println("North door is locked"); }
+				else if (((LockedDoor) currentLoc.getNorth()).isLocked())
+				{
+					return new Object[]{false, "North door is locked"};
+				}
 				break;
 			case "south", "s" :
 				if (currentLoc.isSouth() && (!(currentLoc.getSouth() instanceof LockedDoor) || !((LockedDoor) currentLoc.getSouth()).isLocked()) ||
-				 ( currentLoc.getName().equals("Crash Site") &&  currentPlayer.hasItem("jack") )) {
+				 ( currentLoc.getName().equals("Crash Site") &&  currentPlayer.hasItem("jack") ))
+				{
 					currentPlayer.move(currentLoc.getSouth().getDestination());
-					System.out.println("You Enter : " + currentPlayer.getMapHero().getName() + "\n" + currentPlayer.getMapHero().getDescription());
+					return new Object[]{true, "You Enter : " + currentPlayer.getMapHero().getName()};
 				}
-				else if (!currentLoc.isSouth()) { System.out.println("Impossible to go south"); }
-				else if (((LockedDoor) currentLoc.getSouth()).isLocked()) { System.out.println("South door is locked"); }
+				else if (!currentLoc.isSouth())
+				{
+					return new Object[]{false, "Impossible to go south"};
+				}
+				else if (((LockedDoor) currentLoc.getSouth()).isLocked())
+				{
+					return new Object[]{false, "South door is locked"};
+				}
 				break;
 			case "east", "e" :
-				if (currentLoc.isEast() && (!(currentLoc.getEast() instanceof LockedDoor) || !((LockedDoor) currentLoc.getEast()).isLocked())) {
+				if (currentLoc.isEast() && (!(currentLoc.getEast() instanceof LockedDoor) || !((LockedDoor) currentLoc.getEast()).isLocked()))
+				{
 					currentPlayer.move(currentLoc.getEast().getDestination());
-					System.out.println("You Enter : " + currentPlayer.getMapHero().getName() + "\n" + currentPlayer.getMapHero().getDescription());
+					return new Object[]{true, "You Enter : " + currentPlayer.getMapHero().getName()};
 				}
-				else if (!currentLoc.isEast()) { System.out.println("Impossible to go east"); }
-				else if (((LockedDoor) currentLoc.getEast()).isLocked()) { System.out.println("East door is locked"); }
+				else if (!currentLoc.isEast())
+				{
+					return new Object[]{false, "Impossible to go east"};
+				}
+				else if (((LockedDoor) currentLoc.getEast()).isLocked())
+				{
+					return new Object[]{false, "East door is locked"};
+				}
 				break;
 			case "west","w" :
-				if (currentLoc.isWest() && (!(currentLoc.getWest() instanceof LockedDoor) || !((LockedDoor) currentLoc.getWest()).isLocked())) {
+				if (currentLoc.isWest() && (!(currentLoc.getWest() instanceof LockedDoor) || !((LockedDoor) currentLoc.getWest()).isLocked()))
+				{
 					currentPlayer.move(currentLoc.getWest().getDestination());
-					System.out.println("You Enter : " + currentPlayer.getMapHero().getName() + "\n" + currentPlayer.getMapHero().getDescription());
+					return new Object[]{true, "You Enter : " + currentPlayer.getMapHero().getName()};
 				}
-				else if (!currentLoc.isWest()) { System.out.println("Impossible to go west"); }
-				else if (((LockedDoor) currentLoc.getWest()).isLocked()) { System.out.println("West door is locked"); }
+				else if (!currentLoc.isWest())
+				{
+					return new Object[]{false, "Impossible to go west"};
+				}
+				else if (((LockedDoor) currentLoc.getWest()).isLocked())
+				{
+					return new Object[]{false, "West door is locked"};
+				}
 				break;
+
+				/*
 			case "shop" : //entre magasin
 				if (currentLoc.isShop()) {
 					currentPlayer.move(currentLoc.getShop().getDestination());
@@ -226,10 +256,12 @@ public class ActionManager {
 				}
 				else { System.out.println("You cannot exit current location"); }
 				break;
+
+				 */
 			default :
-				System.out.println("You can't go there.");
-				break;
+				return new Object[]{false, "You can't go there"};
 		}
+		return new Object[]{false, "You can't go there"};
 	}
 
 	public void actionHelp() { //affiche les commandes dispo
@@ -265,7 +297,7 @@ public class ActionManager {
 
 
 	public void actionLook(String item) { //permet de partager l'intel du personnage avec le joueur
-		World currentGame = this.CURRENT_GAME;
+		WorldIHM currentGame = this.CURRENT_GAME;
 
 		switch (item.toLowerCase()) {
 			case "here", "around" : System.out.println(currentGame.getMapDescription()); //affiche description de la map sur laquelle le joueur est présent
@@ -320,7 +352,7 @@ public class ActionManager {
 	}
 
 	public void actionTake(String item) { //récupere un objet sur le sol
-		World currentGame = this.CURRENT_GAME;
+		WorldIHM currentGame = this.CURRENT_GAME;
 
 		Item takeItem = currentGame.player.getMapHero().getItem(item);
 		if(takeItem != null){
@@ -356,7 +388,7 @@ public class ActionManager {
 
 
 	public void actionUse(String item) { //utilise une potion ou équipe un item
-		World currentGame = this.CURRENT_GAME;
+		WorldIHM currentGame = this.CURRENT_GAME;
 
 		final String UNUSABLE = "You can't use that right now";
 		switch (item) {
@@ -399,7 +431,7 @@ public class ActionManager {
 	}
 
 	public void actionRemove(String item) { //déséquipe un item
-		World currentGame = this.CURRENT_GAME;
+		WorldIHM currentGame = this.CURRENT_GAME;
 
 		if (currentGame.player.hasItem(item) ) {
 
@@ -414,7 +446,7 @@ public class ActionManager {
 
 
 	public void actionEquip(String name_item){ //équipe un item et déséquipe le précédant et vérifie si c'est un item
-		World currentGame = this.CURRENT_GAME;
+		WorldIHM currentGame = this.CURRENT_GAME;
 
 		Item item = currentGame.player.getItem(name_item);
 
@@ -437,7 +469,7 @@ public class ActionManager {
 	}
 
 	public void startFight() { // lance et gère le dérouler du combat
-		World currentGame = this.CURRENT_GAME;
+		WorldIHM currentGame = this.CURRENT_GAME;
 		isFighting = true;
 		this.fight = new Fight(currentGame.player);
 		int turnCounter = 0;

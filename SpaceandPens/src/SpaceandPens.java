@@ -5,6 +5,7 @@
  */
 
 
+import Modeles.WorldIHM;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
@@ -18,7 +19,8 @@ import javafx.stage.Stage;
  * @author charlie
  */
 public class SpaceandPens extends Application {
-    
+
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/Vues/menu.fxml"));
@@ -27,6 +29,8 @@ public class SpaceandPens extends Application {
         stage.getIcons().add(new Image("spaceandpens/images/spaceandpens.png"));
         stage.setScene(scene);
         stage.show();
+
+
     }
 
     /**
