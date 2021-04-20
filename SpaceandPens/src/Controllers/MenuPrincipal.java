@@ -10,7 +10,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import Modeles.WorldIHM;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,6 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * FXML Controller class
@@ -39,8 +42,6 @@ public class MenuPrincipal implements Initializable {
     private Button Crédit;
     @FXML
     private Button Quitter;
-    @FXML
-    private Button Shop;
 
     /**
      * Initializes the controller class.
@@ -62,7 +63,7 @@ public class MenuPrincipal implements Initializable {
 
         Scene scene = new Scene(root);
         Stage newStage = new Stage();
-        newStage.getIcons().add(new Image("spaceandpens/images/spaceandpens.png"));
+        newStage.setOnCloseRequest(windowEvent ->  Platform.exit() ); //ferme toutes les fenêtres fils du programme lorsque l'utilisateur ferme la fenêtre principale
         newStage.sizeToScene();
         newStage.setMinHeight(635);
         newStage.setMinWidth(1035);
@@ -70,18 +71,4 @@ public class MenuPrincipal implements Initializable {
         newStage.show();
 
     }
-
-    @FXML
-    public void openShop(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Vues/Shop.fxml"));
-
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setMinHeight(545);
-        stage.setMinWidth(900);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-
 }

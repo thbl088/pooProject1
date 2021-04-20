@@ -36,6 +36,8 @@ public class Shop extends Map {
 		return this.ITEMS.get(item);
 	}
 
+	public HashMap<String, Item> getItems() { return this.ITEMS; }
+
 	public Map getExitShop() {
 		return this.exitShop;
 	}

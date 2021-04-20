@@ -1,5 +1,7 @@
 package Modeles;
 
+import javafx.beans.property.SimpleStringProperty;
+
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -7,6 +9,7 @@ public class WorldIHM {
 
     private final HashMap<String, Map> MAPS;
     public Player player;
+
 
     public String getMapDescription() {
         return this.player.getMapHero().getDescription();

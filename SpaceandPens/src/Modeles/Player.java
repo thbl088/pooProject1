@@ -119,6 +119,10 @@ public class Player extends Character {
 		else { System.out.println("Inventory is empty."); }
 	}
 
+	public HashMap<String, Item> getInventory() {
+		return this.INVENTORY;
+	}
+
 	public void removeEquipment(Item item){
 		if ( item instanceof Weapon && item != DEFAULT_WEAPON)
 		{

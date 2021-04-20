@@ -11,19 +11,27 @@ import java.util.ResourceBundle;
 
 
 import Modeles.ActionManager;
+import Modeles.Shop;
 import Modeles.WorldIHM;
+import javafx.application.Platform;
+import javafx.beans.property.*;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 /**
  * FXML Controller class
@@ -36,6 +44,7 @@ public class JeuController implements Initializable {
     private WorldIHM world;
     private ActionManager manager;
 
+
     @FXML
     private ImageView north;
     @FXML
@@ -44,6 +53,8 @@ public class JeuController implements Initializable {
     private ImageView south;
     @FXML
     private ImageView west;
+    @FXML
+    private Button Shop;
 
     @FXML
     private TextArea mapDescription;
@@ -87,29 +98,61 @@ public class JeuController implements Initializable {
     public void moveNorth(MouseEvent event) {
 
         Object[] response = this.manager.actionGo("north");
-        this.setMapDescription();
+        if((boolean) response[0])
+            this.setMapDescription();
         this.setGameDescription((String) response[1]);
+        this.checkIfShop();
     }
 
     @FXML
     public void moveEast(MouseEvent event) {
         Object[] response = this.manager.actionGo("east");
-        this.setMapDescription();
+        if((boolean) response[0])
+            this.setMapDescription();
         this.setGameDescription((String) response[1]);
+        this.checkIfShop();
     }
 
     @FXML
     public void moveSouth(MouseEvent event) {
         Object[] response = this.manager.actionGo("south");
-        this.setMapDescription();
+        if((boolean) response[0])
+            this.setMapDescription();
         this.setGameDescription((String) response[1]);
+        this.checkIfShop();
     }
 
     @FXML
     public void moveWest(MouseEvent event) {
         Object[] response = this.manager.actionGo("west");
-        this.setMapDescription();
+        if((boolean) response[0])
+            this.setMapDescription();
         this.setGameDescription((String) response[1]);
+        this.checkIfShop();
+    }
+
+    @FXML
+    public void openShop(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vues/Shop.fxml"));
+        Parent root = loader.load();
+
+        ShopController shopController = loader.getController();
+        shopController.setPlayerAndShop(this.world.getPlayer(), (Modeles.Shop) this.world.getPlayer().getMapHero().getShop().getDestination());
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setMinHeight(545);
+        stage.setMinWidth(900);
+        stage.setScene(scene);
+        stage.showAndWait();
+    }
+
+    public void checkIfShop() {
+        if (this.world.getPlayer().getMapHero().isShop())
+            this.Shop.setDisable(false);
+        else
+            this.Shop.setDisable(true);
     }
     
 }

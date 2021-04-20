@@ -1,37 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="505.0" minWidth="500.0" prefHeight="505.0" prefWidth="878.0" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="505.0" minWidth="500.0" prefHeight="505.0" prefWidth="878.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ShopController">
    <children>
-      <TabPane prefHeight="308.0" prefWidth="526.0" stylesheets="@../spaceandpens/images/tab.css" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="341.0" prefWidth="526.0" stylesheets="@../spaceandpens/images/tab.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Achat">
+          <Tab fx:id="buyTab" text="BUY">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="280.0">
                      <children>
-                        <ListView layoutX="97.0" layoutY="14.0" prefHeight="219.0" prefWidth="333.0" />
-                        <Button layoutX="238.0" layoutY="240.0" mnemonicParsing="false" text="Achat" />
+                        <ListView fx:id="shopInventory" layoutX="97.0" layoutY="14.0" onMouseClicked="#selectBuy" prefHeight="219.0" prefWidth="333.0" />
+                        <Button fx:id="buy" layoutX="330.0" layoutY="244.0" mnemonicParsing="false" onAction="#buyItem" prefHeight="50.0" prefWidth="100.0" text="BUY">
+                           <font>
+                              <Font size="25.0" />
+                           </font></Button>
+                        <TextField fx:id="priceBuy" layoutX="97.0" layoutY="259.0" />
+                        <Label layoutX="97.0" layoutY="234.0" text="Price :">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Vente">
+          <Tab fx:id="sellTab" text="SELL">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ListView layoutX="97.0" layoutY="14.0" prefHeight="219.0" prefWidth="333.0" />
-                        <Button layoutX="238.0" layoutY="240.0" mnemonicParsing="false" text="Vente" />
+                        <TextField fx:id="priceSell" layoutX="97.0" layoutY="259.0" />
+                        <ListView fx:id="playerInventory" layoutX="97.0" layoutY="14.0" onMouseClicked="#selectSell" prefHeight="219.0" prefWidth="333.0" />
+                        <Button fx:id="sell" layoutX="330.0" layoutY="244.0" mnemonicParsing="false" onAction="#sellItem" prefHeight="50.0" prefWidth="100.0" text="SELL">
+                           <font>
+                              <Font size="25.0" />
+                           </font></Button>
+                        <Label layoutX="97.0" layoutY="234.0" text="Price :">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
             </content>
@@ -43,9 +54,10 @@
             <Image url="@../spaceandpens/images/morshu.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="659.0" layoutY="302.0" text="Argent :" />
-      <TextField layoutX="713.0" layoutY="298.0" />
-      <TextArea layoutX="133.0" layoutY="380.0" prefHeight="98.0" prefWidth="260.0" />
+      <Label layoutX="628.0" layoutY="302.0" text="Player Money :" />
+      <TextField fx:id="playerCash" editable="false" layoutX="713.0" layoutY="298.0" />
+      <TextArea fx:id="itemDescription" editable="false" layoutX="133.0" layoutY="380.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="98.0" prefWidth="260.0" wrapText="true" />
       <Label layoutX="230.0" layoutY="357.0" text="Description :" />
+      <Button fx:id="exit" layoutX="784.0" layoutY="443.0" mnemonicParsing="false" onAction="#exitShop" prefHeight="35.0" prefWidth="78.0" text="EXIT SHOP" />
    </children>
 </Pane>
