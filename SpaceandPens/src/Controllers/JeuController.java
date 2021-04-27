@@ -26,6 +26,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -55,6 +56,8 @@ public class JeuController implements Initializable {
     private ImageView west;
     @FXML
     private Button Shop;
+    @FXML
+    private Button Stats;
 
     @FXML
     private TextArea mapDescription;
@@ -131,6 +134,24 @@ public class JeuController implements Initializable {
         this.checkIfShop();
     }
 
+
+    @FXML
+    public void openStats(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vues/Stats.fxml"));
+        Parent root = loader.load();
+
+        StatsController stats = loader.getController();
+        stats.setPlayer(this.world.getPlayer());
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.getIcons().add(new Image("spaceandpens/images/spaceandpens.png"));
+        stage.setTitle("Statistics and Inventory");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     @FXML
     public void openShop(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vues/Shop.fxml"));
@@ -141,9 +162,11 @@ public class JeuController implements Initializable {
 
         Scene scene = new Scene(root);
         Stage stage = new Stage();
+        stage.getIcons().add(new Image("spaceandpens/images/spaceandpens.png"));
+        stage.setTitle("Shop");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setMinHeight(545);
-        stage.setMinWidth(900);
+        stage.setMinWidth(800);
         stage.setScene(scene);
         stage.showAndWait();
     }

@@ -5,7 +5,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="611.0" prefWidth="1018.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.JeuController">
+<VBox prefHeight="611.0" prefWidth="1018.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.JeuController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -62,7 +62,7 @@
                         <Button mnemonicParsing="false" text="Button" />
                         <Button mnemonicParsing="false" text="Button" />
                         <Button mnemonicParsing="false" text="Button" />
-                        <Button mnemonicParsing="false" text="Button" />
+                        <Button fx:id="Stats" mnemonicParsing="false" onAction="#openStats" text="Stats/inventory" />
                         <Button fx:id="Shop" disable="true" mnemonicParsing="false" onAction="#openShop" text="Shop" />
                      </children>
                   </HBox>

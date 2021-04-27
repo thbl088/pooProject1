@@ -209,6 +209,14 @@ public class Player extends Character {
 		}	
 	}
 
+	public Armor getArmor() {
+		return this.armor;
+	}
+
+	public Weapon getWeapon() {
+		return this.weapon;
+	}
+
 
 	public void showEquipement() { System.out.println("You are equipped with the current weapon : " + this.weapon.getName() + " and the current armor : " + this.armor.getName()); }
 
@@ -276,6 +284,22 @@ public class Player extends Character {
 			}
                         default : System.out.println("We don't have that kind of potion here.");
 		}
+	}
+
+	public int getHealthPotion(){
+		return this.healthPotion;
+	}
+
+	public int getAttackPotion(){
+		return this.attackPotion;
+	}
+
+	public int getDefensePotion(){
+		return this.defensePotion;
+	}
+
+	public int getCritPotion(){
+		return this.critPotion;
 	}
 
 	@Override

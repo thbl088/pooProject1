@@ -125,14 +125,27 @@ public class ShopController implements Initializable {
             String name = this.playerInventory.getSelectionModel().getSelectedItem().replace(' ', '_');
             int itemRank = this.playerInventory.getSelectionModel().getSelectedIndex();
             Item item = this.player.getInventory().get(name);
-            this.player.removeInventory(item);
-            this.player.getStatistics().addMoney(item.getPrice());
 
-            this.shop.addItem(item);
-            this.playerInventory.getItems().remove(itemRank);
+            if (item != this.player.getArmor() && item != this.player.getWeapon()) {
+                this.player.removeInventory(item);
+                this.player.getStatistics().addMoney(item.getPrice());
 
-            this.setPlayerCash();
-            this.shopInventory.getItems().add(name.replace('_', ' '));
+                this.shop.addItem(item);
+                this.playerInventory.getItems().remove(itemRank);
+
+                this.setPlayerCash();
+                this.shopInventory.getItems().add(name.replace('_', ' '));
+            }
+            else
+            {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText(null);
+                alert.setGraphic(null);
+                alert.setTitle("Information");
+                alert.setContentText("You can't sell an equiped item");
+
+                alert.showAndWait();
+            }
         }
     }
 
@@ -145,4 +158,79 @@ public class ShopController implements Initializable {
         Stage stage = (Stage) exit.getScene().getWindow();
         stage.close();
     }
+
+    @FXML
+    public void buyHealth(ActionEvent e) {
+        if(this.player.getStatistics().getMoney() >= this.shop.getPotionCost())
+        {
+            this.player.addHealthPotion();
+            this.player.getStatistics().removeMoney(this.shop.getPotionCost());
+            this.setPlayerCash();
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setGraphic(null);
+            alert.setTitle("MESSAGE DU BANQUIER");
+            alert.setContentText("You don't have enough money to buy this item !");
+
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    public void buyAttack(ActionEvent e) {
+        if(this.player.getStatistics().getMoney() >= this.shop.getPotionCost())
+        {
+            this.player.addAttackPotion();
+            this.player.getStatistics().removeMoney(this.shop.getPotionCost());
+            this.setPlayerCash();
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setGraphic(null);
+            alert.setTitle("MESSAGE DU BANQUIER");
+            alert.setContentText("You don't have enough money to buy this item !");
+
+            alert.showAndWait();
+        }
+    }
+    @FXML
+    public void buyDefense(ActionEvent e) {
+        if(this.player.getStatistics().getMoney() >= this.shop.getPotionCost())
+        {
+            this.player.addDefensePotion();
+            this.player.getStatistics().removeMoney(this.shop.getPotionCost());
+            this.setPlayerCash();
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setGraphic(null);
+            alert.setTitle("MESSAGE DU BANQUIER");
+            alert.setContentText("You don't have enough money to buy this item !");
+
+            alert.showAndWait();
+        }
+    }
+    @FXML
+    public void buyCritical(ActionEvent e) {
+        if(this.player.getStatistics().getMoney() >= this.shop.getPotionCost())
+        {
+            this.player.addCritPotion();
+            this.player.getStatistics().removeMoney(this.shop.getPotionCost());
+            this.setPlayerCash();
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setGraphic(null);
+            alert.setTitle("MESSAGE DU BANQUIER");
+            alert.setContentText("You don't have enough money to buy this item !");
+
+            alert.showAndWait();
+        }
+    }
+
 }

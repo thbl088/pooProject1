@@ -63,6 +63,8 @@ public class MenuPrincipal implements Initializable {
 
         Scene scene = new Scene(root);
         Stage newStage = new Stage();
+        newStage.getIcons().add(new Image("spaceandpens/images/spaceandpens.png"));
+        newStage.setTitle("Space And Pens");
         newStage.setOnCloseRequest(windowEvent ->  Platform.exit() ); //ferme toutes les fenêtres fils du programme lorsque l'utilisateur ferme la fenêtre principale
         newStage.sizeToScene();
         newStage.setMinHeight(635);
