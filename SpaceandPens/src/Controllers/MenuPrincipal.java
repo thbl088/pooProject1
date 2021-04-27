@@ -55,10 +55,10 @@ public class MenuPrincipal implements Initializable {
     public void launchGame(ActionEvent event) throws IOException {
         Stage stage = (Stage) this.Jeu.getScene().getWindow();
         stage.close();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vues/jeu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vues/game.fxml"));
 
         Parent root = loader.load();
-        JeuController jeuController = loader.getController();
+        GameController jeuController = loader.getController();
         jeuController.setPlayerName(this.playerName.getText());
 
         Scene scene = new Scene(root);

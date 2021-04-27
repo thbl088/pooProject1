@@ -2,6 +2,7 @@ package Modeles;
 
 import Modeles.*;
 import java.util.HashMap;
+import java.util.Set;
 
 
 public class Map {
@@ -99,40 +100,20 @@ public class Map {
 		return this.NPCS.get(Npc);
 	}
 
-	public String getEnemiesList() {
-		if (this.ENEMIES.isEmpty()) {
-			return "there are no enemies here";
-		}
-		else if (this.ENEMIES.size() == 1){
-			return "There is " + this.ENEMIES.size() + " enemy on this map : " + this.ENEMIES.keySet();
-		}
-		else {
-			return "There are " + this.ENEMIES.size() + " enemies on this map : " + this.ENEMIES.keySet();
-		}
+	public Set<String> getEnemiesList() {
+
+		 return this.ENEMIES.keySet();
+
 	}
 
-	public String getGroundItemsList() {
-		if (this.GROUND_ITEMS.isEmpty()) {
-			return "there are no items here";
-		}
-		else if (this.GROUND_ITEMS.size() == 1){
-			return "There is " + this.GROUND_ITEMS.size() + " item on this map : " + this.GROUND_ITEMS.keySet();
-		}
-		else {
-			return "There are " + this.GROUND_ITEMS.size() + " items on this map : " + this.GROUND_ITEMS.keySet();
-		}
+	public Set<String> getGroundItemsList() {
+
+		return this.GROUND_ITEMS.keySet();	
 	}
 
-	public String getNpcsList() {
-		if (this.NPCS.isEmpty()) {
-			return "there are no NPCs here";
-		}
-		else if (this.NPCS.size() == 1){
-			return "There is " + this.NPCS.size() + " NPC on this map : " + this.NPCS.keySet();
-		}
-		else {
-			return "There are " + this.NPCS.size() + " NPCs on this map : " + this.NPCS.keySet();
-		}
+	public Set<String> getNpcsList() {
+            
+                return this.NPCS.keySet();
 	}
 
 	public String toString() {

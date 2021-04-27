@@ -8,9 +8,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="1069.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CleftestController">
    <children>
-      <Pane layoutX="-2.0" layoutY="410.0" prefHeight="179.0" prefWidth="1069.0">
+      <Pane fx:id="sac" layoutX="-2.0" layoutY="410.0" prefHeight="179.0" prefWidth="1069.0">
          <children>
-            <ImageView fx:id="ombre" fitHeight="150.0" fitWidth="200.0" layoutX="99.0" layoutY="15.0" onDragDetected="#glisse" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ombre" fitHeight="150.0" fitWidth="200.0" layoutX="22.0" onDragDetected="#glisse" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../spaceandpens/clef/clan%20du%20chaos.png" />
                </image>
@@ -27,8 +27,20 @@
             </ImageView>
          </children>
       </Pane>
-      <Circle fx:id="four" fill="DODGERBLUE" layoutX="197.0" layoutY="254.0" onDragDropped="#depose" onDragOver="#detecte" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="clan" fill="DODGERBLUE" layoutX="533.0" layoutY="114.0" onDragDropped="#depose" onDragOver="#detecte" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="pokemon" fill="DODGERBLUE" layoutX="905.0" layoutY="261.0" onDragDropped="#depose" onDragOver="#detecte" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+      <Pane fx:id="clan" layoutX="435.0" layoutY="34.0" onDragDropped="#depose" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Circle fx:id="circleCLan" fill="DODGERBLUE" layoutX="100.0" layoutY="100.0" onDragDropped="#depose" onDragOver="#detecte" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+         </children>
+      </Pane>
+      <Pane fx:id="four" layoutX="97.0" layoutY="154.0" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Circle fx:id="circlefour" fill="DODGERBLUE" layoutX="100.0" layoutY="100.0" onDragDropped="#depose" onDragOver="#detecte" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+         </children>
+      </Pane>
+      <Pane fx:id="pokemon" layoutX="805.0" layoutY="161.0" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Circle fx:id="circlepokemon" fill="DODGERBLUE" layoutX="100.0" layoutY="100.0" onDragDropped="#depose" onDragOver="#detecte" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

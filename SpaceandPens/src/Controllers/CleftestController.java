@@ -9,12 +9,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 
 /**
@@ -31,11 +33,19 @@ public class CleftestController implements Initializable {
     @FXML
     private ImageView cupcake;
     @FXML
-    private Circle four;
+    private Pane four;
     @FXML
-    private Circle clan;
+    private Pane clan;
     @FXML
-    private Circle pokemon;
+    private Pane pokemon;
+    @FXML
+    private Pane sac;
+    @FXML
+    private Circle circleCLan;
+    @FXML
+    private Circle circlefour;
+    @FXML
+    private Circle circlepokemon;
 
     /**
      * Initializes the controller class.
@@ -60,9 +70,28 @@ public class CleftestController implements Initializable {
     }
 
     @FXML
-    private void depose(DragEvent event) {
-   
-
+    private void depose(DragEvent event)
+    {           
+               Node node = (Node) event.getGestureSource();                           // on récupére la source 
+               
+               if( node.equals(magicarp))
+               {
+                   pokemon.getChildren().add(1, node);
+                   node.setLayoutX(circlepokemon.getCenterX());
+                   node.setLayoutY(circlepokemon.getCenterY());
+               }
+               if( node.equals(ombre))
+               {
+                   clan.getChildren().add(1,node);
+                   node.setLayoutX(circleCLan.getCenterX());
+                   node.setLayoutY(circleCLan.getCenterY());
+               }
+               if( node.equals(cupcake))
+               {
+                   four.getChildren().add(1,node);
+                   node.setLayoutX(circlefour.getCenterX());
+                   node.setLayoutY(circlefour.getCenterY());
+               }
           
     }
     
@@ -73,9 +102,11 @@ public class CleftestController implements Initializable {
     private void detecte(DragEvent event) {
        
        //String lieu = event.get
-        if(event.getDragboard().hasImage() && event.getGestureSource().equals(magicarp)){// && lieu == "magicarp" ){   // autorise le déplacement d'une image
-        event.acceptTransferModes(TransferMode.ANY);
+        if(event.getDragboard().hasImage() && (event.getGestureSource().equals(magicarp) && event.getTarget().equals(circlepokemon))
+                || (event.getGestureSource().equals(cupcake) && event.getTarget().equals(circlefour))
+                || (event.getGestureSource().equals(ombre) && event.getTarget().equals(circleCLan)))  // autorise le déplacement d'une image
+        {
+            event.acceptTransferModes(TransferMode.ANY);
         }
-        
-}
+    }
 }
