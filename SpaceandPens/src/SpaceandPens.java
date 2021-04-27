@@ -18,6 +18,9 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.stage.WindowEvent;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 /**
  *
@@ -28,24 +31,14 @@ public class SpaceandPens extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/Vues/menu.fxml"));
-        
         Scene scene = new Scene(root);
-        installIcons(new Image("spaceandpens/images/spaceandpens.png"));
+        stage.getIcons().add(new Image("spaceandpens/images/spaceandpens.png"));
+        stage.setTitle("Space And Pens");   
         stage.setScene(scene);
         stage.show();
     }
 
-    public static void installIcons(Image img) {
-        Window.getWindows().addListener((ListChangeListener<Window>) collection -> {
-            while (collection.next()) {
-                for (Window window : collection.getAddedSubList()) {
-                    if (window instanceof Stage) {
-                        ((Stage) window).getIcons().setAll(img);
-                    }
-                }
-            }
-        });
-    }
+    
 
     /**
      * @param args the command line arguments

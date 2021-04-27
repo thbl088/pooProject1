@@ -54,7 +54,7 @@ public class ActionManager {
 						System.out.println("What do you want to look at ?");
 					}
 					break;
-				case "use", "drink", "equip" :
+				case "use" :
 					if (parsedCommands.length > 1) {
 						actionUse(parsedCommands[1].toLowerCase());
 					}
@@ -88,7 +88,7 @@ public class ActionManager {
 						System.out.println("Where do you want to go ?");
 					}
 					break;
-				case "talk", "speak" :
+				case "talk" :
 					if (parsedCommands.length > 1) {
 						actionTalk(parsedCommands[1].toLowerCase());
 					}
@@ -122,7 +122,7 @@ public class ActionManager {
 						System.out.println("What do you want to take ?");
 					}
 					break;
-				case "use", "drink", "equip" :
+				case "use" :
 					if (parsedCommands.length > 1) {
 						actionUse(parsedCommands[1].toLowerCase());
 					}
@@ -147,9 +147,9 @@ public class ActionManager {
 				case "buy" :
 					if (parsedCommands.length > 2) {
 						switch (parsedCommands[1].toLowerCase()){
-							case "item" -> actionBuyItem(parsedCommands[2].toLowerCase());
-							case "potion" -> actionBuyPotion(parsedCommands[2].toLowerCase());
-							default -> System.out.println("Do you want to buy a potion or an item?");
+							case "item" : actionBuyItem(parsedCommands[2].toLowerCase());
+							case "potion" : actionBuyPotion(parsedCommands[2].toLowerCase());
+                                                        default : System.out.println("Do you want to buy a potion or an item?");
 						}
 					}
 					else {
@@ -178,7 +178,7 @@ public class ActionManager {
 
 
 		switch (direction.toLowerCase()) {
-			case "north", "n" :
+			case "north" :
 				if (currentLoc.isNorth() && (!(currentLoc.getNorth() instanceof LockedDoor) || !((LockedDoor) currentLoc.getNorth()).isLocked()) ||
 				 (currentLoc.getName().equals("End Portal") &&  currentPlayer.hasItem("car_wheel") && currentPlayer.hasItem("little_wheel") && currentPlayer.hasItem("tank_track")))
 				 {
@@ -194,7 +194,7 @@ public class ActionManager {
 					return new Object[]{false, "North door is locked"};
 				}
 				break;
-			case "south", "s" :
+			case "south" :
 				if (currentLoc.isSouth() && (!(currentLoc.getSouth() instanceof LockedDoor) || !((LockedDoor) currentLoc.getSouth()).isLocked()) ||
 				 ( currentLoc.getName().equals("Crash Site") &&  currentPlayer.hasItem("jack") ))
 				{
@@ -210,7 +210,7 @@ public class ActionManager {
 					return new Object[]{false, "South door is locked"};
 				}
 				break;
-			case "east", "e" :
+			case "east" :
 				if (currentLoc.isEast() && (!(currentLoc.getEast() instanceof LockedDoor) || !((LockedDoor) currentLoc.getEast()).isLocked()))
 				{
 					currentPlayer.move(currentLoc.getEast().getDestination());
@@ -225,7 +225,7 @@ public class ActionManager {
 					return new Object[]{false, "East door is locked"};
 				}
 				break;
-			case "west","w" :
+			case "west" :
 				if (currentLoc.isWest() && (!(currentLoc.getWest() instanceof LockedDoor) || !((LockedDoor) currentLoc.getWest()).isLocked()))
 				{
 					currentPlayer.move(currentLoc.getWest().getDestination());
@@ -266,32 +266,10 @@ public class ActionManager {
 
 	public void actionHelp() { //affiche les commandes dispo
 		if (isFighting){
-			System.out.println("""
-					-----------------------------------------
-					Available actions : 
-					ATTACK
-					DEFEND
-					USE + item
-					QUIT
-					-----------------------------------------""");
+			System.out.println(" ----------------------------------------- Available actions : ATTACK DEFEND USE + item QUIT-----------------------------------------");
 		}
 		else{
-			System.out.println("""
-					-----------------------------------------
-					Available actions : 
-					LOOK + location(here), inventory, stat, potion, enemy, npc, equipment, ground, money or shop(if in a shop)
-					LOOK ITEM + item
-					TALK + name
-					GO + direction(cardinal points, shop if available and back to leave the shop)
-					TAKE + item
-					USE + item
-					REMOVE + item
-					FIGHT
-					BUY ITEM + name of the item you want to buy
-					BUY POTION + name of the potion you want to buy
-					SELL + name of the item you want to sell
-					QUIT
-					-----------------------------------------""");
+			System.out.println(" -----------------------------------------  Available actions : LOOK + location(here), inventory, stat, potion, enemy, npc, equipment, ground, money or shop(if in a shop) LOOK ITEM + item TALK + name GO + direction(cardinal points, shop if available and back to leave the shop) TAKE + item USE + item REMOVE + item FIGHT BUY ITEM + name of the item you want to buy BUY POTION + name of the potion you want to buy SELL + name of the item you want to sell QUIT ----------------------------------------- ");
 		}
 	}
 
@@ -300,15 +278,15 @@ public class ActionManager {
 		WorldIHM currentGame = this.CURRENT_GAME;
 
 		switch (item.toLowerCase()) {
-			case "here", "around" : System.out.println(currentGame.getMapDescription()); //affiche description de la map sur laquelle le joueur est présent
+			case "here" : System.out.println(currentGame.getMapDescription()); //affiche description de la map sur laquelle le joueur est présent
 				break;
 			case "inventory" : currentGame.player.printInventory(); //affiche inventaire du joueur
 				break;
-			case "stat", "stats", "statistics" : System.out.println("Player : " + currentGame.player.getName() + " : " + currentGame.player.getHealth() + " HP, " + currentGame.player.getAttack() + " att, "+ currentGame.player.getDefense() + " def." ); //affiche les stats du joueur
+			case "stat" : System.out.println("Player : " + currentGame.player.getName() + " : " + currentGame.player.getHealth() + " HP, " + currentGame.player.getAttack() + " att, "+ currentGame.player.getDefense() + " def." ); //affiche les stats du joueur
 				break;
 			case "potion" : System.out.println(currentGame.player.getNbPotion()); //nombre de potion détennues
 				break;
-			case "enemy", "enemies" : System.out.println(currentGame.player.getMapHero().getEnemiesList()); //liste des ennemies
+			case "enemy" : System.out.println(currentGame.player.getMapHero().getEnemiesList()); //liste des ennemies
 			break;
 			case "npc" :  System.out.println(currentGame.player.getMapHero().getNpcsList()); // liste des pnj
 				break;
@@ -318,19 +296,9 @@ public class ActionManager {
 					Shop shop = (Shop) currentGame.player.getMapHero();
 					System.out.println("This is what we have :");
 
-					System.out.println("""
-					-----------
-					|  item   |
-					-----------
-					________________________________________________
-					""");
+					System.out.println(" ----------- |  item   | ----------- ________________________________________________");
 					shop.printItems();
-					System.out.println("""
-					-------------
-					|  potion   |
-					-------------
-					________________________________________________
-					""");
+					System.out.println(" ------------- |  potion   | -------------________________________________________________ ");
 					shop.printPotions();
 					System.out.println("________________________________________________");
 				}
@@ -392,11 +360,11 @@ public class ActionManager {
 
 		final String UNUSABLE = "You can't use that right now";
 		switch (item) {
-			case "health_potion", "hp" :
+			case "health_potion" :
 			System.out.println("You drink a health potion.");
 				currentGame.player.useHealthPotion(); 
 				break;
-			case "attack_potion", "ap" :
+			case "attack_potion" :
 				if(isFighting) {
 					System.out.println("You drink an attack potion.");
 					currentGame.player.useAttackPotion();
@@ -406,7 +374,7 @@ public class ActionManager {
 				}
 				break;
 				
-			case "defense_potion", "dp" :
+			case "defense_potion" :
 				if(isFighting) {
 					System.out.println("You drink a defense potion.");
 					currentGame.player.useDefensePotion();
@@ -415,7 +383,7 @@ public class ActionManager {
 					System.out.println(UNUSABLE);
 					}
 				break;
-			case "crit_potion", "cp" :
+			case "crit_potion" :
 				if(isFighting){
 					System.out.println("You drink a critic potion.");
 					currentGame.player.useCritPotion();

@@ -258,23 +258,23 @@ public class Player extends Character {
 	public void buyPotion(String potionType){
 		Shop shop = (Shop) this.currentLocation ;
 		switch (potionType) {
-			case "health_potion" -> {
+			case "health_potion" : {
 				this.stats.removeMoney(shop.getPotionCost());
 				addHealthPotion();
 			}
-			case "attack_potion" -> {
+			case "attack_potion" : {
 				this.stats.removeMoney(shop.getPotionCost());
 				addAttackPotion();
 			}
-			case "defense_potion" -> {
+			case "defense_potion" : {
 				this.stats.removeMoney(shop.getPotionCost());
 				addDefensePotion();
 			}
-			case "crit_potion" -> {
+			case "crit_potion" : {
 				this.stats.removeMoney(shop.getPotionCost());
 				addCritPotion();
 			}
-			default -> System.out.println("We don't have that kind of potion here.");
+                        default : System.out.println("We don't have that kind of potion here.");
 		}
 	}
 
