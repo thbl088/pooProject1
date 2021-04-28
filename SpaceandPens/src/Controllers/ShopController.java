@@ -51,7 +51,7 @@ public class ShopController implements Initializable {
         this.player = player;
         this.shop = shop;
         for (Map.Entry<String, Item> pair : this.shop.getItems().entrySet()) {
-            this.shopInventory.getItems().add(pair.getKey().replace('_', ' '));
+            this.shopInventory.getItems().add(pair.getKey());
         }
         for (Map.Entry<String, Item> pair : this.player.getInventory().entrySet()) {
             this.playerInventory.getItems().add(pair.getKey());
@@ -71,7 +71,7 @@ public class ShopController implements Initializable {
     @FXML
     public void selectBuy(MouseEvent event) {
         if (this.shopInventory.getSelectionModel().getSelectedItem() != null) {
-            String name = this.shopInventory.getSelectionModel().getSelectedItem().replace(' ', '_');
+            String name = this.shopInventory.getSelectionModel().getSelectedItem();
             Item item = this.shop.getItems().get(name);
             this.itemDescription.setText(item.getDescription());
             this.priceBuy.setText(Integer.toString(item.getPrice()));
@@ -82,7 +82,7 @@ public class ShopController implements Initializable {
     @FXML
     public void selectSell(MouseEvent event) {
         if (this.playerInventory.getSelectionModel().getSelectedItem() != null) {
-            String name = this.playerInventory.getSelectionModel().getSelectedItem().replace(' ', '_');
+            String name = this.playerInventory.getSelectionModel().getSelectedItem();
             Item item = this.player.getInventory().get(name);
             this.itemDescription.setText(item.getDescription());
             this.priceBuy.setText(Integer.toString(item.getPrice()));
@@ -93,7 +93,7 @@ public class ShopController implements Initializable {
     @FXML
     public void buyItem(ActionEvent event) {
         if (this.shopInventory.getSelectionModel().getSelectedItem() != null){
-            String name = this.shopInventory.getSelectionModel().getSelectedItem().replace(' ', '_');
+            String name = this.shopInventory.getSelectionModel().getSelectedItem();
             int itemRank = this.shopInventory.getSelectionModel().getSelectedIndex();
             Item item = this.shop.getItems().get(name);
             if (this.player.getStatistics().getMoney() - item.getPrice() >= 0) {
@@ -105,7 +105,7 @@ public class ShopController implements Initializable {
                 this.shopInventory.getItems().remove(itemRank);
 
                 this.setPlayerCash();
-                this.playerInventory.getItems().add(name.replace('_', ' '));
+                this.playerInventory.getItems().add(name);
             }
             else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -122,11 +122,21 @@ public class ShopController implements Initializable {
     @FXML
     public void sellItem(ActionEvent event) {
         if (this.playerInventory.getSelectionModel().getSelectedItem() != null){
-            String name = this.playerInventory.getSelectionModel().getSelectedItem().replace(' ', '_');
+            String name = this.playerInventory.getSelectionModel().getSelectedItem();
             int itemRank = this.playerInventory.getSelectionModel().getSelectedIndex();
             Item item = this.player.getInventory().get(name);
-
-            if (item != this.player.getArmor() && item != this.player.getWeapon()) {
+            
+            if (item.getPrice() < 0){
+                
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText(null);
+                alert.setGraphic(null);
+                alert.setTitle("Information");
+                alert.setContentText("This item is so important.");
+                alert.showAndWait();
+            }
+            
+           else if (item != this.player.getArmor() && item != this.player.getWeapon()) {
                 this.player.removeInventory(item);
                 this.player.getStatistics().addMoney(item.getPrice());
 
@@ -134,7 +144,7 @@ public class ShopController implements Initializable {
                 this.playerInventory.getItems().remove(itemRank);
 
                 this.setPlayerCash();
-                this.shopInventory.getItems().add(name.replace('_', ' '));
+                this.shopInventory.getItems().add(name);
             }
             else
             {

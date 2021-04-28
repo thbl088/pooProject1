@@ -94,7 +94,7 @@ public class StatsController implements Initializable {
 
     public void initList() {
         for (Map.Entry<String, Item> pair : this.player.getInventory().entrySet()) {
-            String item = pair.getKey().replace('_', ' ');
+            String item = pair.getKey();
             this.inventoryList.getItems().add(item);
         }
     }
@@ -110,7 +110,7 @@ public class StatsController implements Initializable {
         if (this.player.getWeapon() != null) {
             String imgWeapon = "spaceandpens/images/objet/" + this.player.getWeapon().getName() + ".png";
             this.weaponIcon.setImage(new Image(imgWeapon));
-            this.weaponName.setText(this.player.getWeapon().getName().replace('_', ' '));
+            this.weaponName.setText(this.player.getWeapon().getName());
         }
         else {
             this.weaponIcon.setImage(null);
@@ -120,7 +120,7 @@ public class StatsController implements Initializable {
         if (this.player.getArmor() != null) {
             String imgArmor = "spaceandpens/images/objet/" + this.player.getArmor().getName() + ".png";
             this.armorIcon.setImage(new Image(imgArmor));
-            this.armorName.setText(this.player.getArmor().getName().replace('_', ' '));
+            this.armorName.setText(this.player.getArmor().getName());
         }
         else {
             this.armorIcon.setImage(null);
@@ -148,7 +148,7 @@ public class StatsController implements Initializable {
     @FXML
     public void equipItem(ActionEvent e) {
         if (this.inventoryList.getSelectionModel().getSelectedItem() != null) {
-            String selection = this.inventoryList.getSelectionModel().getSelectedItem().replace(' ', '_');
+            String selection = this.inventoryList.getSelectionModel().getSelectedItem();
             Item item = this.player.getItem(selection);
 
             if (item instanceof Weapon && this.player.getWeapon() != item) {
@@ -164,7 +164,7 @@ public class StatsController implements Initializable {
     @FXML
     public void updateDesc(MouseEvent e){
         if (this.inventoryList.getSelectionModel().getSelectedItem() != null) {
-            String selection = this.inventoryList.getSelectionModel().getSelectedItem().replace(' ', '_');
+            String selection = this.inventoryList.getSelectionModel().getSelectedItem();
             Item item = this.player.getItem(selection);
             this.description.setText(item.getDescription());
 

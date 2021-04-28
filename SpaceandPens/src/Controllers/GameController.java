@@ -11,11 +11,15 @@ import Modeles.Item;
 import Modeles.Map;
 import Modeles.Npc;
 import Modeles.WorldIHM;
+import Controllers.TakeListener;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,11 +29,12 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javax.swing.event.EventListenerList;
+
 
 
 /**
@@ -42,7 +47,8 @@ public class GameController implements Initializable {
     private String name;
     private WorldIHM world;
     private ActionManager manager;
-    private final EventListenerList listeners = new EventListenerList();
+    
+    TakeListener dragNdrop ;
     
     @FXML
     private ImageView map;
@@ -68,6 +74,7 @@ public class GameController implements Initializable {
     private Pane temp;
     
     
+    
     @FXML
     public void openStats(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vues/Stats.fxml"));
@@ -85,7 +92,6 @@ public class GameController implements Initializable {
         stage.show();
     }   
     
-    @FXML
     public void openShop(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vues/Shop.fxml"));
         Parent root = loader.load();
@@ -103,9 +109,7 @@ public class GameController implements Initializable {
         stage.setScene(scene);
         stage.showAndWait();
     }
-        public void setMapDescription() {
-        this.mapDescription.setText(this.world.getMapDescription());
-    }
+
 
     public void setPlayerName(String name) {
         this.name = name;
@@ -119,6 +123,9 @@ public class GameController implements Initializable {
         this.gameDescription.setText("Welcome " + this.name + ".");
         this.setGameDescription("Your ship has crashed, you need a jack and a new motor to leave this planet.");
         this.setGameDescription("You Enter : " + this.world.getPlayer().getMapHero().getName() + ".");
+        
+        TakeListener look = new TakeListener(world, temp, 12, 13);
+        this.dragNdrop = look;
    
     }
 
@@ -126,6 +133,11 @@ public class GameController implements Initializable {
         this.gameDescription.appendText('\n' + text);
     }
     
+    
+    
+    public void setMapDescription() {
+        this.mapDescription.setText(this.world.getMapDescription());
+    }    
     public void actualiseVue() throws IOException{
         
         if (temp.getChildren().size() > 0 ){
@@ -146,9 +158,17 @@ public class GameController implements Initializable {
             shop.setLayoutY(203);
             shop.setPrefHeight(306);
             shop.setPrefWidth(327);
-
-            temp.getChildren().add(shop);
             
+            //On lui ajoute un évènement Mouseclique 
+            shop.setOnMouseClicked(event -> {
+                try {
+                    this.openShop(event);
+                } catch (IOException ex) {
+                    Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+            
+            temp.getChildren().add(shop);     
         }
         
         //On récupére son contenu
@@ -163,6 +183,7 @@ public class GameController implements Initializable {
         //On place les objet pnj et ennemis si y'en a 
         Object[] items = itemList.toArray();
         
+        
         for (int i = 0 ; i < items.length; i++) {
             //On récupére la Hashmap de la Map
             HashMap<String, Item> itemHash = world.getPlayer().getMapHero().getItem();
@@ -170,6 +191,9 @@ public class GameController implements Initializable {
             //On crée la nouvelle entité 
             ImageView nEntity = new ImageView(new Image("/spaceandpens/images/objet/"+items[i]+".png"));
             
+            
+            //On lui donne un id le nom de l'objet 
+            nEntity.setId(items[i].toString());
             
             //On prend nos valeur déjà prédifini pour la taille et largeur
             nEntity.setFitHeight(itemHash.get(items[i].toString()).getPositionHeight());
@@ -179,9 +203,11 @@ public class GameController implements Initializable {
             nEntity.setLayoutX(itemHash.get(items[i].toString()).getPositionX());
             nEntity.setLayoutY(itemHash.get(items[i].toString()).getPositionY());
             
+            nEntity.setOnDragDetected(event -> {
+                dragNdrop.handleDragDetected(event);
+            });
             //On l'ajoute comme enfant au pane temp 
             temp.getChildren().add(nEntity);
-            
         }
         
         Object[] npcs = npcList.toArray();
@@ -191,6 +217,7 @@ public class GameController implements Initializable {
             
             ImageView nEntity = new ImageView(new Image("/spaceandpens/images/pnj/"+npcs[i]+".png")); 
             
+            nEntity.setId(npcs[i].toString());
             nEntity.setFitHeight(npcHash.get(npcs[i].toString()).getPositionHeight());
             nEntity.setFitWidth(npcHash.get(npcs[i].toString()).getPositionWidth());
             nEntity.setLayoutX(npcHash.get(npcs[i].toString()).getPositionX());
@@ -206,6 +233,7 @@ public class GameController implements Initializable {
             
             ImageView nEntity = new ImageView(new Image("/spaceandpens/images/ennemi/"+ennemis[i]+".png"));
             
+            nEntity.setId(ennemis[i].toString());
             nEntity.setFitHeight(ennemiHash.get(ennemis[i].toString()).getPositionHeight());
             nEntity.setFitWidth(ennemiHash.get(ennemis[i].toString()).getPositionWidth());
             nEntity.setLayoutX(ennemiHash.get(ennemis[i].toString()).getPositionX());
@@ -267,7 +295,13 @@ public class GameController implements Initializable {
         this.actualiseVue();
     }
 
+    @FXML
+    private void handleDragOver(DragEvent event) {
+        dragNdrop.handleDragOver(event);
+    }
 
-
-    
+    @FXML
+    private void handleDrop(DragEvent event) throws FileNotFoundException {
+        dragNdrop.handleDrop(event);
+    }   
 }
