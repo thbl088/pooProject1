@@ -230,7 +230,7 @@ public class GameController implements Initializable {
     }    
 
     @FXML
-    private void goNorth(MouseEvent event)
+    private void goNorth(MouseEvent event) throws IOException
     {
         Object[] response = this.manager.actionGo("north");
         if((boolean) response[0])
@@ -240,7 +240,7 @@ public class GameController implements Initializable {
     }
 
     @FXML
-    private void goWest(MouseEvent event) 
+    private void goWest(MouseEvent event) throws IOException 
     {
         Object[] response = this.manager.actionGo("west");
         if((boolean) response[0])
@@ -251,7 +251,7 @@ public class GameController implements Initializable {
     }
 
     @FXML
-    private void goEast(MouseEvent event) 
+    private void goEast(MouseEvent event) throws IOException 
     {
         Object[] response = this.manager.actionGo("east");
         if((boolean) response[0])
@@ -262,7 +262,7 @@ public class GameController implements Initializable {
     }
 
     @FXML
-    private void goSouth(MouseEvent event) {
+    private void goSouth(MouseEvent event) throws IOException {
                 Object[] response = this.manager.actionGo("south");
         if((boolean) response[0])
             this.setMapDescription();

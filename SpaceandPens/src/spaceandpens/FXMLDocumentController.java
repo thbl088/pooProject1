@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+/*
 package spaceandpens;
 
 import java.io.IOException;
@@ -24,6 +25,7 @@ import javafx.stage.Stage;
  *
  * @author site7
  */
+/*
 public class FXMLDocumentController implements Initializable {
 
     @FXML
@@ -40,6 +42,7 @@ public class FXMLDocumentController implements Initializable {
     /**
      * Initializes the controller class.
      */
+/*
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -77,3 +80,4 @@ public class FXMLDocumentController implements Initializable {
 
     
 }
+*/

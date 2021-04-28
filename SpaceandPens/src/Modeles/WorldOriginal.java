@@ -1,4 +1,4 @@
-package Modeles;
+/*package Modeles;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -500,5 +500,6 @@ public class WorldOriginal {
     }
 
     */
-
+/*
 }
+*/
