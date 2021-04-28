@@ -106,45 +106,45 @@ public class WorldIHM {
         // Map 4 Dernier Boss
         StatisticsEnemy statsLeclerc = new StatisticsEnemy(100, 50, 60, 15, 80);
         Item crik = new Item("jack", "Useful for lifting heavy stones.", -1);
-        Enemy leclerc = new Enemy("leclerc", crik, statsLeclerc);
+        Enemy leclerc = new Enemy("leclerc", crik, statsLeclerc, 601, 173);
 
         enemies[0] = leclerc;
 
         // Map 5 Crayon trés dur
         StatisticsEnemy stats9H = new StatisticsEnemy(5, 1, 15, 5);
-        Enemy crayon9H = new Enemy("9h", stats9H);
+        Enemy crayon9H = new Enemy("9h", stats9H, 550, 214);
 
         enemies[1] = crayon9H;
 
         // Map 7 Stylo Plume
 
         StatisticsEnemy statsStyloPlume = new StatisticsEnemy(20, 15, 20, 20);
-        Enemy styloPLume = new Enemy("cartier", statsStyloPlume);
+        Enemy styloPLume = new Enemy("cartier", statsStyloPlume, 526, 264);
 
         enemies[2] = styloPLume;
 
         // Map 8 Robot Crayon tendre
 
         StatisticsEnemy statsRobcrayontendre = new StatisticsEnemy(5, 15, 1, 5);
-        Enemy robcrayontendre = new Enemy("9b", statsRobcrayontendre);
+        Enemy robcrayontendre = new Enemy("9b", statsRobcrayontendre, 572, 411);
 
         enemies[3] = robcrayontendre;
 
         // Map 9 Boss Tony
 
         StatisticsEnemy statsTony = new StatisticsEnemy(20, 30, 20, 5);
-        Item littleWheel = new Item("little_wheel", "It's a shining skateboard wheel", -1);
-        Enemy tony = new Enemy("tony", littleWheel, statsTony);
+        Item littleWheel = new Item("little wheel", "It's a shining skateboard wheel", -1);
+        Enemy tony = new Enemy("tony", littleWheel, statsTony, 652, 494);
 
         enemies[4] = tony;
 
         // Map 12  [4 Criterium]
 
         StatisticsEnemy statsCriterium = new StatisticsEnemy(1, 8, 2, 100, 5);
-        Enemy criterium2mm = new Enemy("2mm", statsCriterium);
-        Enemy criterium5mm = new Enemy("5mm", statsCriterium);
-        Enemy criterium7mm = new Enemy("7mm", statsCriterium);
-        Enemy criterium9mm = new Enemy("9mm", statsCriterium);
+        Enemy criterium2mm = new Enemy("2mm", statsCriterium, 633, 485);
+        Enemy criterium5mm = new Enemy("5mm", statsCriterium, 392, 373);
+        Enemy criterium7mm = new Enemy("7mm", statsCriterium, 851, 324);
+        Enemy criterium9mm = new Enemy("9mm", statsCriterium, 624, 138);
 
         enemies[5] = criterium2mm;
         enemies[6] = criterium5mm;
@@ -154,7 +154,7 @@ public class WorldIHM {
         // Map  13 Bicolor
 
         StatisticsEnemy statsBic = new StatisticsEnemy(20, 16, 12, 20);
-        Enemy bicolor = new Enemy("bicolor", statsBic);
+        Enemy bicolor = new Enemy("bicolor", statsBic, 540, 193);
 
         enemies[9] = bicolor;
 
@@ -162,29 +162,29 @@ public class WorldIHM {
 
         StatisticsEnemy statsRobert = new StatisticsEnemy(5, 5, 5, 2);
         Weapon bottle = new Weapon("bottle", "It's a bottle.", 2, 1);
-        Enemy robert = new Enemy("robert", bottle, statsRobert);
+        Enemy robert = new Enemy("robert", bottle, statsRobert, 524, 332);
 
         enemies[10] = robert;
 
         // Map  16 robot crayon HB
 
         StatisticsEnemy statsHB = new StatisticsEnemy(10, 10, 10, 10);
-        Enemy hB = new Enemy("hb", statsHB);
+        Enemy hB = new Enemy("hb", statsHB, 598, 273);
 
         enemies[11] = hB;
 
         // Map  17 Boss Twingy
 
         StatisticsEnemy statsTwingy = new StatisticsEnemy(20, 20, 20, 20);
-        Item carwheel = new Item("car_wheel", "It's a glowing car wheel.", -1);
-        Enemy twingy = new Enemy("twingy", carwheel, statsTwingy);
+        Item carwheel = new Item("car wheel", "It's a glowing car wheel.", -1);
+        Enemy twingy = new Enemy("twingy", carwheel, statsTwingy, 652, 170);
 
         enemies[12] = twingy;
 
         // Map  18 Les frères crayons 2B crayon tendre et 2H crayon dur
 
-        Enemy crayon2B = new Enemy("2b", statsRobcrayontendre);
-        Enemy crayon2H = new Enemy("2h", stats9H);
+        Enemy crayon2B = new Enemy("2b", statsRobcrayontendre, 425, 208);
+        Enemy crayon2H = new Enemy("2h", stats9H, 622, 319);
 
         enemies[13] = crayon2B;
         enemies[14] = crayon2H;
@@ -193,14 +193,14 @@ public class WorldIHM {
 
         StatisticsEnemy statsLeviathan = new StatisticsEnemy(15, 15, 15, 20);
         Weapon redfish = new Weapon("leviathan", "The big red fish.", 50, 15);
-        Enemy leviathan = new Enemy("leviathan", redfish, statsLeviathan);
+        Enemy leviathan = new Enemy("leviathan", redfish, statsLeviathan, 253, 254, 544, 481);
 
         enemies[15] = leviathan;
 
         // Map  21 Le crayon d'oré
 
         StatisticsEnemy statsCrayondore = new StatisticsEnemy(1, 1, 9999999, 100, 200);
-        Enemy crayonDore = new Enemy("golden_pen", statsCrayondore);
+        Enemy crayonDore = new Enemy("golden pen", statsCrayondore, 820, 234);
 
         enemies[16] = crayonDore;
         return enemies;
@@ -209,16 +209,16 @@ public class WorldIHM {
     public Item[] initItemInGround() {
         Item[] ground = new Item[10];
 
-        ground[0] = new Weapon("pickaxe", "A pickaxe hard enough to mine netherite.", 12, 5);
-        ground[1] = new Weapon("rock", "It's a rock like Malphite.", 2, 2);
-        ground[2] = new Weapon("fish", "A smelly fish.", 6, 4);
-        ground[3] = new Weapon("fish", "A smelly fish.", 6, 4);
-        ground[4] = new Item("sheep_wool", "This wool is so soft.", 10);
-        ground[5] = new Item("sheep_wool", "This wool is so soft.", 10);
-        ground[6] = new Item("companion_Cube", "A cube with a pink heart on the side.", 60);
-        ground[7] = new Item("package", "A package which contains an Nvidia GeForce RTX™ 3080.", 20);
-        ground[8] = new Item("package", "A package which contains an Nvidia GeForce RTX™ 3080.", 20);
-        ground[9] = new Weapon("reactor", "This is the key to get out of here.", -1, 5);
+        ground[0] = new Weapon("pickaxe", "A pickaxe hard enough to mine netherite.", 12, 5, 418, 128);
+        ground[1] = new Weapon("rock", "It's a rock like Malphite.", 2, 2, 882, 335);
+        ground[2] = new Weapon("fish", "A smelly fish.", 6, 4, 1051, 436);
+        ground[3] = new Weapon("fish Clown", "A smelly fish Clown.", 10, 4, 475, 101);
+        ground[4] = new Item("sheep wool", "This wool is so soft.", 10, 849, 265);
+        ground[5] = new Item("evil sheep wool", "This wool is so hard.", 14, 156, 144);
+        ground[6] = new Item("companion Cube", "A cube with a pink heart on the side.", 60, 488, 223);
+        ground[7] = new Item("package", "A package which contains an Nvidia GeForce RTX™ 3080.", 20, 1003, 155);
+        ground[8] = new Item("second package", "A package that contains a Pokemon™ card booster.", 15, 326, 351);
+        ground[9] = new Weapon("reactor", "This is the key to get out of here.", -1, 5, 256, 182);
         return ground;
     }
 
@@ -372,19 +372,19 @@ public class WorldIHM {
     public Npc[] initNpc() {
         Npc[] village = new Npc[11];
 
-        village[0] = new Npc("mayor", null, "Henry [Mayor] : \"Welcome " + this.player.getName() + ", as I can see on your suit, I have seen you falling from the sky. I’m sure you’re the man from the prophecy. I’m certain you will find what you need beyond the door behind me. But before that you’ll need to find the 2 objects needed to open the door. If you need help you can ask our merchant, he should have some useful object for you.\" ");
-        village[1] = new Npc("villager", null, "Josette [Villager] : \"Hello there. The weather is nice, isn’t it?\"");
-        village[2] = new Npc("children", null, "Loïc Choulet [Children] : \"Do you have a SolidWorks license?\"");
-        Item tankTrack = new Item("tank_track", "This chariot caterpillar is shining.", -1);
-        village[3] = new Npc("crazy_man", tankTrack, "Mark [Crazy man] : \"HEY YOU! I have found this big thing around, I was trying to sleep on it but it’s too hard so take it!\"");
-        village[4] = new Npc("factor", null, "Sebastien [Factor] : \"I need to deliver these important packages but these monsters block the road.\"");
-        village[5] = new Npc("shepherdess", null, "Anne [Shepherdess] : \"Sometimes I found weird trace on the earth around my herd and a big ball appear.\"");
-        village[6] = new Npc("alcoholic", null, "Robert [alcoholic]: \"BEURGHHHH.\"");
-        village[7] = new Npc("miner", null, "José [Miner] : \"I hope I’ll find a diamond this time but there is too much lava down there.\" ");
-        village[8] = new Npc("lumberjack", null, "Franck [Lumberjack] :\"Thank you a lot, now I can go back and see my wife Josette.\"");
-        village[9] = new Npc("fisher", null, "Hena [Fisher] : \"I hope I’ll catch this big fish this time.\"");
-        Weapon grabage = new Weapon("garbage_collector", "This weapon puts any entity reference to null, allowing for the garbage collector to get rid of it.", -1, 99999999);
-        village[10] = new Npc("samuel", grabage, "Samuel : \"Congratulations for looking at the game file and finding this area. Take this The Garbage Collector.\"");
+        village[0] = new Npc("mayor", null, "Henry [Mayor] : \"Welcome " + this.player.getName() + ", as I can see on your suit, I have seen you falling from the sky. I’m sure you’re the man from the prophecy. I’m certain you will find what you need beyond the door behind me. But before that you’ll need to find the 2 objects needed to open the door. If you need help you can ask our merchant, he should have some useful object for you.\" ", 605, 434);
+        village[1] = new Npc("villager", null, "Josette [Villager] : \"Hello there. The weather is nice, isn’t it?\"", 288, 75);
+        village[2] = new Npc("children", null, "Loïc Choulet [Children] : \"Do you have a SolidWorks license?\"", 185, 444);
+        Item tankTrack = new Item("tank track", "This chariot caterpillar is shining.", -1);
+        village[3] = new Npc("crazy_man", tankTrack, "Mark [Crazy man] : \"HEY YOU! I have found this big thing around, I was trying to sleep on it but it’s too hard so take it!\"", 896, 212);
+        village[4] = new Npc("factor", null, "Sebastien [Factor] : \"I need to deliver these important packages but these monsters block the road.\"", 572, 379);
+        village[5] = new Npc("shepherdess", null, "Anne [Shepherdess] : \"Sometimes I found weird trace on the earth around my herd and a big ball appear.\"", 479, 493);
+        village[6] = new Npc("alcoholic", null, "Robert [alcoholic]: \"BEURGHHHH.\"", 490, 306);
+        village[7] = new Npc("miner", null, "José [Miner] : \"I hope I’ll find a diamond this time but there is too much lava down there.\"", 112, 343);
+        village[8] = new Npc("lumberjack", null, "Franck [Lumberjack] :\"Thank you a lot, now I can go back and see my wife Josette.\"", 565, 424);
+        village[9] = new Npc("fisher", null, "Hena [Fisher] : \"I hope I’ll catch this big fish this time.\"", 113, 144);
+        Weapon grabage = new Weapon("garbage collector", "This weapon puts any entity reference to null, allowing for the garbage collector to get rid of it.", -1, 99999999);
+        village[10] = new Npc("samuel", grabage, "Samuel : \"Congratulations for looking at the game file and finding this area. Take this The Garbage Collector.\"", 596, 25);
         return village;
     }
 
@@ -405,12 +405,12 @@ public class WorldIHM {
     public Item[] initShopItem() {
         Item[] shop = new Item[6];
 
-        shop[0] = new Armor("leather_tunic", "Tunic made of leather.", 12, 5);
-        shop[1] = new Armor("titanium_armour", "Made with remnants of pencil robots.", 25, 20);
-        shop[2] = new Armor("nethererite_armour", "Made with ore from Ravenholm.", 50, 40);
-        shop[3] = new Weapon("stone_sword", "A sword stronger than wood.", 12, 15);
-        shop[4] = new Weapon("japanese_sword", "Take the soul of your enemies.", 25, 35);
-        shop[5] = new Weapon("energie_sword", "A sword recovered from an old ship that once crashed here.", 70, 50);
+        shop[0] = new Armor("leather tunic", "Tunic made of leather.", 12, 5);
+        shop[1] = new Armor("titanium armour", "Made with remnants of pencil robots.", 25, 20);
+        shop[2] = new Armor("nethererite armour", "Made with ore from Ravenholm.", 50, 40);
+        shop[3] = new Weapon("stone sword", "A sword stronger than wood.", 12, 15);
+        shop[4] = new Weapon("japanese sword", "Take the soul of your enemies.", 25, 35);
+        shop[5] = new Weapon("energie sword", "A sword recovered from an old ship that once crashed here.", 70, 50);
         return shop;
     }
 

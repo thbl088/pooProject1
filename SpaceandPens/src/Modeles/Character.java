@@ -8,6 +8,7 @@ public abstract class Character {
 	protected String name;
 	protected Statistics stats;
 
+
 	public Character(String name, Statistics stats) {
 		this.name = name;
 		this.stats = stats;
@@ -28,6 +29,6 @@ public abstract class Character {
 	public int getDefense() { return this.stats.getDefense(); }
 
 	public int getCrit() { return this.stats.getCritical(); }
-
+        
 	public Statistics getStatistics(){return this.stats;}
 }

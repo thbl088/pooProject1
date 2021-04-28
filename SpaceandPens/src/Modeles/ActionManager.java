@@ -322,7 +322,7 @@ public class ActionManager {
 	public void actionTake(String item) { //récupere un objet sur le sol
 		WorldIHM currentGame = this.CURRENT_GAME;
 
-		Item takeItem = currentGame.player.getMapHero().getItem(item);
+		Item takeItem = currentGame.player.getMapHero().takeItem(item);
 		if(takeItem != null){
 			currentGame.player.addInventory(takeItem);
 		}

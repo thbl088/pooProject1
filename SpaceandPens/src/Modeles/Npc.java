@@ -4,10 +4,12 @@ package Modeles;
 public class Npc extends Enemy {
     String dialog;
 
-    public Npc(String name, Item item, String dialog){
+    public Npc(String name, Item item, String dialog, int x, int y){
         this.name = name;
         this.object = item;
         this.dialog = dialog;
+        this.position_x = x;
+        this.position_y = y;
     }
 
     public String getDialog() { return this.dialog; }

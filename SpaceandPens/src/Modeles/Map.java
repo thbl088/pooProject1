@@ -89,7 +89,11 @@ public class Map {
 
 	public HashMap<String, Enemy> getEnemies(){return this.ENEMIES;} //warning mais on se fiche de l'ordre des ennemies
 
-	public Item getItem(String item) {
+        public HashMap<String, Npc> getNpcs(){return this.NPCS;}
+        
+        public HashMap<String, Item> getItem(){return this.GROUND_ITEMS;}
+        
+	public Item takeItem(String item) {
 		Item itemReturn = this.GROUND_ITEMS.get(item);
 		this.GROUND_ITEMS.remove(item);
 		return itemReturn;
