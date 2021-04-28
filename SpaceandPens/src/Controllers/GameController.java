@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
@@ -109,6 +110,26 @@ public class GameController implements Initializable {
         stage.setScene(scene);
         stage.showAndWait();
     }
+    
+    public void openTalk(MouseEvent event, String nameNpc) throws IOException {
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vues/Talk.fxml"));
+        Parent root = loader.load();
+        
+        TalkController talkController = loader.getController();
+        
+        talkController.init(this.world.getPlayer(),nameNpc); 
+        
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.getIcons().add(new Image("spaceandpens/images/spaceandpens.png"));
+        stage.setTitle("Talk");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setMinHeight(545);
+        stage.setMinWidth(800);
+        stage.setScene(scene);
+        stage.showAndWait();    
+    }
 
 
     public void setPlayerName(String name) {
@@ -133,11 +154,11 @@ public class GameController implements Initializable {
         this.gameDescription.appendText('\n' + text);
     }
     
-    
-    
+
     public void setMapDescription() {
         this.mapDescription.setText(this.world.getMapDescription());
     }    
+    
     public void actualiseVue() throws IOException{
         
         if (temp.getChildren().size() > 0 ){
@@ -153,13 +174,12 @@ public class GameController implements Initializable {
         {
             Pane shop = new Pane();
             
-            System.out.println("j'ai crée le shop");
             shop.setLayoutX(801);
             shop.setLayoutY(203);
             shop.setPrefHeight(306);
             shop.setPrefWidth(327);
             
-            //On lui ajoute un évènement Mouseclique 
+            //On lui ajoute un évènement clique souris
             shop.setOnMouseClicked(event -> {
                 try {
                     this.openShop(event);
@@ -203,9 +223,13 @@ public class GameController implements Initializable {
             nEntity.setLayoutX(itemHash.get(items[i].toString()).getPositionX());
             nEntity.setLayoutY(itemHash.get(items[i].toString()).getPositionY());
             
+            //Changement de l'image du curseur
+            nEntity.setCursor(Cursor.HAND);
+            
             nEntity.setOnDragDetected(event -> {
                 dragNdrop.handleDragDetected(event);
             });
+            
             //On l'ajoute comme enfant au pane temp 
             temp.getChildren().add(nEntity);
         }
@@ -216,13 +240,22 @@ public class GameController implements Initializable {
             HashMap<String, Npc> npcHash = world.getPlayer().getMapHero().getNpcs();
             
             ImageView nEntity = new ImageView(new Image("/spaceandpens/images/pnj/"+npcs[i]+".png")); 
+            String nameNpc = npcs[i].toString();
             
-            nEntity.setId(npcs[i].toString());
+            nEntity.setId(nameNpc);
             nEntity.setFitHeight(npcHash.get(npcs[i].toString()).getPositionHeight());
             nEntity.setFitWidth(npcHash.get(npcs[i].toString()).getPositionWidth());
             nEntity.setLayoutX(npcHash.get(npcs[i].toString()).getPositionX());
             nEntity.setLayoutY(npcHash.get(npcs[i].toString()).getPositionY());
-                    
+            
+            nEntity.setOnMouseClicked(event -> {
+                try {
+                    this.openTalk(event, nameNpc);
+                } catch (IOException ex) {
+                    Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                });
+            
             temp.getChildren().add(nEntity);
             
         }

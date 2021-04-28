@@ -1,6 +1,7 @@
 package Modeles;
 
 
+import Controllers.TalkController;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -90,7 +91,7 @@ public class ActionManager {
 					break;
 				case "talk" :
 					if (parsedCommands.length > 1) {
-						actionTalk(parsedCommands[1].toLowerCase());
+						//actionTalk(parsedCommands[1].toLowerCase());
 					}
 					else {
 						System.out.println("Who do you want to talk to ?");
@@ -331,18 +332,18 @@ public class ActionManager {
 		}
 	}
 
-	public void actionTalk(String name){ //lance le dialogue d'un pnj
+	public void actionTalk(String name, TalkController talk){ //lance le dialogue d'un pnj
 		Player p = this.CURRENT_GAME.player;
 
 		if ( p.getMapHero().getNpc(name) != null ){      // vérifie si l'entité est bien un pnj
-			System.out.println( p.getMapHero().getNpc(name).getDialog()); // récupére et affiche son dialogue
+			talk.setDescription(p.getMapHero().getNpc(name).getDialog()); // récupére et affiche son dialogue
 
 
-			if ( (name.equals("crazy_man") && !(p.hasItem("tank_track")) )    //vérifie le pnj si c'est  le crazy_man ou samuel deux pnj qui donne des items et on vérifie si ils ont déjà pas donnée les items
-			|| name.equals("samuel") && !(p.hasItem("garbage_collector"))) {
+			if ( (name.equals("crazy man") && !(p.hasItem("tank track")) )    //vérifie le pnj si c'est  le crazy_man ou samuel deux pnj qui donne des items et on vérifie si ils ont déjà pas donnée les items
+			|| name.equals("samuel") && !(p.hasItem("garbage collector"))) {
 
 				Item objet_pnj = p.getMapHero().getNpc(name).getItem();
-				System.out.println("You obtain " + objet_pnj.getName() + ".");
+                                talk.setDescription("You obtain " + objet_pnj.getName() + ".");
 
 				p.addInventory(objet_pnj);
 			}
