@@ -7,6 +7,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -42,6 +44,8 @@ public class ShopController implements Initializable {
     private Button exit;
     @FXML
     private Label dialog;
+    @FXML
+    private ImageView itemView;
 
 
     @Override
@@ -83,6 +87,8 @@ public class ShopController implements Initializable {
             this.itemDescription.setText(item.getDescription());
             this.priceBuy.setText(Integer.toString(item.getPrice()));
             this.priceSell.setText(Integer.toString(item.getPrice()));
+            Image itemURL = new Image("/spaceandpens/images/objet/"+name+".png");
+            this.itemView.setImage(itemURL);
         }
     }
 
@@ -94,6 +100,8 @@ public class ShopController implements Initializable {
             this.itemDescription.setText(item.getDescription());
             this.priceBuy.setText(Integer.toString(item.getPrice()));
             this.priceSell.setText(Integer.toString(item.getPrice()));
+            Image itemURL = new Image("/spaceandpens/images/objet/"+name+".png");
+            this.itemView.setImage(itemURL);
         }
     }
 
