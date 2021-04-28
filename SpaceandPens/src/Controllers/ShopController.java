@@ -40,10 +40,13 @@ public class ShopController implements Initializable {
     private TextField priceSell;
     @FXML
     private Button exit;
+    @FXML
+    private Label dialog;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
 
     }
 
@@ -58,6 +61,10 @@ public class ShopController implements Initializable {
         }
         this.playerCash.setText(Integer.toString(this.player.getStatistics().getMoney()));
         this.itemDescription.setText(this.shopInventory.getSelectionModel().getSelectedItem());
+
+        String[] dial = this.shop.getDescription().split(":");
+        dial[2] = dial[2].replace('"', ' ');
+        this.dialog.setText(dial[2]);
     }
 
     public void setPlayer(Player player) {
@@ -132,7 +139,7 @@ public class ShopController implements Initializable {
                 alert.setHeaderText(null);
                 alert.setGraphic(null);
                 alert.setTitle("Information");
-                alert.setContentText("This item is so important.");
+                alert.setContentText("This item is too important to be sold");
                 alert.showAndWait();
             }
             
