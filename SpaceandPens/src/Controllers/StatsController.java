@@ -61,7 +61,8 @@ public class StatsController implements Initializable {
     @FXML
     private TextField itemType;
     @FXML
-    private Button weaponUnequip;
+    private ImageView itemView;
+
 
 
     @Override
@@ -172,6 +173,11 @@ public class StatsController implements Initializable {
                 this.itemType.setText("Weapon");
             else if (item instanceof Armor)
                 this.itemType.setText("Armor");
+            else
+                this.itemType.setText("Item");
+
+            String itemImg = "spaceandpens/images/objet/" + selection + ".png";
+            this.itemView.setImage(new Image(itemImg));
         }
     }
 
