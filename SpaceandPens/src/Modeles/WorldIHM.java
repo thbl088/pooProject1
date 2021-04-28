@@ -376,7 +376,7 @@ public class WorldIHM {
         village[1] = new Npc("villager", null, "Josette [Villager] : \"Hello there. The weather is nice, isn’t it?\"", 288, 75);
         village[2] = new Npc("children", null, "Loïc Choulet [Children] : \"Do you have a SolidWorks license?\"", 185, 444);
         Item tankTrack = new Item("tank track", "This chariot caterpillar is shining.", -1);
-        village[3] = new Npc("crazy_man", tankTrack, "Mark [Crazy man] : \"HEY YOU! I have found this big thing around, I was trying to sleep on it but it’s too hard so take it!\"", 896, 212);
+        village[3] = new Npc("crazy man", tankTrack, "Mark [Crazy man] : \"HEY YOU! I have found this big thing around, I was trying to sleep on it but it’s too hard so take it!\"", 896, 212);
         village[4] = new Npc("factor", null, "Sebastien [Factor] : \"I need to deliver these important packages but these monsters block the road.\"", 572, 379);
         village[5] = new Npc("shepherdess", null, "Anne [Shepherdess] : \"Sometimes I found weird trace on the earth around my herd and a big ball appear.\"", 479, 493);
         village[6] = new Npc("alcoholic", null, "Robert [alcoholic]: \"BEURGHHHH.\"", 490, 306);
