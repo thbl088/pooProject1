@@ -11,21 +11,16 @@ import Modeles.Item;
 import Modeles.Map;
 import Modeles.Npc;
 import Modeles.WorldIHM;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.Set;
-import javafx.beans.property.ObjectProperty;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
@@ -141,6 +136,7 @@ public class GameController implements Initializable {
         //On récupère la nouvel amp
         Map newMap = this.world.player.getMapHero();
         
+        //On regarde si la nouvelle map possède le shop
         if (newMap.isShop())
         {
             Pane shop = new Pane();
@@ -166,7 +162,7 @@ public class GameController implements Initializable {
         
         //On place les objet pnj et ennemis si y'en a 
         Object[] items = itemList.toArray();
-        System.out.println("oui le poisson");
+        
         for (int i = 0 ; i < items.length; i++) {
             //On récupére la Hashmap de la Map
             HashMap<String, Item> itemHash = world.getPlayer().getMapHero().getItem();

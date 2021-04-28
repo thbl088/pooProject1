@@ -455,6 +455,7 @@ public class WorldIHM {
         // String name = keyboard.nextLine();
         Player hero = new Player(playerName);
         this.player = hero;
+        this.player.addInventory(new Weapon("reactor", "This is the key to get out of here.", -1, 5, 256, 182));
         // System.out.println("Welcome " + hero.getName() + ".");
         // System.out.println("Your ship has crashed, you need a jack and a new motor to leave this planet.");
         hero.move(this.MAPS.get(namemap[0]));
