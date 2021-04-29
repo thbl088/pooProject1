@@ -71,6 +71,10 @@ public class MenuPrincipal implements Initializable {
         newStage.setMinWidth(1035);
         newStage.setScene(scene);
         newStage.show();
+    }
 
+    @FXML
+    private void quit(ActionEvent event) {
+        Platform.exit();
     }
 }
