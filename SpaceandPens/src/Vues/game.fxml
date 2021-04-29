@@ -18,10 +18,10 @@
          </image>
       </ImageView>
       <Pane fx:id="temp" prefHeight="794.0" prefWidth="1344.0" />
-      <Pane fx:id="north" layoutX="367.0" layoutY="25.0" onMouseClicked="#goNorth" prefHeight="99.0" prefWidth="540.0" />
-      <Pane fx:id="west" layoutX="-1.0" layoutY="136.0" onMouseClicked="#goWest" prefHeight="424.0" prefWidth="129.0" />
-      <Pane fx:id="east" layoutX="1202.0" layoutY="172.0" onMouseClicked="#goEast" prefHeight="388.0" prefWidth="142.0" />
-      <Pane fx:id="south" layoutX="318.0" layoutY="685.0" onMouseClicked="#goSouth" prefHeight="111.0" prefWidth="540.0" />
+      <Pane fx:id="north" layoutX="367.0" layoutY="25.0" onMouseClicked="#goNorth" onMouseEntered="#lookDoorNorth" prefHeight="99.0" prefWidth="540.0" />
+      <Pane fx:id="west" layoutX="-1.0" layoutY="136.0" onMouseClicked="#goWest" onMouseEntered="#lookDoorWest" prefHeight="424.0" prefWidth="129.0" />
+      <Pane fx:id="east" layoutX="1202.0" layoutY="172.0" onMouseClicked="#goEast" onMouseEntered="#lookDoorEast" prefHeight="388.0" prefWidth="142.0" />
+      <Pane fx:id="south" layoutX="318.0" layoutY="685.0" onMouseClicked="#goSouth" onMouseEntered="#lookDoorSouth" prefHeight="111.0" prefWidth="540.0" />
       <Pane fx:id="inventory" layoutX="978.0" layoutY="597.0" prefHeight="200.0" prefWidth="366.0">
          <children>
             <ImageView fitHeight="200.0" fitWidth="379.0" onDragDropped="#handleDrop" onDragOver="#handleDragOver" onMouseClicked="#openStats" pickOnBounds="true" preserveRatio="true">

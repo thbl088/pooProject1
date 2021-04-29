@@ -81,6 +81,11 @@ public class GameController implements Initializable {
     
 
     public void setPlayerName(String name) {
+        //Initialise des données pour la partie modele
+        this.name = name;
+        this.setWorld(this.name);
+    }
+
         
     public void openFight(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vues/fight.fxml"));
@@ -104,6 +109,12 @@ public class GameController implements Initializable {
             endGame();
         }
     }
+    
+    
+    
+    
+    
+     public void endGame() throws IOException {
         Stage stage = (Stage) this.worldVu.getScene().getWindow();
         stage.close();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vues/menu.fxml"));
@@ -120,11 +131,7 @@ public class GameController implements Initializable {
         newStage.show();
 
     }
-    public void endGame() throws IOException {
-        //Initialise des données pour la partie modele
-        this.name = name;
-        this.setWorld(this.name);
-    }
+
 
     public void setWorld(String playerName) {
         
@@ -480,4 +487,22 @@ public class GameController implements Initializable {
     private void handleDrop(DragEvent event) throws FileNotFoundException {
         dragNdrop.handleDrop(event);
     }   
+
+    @FXML
+    private void lookDoorNorth(MouseEvent event) {
+        
+        
+    }
+
+    @FXML
+    private void lookDoorWest(MouseEvent event) {
+    }
+
+    @FXML
+    private void lookDoorEast(MouseEvent event) {
+    }
+
+    @FXML
+    private void lookDoorSouth(MouseEvent event) {
+    }
 }
