@@ -12,7 +12,7 @@ public class Player extends Character {
 	private Armor armor ;
 	private Weapon weapon;
 	private final Armor DEFAULT_ARMOR = new Armor("Space suit", "This uniform represents our nation", -1, 0);
-	private final Weapon DEFAULT_WEAPON = new Weapon("Ax", "It is used to break the windshield", -1, 0);
+	private final Weapon DEFAULT_WEAPON = new Weapon("Axe", "It is used to break the windshield", -1, 0);
 	private final int COEF_HP_POTION;
 	private final int COEF_ATT_POTION;
 	private final int COEF_DEF_POTION;

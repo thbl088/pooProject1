@@ -78,7 +78,10 @@ public class ShopController implements Initializable {
         sell.setCursor(new ImageCursor(imageSell));
         exit.setCursor(new ImageCursor(imageSortie));
     }
-    
+
+    //méthode appelée uniquement par le contrôleur du jeu
+    //elle permet de fournir à ce contrôleur les références du joueur et du shop
+    //elle initialise aussi les listes des inventaires du shop et du joueur
     public void setPlayerAndShop(Player player, Shop shop) {
         this.player = player;
         this.shop = shop;
@@ -92,7 +95,6 @@ public class ShopController implements Initializable {
         this.itemDescription.setText(this.shopInventory.getSelectionModel().getSelectedItem());
 
         String[] dial = this.shop.getDescription().split(":");
-        dial[2] = dial[2];
         this.dialog.setText(dial[2]);
         
         this.initCursorShop();
@@ -106,6 +108,7 @@ public class ShopController implements Initializable {
         this.shop = shop;
     }
 
+    //ces deux méthodes actualisent les informations affichées pour l'objet sélectionné
     @FXML
     public void selectBuy(MouseEvent event) {
         if (this.shopInventory.getSelectionModel().getSelectedItem() != null) {
@@ -132,6 +135,8 @@ public class ShopController implements Initializable {
         }
     }
 
+    // ces deux méthodes gèrent la transaction shop-player
+    // elles vérifient si le joueur a suffisamment d'argent ou si l'objet à vendre n'est pas critique
     @FXML
     public void buyItem(ActionEvent event) {
         if (this.shopInventory.getSelectionModel().getSelectedItem() != null){
@@ -150,13 +155,7 @@ public class ShopController implements Initializable {
                 this.playerInventory.getItems().add(name);
             }
             else {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText(null);
-                alert.setGraphic(null);
-                alert.setTitle("MESSAGE DU BANQUIER");
-                alert.setContentText("You don't have enough money to buy this item !");
-
-                alert.showAndWait();
+                this.noMoney();
             }
         }
     }
@@ -169,8 +168,11 @@ public class ShopController implements Initializable {
             Item item = this.player.getInventory().get(name);
             
             if (item.getPrice() < 0){
-                
+
+                Image img = new Image("spaceandpens/images/spaceandpens.png");
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+                stage.getIcons().add(img);
                 alert.setHeaderText(null);
                 alert.setGraphic(null);
                 alert.setTitle("Information");
@@ -190,7 +192,10 @@ public class ShopController implements Initializable {
             }
             else
             {
+                Image img = new Image("spaceandpens/images/spaceandpens.png");
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+                stage.getIcons().add(img);
                 alert.setHeaderText(null);
                 alert.setGraphic(null);
                 alert.setTitle("Information");
@@ -201,6 +206,7 @@ public class ShopController implements Initializable {
         }
     }
 
+    //actualise
     public void setPlayerCash() {
         this.playerCash.setText(Integer.toString(this.player.getStatistics().getMoney()));
     }
@@ -220,13 +226,7 @@ public class ShopController implements Initializable {
             this.setPlayerCash();
         }
         else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText(null);
-            alert.setGraphic(null);
-            alert.setTitle("MESSAGE DU BANQUIER");
-            alert.setContentText("You don't have enough money to buy this item !");
-
-            alert.showAndWait();
+            this.noMoney();
         }
     }
 
@@ -239,13 +239,7 @@ public class ShopController implements Initializable {
             this.setPlayerCash();
         }
         else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText(null);
-            alert.setGraphic(null);
-            alert.setTitle("MESSAGE DU BANQUIER");
-            alert.setContentText("You don't have enough money to buy this item !");
-
-            alert.showAndWait();
+            this.noMoney();
         }
     }
     @FXML
@@ -257,13 +251,7 @@ public class ShopController implements Initializable {
             this.setPlayerCash();
         }
         else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText(null);
-            alert.setGraphic(null);
-            alert.setTitle("MESSAGE DU BANQUIER");
-            alert.setContentText("You don't have enough money to buy this item !");
-
-            alert.showAndWait();
+            this.noMoney();
         }
     }
     @FXML
@@ -275,14 +263,21 @@ public class ShopController implements Initializable {
             this.setPlayerCash();
         }
         else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText(null);
-            alert.setGraphic(null);
-            alert.setTitle("MESSAGE DU BANQUIER");
-            alert.setContentText("You don't have enough money to buy this item !");
-
-            alert.showAndWait();
+            this.noMoney();
         }
+    }
+
+    public void noMoney() {
+        Image img = new Image("spaceandpens/images/spaceandpens.png");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(img);
+        alert.setHeaderText(null);
+        alert.setGraphic(null);
+        alert.setTitle("MESSAGE FROM THE BANK");
+        alert.setContentText("You don't have enough money to buy this item !");
+
+        alert.showAndWait();
     }
 
 }

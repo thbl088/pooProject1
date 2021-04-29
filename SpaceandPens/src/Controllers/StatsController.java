@@ -83,6 +83,8 @@ public class StatsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+
+        // fait changer la couleur de la barre de vie selon la vie du joueur
         healthBar.progressProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
@@ -102,18 +104,24 @@ public class StatsController implements Initializable {
     }
 
 
+    //appelée par le contrôleur du jeu, cette méthode permet de transférer à ce contrôleur la référence du joueur
+    //et d'initialiser l'inventaire
     public void setPlayer(Player player) {
         this.player = player;
         reInitialize();
         initList();
     }
 
+    // remplit l'inventaire du joueur avec les noms des objets
     public void initList() {
         for (Map.Entry<String, Item> pair : this.player.getInventory().entrySet()) {
             String item = pair.getKey();
             this.inventoryList.getItems().add(item);
         }
     }
+
+    // permet d'actualiser l'inteface, sauf la liste de l'inventaire
+
     public void reInitialize() {
         Statistics stats = this.player.getStatistics();
         
@@ -164,18 +172,22 @@ public class StatsController implements Initializable {
         inventoryList.setCursor(new ImageCursor(image));
     }
 
+
+    //retire l'arme du joueur (le modèle lui réassigne automatiquement son arme par défaut)
     @FXML
     public void weaponUnequip(ActionEvent e) {
         this.player.removeWeapon(this.player.getWeapon());
         reInitialize();
     }
 
+    //retire l'armure du joueur (le modèle lui réassigne automatiquement son armure par défaut)
     @FXML
     public void armorUnequip(ActionEvent e) {
         this.player.removeArmor(this.player.getArmor());
         reInitialize();
     }
 
+    //équipe le joueur avec l'item sélectionné uniquement si c'est une arme ou une armure
     @FXML
     public void equipItem(ActionEvent e) {
         if (this.inventoryList.getSelectionModel().getSelectedItem() != null) {
@@ -192,6 +204,7 @@ public class StatsController implements Initializable {
         this.reInitialize();
     }
 
+    //met à jour la description et le type de l'objet lorsque sélectionné dans l'inventaire
     @FXML
     public void updateDesc(MouseEvent e){
         if (this.inventoryList.getSelectionModel().getSelectedItem() != null) {
@@ -211,6 +224,8 @@ public class StatsController implements Initializable {
         }
     }
 
+
+    // fonctions d'utilisation des potions, directement branchées sur le modèle
     @FXML
     public void useHealth(ActionEvent e) {
         if (this.player.getHealthPotion() > 0 && this.player.getHealth() != this.player.getStatistics().getMaxHealth())
