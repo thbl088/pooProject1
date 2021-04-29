@@ -70,6 +70,7 @@ public class ShopController implements Initializable {
         Image imageMain = new Image("spaceandpens/images/curseur/main.png");
         
         shopInventory.setCursor(new ImageCursor(imageMain));
+        playerInventory.setCursor(new ImageCursor(imageMain));
         buy.setCursor(new ImageCursor(image));
         defPotion.setCursor(new ImageCursor(image));
         critPotion.setCursor(new ImageCursor(image));

@@ -12,6 +12,7 @@ import Modeles.Map;
 import Modeles.Npc;
 import Modeles.WorldIHM;
 import Controllers.TakeListener;
+import Modeles.Door;
 import Modeles.LockedDoor;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -164,19 +165,8 @@ public class GameController implements Initializable {
     }    
     
        public void initiCursor(){
-        //On ajoute une image Custom sur le curseur
-        Image imageN = new Image("spaceandpens/images/curseur/haut.png");
-        north.setCursor(new ImageCursor(imageN));
-        
-        Image imageS = new Image("spaceandpens/images/curseur/bas.png");
-        south.setCursor(new ImageCursor(imageS));
-        
-        Image imageD = new Image("spaceandpens/images/curseur/droite.png");
-        east.setCursor(new ImageCursor(imageD));
-        
-        Image imageG = new Image("spaceandpens/images/curseur/gauche.png");
-        west.setCursor(new ImageCursor(imageG));
-        
+        //On ajoute une image Custom sur le curseur pour la root inventory.
+  
         Image imageI = new Image("spaceandpens/images/curseur/bourse.png");
         inventory.setCursor(new ImageCursor(imageI));               
     }
@@ -489,19 +479,113 @@ public class GameController implements Initializable {
 
     @FXML
     private void lookDoorNorth(MouseEvent event) {
+        Door door =  world.getPlayer().getMapHero().getNorth();        // On récupére la porte 
+       
+      if (door == null){                //Si elle est nul on change le curseur pour dire qu'il n'y a d'autre map
+           Image image = new Image("spaceandpens/images/curseur/nop.png");
+           north.setCursor(new ImageCursor(image));
+      }
+      else if(( door  instanceof LockedDoor )){      //On vérifie si cette porte est une porte fermée, verrouillé sur la map End Portal ( élément de l'histoire ), deverrouillé. Change le cureur suivant le choix
+            if("End Portal" == this.world.getPlayer().getMapHero().getName() && ((LockedDoor) door).isLocked() )
+            { 
+                Image image = new Image("spaceandpens/images/curseur/oeil.png");
+                north.setCursor(new ImageCursor(image));
+            }
+            else if (((LockedDoor) door).isLocked()){
+                Image image = new Image("spaceandpens/images/curseur/cadenat.png");
+                north.setCursor(new ImageCursor(image));
+                }
+            else{
+                Image image = new Image("spaceandpens/images/curseur/haut.png");
+                north.setCursor(new ImageCursor(image));
+                }
+      }
+      else if ( door != null ){          // Si la porte existe on indique changement du curseur                                                                                                                                     
+            Image image = new Image("spaceandpens/images/curseur/haut.png");
+            north.setCursor(new ImageCursor(image));
+        }
+   }
         
         
-    }
 
     @FXML
     private void lookDoorWest(MouseEvent event) {
+        
+      Door door =  world.getPlayer().getMapHero().getWest();
+       
+      if (door == null){
+           Image image = new Image("spaceandpens/images/curseur/nop.png");
+           west.setCursor(new ImageCursor(image));
+      }
+      else if(( door  instanceof LockedDoor )){
+            if (((LockedDoor) door).isLocked()){
+                if( ((LockedDoor) door).isLocked()){
+                    Image image = new Image("spaceandpens/images/curseur/cadenat.png");
+                    west.setCursor(new ImageCursor(image));
+                }
+                else{
+                    Image image = new Image("spaceandpens/images/curseur/gauche.png");
+                    north.setCursor(new ImageCursor(image));
+                    }
+                }
+      }
+      else if ( door != null){
+            Image image = new Image("spaceandpens/images/curseur/gauche.png");
+            west.setCursor(new ImageCursor(image));
+        }
     }
 
     @FXML
     private void lookDoorEast(MouseEvent event) {
+        
+      Door door =  world.getPlayer().getMapHero().getEast();
+       
+      if (door == null){
+           Image image = new Image("spaceandpens/images/curseur/nop.png");
+           east.setCursor(new ImageCursor(image));
+      }
+      else if(( door  instanceof LockedDoor )){
+            if (((LockedDoor) door).isLocked()){
+                if( ((LockedDoor) door).isLocked()){
+                    Image image = new Image("spaceandpens/images/curseur/cadenat.png");
+                    east.setCursor(new ImageCursor(image));
+                }
+                else{
+                    Image image = new Image("spaceandpens/images/curseur/droite.png");
+                    east.setCursor(new ImageCursor(image));
+                    }
+                }
+      }
+      else if ( door != null){
+            Image image = new Image("spaceandpens/images/curseur/droite.png");
+            east.setCursor(new ImageCursor(image));
+        }
     }
 
     @FXML
     private void lookDoorSouth(MouseEvent event) {
+        
+      Door door =  world.getPlayer().getMapHero().getSouth();
+       
+      if (door == null){
+           Image image = new Image("spaceandpens/images/curseur/nop.png");
+           south.setCursor(new ImageCursor(image));
+      }
+      else if(( door  instanceof LockedDoor )){
+            if (((LockedDoor) door).isLocked()){
+                if( ((LockedDoor) door).isLocked()){
+                    Image image = new Image("spaceandpens/images/curseur/cadenat.png");
+                    south.setCursor(new ImageCursor(image));
+                }
+                else{
+                    Image image = new Image("spaceandpens/images/curseur/gauche.png");
+                    south.setCursor(new ImageCursor(image));
+                    }
+                }
+      }      
+      else if ( door != null){
+            Image image = new Image("spaceandpens/images/curseur/bas.png");
+            south.setCursor(new ImageCursor(image));
+        }
     }
 }

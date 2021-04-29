@@ -227,6 +227,7 @@ public class EndDoorController implements Initializable {
         }
 
     private void removeall() {
+        
         skatefinish.getChildren().clear();
         carfinish.getChildren().clear();
         tankfinish.getChildren().clear();
