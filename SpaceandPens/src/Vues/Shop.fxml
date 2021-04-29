@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="505.0" minWidth="500.0" prefHeight="532.0" prefWidth="919.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ShopController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="505.0" minWidth="500.0" prefHeight="532.0" prefWidth="919.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ShopController">
    <children>
       <TabPane prefHeight="341.0" prefWidth="384.0" stylesheets="@../spaceandpens/images/tab.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -18,7 +30,7 @@
                            <font>
                               <Font size="25.0" />
                            </font></Button>
-                        <TextField fx:id="priceBuy" layoutX="26.0" layoutY="256.0" prefHeight="25.0" prefWidth="100.0" />
+                        <TextField fx:id="priceBuy" editable="false" layoutX="26.0" layoutY="256.0" prefHeight="25.0" prefWidth="100.0" />
                         <Label layoutX="26.0" layoutY="231.0" text="Price :">
                            <font>
                               <Font size="14.0" />
@@ -74,7 +86,7 @@
                         <Image url="@../spaceandpens/images/healthPotion.png" />
                      </image>
                   </ImageView>
-                  <Button mnemonicParsing="false" onAction="#buyHealth" prefWidth="60.0" text="Health" />
+                  <Button fx:id="healthPotion" mnemonicParsing="false" onAction="#buyHealth" prefWidth="60.0" text="Health" />
                </children>
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
@@ -84,7 +96,7 @@
                         <Image url="@../spaceandpens/images/attackPotion.png" />
                      </image>
                   </ImageView>
-                  <Button mnemonicParsing="false" onAction="#buyAttack" prefWidth="60.0" text="Attack" />
+                  <Button fx:id="attackPotion" mnemonicParsing="false" onAction="#buyAttack" prefWidth="60.0" text="Attack" />
                </children>
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="1">
@@ -94,7 +106,7 @@
                         <Image url="@../spaceandpens/images/defensePotion.png" />
                      </image>
                   </ImageView>
-                  <Button mnemonicParsing="false" onAction="#buyDefense" prefWidth="60.0" text="Defense" />
+                  <Button fx:id="defPotion" mnemonicParsing="false" onAction="#buyDefense" prefWidth="60.0" text="Defense" />
                </children>
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -104,7 +116,7 @@
                         <Image url="@../spaceandpens/images/criticalPotion.png" />
                      </image>
                   </ImageView>
-                  <Button mnemonicParsing="false" onAction="#buyCritical" prefWidth="60.0" text="Critical" />
+                  <Button fx:id="critPotion" mnemonicParsing="false" onAction="#buyCritical" prefWidth="60.0" text="Critical" />
                </children>
             </VBox>
          </children>

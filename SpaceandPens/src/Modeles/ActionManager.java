@@ -241,24 +241,6 @@ public class ActionManager {
 					return new Object[]{false, "West door is locked"};
 				}
 				break;
-
-				/*
-			case "shop" : //entre magasin
-				if (currentLoc.isShop()) {
-					currentPlayer.move(currentLoc.getShop().getDestination());
-					System.out.println("You Enter : " + currentPlayer.getMapHero().getName() + "\n" + currentPlayer.getMapHero().getDescription());}
-				else { System.out.println("There is no shop"); }
-				break;
-			case "back", "out" : //sort du magasin
-				if (currentLoc instanceof Shop) {
-					currentPlayer.move(((Shop) currentLoc).getExitShop());
-					System.out.println("Xavier [Marchand] :\"Goodbye Hero.\"");
-					System.out.println("You Enter : " + currentPlayer.getMapHero().getName() + "\n" + currentPlayer.getMapHero().getDescription());
-				}
-				else { System.out.println("You cannot exit current location"); }
-				break;
-
-				 */
 			default :
 				return new Object[]{false, "You can't go there"};
 		}

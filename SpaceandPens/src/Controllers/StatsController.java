@@ -16,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
+import javafx.scene.ImageCursor;
 
 public class StatsController implements Initializable {
 
@@ -62,6 +63,20 @@ public class StatsController implements Initializable {
     private TextField itemType;
     @FXML
     private ImageView itemView;
+    @FXML
+    private Button equipItem;
+    @FXML
+    private Button weaponUnequip;
+    @FXML
+    private Button useHp;
+    @FXML
+    private Button useAttaque;
+    @FXML
+    private Button useDef;
+    @FXML
+    private Button useCrit;
+    @FXML
+    private Button armorUnequip;
 
 
 
@@ -101,7 +116,8 @@ public class StatsController implements Initializable {
     }
     public void reInitialize() {
         Statistics stats = this.player.getStatistics();
-
+        
+        this.initCursorStats();
         this.healthBar.setProgress( (double)stats.getHealth() / (double)stats.getMaxHealth());
         this.attack.setText("Attack : " + stats.getAttack());
         this.defense.setText("Defense : " + stats.getDefense());
@@ -132,6 +148,20 @@ public class StatsController implements Initializable {
         this.attPotion.setText(Integer.toString(this.player.getAttackPotion()));
         this.defPotion.setText(Integer.toString(this.player.getDefensePotion()));
         this.critPotion.setText(Integer.toString(this.player.getCritPotion()));
+    }
+    
+    
+    public void initCursorStats(){
+        Image image = new Image("spaceandpens/images/curseur/main.png");
+        
+        equipItem.setCursor(new ImageCursor(image));
+        weaponUnequip.setCursor(new ImageCursor(image));
+        useHp.setCursor(new ImageCursor(image));
+        useAttaque.setCursor(new ImageCursor(image));      
+        useDef.setCursor(new ImageCursor(image));        
+        useCrit.setCursor(new ImageCursor(image));            
+        armorUnequip.setCursor(new ImageCursor(image));
+        inventoryList.setCursor(new ImageCursor(image));
     }
 
     @FXML

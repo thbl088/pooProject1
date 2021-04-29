@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
+import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
 
 public class ShopController implements Initializable {
 
@@ -46,6 +48,14 @@ public class ShopController implements Initializable {
     private Label dialog;
     @FXML
     private ImageView itemView;
+    @FXML
+    private Button healthPotion;
+    @FXML
+    private Button attackPotion;
+    @FXML
+    private Button defPotion;
+    @FXML
+    private Button critPotion;
 
 
     @Override
@@ -53,7 +63,22 @@ public class ShopController implements Initializable {
 
 
     }
-
+    public void initCursorShop(){
+        Image image = new Image("spaceandpens/images/curseur/bourse.png");
+        Image imageSell = new Image("spaceandpens/images/curseur/billet.png");
+        Image imageSortie = new Image("spaceandpens/images/curseur/doorOpen.png");
+        Image imageMain = new Image("spaceandpens/images/curseur/main.png");
+        
+        shopInventory.setCursor(new ImageCursor(imageMain));
+        buy.setCursor(new ImageCursor(image));
+        defPotion.setCursor(new ImageCursor(image));
+        critPotion.setCursor(new ImageCursor(image));
+        attackPotion.setCursor(new ImageCursor(image));
+        healthPotion.setCursor(new ImageCursor(image));
+        sell.setCursor(new ImageCursor(imageSell));
+        exit.setCursor(new ImageCursor(imageSortie));
+    }
+    
     public void setPlayerAndShop(Player player, Shop shop) {
         this.player = player;
         this.shop = shop;
@@ -67,8 +92,10 @@ public class ShopController implements Initializable {
         this.itemDescription.setText(this.shopInventory.getSelectionModel().getSelectedItem());
 
         String[] dial = this.shop.getDescription().split(":");
-        dial[2] = dial[2].replace('"', ' ');
+        dial[2] = dial[2];
         this.dialog.setText(dial[2]);
+        
+        this.initCursorShop();
     }
 
     public void setPlayer(Player player) {

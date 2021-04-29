@@ -11,12 +11,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
@@ -36,6 +37,10 @@ public class TalkController implements Initializable {
     private ImageView pnj;
     @FXML
     private ImageView hero;
+    @FXML
+    private Button quit;
+    @FXML
+    private Button talk;
     
     /**
      * Initializes the controller class.
@@ -113,4 +118,16 @@ public class TalkController implements Initializable {
                 p.getMapHero().getNpc(name).removeItem();                                  //On enlève l'item au pnj
             }
     }  
+
+    @FXML
+    private void exit(ActionEvent event) {
+        Stage stage = (Stage) root.getScene().getWindow();
+                stage.close();
+    }
+
+    @FXML
+    private void talkAgain(ActionEvent event) {
+        
+        this.Talk(this.nameNpc);
+    }
 }

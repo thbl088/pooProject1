@@ -162,7 +162,7 @@ public class WorldIHM {
 
         StatisticsEnemy statsRobert = new StatisticsEnemy(5, 5, 5, 2);
         Weapon bottle = new Weapon("bottle", "It's a bottle.", 2, 1);
-        Enemy robert = new Enemy("robert", bottle, statsRobert, 524, 332);
+        Enemy robert = new Enemy("robert", bottle, statsRobert, 550, 332);
 
         enemies[10] = robert;
 
@@ -184,7 +184,7 @@ public class WorldIHM {
         // Map  18 Les frères crayons 2B crayon tendre et 2H crayon dur
 
         Enemy crayon2B = new Enemy("2b", statsRobcrayontendre, 425, 208);
-        Enemy crayon2H = new Enemy("2h", stats9H, 622, 319);
+        Enemy crayon2H = new Enemy("2h", stats9H, 622, 150);
 
         enemies[13] = crayon2B;
         enemies[14] = crayon2H;
@@ -379,7 +379,7 @@ public class WorldIHM {
         village[3] = new Npc("crazy man", tankTrack, "Mark [Crazy man] : \"HEY YOU! I have found this big thing around, I was trying to sleep on it but it’s too hard so take it!\"", 896, 212);
         village[4] = new Npc("factor", null, "Sebastien [Factor] : \"I need to deliver these important packages but these monsters block the road.\"", 572, 379);
         village[5] = new Npc("shepherdess", null, "Anne [Shepherdess] : \"Sometimes I found weird trace on the earth around my herd and a big ball appear.\"", 479, 493);
-        village[6] = new Npc("alcoholic", null, "Robert [alcoholic]: \"BEURGHHHH.\"", 490, 306);
+        village[6] = new Npc("alcoholic", null, "Franck [alcoholic]: \"BEURGHHHH.\"", 490, 306);
         village[7] = new Npc("miner", null, "José [Miner] : \"I hope I’ll find a diamond this time but there is too much lava down there.\"", 112, 343);
         village[8] = new Npc("lumberjack", null, "Franck [Lumberjack] :\"Thank you a lot, now I can go back and see my wife Josette.\"", 565, 424);
         village[9] = new Npc("fisher", null, "Hena [Fisher] : \"I hope I’ll catch this big fish this time.\"", 113, 144);

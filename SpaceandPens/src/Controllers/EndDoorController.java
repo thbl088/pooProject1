@@ -14,15 +14,19 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
@@ -44,6 +48,8 @@ public class EndDoorController implements Initializable {
     private Pane skatefinish;
     @FXML
     private Pane tankfinish;
+    @FXML
+    private Button qui;
 
     /**
      * Initializes the controller class.
@@ -59,6 +65,9 @@ public class EndDoorController implements Initializable {
         
        this.player = player;
        
+       Image imageQui = new Image("spaceandpens/images/curseur/doorOpen.png");
+       qui.setCursor(new ImageCursor(imageQui));
+       
        if(player.hasItem(car)){
            
            ImageView nEntity = new ImageView(new Image("/spaceandpens/images/objet/"+car+".png"));
@@ -68,11 +77,15 @@ public class EndDoorController implements Initializable {
             nEntity.setFitWidth(170);
             
             //On la place sur la nouvelle map 
-            nEntity.setLayoutX(14);
+            nEntity.setLayoutX(100);
             nEntity.setLayoutY(-8);
             
             //On lui met un id pour le reconnaître
             nEntity.setId(car);
+            
+            //On lui personnalise un curseur pour dire à l'utilisateur qu'il peut faire une action
+            Image image = new Image("spaceandpens/images/curseur/main.png");
+            nEntity.setCursor(new ImageCursor(image));
             
             spawn.getChildren().add(nEntity);
             
@@ -100,6 +113,8 @@ public class EndDoorController implements Initializable {
             
             spawn.getChildren().add(nEntity);
             
+            Image image = new Image("spaceandpens/images/curseur/main.png");
+            nEntity.setCursor(new ImageCursor(image));
             
             TakeListener dragNdrop = new TakeListener(322 , -8);
             
@@ -123,7 +138,11 @@ public class EndDoorController implements Initializable {
             nEntity.setId(tank);
             spawn.getChildren().add(nEntity); 
             
+            Image image = new Image("spaceandpens/images/curseur/main.png");
+            nEntity.setCursor(new ImageCursor(image));
+            
             TakeListener dragNdrop = new TakeListener(632 , -8);
+            
             nEntity.setOnDragDetected(event -> {
                 dragNdrop.glisseEndDoor(event);
             });
@@ -159,8 +178,8 @@ public class EndDoorController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setHeaderText(null);
         alert.setGraphic(null);
-        alert.setTitle("Door Soul");
-        alert.setContentText("Thanks bro u can enter");
+        alert.setTitle("The Soul of the End Door");
+        alert.setContentText("Captain Keyes [The Soul of the End Door] : Thanks bro u can enter");
         alert.show();
 
     }
@@ -211,6 +230,12 @@ public class EndDoorController implements Initializable {
         skatefinish.getChildren().clear();
         carfinish.getChildren().clear();
         tankfinish.getChildren().clear();
+    }
+
+    @FXML
+    private void closeWindow(ActionEvent event) {
+        Stage stage = (Stage) spawn.getScene().getWindow();
+                stage.close();
     }
 }    
 

@@ -25,6 +25,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
@@ -76,7 +77,259 @@ public class GameController implements Initializable {
     private Pane temp;
     
     
+
+    public void setPlayerName(String name) {
+        
+        //Initialise des données pour la partie modele
+        this.name = name;
+        this.setWorld(this.name);
+    }
+
+    public void setWorld(String playerName) {
+        
+        //Initialise des données pour la partie modele
+        this.world = new WorldIHM(playerName);
+        this.manager = new ActionManager(this.world);
+        this.setMapDescription();
+        
+        //Initialisation parti vu
+        TakeListener look = new TakeListener(world, temp, 12, 13);
+        this.dragNdrop = look;
+        this.initiCursor();
+        
+        //Debut du jeu
+        this.gameDescription.setText("Welcome " + this.name + ".");
+        this.setGameDescription("Your ship has crashed, you need a jack and a new motor to leave this planet.");
+        this.setGameDescription("You Enter : " + this.world.getPlayer().getMapHero().getName() + ".");
+        
+        
+   
+    }
+
+    public void setGameDescription(String text) {
+        this.gameDescription.appendText('\n' + text);
+    }
     
+
+    public void setMapDescription() {
+        this.mapDescription.setText(this.world.getMapDescription());
+    }    
+    
+       public void initiCursor(){
+        //On ajoute une image Custom sur le curseur
+        Image imageN = new Image("spaceandpens/images/curseur/haut.png");
+        north.setCursor(new ImageCursor(imageN));
+        
+        Image imageS = new Image("spaceandpens/images/curseur/bas.png");
+        south.setCursor(new ImageCursor(imageS));
+        
+        Image imageD = new Image("spaceandpens/images/curseur/droite.png");
+        east.setCursor(new ImageCursor(imageD));
+        
+        Image imageG = new Image("spaceandpens/images/curseur/gauche.png");
+        west.setCursor(new ImageCursor(imageG));
+        
+        Image imageI = new Image("spaceandpens/images/curseur/bourse.png");
+        inventory.setCursor(new ImageCursor(imageI));
+               
+    }
+   
+    public void actualiseVue() throws IOException{
+        
+        if (temp.getChildren().size() > 0 ){
+            //On supprime les anciens donnée
+            temp.getChildren().clear();
+        }
+        
+        //On récupère la nouvel amp
+        Map newMap = this.world.player.getMapHero();
+        
+        //On regarde si la nouvelle map possède le shop
+        if (newMap.isShop())
+        {
+            Pane shop = new Pane();
+            
+            shop.setLayoutX(801);
+            shop.setLayoutY(203);
+            shop.setPrefHeight(306);
+            shop.setPrefWidth(327);
+            
+            // Changement du curseur pour que l'utilisateur aperçoit l'interaction avec la boutique
+            Image image = new Image("spaceandpens/images/curseur/doorOpen.png");
+            shop.setCursor(new ImageCursor(image));
+            //On lui ajoute un évènement clique souris
+            shop.setOnMouseClicked(event -> {
+                try {
+                    this.openShop(event);
+                } catch (IOException ex) {
+                    Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+            temp.getChildren().add(shop);     
+        }
+        
+        //On récupére son contenu
+        String nameMap = newMap.getName();
+        Set<String> itemList = newMap.getGroundItemsList();
+        Set<String> npcList = newMap.getNpcsList();
+        Set<String> ennemisList = newMap.getEnemiesList();
+        
+        //On actualise la map
+        map.setImage(new Image("/spaceandpens/images/map/"+nameMap+".png"));
+        
+        //On place les objet pnj et ennemis si y'en a 
+        Object[] items = itemList.toArray();
+        
+        
+        for (int i = 0 ; i < items.length; i++) {
+            //On récupére la Hashmap de la Map
+            HashMap<String, Item> itemHash = world.getPlayer().getMapHero().getItem();
+          
+            //On crée la nouvelle entité 
+            ImageView nEntity = new ImageView(new Image("/spaceandpens/images/objet/"+items[i]+".png"));
+            
+            
+            //On lui donne un id le nom de l'objet 
+            nEntity.setId(items[i].toString());
+            
+            //On prend nos valeur déjà prédifini pour la taille et largeur
+            nEntity.setFitHeight(itemHash.get(items[i].toString()).getPositionHeight());
+            nEntity.setFitWidth(itemHash.get(items[i].toString()).getPositionWidth());
+            
+            //On la place sur la nouvelle map 
+            nEntity.setLayoutX(itemHash.get(items[i].toString()).getPositionX());
+            nEntity.setLayoutY(itemHash.get(items[i].toString()).getPositionY());
+            
+            //Changement de l'image du curseur
+            Image image = new Image("spaceandpens/images/curseur/main.png");
+            nEntity.setCursor(new ImageCursor(image));
+            
+            nEntity.setOnDragDetected(event -> {
+                dragNdrop.handleDragDetected(event);
+                
+            });
+            
+            //On l'ajoute comme enfant au pane temp 
+            temp.getChildren().add(nEntity);
+        }
+        
+        Object[] npcs = npcList.toArray();
+        for (int i = 0 ; i < npcs.length; i++) {
+            
+            HashMap<String, Npc> npcHash = world.getPlayer().getMapHero().getNpcs();
+            
+            ImageView nEntity = new ImageView(new Image("/spaceandpens/images/pnj/"+npcs[i]+".png")); 
+            String nameNpc = npcs[i].toString();
+            
+            nEntity.setId(nameNpc);
+            nEntity.setFitHeight(npcHash.get(npcs[i].toString()).getPositionHeight());
+            nEntity.setFitWidth(npcHash.get(npcs[i].toString()).getPositionWidth());
+            nEntity.setLayoutX(npcHash.get(npcs[i].toString()).getPositionX());
+            nEntity.setLayoutY(npcHash.get(npcs[i].toString()).getPositionY());
+            
+            Image image = new Image("spaceandpens/images/curseur/bulle.png");
+            nEntity.setCursor(new ImageCursor(image));
+            
+            nEntity.setOnMouseClicked(event -> {
+                try {
+                    this.openTalk(event, nameNpc);
+                } catch (IOException ex) {
+                    Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                });
+            
+            temp.getChildren().add(nEntity);
+            
+        }
+        
+        Object[] ennemis = ennemisList.toArray();
+        for (int i = 0 ; i < ennemis.length; i++) {
+            HashMap<String, Enemy> ennemiHash = world.getPlayer().getMapHero().getEnemies();
+            
+            ImageView nEntity = new ImageView(new Image("/spaceandpens/images/ennemi/"+ennemis[i]+".png"));
+            
+            nEntity.setId(ennemis[i].toString());
+            nEntity.setFitHeight(ennemiHash.get(ennemis[i].toString()).getPositionHeight());
+            nEntity.setFitWidth(ennemiHash.get(ennemis[i].toString()).getPositionWidth());
+            nEntity.setLayoutX(ennemiHash.get(ennemis[i].toString()).getPositionX());
+            nEntity.setLayoutY(ennemiHash.get(ennemis[i].toString()).getPositionY());
+            
+            Image image = new Image("spaceandpens/images/curseur/epe.png");
+            nEntity.setCursor(new ImageCursor(image));
+                    
+            temp.getChildren().add(nEntity);
+            
+        }        
+    }
+    /**
+     * Initializes the controller class.
+     * @param url
+     * @param rb
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }    
+
+    @FXML
+    private void goNorth(MouseEvent event) throws IOException
+    {
+        Object[] response = this.manager.actionGo("north");
+        if(((boolean) response[0] == false ) && ("End Portal" == this.world.getPlayer().getMapHero().getName() ))
+        {
+            this.openWindowEndPortal(event);
+            LockedDoor northDoor = (LockedDoor) this.world.getPlayer().getMapHero().getNorth();
+            if( northDoor.isLocked())
+            {
+                String description = "Now the door is unlock";
+                this.setGameDescription(description);
+            }
+ 
+        }
+        else{
+            if((boolean) response[0]){
+                
+                this.setMapDescription();
+            }
+            this.setGameDescription((String) response[1]);
+            this.actualiseVue();
+        }    
+        
+    }
+
+    @FXML
+    private void goWest(MouseEvent event) throws IOException 
+    {
+        Object[] response = this.manager.actionGo("west");
+        if((boolean) response[0])
+            this.setMapDescription();
+        this.setGameDescription((String) response[1]);
+        
+        this.actualiseVue();
+    }
+
+    @FXML
+    private void goEast(MouseEvent event) throws IOException 
+    {
+        Object[] response = this.manager.actionGo("east");
+        if((boolean) response[0])
+            this.setMapDescription();
+        this.setGameDescription((String) response[1]);
+        this.actualiseVue();
+
+    }
+
+    @FXML
+    private void goSouth(MouseEvent event) throws IOException 
+    {
+        Object[] response = this.manager.actionGo("south");
+        if((boolean) response[0])
+            this.setMapDescription();
+        this.setGameDescription((String) response[1]);
+        
+        this.actualiseVue();
+    }
+
     @FXML
     public void openStats(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vues/Stats.fxml"));
@@ -152,220 +405,10 @@ public class GameController implements Initializable {
         stage.setMinWidth(802);
         stage.setScene(scene);
         stage.showAndWait();    
-    }    
-
-
-    public void setPlayerName(String name) {
-        this.name = name;
-        this.setWorld(this.name);
-    }
-
-    public void setWorld(String playerName) {
-        this.world = new WorldIHM(playerName);
-        this.manager = new ActionManager(this.world);
-        this.setMapDescription();
-        this.gameDescription.setText("Welcome " + this.name + ".");
-        this.setGameDescription("Your ship has crashed, you need a jack and a new motor to leave this planet.");
-        this.setGameDescription("You Enter : " + this.world.getPlayer().getMapHero().getName() + ".");
-        
-        TakeListener look = new TakeListener(world, temp, 12, 13);
-        this.dragNdrop = look;
-   
-    }
-
-    public void setGameDescription(String text) {
-        this.gameDescription.appendText('\n' + text);
-    }
+    }  
     
-
-    public void setMapDescription() {
-        this.mapDescription.setText(this.world.getMapDescription());
-    }    
     
-    public void actualiseVue() throws IOException{
-        
-        if (temp.getChildren().size() > 0 ){
-            //On supprime les anciens donnée
-            temp.getChildren().clear();
-        }
-        
-        //On récupère la nouvel amp
-        Map newMap = this.world.player.getMapHero();
-        
-        //On regarde si la nouvelle map possède le shop
-        if (newMap.isShop())
-        {
-            Pane shop = new Pane();
-            
-            shop.setLayoutX(801);
-            shop.setLayoutY(203);
-            shop.setPrefHeight(306);
-            shop.setPrefWidth(327);
-            
-            //On lui ajoute un évènement clique souris
-            shop.setOnMouseClicked(event -> {
-                try {
-                    this.openShop(event);
-                } catch (IOException ex) {
-                    Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            });
-            
-            temp.getChildren().add(shop);     
-        }
-        
-        //On récupére son contenu
-        String nameMap = newMap.getName();
-        Set<String> itemList = newMap.getGroundItemsList();
-        Set<String> npcList = newMap.getNpcsList();
-        Set<String> ennemisList = newMap.getEnemiesList();
-        
-        //On actualise la map
-        map.setImage(new Image("/spaceandpens/images/map/"+nameMap+".png"));
-        
-        //On place les objet pnj et ennemis si y'en a 
-        Object[] items = itemList.toArray();
-        
-        
-        for (int i = 0 ; i < items.length; i++) {
-            //On récupére la Hashmap de la Map
-            HashMap<String, Item> itemHash = world.getPlayer().getMapHero().getItem();
-          
-            //On crée la nouvelle entité 
-            ImageView nEntity = new ImageView(new Image("/spaceandpens/images/objet/"+items[i]+".png"));
-            
-            
-            //On lui donne un id le nom de l'objet 
-            nEntity.setId(items[i].toString());
-            
-            //On prend nos valeur déjà prédifini pour la taille et largeur
-            nEntity.setFitHeight(itemHash.get(items[i].toString()).getPositionHeight());
-            nEntity.setFitWidth(itemHash.get(items[i].toString()).getPositionWidth());
-            
-            //On la place sur la nouvelle map 
-            nEntity.setLayoutX(itemHash.get(items[i].toString()).getPositionX());
-            nEntity.setLayoutY(itemHash.get(items[i].toString()).getPositionY());
-            
-            //Changement de l'image du curseur
-            nEntity.setCursor(Cursor.HAND);
-            
-            nEntity.setOnDragDetected(event -> {
-                dragNdrop.handleDragDetected(event);
-            });
-            
-            //On l'ajoute comme enfant au pane temp 
-            temp.getChildren().add(nEntity);
-        }
-        
-        Object[] npcs = npcList.toArray();
-        for (int i = 0 ; i < npcs.length; i++) {
-            
-            HashMap<String, Npc> npcHash = world.getPlayer().getMapHero().getNpcs();
-            
-            ImageView nEntity = new ImageView(new Image("/spaceandpens/images/pnj/"+npcs[i]+".png")); 
-            String nameNpc = npcs[i].toString();
-            
-            nEntity.setId(nameNpc);
-            nEntity.setFitHeight(npcHash.get(npcs[i].toString()).getPositionHeight());
-            nEntity.setFitWidth(npcHash.get(npcs[i].toString()).getPositionWidth());
-            nEntity.setLayoutX(npcHash.get(npcs[i].toString()).getPositionX());
-            nEntity.setLayoutY(npcHash.get(npcs[i].toString()).getPositionY());
-            
-            nEntity.setOnMouseClicked(event -> {
-                try {
-                    this.openTalk(event, nameNpc);
-                } catch (IOException ex) {
-                    Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                });
-            
-            temp.getChildren().add(nEntity);
-            
-        }
-        
-        Object[] ennemis = ennemisList.toArray();
-        for (int i = 0 ; i < ennemis.length; i++) {
-            HashMap<String, Enemy> ennemiHash = world.getPlayer().getMapHero().getEnemies();
-            
-            ImageView nEntity = new ImageView(new Image("/spaceandpens/images/ennemi/"+ennemis[i]+".png"));
-            
-            nEntity.setId(ennemis[i].toString());
-            nEntity.setFitHeight(ennemiHash.get(ennemis[i].toString()).getPositionHeight());
-            nEntity.setFitWidth(ennemiHash.get(ennemis[i].toString()).getPositionWidth());
-            nEntity.setLayoutX(ennemiHash.get(ennemis[i].toString()).getPositionX());
-            nEntity.setLayoutY(ennemiHash.get(ennemis[i].toString()).getPositionY());
-                    
-            temp.getChildren().add(nEntity);
-            
-        }        
-    }
-    /**
-     * Initializes the controller class.
-     * @param url
-     * @param rb
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-
-    @FXML
-    private void goNorth(MouseEvent event) throws IOException
-    {
-        Object[] response = this.manager.actionGo("north");
-        if(((boolean) response[0] == false ) && ("End Portal" == this.world.getPlayer().getMapHero().getName() ))
-        {
-            this.openWindowEndPortal(event);
-            LockedDoor northDoor = (LockedDoor) this.world.getPlayer().getMapHero().getNorth();
-            if( northDoor.isLocked())
-            {
-                String description = "Now the door is unlock";
-                this.setGameDescription(description);
-            }
- 
-        }
-        else{
-            if((boolean) response[0])
-                this.setMapDescription();
-            this.setGameDescription((String) response[1]);
-            this.actualiseVue();
-        }    
-        
-    }
-
-    @FXML
-    private void goWest(MouseEvent event) throws IOException 
-    {
-        Object[] response = this.manager.actionGo("west");
-        if((boolean) response[0])
-            this.setMapDescription();
-        this.setGameDescription((String) response[1]);
-        
-        this.actualiseVue();
-    }
-
-    @FXML
-    private void goEast(MouseEvent event) throws IOException 
-    {
-        Object[] response = this.manager.actionGo("east");
-        if((boolean) response[0])
-            this.setMapDescription();
-        this.setGameDescription((String) response[1]);
-        this.actualiseVue();
-
-    }
-
-    @FXML
-    private void goSouth(MouseEvent event) throws IOException 
-    {
-        Object[] response = this.manager.actionGo("south");
-        if((boolean) response[0])
-            this.setMapDescription();
-        this.setGameDescription((String) response[1]);
-        
-        this.actualiseVue();
-    }
-
+    
     @FXML
     private void handleDragOver(DragEvent event) {
         dragNdrop.handleDragOver(event);

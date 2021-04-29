@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -11,7 +12,10 @@
             <Image url="@../spaceandpens/images/objet/End%20Door.png" />
          </image>
       </ImageView>
-      <Pane fx:id="spawn" layoutX="1.0" layoutY="399.0" prefHeight="133.0" prefWidth="802.0" />
+      <Pane fx:id="spawn" layoutX="1.0" layoutY="399.0" prefHeight="133.0" prefWidth="802.0">
+         <children>
+            <Button fx:id="qui" layoutX="14.0" layoutY="67.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="47.0" prefWidth="97.0" text="Exit" />
+         </children></Pane>
       <Pane fx:id="carfinish" layoutX="7.0" layoutY="105.0" onDragDropped="#depose" onDragOver="#detecte" prefHeight="169.0" prefWidth="159.0" />
       <Pane fx:id="skatefinish" layoutX="627.0" layoutY="92.0" onDragDropped="#depose" onDragOver="#detecte" prefHeight="115.0" prefWidth="147.0" />
       <Pane fx:id="tankfinish" layoutX="226.0" layoutY="4.0" onDragDropped="#depose" onDragOver="#detecte" prefHeight="115.0" prefWidth="351.0" />
