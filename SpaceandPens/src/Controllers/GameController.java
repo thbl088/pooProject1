@@ -153,6 +153,25 @@ public class GameController implements Initializable {
         stage.setScene(scene);
         stage.showAndWait();    
     }    
+    
+    public void openFight(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vues/fight.fxml"));
+        Parent root = loader.load();
+
+        FightController fightController = loader.getController();
+        fightController.setFight(this.world.getPlayer(), this.world.getPlayer().getMapHero().getEnemies());
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.getIcons().add(new Image("spaceandpens/images/spaceandpens.png"));
+        stage.setTitle("Fight!");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setMinHeight(545);
+        stage.setMinWidth(800);
+        stage.setScene(scene);
+        stage.showAndWait();
+        actualiseVue();
+    }
 
 
     public void setPlayerName(String name) {
@@ -296,6 +315,17 @@ public class GameController implements Initializable {
             nEntity.setLayoutY(ennemiHash.get(ennemis[i].toString()).getPositionY());
                     
             temp.getChildren().add(nEntity);
+            
+            //On lui ajoute un évènement Mouseclique 
+            nEntity.setOnMouseClicked(event -> {
+                try {
+                    System.out.println("j'ai crée le fight");
+                    this.openFight(event);
+                } catch (IOException ex) {
+                    System.out.println("j'ai pas crée le fight");
+                    Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
             
         }        
     }
