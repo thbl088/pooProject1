@@ -37,9 +37,6 @@ public class TalkController implements Initializable {
     @FXML
     private ImageView hero;
     
-    
- 
-    
     /**
      * Initializes the controller class.
      * @param url
@@ -83,7 +80,7 @@ public class TalkController implements Initializable {
         //Animation droit
         TranslateTransition transition = new TranslateTransition();
         transition.setDuration(Duration.seconds(5));            // On choisit la durrée
-        transition.setNode(item);                               // On choisi ou la mettre 
+        transition.setNode(item);                               // On choisi sur qui mettre l'animation
         transition.setFromX(pnj.getLayoutX());                  // Point de départ        
         transition.setToX(hero.getLayoutX());                   // Point d'arriver  
 
@@ -103,16 +100,17 @@ public class TalkController implements Initializable {
         this.changeView(name);
         
         Player p = this.player;
-        if ( p.getMapHero().getNpc(name) != null ){      // vérifie si l'entité est bien un pnj
-            this.setDescription(p.getMapHero().getNpc(name).getDialog()); // récupére et affiche son dialogue
-            if ( (name.equals("crazy man") && !(p.hasItem("tank track")) )    //vérifie le pnj si c'est  le crazy_man ou samuel deux pnj qui donne des items et on vérifie si ils ont déjà pas donnée les items
-                    || name.equals("samuel") && !(p.hasItem("garbage collector")))
+        this.setDescription(p.getMapHero().getNpc(name).getDialog()); // récupére et affiche son dialogue
+        if ( (name.equals("crazy man")|| name.equals("samuel")) && p.getMapHero().getNpc(name).getItem() != null )    //vérifie le pnj si sait le crazy_man ou samuel deux pnj qui donne des items et on vérifie si ils ont déjà pas donnée leurs items     
             {  
+               
                 Item objet_pnj = p.getMapHero().getNpc(name).getItem();
                 this.animationItem(objet_pnj.getName());
                 this.setDescription("You obtain " + objet_pnj.getName() + ".");
+                
+                
                 p.addInventory(objet_pnj);
+                p.getMapHero().getNpc(name).removeItem();                                  //On enlève l'item au pnj
             }
-        }  
-    }
+    }  
 }

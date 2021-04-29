@@ -29,11 +29,19 @@ public class TakeListener extends JPanel {
     
     private Pane world;
     private WorldIHM game;
+    
 
     public TakeListener(WorldIHM jeu, Pane paneItem, int x, int y) {
         
         this.world = paneItem;
         this.game = jeu;
+        setPreferredSize(new Dimension(x, y));
+        addMouseListener(new MouseAdapter() {
+        }
+        );
+    }
+    
+    public TakeListener(int x, int y){
         setPreferredSize(new Dimension(x, y));
         addMouseListener(new MouseAdapter() {
         }
@@ -59,13 +67,26 @@ public class TakeListener extends JPanel {
     
      public void handleDrop(DragEvent event) throws FileNotFoundException 
      {
-         Node node = (Node) event.getGestureSource();                           // on récupére la source 
-         String nameId = node.getId().toString();
+         Node node = (Node) event.getGestureSource();                         // on récupére la source 
+         String nameId = node.getId();
          
          Item item = game.getPlayer().getMapHero().takeItem(nameId);          // Remove l'item de la hasmap 
          game.getPlayer().addInventory(item);                                 // Ajoute l'item dans l'inventaire
          world.getChildren().remove(node);                                    //on la supprime du pane pour faire comme si on la rammassé 
      }
+     
+    public void glisseEndDoor(MouseEvent event) {
+       ImageView img  = (ImageView) event.getSource();
+       
+        Dragboard db = img.startDragAndDrop(TransferMode.ANY);
+        
+        ClipboardContent cb = new ClipboardContent();
+        cb.putImage(img.getImage());
+        
+        db.setContent(cb);
+        
+        event.consume();
+    }
 }
 
 

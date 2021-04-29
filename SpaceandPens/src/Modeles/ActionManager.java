@@ -180,8 +180,7 @@ public class ActionManager {
 
 		switch (direction.toLowerCase()) {
 			case "north" :
-				if (currentLoc.isNorth() && (!(currentLoc.getNorth() instanceof LockedDoor) || !((LockedDoor) currentLoc.getNorth()).isLocked()) ||
-				 (currentLoc.getName().equals("End Portal") &&  currentPlayer.hasItem("car_wheel") && currentPlayer.hasItem("little_wheel") && currentPlayer.hasItem("tank_track")))
+				if (currentLoc.isNorth() && (!(currentLoc.getNorth() instanceof LockedDoor) || !((LockedDoor) currentLoc.getNorth()).isLocked()))
 				 {
 					currentPlayer.move(currentLoc.getNorth().getDestination());
 					return new Object[]{true, "You Enter : " + currentPlayer.getMapHero().getName()};
@@ -192,6 +191,7 @@ public class ActionManager {
 				}
 				else if (((LockedDoor) currentLoc.getNorth()).isLocked())
 				{
+                                        
 					return new Object[]{false, "North door is locked"};
 				}
 				break;
@@ -334,17 +334,17 @@ public class ActionManager {
 
 	public void actionTalk(String name, TalkController talk){ //lance le dialogue d'un pnj
 		Player p = this.CURRENT_GAME.player;
-
+                
 		if ( p.getMapHero().getNpc(name) != null ){      // vérifie si l'entité est bien un pnj
 			talk.setDescription(p.getMapHero().getNpc(name).getDialog()); // récupére et affiche son dialogue
 
 
-			if ( (name.equals("crazy man") && !(p.hasItem("tank track")) )    //vérifie le pnj si c'est  le crazy_man ou samuel deux pnj qui donne des items et on vérifie si ils ont déjà pas donnée les items
-			|| name.equals("samuel") && !(p.hasItem("garbage collector"))) {
+			if ( ((name.equals("crazy man")|| name.equals("samuel")) && p.getMapHero().getNpc(name).getItem() != null )    //vérifie le pnj si c'est  le crazy_man ou samuel deux pnj qui donne des items et on vérifie si ils ont déjà pas donnée les items
+			) {
 
 				Item objet_pnj = p.getMapHero().getNpc(name).getItem();
                                 talk.setDescription("You obtain " + objet_pnj.getName() + ".");
-
+                                p.getMapHero().getNpc(name).removeItem();
 				p.addInventory(objet_pnj);
 			}
 		}

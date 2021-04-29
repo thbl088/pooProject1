@@ -12,6 +12,7 @@ import Modeles.Map;
 import Modeles.Npc;
 import Modeles.WorldIHM;
 import Controllers.TakeListener;
+import Modeles.LockedDoor;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -111,6 +112,8 @@ public class GameController implements Initializable {
         stage.showAndWait();
     }
     
+    
+    
     public void openTalk(MouseEvent event, String nameNpc) throws IOException {
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vues/Talk.fxml"));
@@ -130,6 +133,26 @@ public class GameController implements Initializable {
         stage.setScene(scene);
         stage.showAndWait();    
     }
+    
+    public void openWindowEndPortal(MouseEvent event) throws IOException {
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vues/endDoor.fxml"));
+        Parent root = loader.load();
+        
+        EndDoorController endDoorController = loader.getController();
+        
+        endDoorController.initEndDoor(this.world.getPlayer().getInventory(), this.world.getPlayer()); 
+        
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.getIcons().add(new Image("spaceandpens/images/spaceandpens.png"));
+        stage.setTitle("End Door");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setMinHeight(532);
+        stage.setMinWidth(802);
+        stage.setScene(scene);
+        stage.showAndWait();    
+    }    
 
 
     public void setPlayerName(String name) {
@@ -290,10 +313,24 @@ public class GameController implements Initializable {
     private void goNorth(MouseEvent event) throws IOException
     {
         Object[] response = this.manager.actionGo("north");
-        if((boolean) response[0])
-            this.setMapDescription();
-        this.setGameDescription((String) response[1]);
-        this.actualiseVue();
+        if(((boolean) response[0] == false ) && ("End Portal" == this.world.getPlayer().getMapHero().getName() ))
+        {
+            this.openWindowEndPortal(event);
+            LockedDoor northDoor = (LockedDoor) this.world.getPlayer().getMapHero().getNorth();
+            if( northDoor.isLocked())
+            {
+                String description = "Now the door is unlock";
+                this.setGameDescription(description);
+            }
+ 
+        }
+        else{
+            if((boolean) response[0])
+                this.setMapDescription();
+            this.setGameDescription((String) response[1]);
+            this.actualiseVue();
+        }    
+        
     }
 
     @FXML
@@ -319,8 +356,9 @@ public class GameController implements Initializable {
     }
 
     @FXML
-    private void goSouth(MouseEvent event) throws IOException {
-                Object[] response = this.manager.actionGo("south");
+    private void goSouth(MouseEvent event) throws IOException 
+    {
+        Object[] response = this.manager.actionGo("south");
         if((boolean) response[0])
             this.setMapDescription();
         this.setGameDescription((String) response[1]);

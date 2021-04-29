@@ -106,7 +106,7 @@ public class WorldIHM {
         // Map 4 Dernier Boss
         StatisticsEnemy statsLeclerc = new StatisticsEnemy(100, 50, 60, 15, 80);
         Item crik = new Item("jack", "Useful for lifting heavy stones.", -1);
-        Enemy leclerc = new Enemy("leclerc", crik, statsLeclerc, 601, 173);
+        Enemy leclerc = new Enemy("leclerc", crik, statsLeclerc, 255, 48, 694, 359);
 
         enemies[0] = leclerc;
 
@@ -134,7 +134,7 @@ public class WorldIHM {
 
         StatisticsEnemy statsTony = new StatisticsEnemy(20, 30, 20, 5);
         Item littleWheel = new Item("little wheel", "It's a shining skateboard wheel", -1);
-        Enemy tony = new Enemy("tony", littleWheel, statsTony, 652, 494);
+        Enemy tony = new Enemy("tony", littleWheel, statsTony, 320, 76, 250, 360);
 
         enemies[4] = tony;
 
@@ -177,7 +177,7 @@ public class WorldIHM {
 
         StatisticsEnemy statsTwingy = new StatisticsEnemy(20, 20, 20, 20);
         Item carwheel = new Item("car wheel", "It's a glowing car wheel.", -1);
-        Enemy twingy = new Enemy("twingy", carwheel, statsTwingy, 652, 170);
+        Enemy twingy = new Enemy("twingy", carwheel, statsTwingy, 419, 270, 525, 413);
 
         enemies[12] = twingy;
 
@@ -458,6 +458,9 @@ public class WorldIHM {
         this.player.addInventory(new Weapon("reactor", "This is the key to get out of here.", -1, 5, 256, 182));
         // System.out.println("Welcome " + hero.getName() + ".");
         // System.out.println("Your ship has crashed, you need a jack and a new motor to leave this planet.");
+        
+        this.player.addInventory(new Item("little wheel", "It's a shining skateboard wheel", -1));
+        this.player.addInventory(new Item("car wheel", "It's a glowing car wheel.", -1));
         hero.move(this.MAPS.get(namemap[0]));
         // System.out.println("You Enter : " + this.player.getMapHero().getName() + ".");
         // System.out.println(this.player.getMapHero().getDescription());

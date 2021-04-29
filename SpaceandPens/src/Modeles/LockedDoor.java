@@ -15,6 +15,6 @@ public class LockedDoor extends Door {
 		return this.isLocked;
 	}
 
-	//public void unlock() { this.isLocked = false; }
+	public void unlock() { this.isLocked = false; }
 
 }
