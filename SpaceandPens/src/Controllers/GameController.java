@@ -178,8 +178,7 @@ public class GameController implements Initializable {
         west.setCursor(new ImageCursor(imageG));
         
         Image imageI = new Image("spaceandpens/images/curseur/bourse.png");
-        inventory.setCursor(new ImageCursor(imageI));
-               
+        inventory.setCursor(new ImageCursor(imageI));               
     }
    
     public void actualiseVue() throws IOException{

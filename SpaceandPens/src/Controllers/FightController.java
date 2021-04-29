@@ -24,6 +24,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -133,7 +134,14 @@ public class FightController implements Initializable {
     public void startFight(){
         this.fight = new Fight(player);        
     }
-    
+    public void initiCursor(){
+        //On ajoute une image Custom sur le curseur
+        Image imageI = new Image("spaceandpens/images/curseur/bourse.png");
+        InventoryButton.setCursor(new ImageCursor(imageI));
+        
+        Image imageS = new Image("spaceandpens/images/curseur/shield.png");
+        defendButton.setCursor(new ImageCursor(imageS));
+    }
     public void playerInitialize(){
         Statistics statsPlayer = this.player.getStatistics();
         
@@ -144,7 +152,7 @@ public class FightController implements Initializable {
         this.maxHPPLAYER.setText(Integer.toString(statsPlayer.getMaxHealth()));
         this.playerHP.setText(Integer.toString(statsPlayer.getHealth()));
         
-        String imgPlayer = "spaceandpens/images/pnj/" + "samuel" + ".png";
+        String imgPlayer = "spaceandpens/images/pnj/" + "hero" + ".png";
         this.playerPicture.setImage(new Image(imgPlayer));
     }
     
@@ -192,7 +200,8 @@ public class FightController implements Initializable {
                 
                 vboxEnemy.setAlignment(Pos.CENTER);
                                 
-                vboxEnemy.setCursor(Cursor.HAND); //Change cursor to hand
+                Image imageS = new Image("spaceandpens/images/curseur/epe.png");
+                vboxEnemy.setCursor(new ImageCursor(imageS));    
                 
                 vboxEnemy.setOnMouseClicked(event -> {
                     fight.playerAttack(enemyName);
@@ -228,6 +237,7 @@ public class FightController implements Initializable {
     }
     
     public void setFight(Player player, HashMap<String, Enemy> enemies){
+        initiCursor();
         setPlayer(player);
         startFight();
         enemiesInitialize(enemies);
