@@ -7,7 +7,6 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -25,8 +24,6 @@
             <menus>
               <Menu fx:id="option" mnemonicParsing="false" text="Option">
                 <items>
-                  <MenuItem fx:id="help" mnemonicParsing="false" text="Help" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="quit" mnemonicParsing="false" onAction="#quit" text="Quit" />
                 </items>
               </Menu>

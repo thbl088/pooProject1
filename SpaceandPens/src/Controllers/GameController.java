@@ -27,6 +27,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
@@ -36,6 +37,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 
@@ -151,7 +153,7 @@ public class GameController implements Initializable {
         stage.setMinHeight(532);
         stage.setMinWidth(802);
         stage.setScene(scene);
-        stage.showAndWait();    
+        stage.showAndWait();
     }    
     
     public void openFight(MouseEvent event) throws IOException {
@@ -168,9 +170,31 @@ public class GameController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setMinHeight(545);
         stage.setMinWidth(800);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.showAndWait();
         actualiseVue();
+        if(this.world.player.getHealth()<1){
+            endGame();
+        }
+    }
+    
+    public void endGame() throws IOException {
+        Stage stage = (Stage) this.worldVu.getScene().getWindow();
+        stage.close();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vues/menu.fxml"));
+
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage newStage = new Stage();
+        newStage.getIcons().add(new Image("spaceandpens/images/spaceandpens.png"));
+        newStage.setTitle("Space And Pens");
+        newStage.sizeToScene();
+        newStage.setMinHeight(532);
+        newStage.setMinWidth(678);
+        newStage.setScene(scene);
+        newStage.show();
+
     }
 
 
@@ -231,6 +255,16 @@ public class GameController implements Initializable {
             });
             
             temp.getChildren().add(shop);     
+        }
+        
+        if(world.player.getMapHero().getName().equals("Ship") && world.player.hasItem("reactor")){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setGraphic(null);
+            alert.setTitle("Victory");
+            alert.setContentText("You beat the game, congratulation!");
+            alert.showAndWait();
+            endGame();
         }
         
         //On récupére son contenu

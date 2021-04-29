@@ -5,17 +5,16 @@
  */
 package Controllers;
 
-import Modeles.ActionManager;
 import Modeles.Player;
 import Modeles.Enemy;
 import Modeles.Fight;
 import Modeles.Statistics;
-import Modeles.WorldIHM;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -27,6 +26,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -49,11 +49,8 @@ import javafx.stage.Stage;
 public class FightController implements Initializable {
     
     private HashMap<String, Enemy> enemies;
-    private Enemy enemy;
     private Player player;
-    private WorldIHM world;
     private Fight fight;
-    private ActionManager manager;
     private static final String RED_BAR    = "red-bar";
     private static final String YELLOW_BAR = "yellow-bar";
     private static final String ORANGE_BAR = "orange-bar";
@@ -62,14 +59,6 @@ public class FightController implements Initializable {
 
     @FXML
     private VBox World;
-    @FXML
-    private MenuBar menubar;
-    @FXML
-    private Menu option;
-    @FXML
-    private MenuItem help;
-    @FXML
-    private MenuItem quit;
     @FXML
     private AnchorPane fightPanel;
     @FXML
@@ -105,15 +94,21 @@ public class FightController implements Initializable {
     private Label labelDefensePlayer;
     @FXML
     private GridPane enemyGrid;
+    @FXML
+    private MenuBar menubar;
+    @FXML
+    private Menu option;
+    @FXML
+    private MenuItem quit;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //manager.startFight();
         
-        HPBarPlayer.progressProperty().addListener(new ChangeListener<Number>() {
+        
+        HPBarPlayer.progressProperty().addListener(new ChangeListener<Number>() { //on ajoute un listener qui fais changer la couleur de la bar de vie en fonction du pourcentage restant
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 double progress = newValue == null ? 0 : newValue.doubleValue();
@@ -128,9 +123,6 @@ public class FightController implements Initializable {
                 }
             }
         });
-        /*
-        
-        */
     }    
 
     public void setPlayer(Player player){
@@ -187,8 +179,14 @@ public class FightController implements Initializable {
                 HPEnemy.setId("HPBar" + enemyName);
                 VBox vboxEnemy = new VBox(labelNameEnemy1, HPEnemy, enemyPicture1);
                 vboxEnemy.setId("vbox" + enemyName);
-                enemyPicture1.setFitHeight(150);
-                enemyPicture1.setFitWidth(150);
+                if(enemyStat.getObject()!=null){
+                    enemyPicture1.setFitHeight(enemyStat.getPositionHeight()/2);
+                    enemyPicture1.setFitWidth(enemyStat.getPositionWidth()/2);
+                }
+                else{
+                    enemyPicture1.setFitHeight(enemyStat.getPositionHeight());
+                    enemyPicture1.setFitWidth(enemyStat.getPositionWidth()); 
+                }
                 vboxEnemy.setLayoutX(700);
                 vboxEnemy.setLayoutY(0);
                 
@@ -203,6 +201,7 @@ public class FightController implements Initializable {
                     reInitialize(player, enemies);
                     fight.enemyAttack();
                     reInitialize(player, enemies);
+                    checkEndGame();
                 });
                 if(numEnemy % 2 == 1){
                     enemyGrid.add(vboxEnemy, row, column+1);
@@ -225,7 +224,7 @@ public class FightController implements Initializable {
     public void reInitialize(Player player, HashMap<String, Enemy> enemies){
         playerInitialize();
         updateEnemy(enemies);
-        checkEndGame();
+        
     }
     
     public void setFight(Player player, HashMap<String, Enemy> enemies){
@@ -235,16 +234,32 @@ public class FightController implements Initializable {
     }
     
     public void checkEndGame(){
-        System.out.println("Controllers.FightController.checkEndGame()");
-        System.out.println(enemies.size());
         if(fight.stillFighting() == 2){
                 player = fight.getPlayerPostFight();
+                
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setHeaderText(null);
+                alert.setGraphic(null);
+                alert.setTitle("Victory");
+                alert.setContentText("You're still alive.");
+                alert.showAndWait();
+                
                 Stage stage = (Stage) World.getScene().getWindow();
                 stage.close();
             }   
             else{
                 if(fight.stillFighting() == 1){
-                //todo joueur mort
+                player = fight.getPlayerPostFight();
+                
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setHeaderText(null);
+                alert.setGraphic(null);
+                alert.setTitle("Lose");
+                alert.setContentText("YOU DIED");
+                alert.showAndWait();
+                
+                Stage stage = (Stage) World.getScene().getWindow();
+                stage.close();
                 }
             }
         }
@@ -254,21 +269,21 @@ public class FightController implements Initializable {
         fight.defend();
         fight.enemyAttack();
         reInitialize(player, enemies);
-    }
-    
+        checkEndGame();
+    }    
  
     @FXML
     private void quit(Event event) {
-        manager.actionQuit();
+        Platform.exit();
     }
 
     @FXML
-    private void openStats(ActionEvent event) throws IOException {
+    public void openStats(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vues/Stats.fxml"));
         Parent root = loader.load();
 
         StatsController stats = loader.getController();
-        stats.setPlayer(this.world.getPlayer());
+        stats.setPlayer(player);
 
         Scene scene = new Scene(root);
         Stage stage = new Stage();
@@ -277,5 +292,5 @@ public class FightController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.show();
-    }
+    }  
 }
