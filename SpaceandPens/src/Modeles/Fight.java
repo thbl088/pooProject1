@@ -105,8 +105,11 @@ public class Fight {
 	}
 
 	public void defend() { //multiplie la def du joueur par 2 jusqu'a son prochain tour
-            this.PLAYER.getStatistics().addDefense(this.PLAYER.getDefense());
-            hasDefend = true;
+            
+            if(true != hasDefend){
+                 this.PLAYER.getStatistics().addDefense(this.PLAYER.getDefense());
+                 hasDefend = true;
+            }
 	}
 
         

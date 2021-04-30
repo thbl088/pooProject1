@@ -18,9 +18,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -77,5 +79,17 @@ public class MenuPrincipal implements Initializable {
     @FXML
     private void quit(ActionEvent event) {
         Platform.exit();
+    }
+
+    @FXML
+    private void openCredit(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setGraphic(null);
+        alert.setTitle("Credit");
+        alert.setContentText("\nProgrammer : BOUE ALEXIS, LUNETEAU  THOMAS, VIALLE CHARLIE\nDesigner : VIALLE CHARLIE\nBosses's Designer: ZIELINSKI DRAGAN");
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image("spaceandpens/images/spaceandpens.png"));
+        alert.showAndWait();        
     }
 }
