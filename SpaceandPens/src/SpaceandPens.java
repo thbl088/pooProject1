@@ -35,6 +35,7 @@ public class SpaceandPens extends Application {
         stage.getIcons().add(new Image("spaceandpens/images/spaceandpens.png"));
         stage.setTitle("Space And Pens");   
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 

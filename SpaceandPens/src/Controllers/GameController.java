@@ -474,7 +474,7 @@ public class GameController implements Initializable {
         stage.getIcons().add(new Image("spaceandpens/images/spaceandpens.png"));
         stage.setTitle("Statistics and Inventory");
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }   
@@ -495,6 +495,7 @@ public class GameController implements Initializable {
         stage.setMinWidth(800);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.showAndWait();
     }
     
@@ -513,6 +514,7 @@ public class GameController implements Initializable {
         Stage stage = new Stage();
         stage.getIcons().add(new Image("spaceandpens/images/spaceandpens.png"));
         stage.setTitle("Talk");
+        stage.setResizable(false);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setMinHeight(545);
         stage.setMinWidth(800);
@@ -534,6 +536,7 @@ public class GameController implements Initializable {
         Stage stage = new Stage();
         stage.getIcons().add(new Image("spaceandpens/images/spaceandpens.png"));
         stage.setTitle("End Door");
+        stage.setResizable(false);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setMinHeight(532);
         stage.setMinWidth(802);

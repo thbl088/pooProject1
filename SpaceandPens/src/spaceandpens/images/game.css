@@ -1,0 +1,24 @@
+.text-area {
+	-fx-control-inner-background: #f2d7ac; 
+	-fx-text-fill: black; 
+	-fx-background-insets: 0;
+    -fx-background-color: transparent, transparent, transparent, transparent;
+    -fx-background-radius : 0;
+}
+
+.button {
+	-fx-background-radius: 0;
+	-fx-background-color: #736843;
+	-fx-text-fill: #f0e5c2;
+}
+
+.list-view, .text-field {
+	-fx-control-inner-background: #f2d7ac; 
+	-fx-text-fill: black; 
+	-fx-background-insets: 0;
+}
+
+.root {
+	-fx-background-image : url("parchment.png") ;
+	-fx-background-size: cover;
+}
