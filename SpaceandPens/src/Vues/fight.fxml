@@ -7,6 +7,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -80,6 +81,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                   </GridPane>
+                  <TextArea fx:id="textFight" layoutX="27.0" layoutY="373.0" prefHeight="86.0" prefWidth="415.0" wrapText="true" />
                </children>
           </AnchorPane>
             <GridPane fx:id="choices" alignment="CENTER" prefHeight="62.0" prefWidth="498.0">

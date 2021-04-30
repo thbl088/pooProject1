@@ -34,6 +34,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -102,6 +103,8 @@ public class FightController implements Initializable {
     private Menu option;
     @FXML
     private MenuItem quit;
+    @FXML
+    private TextArea textFight;
 
     /**
      * Initializes the controller class.
@@ -157,9 +160,20 @@ public class FightController implements Initializable {
         this.labelAttackPlayer.setText(Integer.toString(statsPlayer.getAttack()));
         this.labelDefensePlayer.setText(Integer.toString(statsPlayer.getDefense()));
         this.maxHPPLAYER.setText(Integer.toString(statsPlayer.getMaxHealth()));
-        this.playerHP.setText(Integer.toString(statsPlayer.getHealth()));        
+        this.playerHP.setText(Integer.toString(statsPlayer.getHealth()));
     }
 
+    
+    public void changeTextAttackPlayer (int enemyPreHealth, int enemyHealth, int playerPreHealth, int playerHealth, String enemyName ){
+        int damage = enemyPreHealth - enemyHealth;
+        if(damage > 0){
+            textFight.appendText("You inflicted " + damage + " damages. " + enemyName + " has " + enemyHealth + " left.\n");
+        }
+        else{
+            damage = playerPreHealth - playerHealth;
+            textFight.appendText("You inflict yourself " + -damage +" dmg. You have " + playerHealth + " HP left.\n");
+        }
+    }
     
     public void enemiesInitialize(HashMap<String, Enemy> enemies){
         fight.remEnemyDeath();
@@ -177,6 +191,7 @@ public class FightController implements Initializable {
                 ImageView enemyPicture1 = new ImageView(new Image("/spaceandpens/images/ennemi/"+enemyName+".png"));
                 enemyPicture1.setId("picture" + enemyName);
                 ProgressBar HPEnemy = new ProgressBar((double)enemyStat.getHealth()/ (double)enemyStat.getStatistics().getMaxHealth());
+                System.out.println(enemyStat.getHealth()+ "+"+ enemyStat.getStatistics().getMaxHealth());
                 if (HPEnemy.getProgress() < 0.25) {
                             HPEnemy.setStyle("-fx-accent : red;");
                         } 
@@ -209,10 +224,25 @@ public class FightController implements Initializable {
                 vboxEnemy.setCursor(new ImageCursor(imageS));    
                 
                 vboxEnemy.setOnMouseClicked(event -> {
+                    int healthEnemy = enemies.get(enemyName).getHealth();
+                    int healthPlayer = player.getHealth();
                     fight.playerAttack(enemyName);
+                    /*
+                    if(enemies.containsKey(enemyName)){
+                        changeTextAttackPlayer(healthEnemy, enemies.get(enemyName).getHealth(), healthPlayer, player.getHealth(), enemyName);
+                    }
+                    else{
+                        textFight.appendText("You killed "+enemyName);
+                    }
+*/
                     updateFightScene(player, enemies);
                     fight.enemyAttack();
+                    System.out.println(enemies.get(enemyName).getHealth());
                     updateFightScene(player, enemies);
+                    /*
+                    int damage = healthPlayer-player.getHealth();
+                    textFight.appendText("All the enemies attack you, you receive " + damage + ". You have " + player.getHealth() + " hp left.\n");
+*/
                     checkEndGame();
                 });
                 if(numEnemy % 2 == 1){
@@ -235,8 +265,7 @@ public class FightController implements Initializable {
     
     public void updateFightScene(Player player, HashMap<String, Enemy> enemies){
         updatePlayer();
-        updateEnemy(enemies);
-        
+        updateEnemy(enemies);        
     }
     
     public void setFight(Player player, HashMap<String, Enemy> enemies){
@@ -279,9 +308,14 @@ public class FightController implements Initializable {
  
     @FXML
     public void defend(ActionEvent event){
+        int healthPlayer = player.getHealth();  
         fight.defend();
+        textFight.appendText("You are ready to block the next attack.\n");
         fight.enemyAttack();
         updateFightScene(player, enemies);
+        
+        int damage = healthPlayer-player.getHealth();
+        textFight.appendText("All the enemies attack you, you receive " + damage + " through your protection. You have " + player.getHealth() + " hp left.\n");
         checkEndGame();
     }    
  
