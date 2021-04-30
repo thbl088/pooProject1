@@ -1,8 +1,7 @@
 package Controllers;
 
 import Modeles.*;
-import com.sun.deploy.panel.TextFieldProperty;
-import javafx.beans.property.SimpleStringProperty;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -80,6 +79,8 @@ public class StatsController implements Initializable {
     private Button armorUnequip;
     @FXML
     private Button quit;
+    @FXML
+    private TextField statsItem;
 
 
 
@@ -217,12 +218,21 @@ public class StatsController implements Initializable {
             Item item = this.player.getItem(selection);
             this.description.setText(item.getDescription());
 
-            if (item instanceof Weapon)
+            if (item instanceof Weapon){
+                Weapon itemW = (Weapon) item;
+                this.statsItem.setText(itemW.getAttackBonus()+" "+"Damages");
                 this.itemType.setText("Weapon");
-            else if (item instanceof Armor)
+                
+            }            
+            else if (item instanceof Armor){
+                Armor itemA = (Armor) item;
                 this.itemType.setText("Armor");
-            else
+                this.statsItem.setText(itemA.getDefenseBonus()+" "+"Damages");
+            }  
+            else{
                 this.itemType.setText("Item");
+                this.statsItem.setText(item.getPrice()+" "+"Price");
+            }
 
             String itemImg = "spaceandpens/images/objet/" + selection + ".png";
             this.itemView.setImage(new Image(itemImg));

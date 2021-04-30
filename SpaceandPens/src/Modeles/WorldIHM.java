@@ -140,11 +140,14 @@ public class WorldIHM {
 
         // Map 12  [4 Criterium]
 
-        StatisticsEnemy statsCriterium = new StatisticsEnemy(1, 8, 2, 100, 5);
-        Enemy criterium2mm = new Enemy("2mm", statsCriterium, 633, 485);
-        Enemy criterium5mm = new Enemy("5mm", statsCriterium, 392, 373);
-        Enemy criterium7mm = new Enemy("7mm", statsCriterium, 851, 324);
-        Enemy criterium9mm = new Enemy("9mm", statsCriterium, 624, 138);
+        StatisticsEnemy statsCriterium2mm = new StatisticsEnemy(1, 12, 2, 100, 5);
+        StatisticsEnemy statsCriterium5mm = new StatisticsEnemy(1, 12, 2, 100, 5);
+        StatisticsEnemy statsCriterium7mm = new StatisticsEnemy(1, 12, 2, 100, 5);
+        StatisticsEnemy statsCriterium9mm = new StatisticsEnemy(1, 12, 2, 100, 5);
+        Enemy criterium2mm = new Enemy("2mm", statsCriterium2mm, 633, 485);
+        Enemy criterium5mm = new Enemy("5mm", statsCriterium5mm, 392, 373);
+        Enemy criterium7mm = new Enemy("7mm", statsCriterium7mm, 851, 324);
+        Enemy criterium9mm = new Enemy("9mm", statsCriterium9mm, 624, 138);
 
         enemies[5] = criterium2mm;
         enemies[6] = criterium5mm;
@@ -182,9 +185,10 @@ public class WorldIHM {
         enemies[12] = twingy;
 
         // Map  18 Les frères crayons 2B crayon tendre et 2H crayon dur
-
-        Enemy crayon2B = new Enemy("2b", statsRobcrayontendre, 425, 208);
-        Enemy crayon2H = new Enemy("2h", stats9H, 622, 150);
+        StatisticsEnemy stats2B = new StatisticsEnemy(15, 13, 20, 10);
+        StatisticsEnemy stats2H = new StatisticsEnemy(15, 13, 20, 10);
+        Enemy crayon2B = new Enemy("2b", stats2B, 425, 208);
+        Enemy crayon2H = new Enemy("2h", stats2H , 622, 150);
 
         enemies[13] = crayon2B;
         enemies[14] = crayon2H;
@@ -405,12 +409,12 @@ public class WorldIHM {
     public Item[] initShopItem() {
         Item[] shop = new Item[6];
 
-        shop[0] = new Armor("leather tunic", "Tunic made of leather.", 12, 40);
-        shop[1] = new Armor("titanium armour", "Made with the remnants of pencil robots.", 25, 200);
-        shop[2] = new Armor("nethererite armour", "Made with ore from Ravenholm.", 50, 40);
-        shop[3] = new Weapon("stone sword", "A sword stronger than wood.", 12, 50);
-        shop[4] = new Weapon("japanese sword", "Take the soul of your enemies.", 25, 100);
-        shop[5] = new Weapon("energy sword", "A sword recovered from an old ship that once crashed here.", 70, 200);
+        shop[0] = new Armor("leather tunic", "Tunic made of leather.", 50, 10);
+        shop[1] = new Armor("titanium armour", "Made with the remnants of pencil robots.", 100, 20);
+        shop[2] = new Armor("nethererite armour", "Made with ore from Ravenholm.", 210, 50);
+        shop[3] = new Weapon("stone sword", "A sword stronger than wood.", 50, 15);
+        shop[4] = new Weapon("japanese sword", "Take the soul of your enemies.", 100, 35);
+        shop[5] = new Weapon("energy sword", "A sword recovered from an old ship that once crashed here.", 210, 50);
         return shop;
     }
 

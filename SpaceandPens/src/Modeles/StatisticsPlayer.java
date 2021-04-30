@@ -1,7 +1,7 @@
 package Modeles;
 
 public class StatisticsPlayer extends Statistics {
-	private final int DEFAULT_HEALTH = 20;
+	private final int DEFAULT_HEALTH = 50;
 	private final int DEFAULT_ATTACK = 10;
 	private final int DEFAULT_DEFENSE = 5;
 	private final int DEFAULT_CRITICAL = 5;

@@ -67,6 +67,8 @@ public class Player extends Character {
 
 	public void useCritPotion() {
             this.critPotion-- ;
+            int turn = (int) Math.log(this.getCrit() * COEF_CRIT_POTION);
+            System.out.println(turn);
             this.getStatistics().changeCritical(this.getCrit() * COEF_CRIT_POTION);
 	}
 
