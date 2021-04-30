@@ -166,7 +166,7 @@ public class FightController implements Initializable {
     public void changeTextAttackPlayer (int enemyPreHealth, int enemyHealth, int playerPreHealth, int playerHealth, String enemyName ){
         int damage = enemyPreHealth - enemyHealth;
         if(damage > 0){
-            textFight.appendText("You inflicted " + damage + " damages. " + enemyName + " has " + enemyHealth + " left.\n");
+            textFight.appendText("You inflicted " + damage + " damages. " + enemyName + " has " + enemyHealth + " HP left.\n");
         }
         else{
             damage = playerPreHealth - playerHealth;
@@ -226,22 +226,23 @@ public class FightController implements Initializable {
                     int healthEnemy = enemies.get(enemyName).getHealth();
                     int healthPlayer = player.getHealth();
                     fight.playerAttack(enemyName);
-                    /*
+                    
                     if(enemies.containsKey(enemyName)){
                         changeTextAttackPlayer(healthEnemy, enemies.get(enemyName).getHealth(), healthPlayer, player.getHealth(), enemyName);
                     }
                     else{
                         textFight.appendText("You killed "+enemyName);
                     }
-*/
+
                     updateFightScene(player, enemies);
+                    checkEndGame();
                     fight.enemyAttack();
                     System.out.println(enemies.get(enemyName).getHealth());
                     updateFightScene(player, enemies);
-                    /*
+                    
                     int damage = healthPlayer-player.getHealth();
                     textFight.appendText("All the enemies attack you, you receive " + damage + ". You have " + player.getHealth() + " hp left.\n");
-*/
+
                     checkEndGame();
                 });
                 if(numEnemy % 2 == 1){
