@@ -1,8 +1,10 @@
 package Controllers;
 
+import Modeles.Armor;
 import Modeles.Item;
 import Modeles.Player;
 import Modeles.Shop;
+import Modeles.Weapon;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,7 +17,6 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
-import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
 
 public class ShopController implements Initializable {
@@ -56,6 +57,10 @@ public class ShopController implements Initializable {
     private Button defPotion;
     @FXML
     private Button critPotion;
+    @FXML
+    private Label stats;
+    @FXML
+    private TextField statItem;
 
 
     @Override
@@ -120,6 +125,19 @@ public class ShopController implements Initializable {
             this.priceSell.setText(Integer.toString(item.getPrice()));
             Image itemURL = new Image("/spaceandpens/images/objet/"+name+".png");
             this.itemView.setImage(itemURL);
+            
+            if(item instanceof Weapon){
+                this.statItem.setText(((Weapon) item).getAttackBonus()+"");
+                this.stats.setText("Damages");
+            }
+            else if(item instanceof Armor){
+                this.statItem.setText(((Armor) item).getDefenseBonus()+"");
+                this.stats.setText("Resistances");            
+            }
+            else{
+                this.statItem.setText(item.getName());
+                this.stats.setText("Item");
+            }
         }
     }
 
@@ -133,6 +151,19 @@ public class ShopController implements Initializable {
             this.priceSell.setText(Integer.toString(item.getPrice()));
             Image itemURL = new Image("/spaceandpens/images/objet/"+name+".png");
             this.itemView.setImage(itemURL);
+            
+            if(item instanceof Weapon){
+                this.statItem.setText(((Weapon) item).getAttackBonus()+"");
+                this.stats.setText("Damages");
+            }
+            else if(item instanceof Armor){
+                this.statItem.setText(((Armor) item).getDefenseBonus()+"");
+                this.stats.setText("Resistances");            
+            }
+            else{
+                this.statItem.setText(item.getName());
+                this.stats.setText("Item");
+            }
         }
     }
 

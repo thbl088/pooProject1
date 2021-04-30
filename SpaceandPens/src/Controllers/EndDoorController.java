@@ -38,7 +38,7 @@ public class EndDoorController implements Initializable {
     
     private final String car = "car wheel";
     private final String skate = "little wheel";
-    private final String tank = "tank track";
+    private final String tank = "tank tracks";
     private Player player;
     @FXML
     private Pane spawn;
@@ -73,12 +73,12 @@ public class EndDoorController implements Initializable {
            ImageView nEntity = new ImageView(new Image("/spaceandpens/images/objet/"+car+".png"));
            
            //On prend nos valeur déjà prédifini pour la taille et largeur
-            nEntity.setFitHeight(182);
-            nEntity.setFitWidth(170);
+            nEntity.setFitHeight(100);
+            nEntity.setFitWidth(100);
             
             //On la place sur la nouvelle map 
-            nEntity.setLayoutX(100);
-            nEntity.setLayoutY(-8);
+            nEntity.setLayoutX(150);
+            nEntity.setLayoutY(20);
             
             //On lui met un id pour le reconnaître
             nEntity.setId(car);
@@ -160,14 +160,14 @@ public class EndDoorController implements Initializable {
         transitionSkate.setDuration(Duration.seconds(5));            
         transitionSkate.setNode(skatefinish.getChildren().get(0));       
         transitionSkate.setFromY(0);                          
-        transitionSkate.setToY(100);
+        transitionSkate.setToY(75);
         transitionSkate.setToX(-250);
 
         TranslateTransition transitionCar = new TranslateTransition();
         transitionCar.setDuration(Duration.seconds(5));            
         transitionCar.setNode(carfinish.getChildren().get(0));       
         transitionCar.setFromY(0);                          
-        transitionCar.setToY(75);
+        transitionCar.setToY(100);
         transitionCar.setToX(250);
         
         transitionTank.play();

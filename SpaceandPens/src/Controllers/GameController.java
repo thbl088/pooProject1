@@ -5,7 +5,6 @@
  */
 package Controllers;
 
-import Modeles.ActionManager;
 import Modeles.Enemy;
 import Modeles.Item;
 import Modeles.Map;
@@ -14,6 +13,7 @@ import Modeles.WorldIHM;
 import Controllers.TakeListener;
 import Modeles.Door;
 import Modeles.LockedDoor;
+import Modeles.Player;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -22,6 +22,7 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -52,7 +53,7 @@ public class GameController implements Initializable {
     
     private String name;
     private WorldIHM world;
-    private ActionManager manager;
+    //private ActionManager manager;
     
     TakeListener dragNdrop ;
     
@@ -68,8 +69,6 @@ public class GameController implements Initializable {
     private Pane south;
     @FXML
     private Pane inventory;
-    @FXML
-    private MenuBar menu;
     @FXML
     private TextArea mapDescription;
     @FXML
@@ -138,7 +137,7 @@ public class GameController implements Initializable {
         
         //Initialise des données pour la partie modele
         this.world = new WorldIHM(playerName);
-        this.manager = new ActionManager(this.world);
+        
         this.setMapDescription();
         
         //Initialisation parti vu
@@ -309,10 +308,9 @@ public class GameController implements Initializable {
             //On lui ajoute un évènement Mouseclique 
             nEntity.setOnMouseClicked(event -> {
                 try {
-                    System.out.println("j'ai crée le fight");
                     this.openFight(event);
+                    
                 } catch (IOException ex) {
-                    System.out.println("j'ai pas crée le fight");
                     Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             });
@@ -328,11 +326,86 @@ public class GameController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    
+   public Object[] actionGo(String direction) { //déplace le joueur sur le monde
+		Map currentLoc = this.world.player.getMapHero();
+		Player currentPlayer = this.world.player;
 
+
+		switch (direction.toLowerCase()) {
+			case "north" :
+				if (currentLoc.isNorth() && (!(currentLoc.getNorth() instanceof LockedDoor) || !((LockedDoor) currentLoc.getNorth()).isLocked()))
+				 {
+					currentPlayer.move(currentLoc.getNorth().getDestination());
+					return new Object[]{true, "You Enter : " + currentPlayer.getMapHero().getName()};
+				 }
+				else if (!currentLoc.isNorth())
+				{
+					return new Object[]{false, "Impossible to go north"};
+				}
+				else if (((LockedDoor) currentLoc.getNorth()).isLocked())
+				{
+                                        
+					return new Object[]{false, "North door is locked"};
+				}
+				break;
+			case "south" :
+				if (currentLoc.isSouth() && (!(currentLoc.getSouth() instanceof LockedDoor) || !((LockedDoor) currentLoc.getSouth()).isLocked()) ||
+				 ( currentLoc.getName().equals("Crash Site") &&  currentPlayer.hasItem("jack") ))
+				{
+					currentPlayer.move(currentLoc.getSouth().getDestination());
+					return new Object[]{true, "You Enter : " + currentPlayer.getMapHero().getName()};
+				}
+				else if (!currentLoc.isSouth())
+				{
+					return new Object[]{false, "Impossible to go south"};
+				}
+				else if (((LockedDoor) currentLoc.getSouth()).isLocked())
+				{
+					return new Object[]{false, "South door is locked"};
+				}
+				break;
+			case "east" :
+				if (currentLoc.isEast() && (!(currentLoc.getEast() instanceof LockedDoor) || !((LockedDoor) currentLoc.getEast()).isLocked()))
+				{
+					currentPlayer.move(currentLoc.getEast().getDestination());
+					return new Object[]{true, "You Enter : " + currentPlayer.getMapHero().getName()};
+				}
+				else if (!currentLoc.isEast())
+				{
+					return new Object[]{false, "Impossible to go east"};
+				}
+				else if (((LockedDoor) currentLoc.getEast()).isLocked())
+				{
+					return new Object[]{false, "East door is locked"};
+				}
+				break;
+			case "west" :
+				if (currentLoc.isWest() && (!(currentLoc.getWest() instanceof LockedDoor) || !((LockedDoor) currentLoc.getWest()).isLocked()))
+				{
+					currentPlayer.move(currentLoc.getWest().getDestination());
+					return new Object[]{true, "You Enter : " + currentPlayer.getMapHero().getName()};
+				}
+				else if (!currentLoc.isWest())
+				{
+					return new Object[]{false, "Impossible to go west"};
+				}
+				else if (((LockedDoor) currentLoc.getWest()).isLocked())
+				{
+					return new Object[]{false, "West door is locked"};
+				}
+				break;
+			default :
+				return new Object[]{false, "You can't go there"};
+		}
+		return new Object[]{false, "You can't go there"};
+	}
+   
     @FXML
     private void goNorth(MouseEvent event) throws IOException
     {
-        Object[] response = this.manager.actionGo("north");
+        
+        Object[] response = this.actionGo("north");
         if(((boolean) response[0] == false ) && ("End Portal" == this.world.getPlayer().getMapHero().getName() ))
         {
             this.openWindowEndPortal(event);
@@ -358,7 +431,7 @@ public class GameController implements Initializable {
     @FXML
     private void goWest(MouseEvent event) throws IOException 
     {
-        Object[] response = this.manager.actionGo("west");
+        Object[] response = this.actionGo("west");
         if((boolean) response[0])
             this.setMapDescription();
         this.setGameDescription((String) response[1]);
@@ -369,7 +442,7 @@ public class GameController implements Initializable {
     @FXML
     private void goEast(MouseEvent event) throws IOException 
     {
-        Object[] response = this.manager.actionGo("east");
+        Object[] response = this.actionGo("east");
         if((boolean) response[0])
             this.setMapDescription();
         this.setGameDescription((String) response[1]);
@@ -380,7 +453,7 @@ public class GameController implements Initializable {
     @FXML
     private void goSouth(MouseEvent event) throws IOException 
     {
-        Object[] response = this.manager.actionGo("south");
+        Object[] response = this.actionGo("south");
         if((boolean) response[0])
             this.setMapDescription();
         this.setGameDescription((String) response[1]);
@@ -394,13 +467,14 @@ public class GameController implements Initializable {
         Parent root = loader.load();
 
         StatsController stats = loader.getController();
-        stats.setPlayer(this.world.getPlayer());
+        stats.setStats(this.world.getPlayer());
 
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.getIcons().add(new Image("spaceandpens/images/spaceandpens.png"));
         stage.setTitle("Statistics and Inventory");
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();
     }   
@@ -419,6 +493,7 @@ public class GameController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setMinHeight(545);
         stage.setMinWidth(800);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.showAndWait();
     }
@@ -441,6 +516,7 @@ public class GameController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setMinHeight(545);
         stage.setMinWidth(800);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.showAndWait();    
     }
@@ -461,6 +537,7 @@ public class GameController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setMinHeight(532);
         stage.setMinWidth(802);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.showAndWait();    
     }  
@@ -587,5 +664,14 @@ public class GameController implements Initializable {
             Image image = new Image("spaceandpens/images/curseur/bas.png");
             south.setCursor(new ImageCursor(image));
         }
+    }
+
+    @FXML
+    private void openHelp(ActionEvent event) {
+    }
+
+    @FXML
+    private void quit(ActionEvent event) throws IOException {
+        endGame();
     }
 }

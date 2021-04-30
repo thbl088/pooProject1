@@ -36,6 +36,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -143,18 +144,22 @@ public class FightController implements Initializable {
         defendButton.setCursor(new ImageCursor(imageS));
     }
     public void playerInitialize(){
-        Statistics statsPlayer = this.player.getStatistics();
+            
+        updatePlayer();   
+        String imgPlayer = "spaceandpens/images/pnj/" + "hero" + ".png";
+        this.playerPicture.setImage(new Image(imgPlayer));
+    }
+    public void updatePlayer(){
+       Statistics statsPlayer = this.player.getStatistics();
         
         this.HPBarPlayer.setProgress((double)statsPlayer.getHealth()/ (double)statsPlayer.getMaxHealth());
         this.labelNamePlayer.setText(player.getName());
         this.labelAttackPlayer.setText(Integer.toString(statsPlayer.getAttack()));
         this.labelDefensePlayer.setText(Integer.toString(statsPlayer.getDefense()));
         this.maxHPPLAYER.setText(Integer.toString(statsPlayer.getMaxHealth()));
-        this.playerHP.setText(Integer.toString(statsPlayer.getHealth()));
-        
-        String imgPlayer = "spaceandpens/images/pnj/" + "hero" + ".png";
-        this.playerPicture.setImage(new Image(imgPlayer));
+        this.playerHP.setText(Integer.toString(statsPlayer.getHealth()));        
     }
+
     
     public void enemiesInitialize(HashMap<String, Enemy> enemies){
         fight.remEnemyDeath();
@@ -205,11 +210,9 @@ public class FightController implements Initializable {
                 
                 vboxEnemy.setOnMouseClicked(event -> {
                     fight.playerAttack(enemyName);
-                    System.out.println("Controllers.FightController.enemiesInitialize()");
-                    System.out.println(enemyName);
-                    reInitialize(player, enemies);
+                    updateFightScene(player, enemies);
                     fight.enemyAttack();
-                    reInitialize(player, enemies);
+                    updateFightScene(player, enemies);
                     checkEndGame();
                 });
                 if(numEnemy % 2 == 1){
@@ -230,8 +233,8 @@ public class FightController implements Initializable {
         enemiesInitialize(enemies);
     }
     
-    public void reInitialize(Player player, HashMap<String, Enemy> enemies){
-        playerInitialize();
+    public void updateFightScene(Player player, HashMap<String, Enemy> enemies){
+        updatePlayer();
         updateEnemy(enemies);
         
     }
@@ -245,7 +248,7 @@ public class FightController implements Initializable {
     
     public void checkEndGame(){
         if(fight.stillFighting() == 2){
-                player = fight.getPlayerPostFight();
+                fight.getPlayerPostFight();
                 
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setHeaderText(null);
@@ -259,7 +262,7 @@ public class FightController implements Initializable {
             }   
             else{
                 if(fight.stillFighting() == 1){
-                player = fight.getPlayerPostFight();
+                fight.getPlayerPostFight();
                 
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setHeaderText(null);
@@ -278,7 +281,7 @@ public class FightController implements Initializable {
     public void defend(ActionEvent event){
         fight.defend();
         fight.enemyAttack();
-        reInitialize(player, enemies);
+        updateFightScene(player, enemies);
         checkEndGame();
     }    
  
@@ -293,7 +296,7 @@ public class FightController implements Initializable {
         Parent root = loader.load();
 
         StatsController stats = loader.getController();
-        stats.setPlayer(player);
+        stats.setStats(player);
 
         Scene scene = new Scene(root);
         Stage stage = new Stage();
@@ -303,4 +306,10 @@ public class FightController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }  
+
+    @FXML
+    private void update(MouseEvent event) {
+        updatePlayer();
+        updateEnemy(enemies);
+    }
 }

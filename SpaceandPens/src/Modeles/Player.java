@@ -11,8 +11,8 @@ public class Player extends Character {
 	private Map currentLocation ;
 	private Armor armor ;
 	private Weapon weapon;
-	private final Armor DEFAULT_ARMOR = new Armor("Space suit", "This uniform represents our nation", -1, 0);
-	private final Weapon DEFAULT_WEAPON = new Weapon("Axe", "It is used to break the windshield", -1, 0);
+	private final Armor DEFAULT_ARMOR = new Armor("space suit", "This uniform represents our nation", -1, 5);
+	private final Weapon DEFAULT_WEAPON = new Weapon("axe", "It is used to break the windshield", -1, 10);
 	private final int COEF_HP_POTION;
 	private final int COEF_ATT_POTION;
 	private final int COEF_DEF_POTION;
@@ -49,75 +49,27 @@ public class Player extends Character {
 
 	public Item getItem(String item) { return this.INVENTORY.get(item); }
 
-	public String getNbPotion(){
-		return "health potion : " + this.healthPotion
-						+ "\ndefense potion : " + this.defensePotion
-						+ "\nattack potion : " + this.attackPotion
-						+ "\ncrit potion : " + this.critPotion;
-	}
 
 	public void useHealthPotion() {
-		if (this.healthPotion > 0)
-		{
-			this.healthPotion -- ;
-			this.getStatistics().addHealth(COEF_HP_POTION);
-		}
-		else
-		{
-			System.out.println("You don't have any health potion.");
-			
-		}
+            this.healthPotion -- ;
+            this.getStatistics().addHealth(COEF_HP_POTION);
 	}
 	
 	public void useAttackPotion() {
-			if (this.attackPotion > 0)
-			{
-				this.attackPotion-- ;
-				this.getStatistics().changeAttack(this.getAttack() * COEF_ATT_POTION);
-				System.out.println("new attack = " + this.getAttack());
-			}
-			else
-			{
-				System.out.println("You don't have any attack potion.");
-			}
-		}
+            this.attackPotion-- ;
+            this.getStatistics().changeAttack(this.getAttack() * COEF_ATT_POTION);
+        }
 
 	public void useDefensePotion() {
-		if (this.defensePotion > 0)
-		{
-			this.defensePotion-- ;
-			this.getStatistics().changeDefense(this.getDefense() * COEF_DEF_POTION);
-			System.out.println("new Defense = " + this.getDefense());
-		}
-		else
-		{
-			System.out.println("You don't have any defense potion.");
-		}
+            this.defensePotion-- ;
+	    this.getStatistics().changeDefense(this.getDefense() * COEF_DEF_POTION);
 	}
 
 	public void useCritPotion() {
-		if (this.critPotion > 0)
-		{
-			
-			this.critPotion-- ;
-			this.getStatistics().changeCritical(this.getCrit() * COEF_CRIT_POTION);
-			System.out.println("new Critic = " + this.getCrit());
-		}
-		else
-		{
-			System.out.println("You don't have any crit potion.");
-		}
+            this.critPotion-- ;
+            this.getStatistics().changeCritical(this.getCrit() * COEF_CRIT_POTION);
 	}
 
-	public void printInventory() {
-		if (!this.INVENTORY.isEmpty()){
-			
-			for (String i : this.INVENTORY.keySet()) {
-				System.out.println(i);
-			}
-		}
-		else { System.out.println("Inventory is empty."); }
-	}
 
 	public HashMap<String, Item> getInventory() {
 		return this.INVENTORY;
@@ -133,34 +85,20 @@ public class Player extends Character {
 
 			removeArmor(((Armor)item));
 		}
-		else{
-			System.out.println(item.getName() + " isn't removable.");
-		}		
-		showEquipement();
 	}
 
-	public void removeWeapon(Weapon item) {  	// Permet d'enlever son arme on vérifie bien qui n'enlève pas celle de base     
-		if (item == DEFAULT_WEAPON)
-		{
-			System.out.println("You can't remove your default weapon.");
-		}
-		else
-		{
-			this.stats.changeAttack(this.DEFAULT_ATTACK + DEFAULT_WEAPON.getAttackBonus());
-			this.weapon = DEFAULT_WEAPON;
-		}
+	public void removeWeapon(Weapon item) {  	// Permet d'enlever son arme 
+
+            int attaque_base = this.stats.getAttack() - item.getAttackBonus();            //On récupère l'attaque de base pour récuper son bonus (potion) si il en a un
+            this.stats.changeAttack(attaque_base + DEFAULT_WEAPON.getAttackBonus());
+            this.weapon = DEFAULT_WEAPON;
 	}
 
-	public void removeArmor(Armor item) {              
-		if (item == DEFAULT_ARMOR)
-		{
-			System.out.println("You can't remove your default armor.");
-		}
-		else
-		{
-			this.stats.removeDefense(this.DEFAULT_DEFENSE + DEFAULT_ARMOR.getDefenseBonus());
-			this.armor = DEFAULT_ARMOR;
-		}
+	public void removeArmor(Armor item) {
+            
+            int def_base = this.stats.getDefense()- item.getDefenseBonus();             
+            this.stats.changeDefense(def_base + DEFAULT_ARMOR.getDefenseBonus());
+            this.armor = DEFAULT_ARMOR;
 	}
 
 
@@ -176,37 +114,18 @@ public class Player extends Character {
 
 			equiArmor(((Armor)item));
 		}
-		else{
-			System.out.println(item.getName() + "isn't equipable.");
-		}
 	}
 
 	public void equiWeapon(Weapon item) {                 // On équipe la nouvelle arme
-		if ( item != this.weapon){
-
-			this.stats.removeAttack(this.weapon.getAttackBonus());  // On retire l'ancienne arme 
-			this.stats.addAttack(item.getAttackBonus());
-			this.weapon = item;
-			showEquipement();
-
-		}
-		else{
-			System.out.println("You have already this weapon equiped.");
-		}
+            this.stats.removeAttack(this.weapon.getAttackBonus());  // On retire l'ancienne arme 
+	    this.stats.addAttack(item.getAttackBonus());
+            this.weapon = item;
 	}
 
 	public void equiArmor(Armor item) {                 // On équipe la nouvelle défense
-		if ( item != this.armor){
-
-			this.stats.removeDefense(this.armor.getDefenseBonus());  // On retire les bonus de def  de l'ancienne arme 
-			this.stats.addDefense(item.getDefenseBonus());
-			this.armor = item;
-			showEquipement();
-
-		}
-		else{
-			System.out.println("You have already this armor equiped.");
-		}	
+            this.stats.removeDefense(this.armor.getDefenseBonus());  // On retire les bonus de def  de l'ancienne arme 
+            this.stats.addDefense(item.getDefenseBonus());
+            this.armor = item;	
 	}
 
 	public Armor getArmor() {
@@ -217,74 +136,15 @@ public class Player extends Character {
 		return this.weapon;
 	}
 
-
-	public void showEquipement() { System.out.println("You are equipped with the current weapon : " + this.weapon.getName() + " and the current armor : " + this.armor.getName()); }
-
-
 	public void removeInventory(Item item) { this.INVENTORY.remove(item.getName()); }
 
 	public boolean hasItem(String item) {return this.INVENTORY.containsKey(item);}
-
-	public void buyItem(String nameItem) {                                   //Permet d'acheter un item
-		Shop shop = (Shop) this.currentLocation ;
-		if (shop.getItem(nameItem)!= null ){
-			Item item = shop.getItem(nameItem);
-			if ( item.getPrice() < this.stats.getMoney() ){          // Vérifie si le joueur possède accés d'argent  puis on l'ajoute à dans l'inventaire et l iteme n'ai plus dans le shop
-
-					addInventory(item);
-					this.stats.removeMoney(item.getPrice());
-					shop.removeItem(nameItem);
-			}
-			else{
-				System.out.println("Xavier [Marchand] :\"Need more money rogue!\" ");
-			}
-		}
-		else { System.out.println("Xavier [Marchand] :\"The shop doesn't sell this item.\""); }
-	}
-
-
-	public void sellItem(String nameItem) {
-		if (this.hasItem(nameItem)) {
-			Item item = getItem(nameItem);
-			if ( item.getPrice() <  0) {                                        // Vérifie si le prix de litem est supérieur à 0 car les items pour avancer dans l'histoire on un prix négatif
-				System.out.println("Xavier [Marchand] :\"This item is so important.\"");
-			}
-			else{
-				if( item == this.weapon || item == this.armor ){
-
-					removeEquipment(item);
-				}
-				this.stats.addMoney(item.getPrice() / 2);
-				removeInventory(item);
-				System.out.println("Xavier [Marchand] :\"Thanks for your patronage.\"" );
-
-			}
-		}
-		else { System.out.println("Xavier [Marchand] :\"You don't have this item.\"" ); }
-	}
-
-	public void buyPotion(String potionType){
-		Shop shop = (Shop) this.currentLocation ;
-		switch (potionType) {
-			case "health_potion" : {
-				this.stats.removeMoney(shop.getPotionCost());
-				addHealthPotion();
-			}
-			case "attack_potion" : {
-				this.stats.removeMoney(shop.getPotionCost());
-				addAttackPotion();
-			}
-			case "defense_potion" : {
-				this.stats.removeMoney(shop.getPotionCost());
-				addDefensePotion();
-			}
-			case "crit_potion" : {
-				this.stats.removeMoney(shop.getPotionCost());
-				addCritPotion();
-			}
-                        default : System.out.println("We don't have that kind of potion here.");
-		}
-	}
+        
+        public void removeBonusPotion(){  //On remet le joueur sans potion
+            stats.changeAttack(getWeapon().getAttackBonus());
+            stats.changeDefense(getArmor().getDefenseBonus());
+            stats.changeCritical(5);
+        }
 
 	public int getHealthPotion(){
 		return this.healthPotion;
@@ -302,9 +162,5 @@ public class Player extends Character {
 		return this.critPotion;
 	}
 
-	@Override
-	public String toString() {
-		return "player name : " + this.getName() + "\nhealth : " + this.getHealth() + "\nattack : " + this.getAttack() + "\ndefense : " + this.getDefense() + "\ncritical : " + this.getCrit() + "\n";
-	}
 
 }

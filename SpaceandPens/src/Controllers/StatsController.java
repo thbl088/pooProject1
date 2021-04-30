@@ -17,6 +17,7 @@ import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.scene.ImageCursor;
+import javafx.stage.Stage;
 
 public class StatsController implements Initializable {
 
@@ -77,6 +78,8 @@ public class StatsController implements Initializable {
     private Button useCrit;
     @FXML
     private Button armorUnequip;
+    @FXML
+    private Button quit;
 
 
 
@@ -106,8 +109,10 @@ public class StatsController implements Initializable {
 
     //appelée par le contrôleur du jeu, cette méthode permet de transférer à ce contrôleur la référence du joueur
     //et d'initialiser l'inventaire
-    public void setPlayer(Player player) {
+    public void setStats(Player player) {
+   
         this.player = player;
+        this.initCursorStats();
         reInitialize();
         initList();
     }
@@ -125,7 +130,7 @@ public class StatsController implements Initializable {
     public void reInitialize() {
         Statistics stats = this.player.getStatistics();
         
-        this.initCursorStats();
+        
         this.healthBar.setProgress( (double)stats.getHealth() / (double)stats.getMaxHealth());
         this.attack.setText("Attack : " + stats.getAttack());
         this.defense.setText("Defense : " + stats.getDefense());
@@ -252,5 +257,11 @@ public class StatsController implements Initializable {
         if (this.player.getCritPotion() > 0)
             this.player.useCritPotion();
         this.reInitialize();
+    }
+
+    @FXML
+    private void quit(ActionEvent event) {
+        Stage stage = (Stage) quit.getScene().getWindow();
+        stage.close();
     }
 }

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="worldVu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="946.0" prefWidth="1344.0" stylesheets="@../spaceandpens/images/game.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameController">
+<Pane fx:id="worldVu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="946.0" prefWidth="1344.0" stylesheets="@../spaceandpens/images/game.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameController">
    
     <children>
       <ImageView fx:id="map" fitHeight="772.0" fitWidth="1344.0" pickOnBounds="true" preserveRatio="true" y="25.0">
@@ -33,17 +33,6 @@
             </ImageView>
          </children>
       </Pane>
-      <MenuBar fx:id="menu" prefHeight="25.0" prefWidth="1344.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="Option">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Help" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Quit" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
       <TextArea fx:id="gameDescription" editable="false" layoutY="827.0" prefHeight="119.0" prefWidth="518.0" wrapText="true" />
       <Label layoutX="203.0" layoutY="796.0" prefHeight="32.0" prefWidth="113.0" text="Game log" textFill="#a8381c">
          <font>
@@ -57,5 +46,16 @@
             <Font name="Snap ITC" size="22.0" />
          </font>
       </Label>
+      <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="Option">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#openHelp" text="Help" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#quit" text="Quit" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
    </children>
 </Pane>

@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="505.0" minWidth="500.0" prefHeight="532.0" prefWidth="919.0" stylesheets="@../spaceandpens/images/game.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ShopController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="505.0" minWidth="500.0" prefHeight="532.0" prefWidth="919.0" stylesheets="@../spaceandpens/images/game.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ShopController">
    <children>
       <TabPane prefHeight="341.0" prefWidth="384.0" stylesheets="@../spaceandpens/images/tab.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -61,15 +61,15 @@
           </Tab>
         </tabs>
       </TabPane>
-      <ImageView fitHeight="271.0" fitWidth="311.0" layoutX="608.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="319.0" fitWidth="331.0" layoutX="629.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../spaceandpens/images/morshu.jpg" />
+            <Image url="@../spaceandpens/images/objet/marchand.png" />
          </image>
       </ImageView>
       <TextArea fx:id="itemDescription" editable="false" layoutX="62.0" layoutY="415.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="98.0" prefWidth="260.0" wrapText="true" />
       <Label layoutX="159.0" layoutY="398.0" text="Description :" />
       <Button fx:id="exit" layoutX="827.0" layoutY="483.0" mnemonicParsing="false" onAction="#exitShop" prefHeight="35.0" prefWidth="78.0" text="EXIT SHOP" />
-      <GridPane layoutX="507.0" layoutY="347.0" prefHeight="171.0" prefWidth="158.0">
+      <GridPane layoutX="422.0" layoutY="354.0" prefHeight="171.0" prefWidth="158.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -83,7 +83,7 @@
                <children>
                   <ImageView fitHeight="55.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../spaceandpens/images/healthPotion.png" />
+                        <Image url="@../spaceandpens/images/objet/healing%20potion.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="healthPotion" mnemonicParsing="false" onAction="#buyHealth" prefWidth="60.0" text="Health" />
@@ -93,7 +93,7 @@
                <children>
                   <ImageView fitHeight="55.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../spaceandpens/images/attackPotion.png" />
+                        <Image url="@../spaceandpens/images/objet/attack%20potion.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="attackPotion" mnemonicParsing="false" onAction="#buyAttack" prefWidth="60.0" text="Attack" />
@@ -103,7 +103,7 @@
                <children>
                   <ImageView fitHeight="55.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../spaceandpens/images/defensePotion.png" />
+                        <Image url="@../spaceandpens/images/objet/defense%20potion.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="defPotion" mnemonicParsing="false" onAction="#buyDefense" prefWidth="60.0" text="Defense" />
@@ -113,7 +113,7 @@
                <children>
                   <ImageView fitHeight="55.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../spaceandpens/images/criticalPotion.png" />
+                        <Image url="@../spaceandpens/images/objet/critical%20Potion.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="critPotion" mnemonicParsing="false" onAction="#buyCritical" prefWidth="60.0" text="Critical" />
@@ -121,7 +121,7 @@
             </VBox>
          </children>
       </GridPane>
-      <Label layoutX="485.0" layoutY="314.0" text="Potion stall (5 coins each)">
+      <Label layoutX="400.0" layoutY="319.0" text="Potion stall (5 coins each)">
          <font>
             <Font size="18.0" />
          </font>
@@ -132,7 +132,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="dialog" alignment="CENTER" layoutX="608.0" layoutY="275.0" prefHeight="17.0" prefWidth="311.0" text="Label">
+      <Label fx:id="dialog" alignment="CENTER" layoutX="602.0" layoutY="345.0" prefHeight="17.0" prefWidth="311.0" text="Label">
          <font>
             <Font size="13.0" />
          </font>
@@ -142,5 +142,11 @@
             <ImageView fx:id="itemView" fitHeight="171.0" fitWidth="168.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
+      <TextField fx:id="statItem" layoutX="401.0" layoutY="242.0" prefHeight="25.0" prefWidth="100.0" />
+      <Label fx:id="stats" layoutX="523.0" layoutY="245.0" text="Stats">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

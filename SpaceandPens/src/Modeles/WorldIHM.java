@@ -405,7 +405,7 @@ public class WorldIHM {
     public Item[] initShopItem() {
         Item[] shop = new Item[6];
 
-        shop[0] = new Armor("leather tunic", "Tunic made of leather.", 12, 5);
+        shop[0] = new Armor("leather tunic", "Tunic made of leather.", 12, 10);
         shop[1] = new Armor("titanium armour", "Made with the remnants of pencil robots.", 25, 20);
         shop[2] = new Armor("nethererite armour", "Made with ore from Ravenholm.", 50, 40);
         shop[3] = new Weapon("stone sword", "A sword stronger than wood.", 12, 15);
@@ -451,66 +451,13 @@ public class WorldIHM {
 
 
     public void initPlayer(String[] namemap, String playerName) {
-        // System.out.print("Enter your name : ");
-        // String name = keyboard.nextLine();
         Player hero = new Player(playerName);
         this.player = hero;
-        this.player.addInventory(new Weapon("reactor", "This is the key to get out of here.", -1, 5, 256, 182));
-        // System.out.println("Welcome " + hero.getName() + ".");
-        // System.out.println("Your ship has crashed, you need a jack and a new motor to leave this planet.");
-        
-        this.player.addInventory(new Item("little wheel", "It's a shining skateboard wheel", -1));
-        this.player.addInventory(new Item("car wheel", "It's a glowing car wheel.", -1));
         hero.move(this.MAPS.get(namemap[0]));
-        // System.out.println("You Enter : " + this.player.getMapHero().getName() + ".");
-        // System.out.println(this.player.getMapHero().getDescription());
+
     }
 
     public Player getPlayer() {
         return this.player;
     }
-
-    public int play(ActionManager action) {
-        action.getAction();
-
-        if (this.player.getHealth() <= 0) {
-
-            return -1;
-        } else if (this.player.getMapHero().getName().equals("Ship") && this.player.hasItem("reactor")) {
-
-            return 1;
-        } else {
-
-            return 0;
-        }
-    }
-
-    /*
-    public static void main(String[] args) {
-        int finish = 0;
-        WorldIHM monde = new WorldIHM();
-        ActionManager action = new ActionManager(monde);
-        monde.initWorld(action.SCANNER);
-
-
-        // ------------------------ INTRODUCTION -----------------------------------
-        while (finish == 0) {
-            finish = monde.play(action);
-        }
-        // ------------------------ Fin du jeu -----------------------------------
-
-        action.SCANNER.close();
-        if (finish == 1) {
-            System.out.println("\nCongratulations, you have escaped the planet and saved everyone on it.");
-            System.out.println("Thanks for playing our video game !!!");
-            System.out.println("Credit:\n-Boue Alexis\n-Luneteau Thomas\n-Vialle Charlie");
-        } else {
-            System.out.println("\"☠ You died. ☠ \"");
-
-        }
-    }
-
- */
-
-
 }
