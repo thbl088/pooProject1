@@ -215,7 +215,7 @@ public class WorldIHM {
         ground[3] = new Weapon("clownfish", "A smelly clownfish.", 10, 4, 475, 101);
         ground[4] = new Item("sheep wool", "This wool is so soft.", 10, 849, 265);
         ground[5] = new Item("evil sheep wool", "This wool is so hard.", 14, 156, 144);
-        ground[6] = new Item("companion Cube", "A cube with a pink heart on the side.", 60, 488, 223);
+        ground[6] = new Item("companion cube", "A cube with a pink heart on the side.", 60, 488, 223);
         ground[7] = new Item("package", "A package which contains an Nvidia GeForce RTX™ 3080.", 20, 1003, 155);
         ground[8] = new Item("second package", "A package that contains a Pokemon™ card booster.", 15, 326, 351);
         ground[9] = new Weapon("reactor", "This is the key to get out of here.", -1, 5, 256, 182);
