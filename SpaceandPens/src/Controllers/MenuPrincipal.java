@@ -70,6 +70,7 @@ public class MenuPrincipal implements Initializable {
         newStage.setMinHeight(635);
         newStage.setMinWidth(1035);
         newStage.setScene(scene);
+        newStage.setResizable(false);
         newStage.show();
     }
 
