@@ -21,7 +21,7 @@
    <children>
       <TabPane prefHeight="341.0" prefWidth="384.0" stylesheets="@../spaceandpens/images/tab.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab fx:id="buyTab" text="BUY">
+          <Tab text="BUY">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="393.0">
                      <children>
@@ -40,7 +40,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab fx:id="sellTab" text="SELL">
+          <Tab text="SELL">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>

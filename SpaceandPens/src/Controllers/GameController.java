@@ -10,7 +10,6 @@ import Modeles.Item;
 import Modeles.Map;
 import Modeles.Npc;
 import Modeles.WorldIHM;
-import Controllers.TakeListener;
 import Modeles.Door;
 import Modeles.LockedDoor;
 import Modeles.Player;

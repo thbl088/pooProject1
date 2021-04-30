@@ -37,10 +37,6 @@ public class TalkController implements Initializable {
     private ImageView pnj;
     @FXML
     private ImageView hero;
-    @FXML
-    private Button quit;
-    @FXML
-    private Button talk;
     
     /**
      * Initializes the controller class.

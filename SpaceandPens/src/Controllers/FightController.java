@@ -29,15 +29,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
@@ -62,13 +58,7 @@ public class FightController implements Initializable {
     @FXML
     private VBox World;
     @FXML
-    private AnchorPane fightPanel;
-    @FXML
-    private VBox playerDisplay;
-    @FXML
     private ImageView playerPicture;
-    @FXML
-    private VBox vboxPlayer;
     @FXML
     private Label labelNamePlayer;
     @FXML
@@ -77,15 +67,6 @@ public class FightController implements Initializable {
     private Label playerHP;
     @FXML
     private ProgressBar HPBarPlayer;
-    private ImageView enemyPicture;
-    private Label labelNameEnemy;
-    private ProgressBar HPBarEnemy;
-    @FXML
-    private Label labelAction;
-    @FXML
-    private Label description;
-    @FXML
-    private GridPane choices;
     @FXML
     private Button defendButton;
     @FXML
@@ -96,12 +77,6 @@ public class FightController implements Initializable {
     private Label labelDefensePlayer;
     @FXML
     private GridPane enemyGrid;
-    @FXML
-    private MenuBar menubar;
-    @FXML
-    private Menu option;
-    @FXML
-    private MenuItem quit;
     @FXML
     private TextArea textFight;
 
@@ -170,7 +145,7 @@ public class FightController implements Initializable {
         }
         else{
             damage = playerPreHealth - playerHealth;
-            textFight.appendText("You inflict yourself " + -damage +" dmg. You have " + playerHealth + " HP left.\n");
+            textFight.appendText("You inflict yourself " + damage +" dmg. You have " + playerHealth + " HP left.\n");
         }
     }
     
@@ -184,13 +159,11 @@ public class FightController implements Initializable {
             String enemyName = entry.getKey();
             Enemy enemyStat = entry.getValue();
             
-            //if (enemyStat.getHealth()>0) {
                 Label labelNameEnemy1 = new Label(enemyName);
                 labelNameEnemy1.setId("label" + enemyName);
                 ImageView enemyPicture1 = new ImageView(new Image("/spaceandpens/images/ennemi/"+enemyName+".png"));
                 enemyPicture1.setId("picture" + enemyName);
                 ProgressBar HPEnemy = new ProgressBar((double)enemyStat.getHealth()/ (double)enemyStat.getStatistics().getMaxHealth());
-                System.out.println(enemyStat.getHealth()+ "+"+ enemyStat.getStatistics().getMaxHealth());
                 if (HPEnemy.getProgress() < 0.25) {
                             HPEnemy.setStyle("-fx-accent : red;");
                         } 
@@ -225,7 +198,7 @@ public class FightController implements Initializable {
                 vboxEnemy.setOnMouseClicked(event -> {
                     int healthEnemy = enemies.get(enemyName).getHealth();
                     int healthPlayer = player.getHealth();
-                    fight.playerAttack(enemyName);
+                    playerAttack(enemyName);
                     
                     if(enemies.containsKey(enemyName)){
                         changeTextAttackPlayer(healthEnemy, enemies.get(enemyName).getHealth(), healthPlayer, player.getHealth(), enemyName);
@@ -235,13 +208,11 @@ public class FightController implements Initializable {
                     }
 
                     updateFightScene(player, enemies);
-                    checkEndGame();
-                    fight.enemyAttack();
-                    System.out.println(enemies.get(enemyName).getHealth());
+                    enemyAttack();
                     updateFightScene(player, enemies);
                     
                     int damage = healthPlayer-player.getHealth();
-                    textFight.appendText("All the enemies attack you, you receive " + damage + ". You have " + player.getHealth() + " hp left.\n");
+                    
 
                     checkEndGame();
                 });
@@ -314,12 +285,10 @@ public class FightController implements Initializable {
     public void defend(ActionEvent event){
         int healthPlayer = player.getHealth();  
         fight.defend();
-        textFight.appendText("You are ready to block the next attack.\n");
-        fight.enemyAttack();
+        enemyAttack();
         updateFightScene(player, enemies);
         
         int damage = healthPlayer-player.getHealth();
-        textFight.appendText("All the enemies attack you, you receive " + damage + " through your protection. You have " + player.getHealth() + " hp left.\n");
         checkEndGame();
     }    
  
@@ -364,5 +333,47 @@ public class FightController implements Initializable {
             stage.setScene(scene);
             stage.setResizable(false);
             stage.show();
-        }  
+        } 
+        
+	public void playerAttack(String targetName) { //calcule les dégats que le joueur inflige a un enemi
+		if(fight.isDefend()){player.getStatistics().changeDefense(player.getDefense()/2);}
+		fight.sethasDefend(false);
+		int damage = fight.attackCrit(this.player)-this.enemies.get(targetName).getDefense();
+		if (damage>0){
+			this.enemies.get(targetName).getStatistics().removeHealth(damage);
+			fight.checkEnemyDeath(this.enemies.get(targetName).getName());
+                        textFight.appendText(this.player.getName()+" infliged " + damage +" on "+targetName+".\n");
+		}
+		else{
+			this.player.getStatistics().removeHealth(-damage);
+                        textFight.appendText(this.player.getName()+" attack "+targetName+".You can't damage him through his armor.\n");
+		}
+		for (String i : this.enemies.keySet()) {
+			fight.checkEnemyDeath(i);
+		}
+		fight.remEnemyDeath();
+	}        
+        
+        public void enemyAttack() { //calcule les dégats que l'enemi inflige au joueur
+		for (String i : this.enemies.keySet()) {
+			int damage = fight.attackCrit(this.enemies.get(i))-this.player.getDefense();
+			if (damage>0){
+                            if(fight.isDefend()){
+                                textFight.appendText("You are ready to block the next attack.\n");
+                            }
+                            this.player.getStatistics().removeHealth(damage);
+                            textFight.appendText(this.enemies.get(i).getName()+" attack you, you receive " + damage +" "+"damages through your protection. You have " + player.getHealth() + " hp left.\n");
+			}
+			else{
+                            if(fight.isDefend()){
+                                textFight.appendText("You are ready to block the next attack.\n");
+                            }                            
+                            this.enemies.get(i).getStatistics().removeHealth(-damage);
+                            textFight.appendText(this.enemies.get(i).getName()+" attack you, and he receives " + -damage +" "+"damages. You have " + player.getHealth() + " hp left.\n");
+			}
+		}
+		for (String i : this.enemies.keySet()) {
+			fight.checkEnemyDeath(i);
+		}
+	}
 }

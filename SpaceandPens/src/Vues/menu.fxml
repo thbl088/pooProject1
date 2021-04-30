@@ -28,17 +28,17 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="Commandes" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openHelp" prefHeight="50.0" prefWidth="100.0" text="Commandes">
+            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openHelp" prefHeight="50.0" prefWidth="100.0" text="Commandes">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="Crédit" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openCredit" prefHeight="50.0" prefWidth="100.0" text="Crédit">
+            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openCredit" prefHeight="50.0" prefWidth="100.0" text="Crédit">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="Quitter" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#quit" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: red;" text="Quitter">
+            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#quit" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: red;" text="Quitter">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

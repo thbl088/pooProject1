@@ -6,7 +6,6 @@
 package Controllers;
 
 import Controllers.TakeListener;
-import Modeles.Door;
 import Modeles.Item;
 import Modeles.LockedDoor;
 import Modeles.Player;

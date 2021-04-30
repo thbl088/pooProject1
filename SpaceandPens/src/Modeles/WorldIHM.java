@@ -1,9 +1,7 @@
 package Modeles;
 
-import javafx.beans.property.SimpleStringProperty;
 
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class WorldIHM {
 

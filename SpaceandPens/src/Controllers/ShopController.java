@@ -36,10 +36,6 @@ public class ShopController implements Initializable {
     @FXML
     private Button buy;
     @FXML
-    private Tab buyTab;
-    @FXML
-    private Tab sellTab;
-    @FXML
     private TextField priceBuy;
     @FXML
     private TextField priceSell;

@@ -72,37 +72,6 @@ public class Fight {
 		return 0;
 	}
 
-	public void playerAttack(String targetName) { //calcule les dégats que le joueur inflige a un enemi
-		if(hasDefend){this.PLAYER.getStatistics().changeDefense(this.PLAYER.getDefense()/2);}
-		hasDefend = false;
-		damage = attackCrit(this.PLAYER)-this.ENEMIES.get(targetName).getDefense();
-		if (damage>0){
-			this.ENEMIES.get(targetName).getStatistics().removeHealth(damage);
-			checkEnemyDeath(this.ENEMIES.get(targetName).getName());
-		}
-		else{
-			this.PLAYER.getStatistics().removeHealth(-damage);
-		}
-		for (String i : this.ENEMIES.keySet()) {
-			checkEnemyDeath(i);
-		}
-		remEnemyDeath();
-	}
-
-	public void enemyAttack() { //calcule les dégats que l'enemi inflige au joueur
-		for (String i : this.ENEMIES.keySet()) {
-			damage = attackCrit(this.ENEMIES.get(i))-this.PLAYER.getDefense();
-			if (damage>0){
-				this.PLAYER.getStatistics().removeHealth(damage);
-			}
-			else{
-				this.ENEMIES.get(i).getStatistics().removeHealth(-damage);
-			}
-		}
-		for (String i : this.ENEMIES.keySet()) {
-			checkEnemyDeath(i);
-		}
-	}
 
 	public void defend() { //multiplie la def du joueur par 2 jusqu'a son prochain tour
             
@@ -116,5 +85,13 @@ public class Fight {
 	public void getPlayerPostFight(){   //Après un combat le joueur perd son bonus de potion
             PLAYER.removeBonusPotion();
 	}
+        
+        public boolean isDefend(){
+            return hasDefend;
+        }
+        
+        public void sethasDefend(Boolean hasDef){
+            hasDefend = hasDef;
+        }
 }
         
