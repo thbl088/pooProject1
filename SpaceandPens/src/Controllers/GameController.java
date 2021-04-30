@@ -670,8 +670,19 @@ public class GameController implements Initializable {
     }
 
     @FXML
-    private void openHelp(ActionEvent event) {
-    }
+    public void openHelp(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vues/help.fxml"));
+        Parent root = loader.load();
+
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.getIcons().add(new Image("spaceandpens/images/spaceandpens.png"));
+        stage.setTitle("Help");
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+    }  
 
     @FXML
     private void quit(ActionEvent event) throws IOException {

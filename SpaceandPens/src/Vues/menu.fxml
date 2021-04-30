@@ -28,7 +28,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="Commandes" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Commandes">
+            <Button fx:id="Commandes" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openHelp" prefHeight="50.0" prefWidth="100.0" text="Commandes">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -48,7 +48,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" />
          </padding>
       </VBox>
-      <TextField fx:id="playerName" alignment="CENTER" layoutX="264.0" layoutY="179.0" text="Player" />
+      <TextField fx:id="playerName" alignment="CENTER" layoutX="264.0" layoutY="179.0" text="Mrow" />
       <Label layoutX="290.0" layoutY="154.0" text="Player Name :">
          <font>
             <Font size="16.0" />
