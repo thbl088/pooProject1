@@ -26,12 +26,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -210,6 +208,8 @@ public class GameController implements Initializable {
             alert.setGraphic(null);
             alert.setTitle("Victory");
             alert.setContentText("You beat the game, congratulation!");
+            Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(new Image("spaceandpens/images/spaceandpens.png"));            
             alert.showAndWait();
             endGame();
         }

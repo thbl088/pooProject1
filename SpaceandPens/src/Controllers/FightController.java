@@ -23,7 +23,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -279,13 +278,15 @@ public class FightController implements Initializable {
         if(fight.stillFighting() == 2){
                 fight.getPlayerPostFight();
                 
-                Alert alert = new Alert(Alert.AlertType.WARNING);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setHeaderText(null);
                 alert.setGraphic(null);
                 alert.setTitle("Victory");
                 alert.setContentText("You're still alive.");
+                Stage stageAlert = (Stage) alert.getDialogPane().getScene().getWindow();
+                stageAlert.getIcons().add(new Image("spaceandpens/images/spaceandpens.png")); 
                 alert.showAndWait();
-                
+  
                 Stage stage = (Stage) World.getScene().getWindow();
                 stage.close();
             }   
@@ -298,10 +299,12 @@ public class FightController implements Initializable {
                 alert.setGraphic(null);
                 alert.setTitle("Lose");
                 alert.setContentText("YOU DIED");
+                Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+                stage.getIcons().add(new Image("spaceandpens/images/spaceandpens.png"));                  
                 alert.showAndWait();
-                
-                Stage stage = (Stage) World.getScene().getWindow();
-                stage.close();
+              
+                Stage stageWorld = (Stage) World.getScene().getWindow();
+                stageWorld.close();
                 }
             }
         }

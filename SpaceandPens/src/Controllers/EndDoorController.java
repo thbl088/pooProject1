@@ -148,7 +148,6 @@ public class EndDoorController implements Initializable {
             });
        }  
     }
-    
     private void annimationOpenEndDoor(){
         TranslateTransition transitionTank = new TranslateTransition();
         transitionTank.setDuration(Duration.seconds(5));            // On choisit la durrée
@@ -179,7 +178,9 @@ public class EndDoorController implements Initializable {
         alert.setHeaderText(null);
         alert.setGraphic(null);
         alert.setTitle("The Soul of the End Door");
-        alert.setContentText("Captain Keyes [The Soul of the End Door] : Thanks bro u can enter");
+        alert.setContentText("Captain Keyes [The Soul of the End Door] : Thanks bro you can enter and defeat Leclerc");
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image("spaceandpens/images/spaceandpens.png"));
         alert.show();
 
     }

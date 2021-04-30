@@ -104,7 +104,7 @@ public class WorldIHM {
         Enemy[] enemies = new Enemy[17];
 
         // Map 4 Dernier Boss
-        StatisticsEnemy statsLeclerc = new StatisticsEnemy(100, 50, 60, 15, 80);
+        StatisticsEnemy statsLeclerc = new StatisticsEnemy(180, 85, 60, 15, 80);
         Item crik = new Item("jack", "Useful for lifting heavy stones.", -1);
         Enemy leclerc = new Enemy("leclerc", crik, statsLeclerc, 255, 48, 694, 359);
 
@@ -132,7 +132,7 @@ public class WorldIHM {
 
         // Map 9 Boss Tony
 
-        StatisticsEnemy statsTony = new StatisticsEnemy(20, 30, 20, 5);
+        StatisticsEnemy statsTony = new StatisticsEnemy(50, 45, 25, 5);
         Item littleWheel = new Item("little wheel", "It's a shiny skateboard wheel", -1);
         Enemy tony = new Enemy("tony", littleWheel, statsTony, 320, 76, 250, 360);
 
@@ -153,7 +153,7 @@ public class WorldIHM {
 
         // Map  13 Bicolor
 
-        StatisticsEnemy statsBic = new StatisticsEnemy(20, 16, 12, 20);
+        StatisticsEnemy statsBic = new StatisticsEnemy(50, 45, 25, 20);
         Enemy bicolor = new Enemy("bicolor", statsBic, 540, 193);
 
         enemies[9] = bicolor;
@@ -168,14 +168,14 @@ public class WorldIHM {
 
         // Map  16 robot crayon HB
 
-        StatisticsEnemy statsHB = new StatisticsEnemy(10, 10, 10, 10);
+        StatisticsEnemy statsHB = new StatisticsEnemy(10, 7, 3, 10);
         Enemy hB = new Enemy("hb", statsHB, 598, 273);
 
         enemies[11] = hB;
 
         // Map  17 Boss Twingy
 
-        StatisticsEnemy statsTwingy = new StatisticsEnemy(20, 20, 20, 20);
+        StatisticsEnemy statsTwingy = new StatisticsEnemy(50, 45, 30, 20);
         Item carwheel = new Item("car wheel", "It's a glowing car wheel.", -1);
         Enemy twingy = new Enemy("twingy", carwheel, statsTwingy, 419, 270, 525, 413);
 
@@ -191,7 +191,7 @@ public class WorldIHM {
 
         // Map  20 Le Léviathan
 
-        StatisticsEnemy statsLeviathan = new StatisticsEnemy(15, 15, 15, 20);
+        StatisticsEnemy statsLeviathan = new StatisticsEnemy(30, 40, 25, 20);
         Weapon redfish = new Weapon("leviathan", "The big red fish.", 50, 15);
         Enemy leviathan = new Enemy("leviathan", redfish, statsLeviathan, 253, 254, 544, 481);
 
@@ -405,12 +405,12 @@ public class WorldIHM {
     public Item[] initShopItem() {
         Item[] shop = new Item[6];
 
-        shop[0] = new Armor("leather tunic", "Tunic made of leather.", 12, 10);
-        shop[1] = new Armor("titanium armour", "Made with the remnants of pencil robots.", 25, 20);
+        shop[0] = new Armor("leather tunic", "Tunic made of leather.", 12, 40);
+        shop[1] = new Armor("titanium armour", "Made with the remnants of pencil robots.", 25, 200);
         shop[2] = new Armor("nethererite armour", "Made with ore from Ravenholm.", 50, 40);
-        shop[3] = new Weapon("stone sword", "A sword stronger than wood.", 12, 15);
-        shop[4] = new Weapon("japanese sword", "Take the soul of your enemies.", 25, 35);
-        shop[5] = new Weapon("energy sword", "A sword recovered from an old ship that once crashed here.", 70, 50);
+        shop[3] = new Weapon("stone sword", "A sword stronger than wood.", 12, 50);
+        shop[4] = new Weapon("japanese sword", "Take the soul of your enemies.", 25, 100);
+        shop[5] = new Weapon("energy sword", "A sword recovered from an old ship that once crashed here.", 70, 200);
         return shop;
     }
 
